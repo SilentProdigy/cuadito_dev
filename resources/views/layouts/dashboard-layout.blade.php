@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+
+    <title>{{ config('app.name', 'Cuadito') }}</title>
+
+    <link rel="shortcut icon" type="image/x-icon" href="{{ App::environment('local') ? asset('images/logo/logo.png') : secure_asset('images/logo/favicon.ico') }}">
+
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
+
+    <script src="https://kit.fontawesome.com/7a6e9affc7.js" crossorigin="anonymous"></script>
+
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top">
+        <div class="container">
+            <!-- Brand -->
+            <a class="navbar-brand" href="#">
+                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="YCC Logo" loading="lazy" />
+            </a>
+
+            <!-- Right links -->
+            <ul class="navbar-nav ms-auto flex-row">
+                <!-- Avatar -->
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
+                        &ensp;<span style="font-weight: normal">{{ auth()->user()->name }}</span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('profile', [auth()->user()->id]) }}">My Profile</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="#">Settings</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                       document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <!-- Container wrapper -->
+    </nav>
+    <!-- Navbar -->
+    <header>
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4">
+                    <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
+                        <i class="fas fa-home fa-fw me-3"></i><span>Home</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-paper-plane fa-fw me-3"></i><span>Quotes</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-credit-card fa-fw me-3"></i><span>Sales</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-credit-card fa-fw me-3"></i><span>Purchases</span>
+                    </a>
+                    <a href="{{ route('orders') }}" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-highlighter fa-fw me-3"></i><span>Orders</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-user fa-fw me-3"></i><span>Customers</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-dolly fa-fw me-3"></i><span>Suppliers</span>
+                    </a>
+                    <a href="{{ route('user_listing') }}" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-user fa-fw me-3"></i><span>Users</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span>
+                    </a>
+                    <div class="list-group-item list-group-item-action dropdown ripple py-0 px-0 mb-auto">
+                      <a  class="dropdown-toggle list-group-item list-group-item-action py-2 ripple" style="border: none;" id="ProductsDropdown" data-bs-toggle="dropdown" aria-expanded="true" role="button">
+                         <i class="fas fa-box-open fa-fw me-3"></i><span>Products</span>
+                      </a>
+                      <div class="dropdown-menu" aria-labelledby="ProductsDropdown">
+                        <a class="dropdown-item" href="{{ route('product-listing') }}">All Products</a>
+                        <a class="dropdown-item" href="#">Bids</a>
+                        <a class="dropdown-item" href="#">Transfer</a>
+                      </div>
+                    </div>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span>Reports</span>
+                    </a>
+                    <a href="{{ route('dashboard') }}" target="_blank" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-store fa-fw me-3"></i><span>Go to Platform&nbsp;<i class="fa fa-external-link fa-fw"></i></span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
+                        <i class="fas fa-circle-question fa-fw me-3"></i><span>Help</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        <!-- Sidebar -->
+    </header>
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main style="margin-top: 58px; padding-left: 240px; padding-bottom: 100px">
+        <div class="container pt-5">
+            @yield('content')
+        </div>
+    </main>
+    <!--Main layout-->
+
+    <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    @yield('script')
+</body>
+
+</html>
