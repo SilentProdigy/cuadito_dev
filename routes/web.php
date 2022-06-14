@@ -52,3 +52,11 @@ Route::get('profile/{id}', ['uses' => 'App\Http\Controllers\DashboardController@
 Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
 
 Auth::routes();
+
+
+
+Route::middleware([])->prefix('admin')->name('admin.')->group(function () {
+    
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
+});
