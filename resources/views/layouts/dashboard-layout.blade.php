@@ -131,6 +131,9 @@
     <!--Main layout-->
     <main style="margin-top: 58px; padding-left: 240px; padding-bottom: 100px">
         <div class="container pt-5">
+
+            @include('panels.flash_messages')
+
             @yield('content')
         </div>
     </main>
