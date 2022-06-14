@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\CreateUserFormRequest;
 use App\Models\User;
+use Exception;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -16,8 +18,8 @@ class UserController extends Controller
     public function index()
     {
         $users = User::get();
-
-        return view('admin.users.index')->with(compact('users'));
+        $roles = User::ROLES;
+        return view('admin.users.index')->with(compact('users', 'roles'));
     }
 
     /**
@@ -36,9 +38,16 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateUserFormRequest $request)
     {
-        //
+        try 
+        {
+            User::create($request->all());
+            return redirect()->route('admin.users.index')->with('success', 'User successfully created.');  
+        }
+        catch(Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**
