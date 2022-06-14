@@ -16,6 +16,10 @@ class User extends Authenticatable
     public const PENDING_STATUS = 0;
     public const DISAPPROVED_STATUS = 2;
 
+    public const USER_ROLE = "user";
+    public const ADMIN_ROLE = "admin";
+    public const ROLES = [self::USER_ROLE, self::ADMIN_ROLE];
+
 
     /**
      * The attributes that are mass assignable.
