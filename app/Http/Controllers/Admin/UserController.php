@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\ChangePasswordFormRequest;
 use App\Http\Requests\Admin\CreateUserFormRequest;
 use App\Http\Requests\Admin\UpdateUserFormRequest;
 use App\Models\User;
@@ -101,6 +102,19 @@ class UserController extends Controller
             // TODO: Extract this to a class or a trait
             $user->update($request->all());
             return redirect()->route('admin.users.index')->with('success', 'User status was successfully updated.');  
+        }
+        catch(Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function changePassword(ChangePasswordFormRequest $request, User $user) 
+    {   
+        try 
+        {
+            // TODO: Extract this to a class or a trait
+            $user->update(['password' => bcrypt($request->input('password'))]);
+            return redirect()->route('admin.users.index')->with('success', 'Password was successfully updated.');  
         }
         catch(Exception $e) {
             dd($e->getMessage());

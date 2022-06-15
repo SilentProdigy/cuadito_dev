@@ -63,13 +63,16 @@
                                 {!! $user->statusBadge !!}
                             </td>
                             <td>
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-warning btn-edit-user">
+                                    Edit          
+                                </a>
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-danger btn-delete">Delete</a>
+
                                 <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-primary btn-set-user-status">
                                   Set Status          
                                 </a>
-                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-warning btn-edit-user">
-                                    Edit          
-                                </a>
-                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-danger btn-delete">Delete</a>
+                               
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-dark btn-change-password">Change Password</a>
                             </td>
                         </tr>
                     @endforeach
@@ -82,6 +85,7 @@
     @include('admin.users.modals.set_status_modal')
     @include('admin.users.modals.confirm_delete_modal')
     @include('admin.users.modals.edit_user_modal')
+    @include('admin.users.modals.change_password_modal')
 @endsection
 
 @section('script')
@@ -143,6 +147,24 @@
                     $('#edit-name-text').val(data.name);
                     $('#edit-email-text').val(data.email);
                     $('#edit-role-text').val(data.role);
+                });
+            });
+
+            let change_password_buttons = document.querySelectorAll('.btn-change-password');
+
+            change_password_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-user');   
+                    data = JSON.parse(data);
+    
+                    let myModal = new bootstrap.Modal(document.getElementById('change-user-password-modal'), {keyboard: false})
+                    myModal.show()
+
+                    // document.querySelector('#user-fullname').innerHTML = data.name;
+    
+                    let form = document.querySelector('#change-password-form');
+                    form.setAttribute('action', `/admin/users/change-password/${ data.id }`);
                 });
             });
 
