@@ -43,7 +43,7 @@ class UserController extends Controller
         try 
         {
             User::create($request->all());
-            return redirect()->route('admin.users.index')->with('success', 'User successfully created.');  
+            return redirect()->route('admin.users.index')->with('success', 'User was successfully created.');  
         }
         catch(Exception $e) {
             dd($e->getMessage());
@@ -84,7 +84,7 @@ class UserController extends Controller
         try 
         {
             $user->update($request->all());
-            return redirect()->route('admin.users.index')->with('success', 'User successfully updated.');  
+            return redirect()->route('admin.users.index')->with('success', 'User was successfully updated.');  
         }
         catch(Exception $e) {
             dd($e->getMessage());
@@ -97,8 +97,15 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(User $user)
     {
-        //
+        try 
+        {
+            $user->delete();
+            return redirect()->route('admin.users.index')->with('success', 'User was successfully deleted.');  
+        }
+        catch(Exception $e) {
+            dd($e->getMessage());
+        }
     }
 }

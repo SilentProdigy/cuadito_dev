@@ -63,12 +63,12 @@
                                 {!! $user->statusBadge !!}
                             </td>
                             <td>
-                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-outline-primary btn-set-user-status">
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-primary btn-set-user-status">
                                   Set Status          
                                 </a>
                                 {{-- <a href="#" data-user="{{ }}">Set Status</a> --}}
                                 <a href="#">Edit</a>
-                                <a href="#">Delete</a>
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-danger btn-delete">Delete</a>
                             </td>
                         </tr>
                     @endforeach
@@ -79,6 +79,7 @@
 
     @include('admin.users.modals.add_user_modal')
     @include('admin.users.modals.set_status_modal')
+    @include('admin.users.modals.confirm_delete_modal')
 @endsection
 
 @section('script')
@@ -101,6 +102,26 @@
                     // document.querySelector('#area-name').innerHTML = data.name;
                 });
             });
+
+            let delete_buttons = document.querySelectorAll('.btn-delete');
+
+            delete_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-user');   
+                    data = JSON.parse(data);
+    
+                    let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
+                    myModal.show()
+
+                    document.querySelector('#user-fullname').innerHTML = data.name;
+    
+                    let form = document.querySelector('#delete-user-form');
+                    form.setAttribute('action', `/admin/users/${ data.id }`);
+
+                });
+            });
+
         });
     </script>
 @endsection
