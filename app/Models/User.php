@@ -12,9 +12,8 @@ class User extends Authenticatable
 {
     use HasApiTokens, HasFactory, Notifiable;
 
-    public const APPROVED_STATUS = 1; 
-    public const PENDING_STATUS = 0;
-    public const DISAPPROVED_STATUS = 2;
+    public const ACTIVE_STATUS = 1; 
+    public const INACTIVE_STATUS = 0;
 
     public const USER_ROLE = "user";
     public const ADMIN_ROLE = "admin";
@@ -55,19 +54,14 @@ class User extends Authenticatable
 
     public function getStatusBadgeAttribute()
     {
-        if( $this->status == self::APPROVED_STATUS ) 
+        if( $this->status == self::ACTIVE_STATUS ) 
         {
-            return "<label class='label green'>APPROVED</label>";
+            return "<span class='badge rounded-pill bg-success'>APPROVED</span>";
         }
         
-        if( $this->status == self::DISAPPROVED_STATUS )  
+        if( $this->status == self::INACTIVE_STATUS )  
         {
-            return "<label class='label red'>DISAPPROVED</label>";
-        }
-
-        if( $this->status == self::PENDING_STATUS )  
-        {
-            return "<label class='label gray'>WAITING FOR APPROVAL</label>";
+            return "<span class='badge rounded-pill bg-danger'>DISAPPROVED</span>";
         }
     }
 }
