@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\CreateUserFormRequest;
+use App\Http\Requests\Admin\UpdateUserFormRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
@@ -80,12 +81,26 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, User $user)
+    public function update(UpdateUserFormRequest $request, User $user)
     {
         try 
         {
+            // TODO: Extract this to a class or a trait
             $user->update($request->all());
             return redirect()->route('admin.users.index')->with('success', 'User was successfully updated.');  
+        }
+        catch(Exception $e) {
+            dd($e->getMessage());
+        }
+    }
+
+    public function setStatus(Request $request, User $user) 
+    {
+        try 
+        {
+            // TODO: Extract this to a class or a trait
+            $user->update($request->all());
+            return redirect()->route('admin.users.index')->with('success', 'User status was successfully updated.');  
         }
         catch(Exception $e) {
             dd($e->getMessage());

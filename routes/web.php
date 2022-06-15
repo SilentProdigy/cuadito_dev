@@ -57,6 +57,8 @@ Auth::routes();
 
 Route::middleware([])->prefix('admin')->name('admin.')->group(function () {
     
+    Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
+
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
 
 });
