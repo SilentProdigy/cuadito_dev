@@ -96,7 +96,7 @@
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-dolly fa-fw me-3"></i><span>Suppliers</span>
                     </a>
-                    <a href="{{ route('user_listing') }}" class="list-group-item list-group-item-action py-2 ripple">
+                    <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-user fa-fw me-3"></i><span>Users</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
