@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\SoftDeletes;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, SoftDeletes;
 
     public const ACTIVE_STATUS = 1; 
     public const INACTIVE_STATUS = 0;
@@ -18,6 +19,7 @@ class User extends Authenticatable
     public const USER_ROLE = "user";
     public const ADMIN_ROLE = "admin";
     public const ROLES = [self::USER_ROLE, self::ADMIN_ROLE];
+
 
 
     /**
@@ -56,12 +58,12 @@ class User extends Authenticatable
     {
         if( $this->status == self::ACTIVE_STATUS ) 
         {
-            return "<span class='badge rounded-pill bg-success'>APPROVED</span>";
+            return "<span class='badge rounded-pill bg-success'>ACTIVE</span>";
         }
         
         if( $this->status == self::INACTIVE_STATUS )  
         {
-            return "<span class='badge rounded-pill bg-danger'>DISAPPROVED</span>";
+            return "<span class='badge rounded-pill bg-dark'>INACTIVE</span>";
         }
     }
 }
