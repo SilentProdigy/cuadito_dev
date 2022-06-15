@@ -79,9 +79,16 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, User $user)
     {
-        //
+        try 
+        {
+            $user->update($request->all());
+            return redirect()->route('admin.users.index')->with('success', 'User successfully updated.');  
+        }
+        catch(Exception $e) {
+            dd($e->getMessage());
+        }
     }
 
     /**

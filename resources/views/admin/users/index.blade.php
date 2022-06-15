@@ -1,8 +1,6 @@
 @extends('layouts.dashboard-layout')
 
 @section('content')
-
-
     <div class="container-fluid mb-3">
         <div class="d-flex flex-row d-align-items-center justify-content-center">
             <div class="col d-flex justify-content-end">
@@ -65,7 +63,10 @@
                                 {!! $user->statusBadge !!}
                             </td>
                             <td>
-                                <a href="#">Set Status</a>
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-outline-primary btn-set-user-status">
+                                  Set Status          
+                                </a>
+                                {{-- <a href="#" data-user="{{ }}">Set Status</a> --}}
                                 <a href="#">Edit</a>
                                 <a href="#">Delete</a>
                             </td>
@@ -77,4 +78,29 @@
     </div>
 
     @include('admin.users.modals.add_user_modal')
+    @include('admin.users.modals.set_status_modal')
+@endsection
+
+@section('script')
+    <script>
+        $(document).ready(function() {
+            let set_status_buttons = document.querySelectorAll('.btn-set-user-status');
+
+            set_status_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-user');   
+                    data = JSON.parse(data);
+    
+                    let myModal = new bootstrap.Modal(document.getElementById('set-user-status-modal'), {keyboard: false})
+                    myModal.show()
+
+                    let form = document.querySelector('#set-user-status-form');
+                    form.setAttribute('action', `/admin/users/${ data.id }`);
+
+                    // document.querySelector('#area-name').innerHTML = data.name;
+                });
+            });
+        });
+    </script>
 @endsection
