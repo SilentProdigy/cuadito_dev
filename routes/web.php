@@ -52,3 +52,13 @@ Route::get('profile/{id}', ['uses' => 'App\Http\Controllers\DashboardController@
 Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
 
 Auth::routes();
+
+
+
+Route::middleware([])->prefix('admin')->name('admin.')->group(function () {
+    
+    Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
+    Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
+    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+
+});

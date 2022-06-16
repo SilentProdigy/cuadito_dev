@@ -96,7 +96,7 @@
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-dolly fa-fw me-3"></i><span>Suppliers</span>
                     </a>
-                    <a href="{{ route('user_listing') }}" class="list-group-item list-group-item-action py-2 ripple">
+                    <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-user fa-fw me-3"></i><span>Users</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
@@ -131,12 +131,16 @@
     <!--Main layout-->
     <main style="margin-top: 58px; padding-left: 240px; padding-bottom: 100px">
         <div class="container pt-5">
+
+            @include('panels.flash_messages')
+            
             @yield('content')
         </div>
     </main>
     <!--Main layout-->
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     @yield('script')
 </body>
 
