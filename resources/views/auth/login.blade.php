@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-4">
             <div class="card" style="border-radius: 20px;">
-                <div class="card-body">
+                <div class="card-body"> 
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
@@ -47,17 +47,19 @@
                                 {{ __('Login') }}
                             </button>
                         </div>
-                        <hr>
-                        <div class="row mb-3 mx-0">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-google"></i>&nbsp;{{ __('Login with Google') }}
-                            </button>
-                        </div>
-                        <div class="row mb-3 mx-0">
-                            <button type="submit" class="btn btn-primary">
-                                <i class="fa fa-apple"></i>&nbsp;{{ __('Login with Apple') }}
-                            </button>
-                        </div>
+                        {{-- 
+                            <hr>
+                            <div class="row mb-3 mx-0">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-google"></i>&nbsp;{{ __('Login with Google') }}
+                                </button>
+                            </div>
+                            <div class="row mb-3 mx-0">
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fa fa-apple"></i>&nbsp;{{ __('Login with Apple') }}
+                                </button>
+                            </div> 
+                        --}}
                     </form>
                 </div>
             </div>
