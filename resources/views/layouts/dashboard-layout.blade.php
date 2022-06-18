@@ -49,7 +49,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
                         <li>
-                            <a class="dropdown-item" href="{{ route('profile', [auth()->user()->id]) }}">My Profile</a>
+                            <a class="dropdown-item" href="{{ route('admin.profile.show', auth()->user()) }}">My Profile</a>
                         </li>
                         <li>
                             <a class="dropdown-item" href="#">Settings</a>
@@ -75,52 +75,7 @@
         <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
-                    <a href="{{ route('dashboard') }}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                        <i class="fas fa-home fa-fw me-3"></i><span>Home</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-paper-plane fa-fw me-3"></i><span>Quotes</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-credit-card fa-fw me-3"></i><span>Sales</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-credit-card fa-fw me-3"></i><span>Purchases</span>
-                    </a>
-                    <a href="{{ route('orders') }}" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-highlighter fa-fw me-3"></i><span>Orders</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-user fa-fw me-3"></i><span>Customers</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-dolly fa-fw me-3"></i><span>Suppliers</span>
-                    </a>
-                    <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-user fa-fw me-3"></i><span>Users</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-money-bill fa-fw me-3"></i><span>Sales</span>
-                    </a>
-                    <div class="list-group-item list-group-item-action dropdown ripple py-0 px-0 mb-auto">
-                      <a  class="dropdown-toggle list-group-item list-group-item-action py-2 ripple" style="border: none;" id="ProductsDropdown" data-bs-toggle="dropdown" aria-expanded="true" role="button">
-                         <i class="fas fa-box-open fa-fw me-3"></i><span>Products</span>
-                      </a>
-                      <div class="dropdown-menu" aria-labelledby="ProductsDropdown">
-                        <a class="dropdown-item" href="{{ route('product-listing') }}">All Products</a>
-                        <a class="dropdown-item" href="#">Bids</a>
-                        <a class="dropdown-item" href="#">Transfer</a>
-                      </div>
-                    </div>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-chart-area fa-fw me-3"></i><span>Reports</span>
-                    </a>
-                    <a href="{{ route('dashboard') }}" target="_blank" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-store fa-fw me-3"></i><span>Go to Platform&nbsp;<i class="fa fa-external-link fa-fw"></i></span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
-                        <i class="fas fa-circle-question fa-fw me-3"></i><span>Help</span>
-                    </a>
+                    @includeIf('panels.admin_sidebar', [auth()->user()->role => 'admin'])
                 </div>
             </div>
         </nav>
