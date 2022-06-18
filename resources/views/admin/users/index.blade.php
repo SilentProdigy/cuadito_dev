@@ -28,7 +28,7 @@
 
     <div class="card">
         <div class="card-header">
-            <span class="profile-labels">Active Users</span>
+            <span class="profile-labels">System Users</span>
         </div>
         <div class="card-body">
             <table class="table table-borderless table-md user-listing-table">
@@ -50,7 +50,7 @@
                                         alt="Avatar" />
                                 </div>
                                 <div class="d-flex flex-column user-listing-details px-3">
-                                    <a href="{{ route('profile', $user->id) }}">
+                                    <a href="{{ route('admin.profile.show', $user) }}">
                                         {{$user->name}}
                                     </a>
                                     <span>{{ $user->email }}</span>
