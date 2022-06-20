@@ -19,7 +19,6 @@ use App\Http\Controllers\ProductController;
 |
 */
 
-Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
 
 Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
 
@@ -41,7 +40,7 @@ Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('myOrders')
 
 Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin-dashboard');
 
-Route::get('/dashboard/user_listing', [DashboardController::class, 'show_users'])->name('user_listing');
+// Route::get('/dashboard/user_listing', [DashboardController::class, 'show_users'])->name('user_listing');
 
 Route::get('/dashboard/orders', [DashboardController::class, 'showOrders'])->name('orders');
 Route::get('/dashboard/product-listing', [ProductController::class, 'index'])->name('product-listing');
@@ -55,10 +54,13 @@ Auth::routes();
 
 
 
-Route::middleware([])->prefix('admin')->name('admin.')->group(function () {
-    
+Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(function () {
+
+    // Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+    Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
+
     Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
     Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-
 });

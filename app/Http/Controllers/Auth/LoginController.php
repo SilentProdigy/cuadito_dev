@@ -3,9 +3,11 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
@@ -41,10 +43,13 @@ class LoginController extends Controller
 
     protected function authenticated(Request $request, $user)
     {
-        if ($user->status === 0) {
-            return redirect('/register/confirmation');
+        if ($user->status == User::INACTIVE_STATUS) {
+            Auth::logout();
+            $request->session()->invalidate();
+            $request->session()->regenerateToken();
+            return redirect('login')->withErrors(['email' => 'Your account is inactive, please contact the administrator to activate your account.']);;
         }
 
-        return redirect('/');
+        return redirect(route('admin.dashboard'));
     }
 }
