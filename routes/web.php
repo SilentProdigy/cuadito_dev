@@ -67,9 +67,15 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
 
 Route::prefix('client')->name('client.')->group(function () {
     Route::prefix('auth')->name('auth.')->group(function() {
-        Route::get('login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'showLoginForm'])->name('login');
-        
+        Route::get('login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'showLoginForm'])->name('show-login-form');
+        Route::post('login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'login'])->name('login');
         Route::get('register', [\App\Http\Controllers\Client\Auth\RegisterController::class, 'showRegisterForm'])->name('show-register-form');
         Route::post('register', [\App\Http\Controllers\Client\Auth\RegisterController::class, 'register'])->name('register');
+        Route::post('logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout'])->name('logout');
     });
+
+    Route::middleware('auth.client')->group(function() {
+        Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
+    });
+
 });
