@@ -15,8 +15,8 @@ class CreateBiddingsTable extends Migration
     {
         Schema::create('biddings', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('companies')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('projects')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('company_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('project_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('quotation_url');
             $table->text('cover_letter');
             $table->decimal('amount', 9, 2);
