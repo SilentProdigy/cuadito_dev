@@ -18,7 +18,7 @@ class CreateProjectsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('status')->default('ACTIVE');
-            $table->foreignId('companies')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('company_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
             $table->softDeletes();
             $table->index(['title']);
