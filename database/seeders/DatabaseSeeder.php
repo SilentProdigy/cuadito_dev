@@ -12,7 +12,7 @@ use App\Models\Customer;
 class DatabaseSeeder extends Seeder
 {
     private $userEmails = [
-        'anh@cict.solutions'
+        'anthony.lopez@1mcdigital.com'
     ];
 
     /**
@@ -27,50 +27,50 @@ class DatabaseSeeder extends Seeder
 
             if (!$user) {
                 $user = User::create([
-                    'name' => 'Anh Vo',
+                    'name' => 'Anthony Mark Lopez',
                     'role' => 'admin',
-                    'email' => 'anh@cict.solutions',
-                    'password' => Hash::make('vietnam'),
+                    'email' => 'anthony.lopez@1mcdigital.com',
+                    'password' => Hash::make('password'),
                     'status' => 1,
                 ]);
             }
 
-            $customer = Customer::create([
-                'name' => 'Anh Vo ' . $user->id,
-                'company' => 'CICT',
-                'email' => 'anh@cict.solutions',
-            ]);
+            // $customer = Customer::create([
+            //     'name' => 'Anh Vo ' . $user->id,
+            //     'company' => 'CICT',
+            //     'email' => 'anh@cict.solutions',
+            // ]);
 
-            $address = Address::where('user_id', '=', $user->id)->first();
+            // $address = Address::where('user_id', '=', $user->id)->first();
 
-            if (!$address) {
-                DB::table('addresses')->insert([
-                    'name' => $user->name,
-                    'user_id' => $user->id,
-                    'customer_id' => $customer->id,
-                    'phone' => 123456789,
-                    'address' => '123 Cao Lo',
-                    'country' => 'VN',
-                    'state' => 'SG',
-                    'zipcode' => 700000
-                ]);
-            }
+            // if (!$address) {
+            //     DB::table('addresses')->insert([
+            //         'name' => $user->name,
+            //         'user_id' => $user->id,
+            //         'customer_id' => $customer->id,
+            //         'phone' => 123456789,
+            //         'address' => '123 Cao Lo',
+            //         'country' => 'VN',
+            //         'state' => 'SG',
+            //         'zipcode' => 700000
+            //     ]);
+            // }
 
-            $customer = Customer::create([
-                'name' => 'Alex Colman',
-                'company' => 'CICT',
-                'email' => 'alex@cict.solutions',
-            ]);
+            // $customer = Customer::create([
+            //     'name' => 'Alex Colman',
+            //     'company' => 'CICT',
+            //     'email' => 'alex@cict.solutions',
+            // ]);
 
-            DB::table('addresses')->insert([
-                'name' => 'Alex Colman',
-                'customer_id' => $customer->id,
-                'phone' => 123456789,
-                'address' => '123 Cao Lo',
-                'country' => 'VN',
-                'state' => 'SG',
-                'zipcode' => 700000
-            ]);
+            // DB::table('addresses')->insert([
+            //     'name' => 'Alex Colman',
+            //     'customer_id' => $customer->id,
+            //     'phone' => 123456789,
+            //     'address' => '123 Cao Lo',
+            //     'country' => 'VN',
+            //     'state' => 'SG',
+            //     'zipcode' => 700000
+            // ]);
         }
 
         for ($i = 1; $i <= 100; $i++) {

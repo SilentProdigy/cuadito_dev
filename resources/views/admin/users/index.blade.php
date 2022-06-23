@@ -1,15 +1,7 @@
 @extends('layouts.dashboard-layout')
 
 @section('content')
-    <div class="container-fluid mb-3">
-        <div class="d-flex flex-row d-align-items-center justify-content-center">
-            <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addUserModal">
-                <i class="fa fa-plus"></i>&ensp;Add user
-            </button>
-            </div>
-        </div>
-    </div>
+    
 
     <div class="card mb-3 p-3 container-fluid">
         <div class="d-flex flex-row">
@@ -26,10 +18,17 @@
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-header">
-            <span class="profile-labels">System Users</span>
+    <div class="container-fluid mb-3">
+        <div class="d-flex flex-row d-align-items-center justify-content-center">
+            <div class="table-titles">System Users</div>
+            <div class="col d-flex justify-content-end">
+                <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#addUserModal">
+                    <i class="fa fa-plus"></i>&ensp;Add user
+                </button>
+            </div>
         </div>
+    </div>
+    <div class="card">
         <div class="card-body">
             <table class="table table-borderless table-md user-listing-table">
                 <thead>
@@ -62,17 +61,19 @@
                             <td>
                                 {!! $user->statusBadge !!}
                             </td>
-                            <td>
+                            <td class="user-actions">
                                 <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-warning btn-edit-user">
-                                    Edit          
+                                    <i class="fa fa-pencil"></i>          
                                 </a>
-                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-danger btn-delete">Delete</a>
-
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-danger btn-delete">
+                                    <i class="fa fa-trash"></i>
+                                </a>
                                 <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-primary btn-set-user-status">
-                                  Set Status          
+                                  <i class="fa fa-check"></i>         
                                 </a>
-                               
-                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-dark btn-change-password">Change Password</a>
+                                <a href="#" data-user="{{ json_encode($user) }}"  class="btn btn-sm btn-outline-dark btn-change-password">
+                                    <i class="fa fa-unlock"></i>
+                                </a>
                             </td>
                         </tr>
                     @endforeach

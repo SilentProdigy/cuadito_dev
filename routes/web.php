@@ -19,6 +19,7 @@ use App\Http\Controllers\ProductController;
 |
 */
 
+Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 
 Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
 

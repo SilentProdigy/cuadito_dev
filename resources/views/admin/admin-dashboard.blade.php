@@ -4,7 +4,7 @@
 <div class="row m-5">
 	<div class="col-md-4">
 		<div class="shadow-lg rounded-lg overflow-hidden">
-		  <div class="py-3 px-5 bg-gray-50">Doughnut chart</div>
+		  <div class="py-3 px-5 bg-gray-50">Projects</div>
 		  <canvas class="p-10" id="chartDoughnut"></canvas>
 		</div>
 	</div>
@@ -32,7 +32,7 @@
 <!-- Chart doughnut -->
 <script>
   const dataDoughnut = {
-    labels: ["JavaScript", "Python", "Ruby"],
+    labels: ["Sample", "Python", "Ruby"],
     datasets: [
       {
         label: "My First Dataset",
