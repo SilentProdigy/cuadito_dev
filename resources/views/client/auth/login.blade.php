@@ -64,7 +64,7 @@
                 </div>
             </div>
             <div class="justify-content-center text-center">
-                <span>Are you a business?</span>&nbsp;<a href="{{ route('client.auth.show-register-form') }}">Get started.</a>
+                <span>Don't have an account?</span>&nbsp;<a href="{{ route('client.auth.show-register-form') }}">Join us now.</a>
             </div>
         </div>
     </div>
