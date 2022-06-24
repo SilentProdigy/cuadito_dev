@@ -14,7 +14,7 @@ class Company extends Model
         'name',
         'address',
         'email',
-        'password',
+        // 'password',
         'contact_number',
         'validation_status',
         'client_id'
