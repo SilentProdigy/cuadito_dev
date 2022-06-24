@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Company\CreateCompanyFormRequest;
+use App\Http\Requests\Client\Company\EditCompanyFormRequest;
 use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,6 +22,11 @@ class CompanyController extends Controller
         return view('client.companies.create');   
     }
 
+    public function edit(Company $company)
+    {
+        return view('client.companies.edit')->with(compact('company'));
+    }
+
     public function store(CreateCompanyFormRequest $request)
     {
         try 
@@ -28,6 +34,19 @@ class CompanyController extends Controller
             // Company::create($request->all());
             auth('client')->user()->companies()->create($request->all());
             return redirect()->route('client.companies.index')->with('success', 'Company was successfully created.');  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
+    public function update(EditCompanyFormRequest $request, Company $company)
+    {
+        try 
+        {
+            $company->update($request->all());
+            return redirect()->route('client.companies.index')->with('success', 'Company was successfully updated.');  
         }
         catch(Exception $e)
         {

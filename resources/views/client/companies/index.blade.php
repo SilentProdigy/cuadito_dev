@@ -40,13 +40,13 @@
                        <span>-</span>
                     </td>
                     <td class="user-actions">
-                        <a href="#" class="btn btn-sm btn-outline-info btn-set-user-status">
+                        <a href="#" class="btn btn-sm btn-outline-info">
                             <i class="fa fa-eye"></i>         
                         </a>
-                        <a href="#" class="btn btn-sm btn-warning btn-edit-user">
+                        <a href="{{ route('client.companies.edit', $company) }}" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil"></i>          
                         </a>
-                        <a href="#" class="btn btn-sm btn-danger btn-delete">
+                        <a href="#" class="btn btn-sm btn-danger">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
