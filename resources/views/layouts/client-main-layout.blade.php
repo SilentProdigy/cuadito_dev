@@ -80,7 +80,7 @@
                         <i class="fas fa-home fa-fw me-3"></i><span>Home</span>
                     </a>
 
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <a href="{{ route('client.companies.index') }}" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-square fa-fw me-3"></i><span>Companies</span>
                     </a>
                     
