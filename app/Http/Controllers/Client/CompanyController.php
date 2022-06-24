@@ -53,4 +53,17 @@ class CompanyController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function destroy(Company $company)
+    {
+        try
+        {
+            $company->delete();
+            return redirect()->route('client.companies.index')->with('success', 'Company was successfully deleted.');  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
 }

@@ -46,7 +46,7 @@
                         <a href="{{ route('client.companies.edit', $company) }}" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil"></i>          
                         </a>
-                        <a href="#" class="btn btn-sm btn-danger">
+                        <a href="#" class="btn btn-sm btn-danger btn-delete" data-company="{{ json_encode($company) }}">
                             <i class="fa fa-trash"></i>
                         </a>
                     </td>
@@ -56,8 +56,30 @@
         </table>
     </div>
 </div>
+@include('client.companies.modals.confirm_delete_modal')
 @endsection
 
 @section('script')
+    <script>
+        $(document).ready(function() {
+            let delete_buttons = document.querySelectorAll('.btn-delete');
 
+            delete_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-company');   
+                    data = JSON.parse(data);
+
+                    let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
+                    myModal.show()
+
+                    document.querySelector('#company-name').innerHTML = data.name;
+
+                    let form = document.querySelector('#delete-company-form');
+                    form.setAttribute('action', `/client/companies/${ data.id }`);
+
+                });
+            });
+        });
+    </script>
 @endsection
