@@ -63,6 +63,7 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
     Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
     Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+    Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class);
 });
 
 
@@ -77,6 +78,7 @@ Route::prefix('client')->name('client.')->group(function () {
 
     Route::middleware('auth.client')->group(function() {
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
+        Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
     });
 
 });
