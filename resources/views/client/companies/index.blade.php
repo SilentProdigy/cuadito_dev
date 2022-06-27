@@ -78,6 +78,7 @@
                     let form = document.querySelector('#delete-company-form');
                     form.setAttribute('action', `/client/companies/${ data.id }`);
 
+                    // $('#validation_status').val(`${ data.validation_status }`);
                 });
             });
         });
