@@ -84,7 +84,7 @@
                         <i class="fas fa-square fa-fw me-3"></i><span>Companies</span>
                     </a>
                     
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <a href="{{ route('client.projects.index') }}" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-highlighter fa-fw me-3"></i><span>Projects</span>
                     </a>
                 
