@@ -79,6 +79,8 @@ Route::prefix('client')->name('client.')->group(function () {
     Route::middleware('auth.client')->group(function() {
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
+        Route::patch('/projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
+        Route::resource('projects', \App\Http\Controllers\Client\ProjectController::class);
     });
 
 });

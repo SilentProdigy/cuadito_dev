@@ -31,4 +31,8 @@ class Client extends Authenticatable
         return $this->hasMany(\App\Models\Company::class);
     }
 
+    public function projects()
+    {
+        return $this->hasManyThrough(\App\Models\Project::class, \App\Models\Company::class);
+    }
 }

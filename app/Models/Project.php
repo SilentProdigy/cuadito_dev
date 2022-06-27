@@ -10,6 +10,16 @@ class Project extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const ACTIVE_STATUS = "ACTIVE";
+    public const ON_HOLD_STATUS = "ON HOLD";
+    public const CLOSED_STATUS = "CLOSED";
+
+    public const PROJECT_STATES = [
+        self::ACTIVE_STATUS,
+        self::ON_HOLD_STATUS,
+        self::CLOSED_STATUS,
+    ];
+
     protected $fillable = [
         'title',
         'description',
