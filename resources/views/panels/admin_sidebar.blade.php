@@ -17,6 +17,11 @@
 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-user fa-fw me-3"></i><span>Customers</span>
 </a>
+
+<a href="{{ route('admin.companies.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+    <i class="fas fa-square fa-fw me-3"></i><span>Companies</span>
+</a>
+
 <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-shield fa-fw me-3"></i><span>System Users</span>
 </a>
