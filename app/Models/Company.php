@@ -10,6 +10,10 @@ class Company extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const FOR_APPROVAL_STATUS = "FOR APPROVAL";
+    public const APPROVED_STATUS = "APPROVED";
+    public const DISAPPROVED_STATUS = "DISAPPROVED";
+
     protected $fillable = [
         'name',
         'address',
@@ -18,6 +22,12 @@ class Company extends Model
         'contact_number',
         'validation_status',
         'client_id'
+    ];
+
+    public const COMPANY_STATES = [
+        self::FOR_APPROVAL_STATUS,
+        self::APPROVED_STATUS,
+        self::DISAPPROVED_STATUS,
     ];
 
     public function client()
