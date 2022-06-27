@@ -45,10 +45,10 @@ class UserController extends Controller
     {
         try 
         {
-            $data = $request->only(['name', 'email']);
+            $data = $request->all();
             $data['password'] = bcrypt($request->input('password'));
 
-            User::create($request->all());
+            User::create($data);
             return redirect()->route('admin.users.index')->with('success', 'User was successfully created.');  
         }
         catch(Exception $e) {
