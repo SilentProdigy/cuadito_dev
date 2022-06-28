@@ -19,6 +19,13 @@ class CompanyController extends Controller
 
     public function create()
     {
+        if(auth('client')->user()->have_companies) 
+        {
+            return redirect()->back()->withErrors([
+                'Invalid Company Count' => 'Reached the max count of companies!'
+            ]);
+        }
+        
         return view('client.companies.create');   
     }
 

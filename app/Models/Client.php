@@ -26,6 +26,10 @@ class Client extends Authenticatable
         'birth_date' => 'date'
     ];
 
+    protected $appends = [
+        'have_companies'
+    ];
+
     public function companies() 
     {
         return $this->hasMany(\App\Models\Company::class);
@@ -34,5 +38,10 @@ class Client extends Authenticatable
     public function projects()
     {
         return $this->hasManyThrough(\App\Models\Project::class, \App\Models\Company::class);
+    }
+
+    public function getHaveCompaniesAttribute()
+    {
+        return $this->companies->count() > 0;
     }
 }

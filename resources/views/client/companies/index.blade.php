@@ -43,12 +43,14 @@
                         <a href="#" class="btn btn-sm btn-outline-info">
                             <i class="fa fa-eye"></i>         
                         </a>
-                        <a href="{{ route('client.companies.edit', $company) }}" class="btn btn-sm btn-warning">
-                            <i class="fa fa-pencil"></i>          
-                        </a>
-                        <a href="#" class="btn btn-sm btn-danger btn-delete" data-company="{{ json_encode($company) }}">
-                            <i class="fa fa-trash"></i>
-                        </a>
+                        {{-- 
+                            <a href="{{ route('client.companies.edit', $company) }}" class="btn btn-sm btn-warning">
+                                <i class="fa fa-pencil"></i>          
+                            </a>
+                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-company="{{ json_encode($company) }}">
+                                <i class="fa fa-trash"></i>
+                            </a> 
+                        --}}
                     </td>
                 </tr>
                 @endforeach
