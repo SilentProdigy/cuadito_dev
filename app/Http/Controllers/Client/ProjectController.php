@@ -31,7 +31,7 @@ class ProjectController extends Controller
     public function create()
     {
         // TODO: Add some more business logic here...
-        $companies = auth('client')->user()->companies;
+        $companies = auth('client')->user()->companies->where('status', Company::APPROVED_STATUS);
         return view('client.projects.create')->with(compact('companies'));
     }
 

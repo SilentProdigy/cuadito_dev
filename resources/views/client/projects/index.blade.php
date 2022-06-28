@@ -4,7 +4,7 @@
 
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Your Companies</div>
+        <div class="table-titles">Your Projects</div>
         <div class="col d-flex justify-content-end">
             <a href="{{ route('client.projects.create') }}" class="btn btn-primary header-btn">
                 <i class="fa fa-plus"></i>&ensp;Add Project
