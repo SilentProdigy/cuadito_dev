@@ -8,4 +8,15 @@ use Illuminate\Database\Eloquent\Model;
 class Requirement extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'name'
+    ];
+
+    public function clients()
+    {
+        return $this->belongsToMany(\App\Models\Client::class, 'client_requirements')
+                ->as('file')
+                ->withPivot(['url']);
+    }
 }
