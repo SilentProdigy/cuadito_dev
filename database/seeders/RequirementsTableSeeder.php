@@ -18,7 +18,7 @@ class RequirementsTableSeeder extends Seeder
             ['name' => "1pc Picture"],
             ['name' => "1pc Valid ID(Borrower)"],
             ['name' => "1pc Valid ID(Co-Maker)"],
-            ['name' => "Brgy. Business Permit"],
+            ['name' => "Business Permit"],
         ];
 
         foreach ($requirements as $item) 
