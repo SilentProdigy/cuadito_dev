@@ -14,7 +14,7 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-blue">
             <div class="inner">
-                <h3> 366 </h3>
+                <h3> {{ $projects_count }} </h3>
                 <p> Projects </p>
             </div>
             <div class="icon">
@@ -51,8 +51,8 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-red">
             <div class="inner">
-                <h3> 723 </h3>
-                <p> Total Users </p>
+                <h3> {{ $clients_count }} </h3>
+                <p> Total Clients </p>
             </div>
             <div class="icon">
                 <i class="fa fa-users"></i>
