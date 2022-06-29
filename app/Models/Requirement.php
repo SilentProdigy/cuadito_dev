@@ -10,7 +10,8 @@ class Requirement extends Model
     use HasFactory;
 
     protected $fillable = [
-        'name'
+        'name',
+        'required'
     ];
 
     public function clients()
