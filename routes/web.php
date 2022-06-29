@@ -64,6 +64,7 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
     Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class);
+    Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class);
 });
 
 
