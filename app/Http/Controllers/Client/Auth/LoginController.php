@@ -19,7 +19,7 @@ class LoginController extends Controller
         if( Auth::guard('client')->attempt($request->only(['email', 'password'])) )
         {
             $request->session()->regenerate();
-            return redirect()->intended(route('client.dashboard'));
+            return redirect(route('client.dashboard'));
         }
 
         return redirect()->back()->withErrors([
