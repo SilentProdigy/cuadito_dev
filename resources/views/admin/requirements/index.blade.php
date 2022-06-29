@@ -74,8 +74,8 @@
 
                 // document.querySelector('#user-fullname').innerHTML = data.name;
 
-                // let form = document.querySelector('#delete-user-form');
-                // form.setAttribute('action', `/admin/users/${ data.id }`);
+                let form = document.querySelector('#delete-requirement-form');
+                form.setAttribute('action', `/admin/requirements/${ data.id }`);
 
             });
         });
