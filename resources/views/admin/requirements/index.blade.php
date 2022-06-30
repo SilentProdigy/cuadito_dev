@@ -44,7 +44,7 @@
                                 <span>{{ $requirement->required ? 'Required' : 'Optional' }}</span>
                             </td>
                             <td class="user-actions"> 
-                                <a href="#" class="btn btn-sm btn-warning btn-edit-user">
+                                <a href="#" class="btn btn-sm btn-warning btn-edit-requirement" data-requirement="{{ json_encode($requirement) }}">
                                     <i class="fa fa-pencil"></i>          
                                 </a>
                                 <a href="#" data-requirement="{{ json_encode($requirement) }}" class="btn btn-sm btn-danger btn-delete">
@@ -63,6 +63,7 @@
 
     @include('admin.requirements.modals.confirm_delete_modal')
     @include('admin.requirements.modals.add_requirement_modal')
+    @include('admin.requirements.modals.edit_requirement_modal')
 @endsection
 
 @section('script')
@@ -83,6 +84,28 @@
 
                 let form = document.querySelector('#delete-requirement-form');
                 form.setAttribute('action', `/admin/requirements/${ data.id }`);
+
+            });
+        });
+
+        let edit_buttons = document.querySelectorAll('.btn-edit-requirement');
+
+        edit_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-requirement');   
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('edit-requirement-modal'), {keyboard: false})
+                myModal.show()
+
+                // document.querySelector('#user-fullname').innerHTML = data.name;
+
+                let form = document.querySelector('#edit-requirement-form');
+                form.setAttribute('action', `/admin/requirements/${ data.id }`);
+
+                $('#edit-name-txt').val(data.name);
+                $('#edit-required-sel').val(data.required == 1 ? "true" : "false");
 
             });
         });

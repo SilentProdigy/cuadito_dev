@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Admin\Requirement\CreateRequirementRequest;
+use App\Http\Requests\Admin\Requirement\UpdateRequirementRequest;
 use App\Models\Requirement;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,7 +17,7 @@ class RequirementController extends Controller
         return view('admin.requirements.index')->with(compact('requirements'));   
     }
 
-    public function store(Request $request)
+    public function store(CreateRequirementRequest $request)
     {
         try
         {
@@ -25,6 +27,23 @@ class RequirementController extends Controller
 
             Requirement::create($data);
             return redirect()->back()->with('success', 'Requirement was successfully created!');  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
+    public function update(UpdateRequirementRequest $request, Requirement $requirement)
+    {
+        try
+        {
+            $data = $request->only('name');
+
+            $data['required'] = $request->input('required') == 'true' ? true : false;
+
+            $requirement->update($data);
+            return redirect()->back()->with('success', 'Requirement was successfully updated!');  
         }
         catch(Exception $e)
         {
