@@ -14,6 +14,12 @@
         <div class="d-flex flex-row d-align-items-center justify-content-center">
             <div class="table-titles">Client Requirements</div>
         </div>
+
+        <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#addRequirementModal">
+                <i class="fa fa-plus"></i>&ensp;Add Requirement
+            </button>
+        </div>
     </div>
 
     <div class="card">
@@ -56,6 +62,7 @@
     </div>
 
     @include('admin.requirements.modals.confirm_delete_modal')
+    @include('admin.requirements.modals.add_requirement_modal')
 @endsection
 
 @section('script')

@@ -15,6 +15,23 @@ class RequirementController extends Controller
         return view('admin.requirements.index')->with(compact('requirements'));   
     }
 
+    public function store(Request $request)
+    {
+        try
+        {
+            $data = $request->only('name');
+
+            $data['required'] = $request->input('required') == 'true' ? true : false;
+
+            Requirement::create($data);
+            return redirect()->back()->with('success', 'Requirement was successfully created!');  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
     public function destroy(Requirement $requirement)
     {
         try 
