@@ -13,6 +13,12 @@ class DashboardController extends Controller
     {
         $projects_count = Project::count();
         $clients_count = Client::count();
-        return view('admin.dashboard.index')->with(compact('projects_count', 'clients_count'));
+        $projects = Project::with('company')
+                    ->where('status', Project::ACTIVE_STATUS)
+                    ->orderBy('id', 'desc')
+                    ->take(5)
+                    ->get();
+
+        return view('admin.dashboard.index')->with(compact('projects_count', 'clients_count', 'projects'));
     }
 }

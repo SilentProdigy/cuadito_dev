@@ -76,42 +76,17 @@
           
         </div>
         <ul class="list-group list-group-flush">
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 001</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 002</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 003</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 004</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
+          @foreach ($projects as $item)
+            <li class="d-flex justify-content-between list-group-item">
+              <div class="col-2 dashboard-proj-img">
+                <img src="{{ asset('images/company_logo/cov.png') }}">
+              </div>
+              <div class="col-10 p-2">
+                <span class="dashboard-proj-name">{{ $item->title }}</span><br>
+                <span class="dashboard-proj-company text-muted">{{ $item->company->name }}</span>
+              </div>
+            </li>
+          @endforeach
         </ul>
       </div>
     </div>
