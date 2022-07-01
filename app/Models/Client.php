@@ -50,4 +50,11 @@ class Client extends Authenticatable
     {
         return $this->companies->where('status', \App\Models\Company::APPROVED_STATUS)->count() > 0;
     }
+
+    public function requirements()
+    {
+        return $this->belongsToMany(\App\Models\Requirement::class, 'client_requirements')
+                ->as('file')
+                ->withPivot(['id','url']);
+    }
 }
