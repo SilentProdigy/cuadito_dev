@@ -6,9 +6,15 @@
     <div class="d-flex flex-row d-align-items-center justify-content-center">
         <div class="table-titles">Your Projects</div>
         <div class="col d-flex justify-content-end">
-            <a href="{{ route('client.projects.create') }}" class="btn btn-primary header-btn">
-                <i class="fa fa-plus"></i>&ensp;Add Project
-            </a>
+            @if(auth('client')->user()->have_valid_companies)
+                <a href="{{ route('client.projects.create') }}" class="btn btn-primary header-btn">
+                    <i class="fa fa-plus"></i>&ensp;Add Project
+                </a>
+            @else
+                <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#no-valid-company-modal">
+                    <i class="fa fa-plus"></i>&ensp;Add Project
+                </button>
+            @endif
         </div>
     </div>
 </div>
@@ -67,6 +73,7 @@
 </div>
 @include('client.projects.modals.confirm_delete_modal')
 @include('client.projects.modals.set_status_modal')
+@include('client.projects.modals.no_valid_company_modal')
 @endsection
 
 @section('script')
