@@ -44,4 +44,11 @@ class Client extends Authenticatable
     {
         return $this->companies->count() > 0;
     }
+
+    public function requirements()
+    {
+        return $this->belongsToMany(\App\Models\Requirement::class, 'client_requirements')
+                ->as('file')
+                ->withPivot(['id','url']);
+    }
 }

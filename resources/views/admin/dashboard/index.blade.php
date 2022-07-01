@@ -14,7 +14,7 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-blue">
             <div class="inner">
-                <h3> 366 </h3>
+                <h3> {{ $projects_count }} </h3>
                 <p> Projects </p>
             </div>
             <div class="icon">
@@ -51,8 +51,8 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-red">
             <div class="inner">
-                <h3> 723 </h3>
-                <p> Total Users </p>
+                <h3> {{ $clients_count }} </h3>
+                <p> Total Clients </p>
             </div>
             <div class="icon">
                 <i class="fa fa-users"></i>
@@ -76,42 +76,17 @@
           
         </div>
         <ul class="list-group list-group-flush">
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 001</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 002</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 003</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
-          <li class="d-flex justify-content-between list-group-item">
-            <div class="col-2 dashboard-proj-img">
-              <img src="{{ asset('images/company_logo/cov.png') }}">
-            </div>
-            <div class="col-10 p-2">
-              <span class="dashboard-proj-name">Project 004</span><br>
-              <span class="dashboard-proj-company text-muted">Covenant Arts and Music Center</span>
-            </div>
-          </li>
+          @foreach ($projects as $item)
+            <li class="d-flex justify-content-between list-group-item">
+              <div class="col-2 dashboard-proj-img">
+                <img src="{{ asset('images/company_logo/cov.png') }}">
+              </div>
+              <div class="col-10 p-2">
+                <span class="dashboard-proj-name">{{ $item->title }}</span><br>
+                <span class="dashboard-proj-company text-muted">{{ $item->company->name }}</span>
+              </div>
+            </li>
+          @endforeach
         </ul>
       </div>
     </div>
