@@ -66,6 +66,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'inactive' => \App\Http\Middleware\Admin\RestrictAccessIfInactive::class,
         'auth.client' => \App\Http\Middleware\AuthenticateClient::class,
+        'client.validate.companies' => \App\Http\Middleware\Client\EnsureClientHaveValidCompanies::class,
         'preventBackHistory' => \App\Http\Middleware\RevalidateBackHistory::class
     ];
 }
