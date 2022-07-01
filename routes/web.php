@@ -55,7 +55,7 @@ Auth::routes();
 
 
 
-Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
     // Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
@@ -77,7 +77,7 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::post('logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout'])->name('logout');
     });
 
-    Route::middleware('auth.client')->group(function() {
+    Route::middleware(['auth.client', 'preventBackHistory'])->group(function() {
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
         Route::patch('/projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
