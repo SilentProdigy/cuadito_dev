@@ -80,7 +80,19 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
         Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
         Route::patch('/projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
-        Route::resource('projects', \App\Http\Controllers\Client\ProjectController::class);
+
+        Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
+        
+        Route::middleware('client.validate.companies')
+            ->get('projects/create', [\App\Http\Controllers\Client\ProjectController::class, 'create'])
+            ->name('projects.create');
+
+        Route::post('projects', [\App\Http\Controllers\Client\ProjectController::class, 'store'])->name('projects.store');
+        Route::get('projects/edit/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'edit'])->name('projects.edit');
+        Route::patch('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'update'])->name('projects.update');
+        Route::delete('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'delete'])->name('projects.delete');
+
+        // Route::resource('projects', \App\Http\Controllers\Client\ProjectController::class);
     });
 
 });

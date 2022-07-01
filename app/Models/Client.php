@@ -27,7 +27,8 @@ class Client extends Authenticatable
     ];
 
     protected $appends = [
-        'have_companies'
+        'have_companies',
+        'have_valid_companies'
     ];
 
     public function companies() 
@@ -43,5 +44,10 @@ class Client extends Authenticatable
     public function getHaveCompaniesAttribute()
     {
         return $this->companies->count() > 0;
+    }
+
+    public function getHaveValidCompaniesAttribute()
+    {
+        return $this->companies->where('status', \App\Models\Company::APPROVED_STATUS)->count() > 0;
     }
 }
