@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Project\CreateProjectRequest;
+use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Models\Company;
 use App\Models\Project;
@@ -41,7 +43,7 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
         try 
         {
@@ -86,7 +88,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
         try 
         {
