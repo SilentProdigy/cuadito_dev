@@ -28,7 +28,9 @@ class Client extends Authenticatable
 
     protected $appends = [
         'have_companies',
-        'have_valid_companies'
+        'have_valid_companies',
+        'projects_count',
+        'companies_count'
     ];
 
     public function companies() 
@@ -39,6 +41,11 @@ class Client extends Authenticatable
     public function projects()
     {
         return $this->hasManyThrough(\App\Models\Project::class, \App\Models\Company::class);
+    }
+    
+    public function biddings()
+    {
+        return $this->hasManyThrough(\App\Models\Bidding::class, \App\Models\Company::class);
     }
 
     public function getHaveCompaniesAttribute()
@@ -56,5 +63,15 @@ class Client extends Authenticatable
         return $this->belongsToMany(\App\Models\Requirement::class, 'client_requirements')
                 ->as('file')
                 ->withPivot(['id','url']);
+    }
+
+    public function getProjectsCountAttribute()
+    {
+        return $this->projects()->count();
+    }
+
+    public function getCompaniesCountAttribute()
+    {
+        return $this->companies()->count();
     }
 }
