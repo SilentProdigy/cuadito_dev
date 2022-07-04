@@ -24,6 +24,11 @@ class Project extends Model
         'title',
         'description',
         'status',
+        'max_date',
+        'cost_and_payment',
+        'scope_of_work',
+        'terms_and_conditions',
+        'relevant_authorities',
         'company_id'
     ];
 

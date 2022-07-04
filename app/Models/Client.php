@@ -48,7 +48,7 @@ class Client extends Authenticatable
 
     public function getHaveValidCompaniesAttribute()
     {
-        return $this->companies->where('status', \App\Models\Company::APPROVED_STATUS)->count() > 0;
+        return $this->companies()->where('validation_status', \App\Models\Company::APPROVED_STATUS)->count() > 0;
     }
 
     public function requirements()

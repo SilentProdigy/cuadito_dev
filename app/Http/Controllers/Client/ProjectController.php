@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Project\CreateProjectRequest;
+use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Models\Company;
 use App\Models\Project;
@@ -31,7 +33,7 @@ class ProjectController extends Controller
     public function create()
     {
         // TODO: Add some more business logic here...
-        $companies = auth('client')->user()->companies->where('status', Company::APPROVED_STATUS);
+        $companies = auth('client')->user()->companies->where('validation_status', Company::APPROVED_STATUS);
         return view('client.projects.create')->with(compact('companies'));
     }
 
@@ -41,13 +43,12 @@ class ProjectController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateProjectRequest $request)
     {
         try 
         {
             $company = Company::find($request->input('company_id'));
             $company->projects()->create($request->except(['company_id']));
-            // auth('client')->user()->projects()->create($request->all());
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
         }
         catch(Exception $e)
@@ -87,7 +88,7 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Project $project)
+    public function update(UpdateProjectRequest $request, Project $project)
     {
         try 
         {
