@@ -44,4 +44,11 @@ class Company extends Model
     {
         return $this->hasMany(\App\Models\Project::class);
     }
+
+    public function requirements()
+    {
+        return $this->belongsToMany(\App\Models\Requirement::class, 'company_requirement')
+                ->as('file')
+                ->withPivot(['id','url']);
+    }
 }
