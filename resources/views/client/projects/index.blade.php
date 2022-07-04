@@ -23,9 +23,11 @@
         <table class="table table-borderless table-md user-listing-table">
             <thead>
                 <th>SEQ</th>
+                <th>PROJECT</th>
                 <th>COMPANY</th>
                 <th class="col-span-2">STATUS</th>
                 <th>DATE POSTED</th>
+                <th>MAX AVAILABLE DATE</th>
                 <th>ACTIONS</th>
             </thead>
             <tbody>
@@ -40,11 +42,17 @@
                         <td>
                             <span>{{ $project->title }}</span>
                         </td>
+                        <td>
+                            <span>{{ $project->company->name }}</span>
+                        </td>
                         <td class="">
                             <span>{{ $project->status }}</span>
                         </td>
                         <td>
                             <span>{{ $project->created_at->format('M d,Y') }}</span>
+                        </td>
+                        <td>
+                            <span>{{ $project->max_date }}</span>
                         </td>
                         <td class="user-actions">
                             <a href="#" class="btn btn-sm btn-outline-info">

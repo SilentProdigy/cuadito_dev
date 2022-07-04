@@ -47,7 +47,6 @@ class ProjectController extends Controller
         {
             $company = Company::find($request->input('company_id'));
             $company->projects()->create($request->except(['company_id']));
-            // auth('client')->user()->projects()->create($request->all());
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
         }
         catch(Exception $e)
