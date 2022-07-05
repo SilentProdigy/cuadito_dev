@@ -18,7 +18,10 @@
                     </div>
                 </td>
                 <td class="user-actions">
-                    <a href="#" class="btn btn-sm btn-outline-info">
+                    <a href="{{ route('client.companies.requirements.download', [ $company, $item ]) }}" 
+                        class="btn btn-sm btn-outline-info"
+                        target="_blank"
+                    >
                         <i class="fa fa-download"></i>         
                     </a>
                 

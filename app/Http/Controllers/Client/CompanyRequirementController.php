@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Company;
+use App\Models\CompanyRequirement;
+use App\Models\Requirement;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
@@ -40,4 +42,11 @@ class CompanyRequirementController extends Controller
 
         return;
     }
+
+    public function download(Company $company, Requirement $requirement)
+    {
+        $target_file = $company->requirements->where('id', $requirement->id)->first();
+
+        return Storage::disk('public')->download($target_file->file->url);
+    }   
 }
