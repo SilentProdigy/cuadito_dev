@@ -85,7 +85,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
         Route::post('companies/{company}/requirements', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'store'])->name('companies.requirements.store');
         Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');
-        
+        Route::delete('companies/{company}/requirements/{requirement}', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'destroy'])->name('companies.requirements.destroy');
+
         Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
 
         Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');

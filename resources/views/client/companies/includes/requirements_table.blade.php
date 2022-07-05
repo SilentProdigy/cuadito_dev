@@ -24,13 +24,13 @@
                     >
                         <i class="fa fa-download"></i>         
                     </a>
-                
-                    <a href="#" class="btn btn-sm btn-warning">
+
+                    {{-- <a href="#" class="btn btn-sm btn-warning">
                         <i class="fa fa-pencil"></i>          
-                    </a>
-                    <a href="#" class="btn btn-sm btn-danger btn-delete">
+                    </a> --}}
+                    <button class="btn btn-sm btn-danger btn-delete-requirement" data-requirement="{{ json_encode($item) }}" data-company="{{ json_encode($company) }}">
                         <i class="fa fa-trash"></i>
-                    </a> 
+                    </button> 
                 
                 </td>
             </tr>
