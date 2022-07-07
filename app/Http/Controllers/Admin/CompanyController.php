@@ -19,7 +19,8 @@ class CompanyController extends Controller
 
     public function show(Company $company)
     {   
-        return view('admin.companies.show')->with(compact('company'));
+        $company_states = Company::COMPANY_STATES;
+        return view('admin.companies.show')->with(compact('company', 'company_states'));
     }
 
     public function update(UpdateCompanyRequest $request, Company $company)
