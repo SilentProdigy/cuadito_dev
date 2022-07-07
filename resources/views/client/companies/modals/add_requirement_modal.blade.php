@@ -14,9 +14,9 @@
                             <label for="">Requirement Type:</label>
                             <select name="requirement_id" class="form-control" selected>
                                 <option value="">Select Requirement Type Below</option>
-                               @foreach ($requirement_types as $type)
+                                @foreach ($missing_requirements as $type)
                                    <option value="{{ $type->id }}">{{ $type->name }}</option>
-                               @endforeach
+                                @endforeach
                             </select>
                         </div>
 
