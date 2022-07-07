@@ -55,8 +55,8 @@ Auth::routes();
 
 
 
-Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
-    // Route::get('/', [DashboardController::class, 'dashboard'])->name('dashboard');
+// Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
+Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(function () {
     Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
     Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
 
@@ -64,6 +64,7 @@ Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->n
     Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class);
+    Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');
     Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class);
 });
 
