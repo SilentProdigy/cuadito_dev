@@ -6,9 +6,11 @@
     <div class="d-flex flex-row d-align-items-center justify-content-center">
         <div class="table-titles">{{ $company->name }} Requirements</div>
         <div class="col d-flex justify-content-end">
-            <button class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-requirement-modal">
-                <i class="fa fa-plus"></i>&ensp;Add Requirement
-            </button>
+            @if($company->can_upload_requirements)
+                <button class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-requirement-modal">
+                    <i class="fa fa-plus"></i>&ensp;Add Requirement
+                </button>
+            @endif
         </div>
     </div>
 </div>

@@ -30,6 +30,11 @@ class Company extends Model
         self::DISAPPROVED_STATUS,
     ];
 
+    protected $appends = [
+        'can_upload_requirements',
+        'have_complete_requirements'
+    ];
+
     public function client()
     {
         return $this->belongsTo(\App\Models\Client::class);
@@ -50,5 +55,18 @@ class Company extends Model
         return $this->belongsToMany(\App\Models\Requirement::class, 'company_requirement')
                 ->as('file')
                 ->withPivot(['id','url']);
+    }
+
+    public function getCanUploadRequirementsAttribute()
+    {
+        return $this->validation_status != self::APPROVED_STATUS; 
+    }
+
+    public function gethaveCompleteRequirementsAttribute()
+    {
+        $requirements = $this->requirements;
+        return count(
+            array_diff( $requirements->pluck('id')->toArray(), Requirement::REQUIREMENT_IDS)
+        ) > 0;
     }
 }

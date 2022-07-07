@@ -18,13 +18,12 @@ class CompanyController extends Controller
         return view('client.companies.index')->with(compact('companies'));   
     }
 
+
     public function show(Company $company)
     {  
-        $requirement_types = Requirement::get();
-
-        // dd($company->requirements);
-
-        return view('client.companies.show')->with(compact('company', 'requirement_types'));
+        $client_submitted_requirements = $company->requirements->pluck('id')->toArray();
+        $missing_requirements = Requirement::whereNotIn('id', $client_submitted_requirements)->get();
+        return view('client.companies.show')->with(compact('company', 'client_submitted_requirements', 'missing_requirements'));
     }
 
     public function create()
