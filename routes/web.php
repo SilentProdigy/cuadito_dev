@@ -77,10 +77,17 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::post('logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout'])->name('logout');
     });
 
-    Route::middleware(['auth.client', 'preventBackHistory'])->group(function() {
+    // Route::middleware(['auth.client', 'preventBackHistory'])->group(function() {
+    Route::middleware(['auth.client'])->group(function() {
+    
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
+
         Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
-        Route::patch('/projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
+        Route::post('companies/{company}/requirements', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'store'])->name('companies.requirements.store');
+        Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');
+        Route::delete('companies/{company}/requirements/{requirement}', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'destroy'])->name('companies.requirements.destroy');
+
+        Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
 
         Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
         
@@ -94,6 +101,7 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::delete('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'destroy'])->name('projects.delete');
 
         // Route::resource('projects', \App\Http\Controllers\Client\ProjectController::class);
+        
     });
 
 });

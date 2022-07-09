@@ -14,9 +14,9 @@ class Requirement extends Model
         'required'
     ];
 
-    public function clients()
+    public function companies()
     {
-        return $this->belongsToMany(\App\Models\Client::class, 'client_requirements')
+        return $this->belongsToMany(\App\Models\Company::class, 'company_requirement')
                 ->as('file')
                 ->withPivot(['url']);
     }

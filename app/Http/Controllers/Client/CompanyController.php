@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Company\CreateCompanyFormRequest;
 use App\Http\Requests\Client\Company\EditCompanyFormRequest;
 use App\Models\Company;
+use App\Models\Requirement;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -15,6 +16,14 @@ class CompanyController extends Controller
     {
         $companies = auth('client')->user()->companies;
         return view('client.companies.index')->with(compact('companies'));   
+    }
+
+
+    public function show(Company $company)
+    {  
+        $client_submitted_requirements = $company->requirements->pluck('id')->toArray();
+        $missing_requirements = Requirement::whereNotIn('id', $client_submitted_requirements)->get();
+        return view('client.companies.show')->with(compact('company', 'client_submitted_requirements', 'missing_requirements'));
     }
 
     public function create()
