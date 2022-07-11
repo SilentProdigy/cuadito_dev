@@ -33,11 +33,10 @@
                                 <span>{{ $company->validation_status }}</span>
                             </td>
                             <td class="user-actions">
-                                {{-- 
-                                    <a href="#" class="btn btn-sm btn-info">
-                                        View
-                                    </a> 
-                                --}}
+                                <a href="{{ route('admin.companies.show', $company) }}" class="btn btn-sm btn-outline-info">
+                                    <i class="fa fa-eye"></i>         
+                                </a>
+                            
                                 <a href="#" class="btn btn-sm btn-warning btn-set-approval-status" data-company="{{ json_encode($company) }}">
                                     Set Approval Status
                                 </a>
