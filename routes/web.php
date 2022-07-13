@@ -99,10 +99,10 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::post('projects', [\App\Http\Controllers\Client\ProjectController::class, 'store'])->name('projects.store');
         Route::get('projects/edit/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'edit'])->name('projects.edit');
         Route::patch('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'update'])->name('projects.update');
-        Route::delete('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'destroy'])->name('projects.delete');
-
-        // Route::resource('projects', \App\Http\Controllers\Client\ProjectController::class);
+        Route::delete('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'destroy'])->name('projects.delete');   
         
+        Route::get('listing', [\App\Http\Controllers\Client\ProjectListingController::class, 'index'])->name('listing.index');
     });
 
 });
+
