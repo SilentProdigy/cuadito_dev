@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
@@ -32,6 +33,18 @@ class Project extends Model
         'company_id'
     ];
 
+    protected $cast = [
+        'max_date' => 'date'
+    ];
+
+    protected $with = ['company'];
+
+    protected $withCount = ['proposals'];
+
+    protected $appends = [
+        'max_active_date'
+    ];
+
     public function company()
     {
         return $this->belongsTo(\App\Models\Company::class);
@@ -40,5 +53,15 @@ class Project extends Model
     public function biddings()
     {
         return $this->hasMany(\App\Models\Bidding::class);
+    }
+
+    public function proposals()
+    {
+        return $this->hasMany(\App\Models\Bidding::class);
+    }
+
+    public function getMaxActiveDateAttribute()
+    {
+        return Carbon::parse($this->max_date)->format('M d,Y');
     }
 }
