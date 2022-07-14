@@ -9,8 +9,13 @@ use Illuminate\Http\Request;
 class ProjectListingController extends Controller
 {
     public function index()
-    {
-        $projects = Project::where('status', Project::ACTIVE_STATUS)
+    {   
+        $projects = Project::query()
+                    ->when(request('search'), function($query) {
+                        $query->where('title', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('description', 'LIKE', '%' . request('search') . '%');
+                    })
+                    ->where('status', Project::ACTIVE_STATUS)
                     ->orderBy('id', 'desc')
                     ->paginate(5);
 
