@@ -13,7 +13,9 @@ class ProjectListingController extends Controller
         $projects = Project::where('status', Project::ACTIVE_STATUS)
                     ->orderBy('id', 'desc')
                     ->paginate(5);
-        return view('client.listing.index')->with(compact('projects'));
+
+        $companies = auth('client')->user()->companies;                    
+        return view('client.listing.index')->with(compact('projects', 'companies'));
     }
 
     public function show(Project $project)

@@ -67,6 +67,8 @@
         {{ $projects->links() }}
     </section>
 </div>
+
+@include('client.includes.set_company_modal')
 @endsection
 
 @section('script')
