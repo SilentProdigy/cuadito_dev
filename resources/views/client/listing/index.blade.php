@@ -3,16 +3,20 @@
 @section('content')
 <div class="container px-5">
     <div class="my-3">
-        <div class="input-group input-group-lg mb-3">
-            <input type="text" class="form-control " placeholder="Search Project ...">
-            <button class="btn btn-warning" type="button">
-                <span class="fa fa-search"></span>
-            </button>
-        </div>
+        <form action="{{ route('client.listing.index') }}" method="get">
+            <div class="input-group input-group-lg mb-3">
+                <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+                <button class="btn btn-warning" type="submit">
+                    <span class="fa fa-search"></span>
+                </button>
+            </div>
+            <a href="{{ route('client.listing.index') }}">Clear Search</a>
+        </form>
     </div>
 
     <section class="mt-4">
-        <h4>Projects you might like</h4>
+
+        <h4>{{ request('search') ? 'We found ' . $projects->count() . ' results ...' : 'Projects you might like'}}</h4>
         
         <div class="row">
             @foreach ($projects as $project)
