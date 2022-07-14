@@ -7,23 +7,24 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body mx-3 auth-form">
-                <form method="POST" action="#">
+                <form method="POST" action="{{ route('client.global.config.update') }}">
                     @csrf
+                    @method('PATCH')
                     <div class="row mb-3">
                         <div class="col-md-12">
                             <p>Please select the company that you would like to use for browsing projects or submitting proposals.</p>
 
-                            <select name="requirement_id" class="form-control" selected>
+                            <select name="company_id" class="form-control" selected>
                                 <option value="">Select Company Below</option>
                                 @foreach ($companies as $item)
-                                    <option value="{{ $item->id }}">{{ $item->name }}</option>
+                                    <option value="{{ $item->id }}" {{ session('config.company') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
                         </div>
                     </div>
 
                     <div class="row mb-3 mx-0">
-                        <button type="submit" class="btn btn-primary">OK</button>
+                        <button type="submit" class="btn btn-primary">Continue</button>
                     </div>
                     <hr>
                 </form>
