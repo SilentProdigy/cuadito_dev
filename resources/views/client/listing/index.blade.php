@@ -40,7 +40,7 @@
                                 {{ $project->description }}
                             </p>
                             <div class="d-flex justify-content-end">
-                                <a href="#" class="btn btn-sm btn-outline-success px-3">View</a>
+                                <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-outline-success px-3">View</a>
                             </div>
                         </div>
                     </div>
