@@ -41,7 +41,7 @@
                                 <span class="px-1">Open till {{ $project->max_active_date }}</span>
                             </ul>
                             <p class="card-text">
-                                {{ $project->description }}
+                                {!! $project->description_text !!}
                             </p>
                             <div class="d-flex justify-content-end">
                                 <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-outline-success px-3">View</a>

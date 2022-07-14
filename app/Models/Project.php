@@ -15,6 +15,8 @@ class Project extends Model
     public const ON_HOLD_STATUS = "ON HOLD";
     public const CLOSED_STATUS = "CLOSED";
 
+    const MAX_DESCRIPTION_LENGTH = 200;
+
     public const PROJECT_STATES = [
         self::ACTIVE_STATUS,
         self::ON_HOLD_STATUS,
@@ -63,5 +65,15 @@ class Project extends Model
     public function getMaxActiveDateAttribute()
     {
         return Carbon::parse($this->max_date)->format('M d,Y');
+    }
+
+    public function getDescriptionTextAttribute()
+    {
+        if(strlen($this->description) > self::MAX_DESCRIPTION_LENGTH)
+        {
+            return $this->description . "<br>" . "<a href='" . route('client.listing.show', $this->id) . "'>See More</a>";
+        }
+
+        return $this->description;
     }
 }
