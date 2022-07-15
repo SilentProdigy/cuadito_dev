@@ -103,6 +103,9 @@ Route::prefix('client')->name('client.')->group(function () {
         
         Route::get('listing', [\App\Http\Controllers\Client\ProjectListingController::class, 'index'])->name('listing.index');
         Route::get('listing/{project}', [\App\Http\Controllers\Client\ProjectListingController::class, 'show'])->name('listing.show');
+        Route::get('proposal/create/{project}', function() {
+            return 'hello world';
+        })->name('proposals.create');
 
         Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
     });

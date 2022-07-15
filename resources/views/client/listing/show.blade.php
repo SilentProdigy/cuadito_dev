@@ -56,8 +56,8 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <a href="#" class="btn btn-success">Submit A Proposal</a>
-                            <a href="#" class="btn btn-dark">Cancel</a>
+                            <a href="{{ route('client.proposals.create', $project) }}" class="btn btn-success">Submit A Proposal</a>
+                            <a href="{{ route('client.listing.index') }}" class="btn btn-dark">Cancel</a>
                         </div>
 
                         <div class="my-5 text-center">
@@ -79,6 +79,7 @@
     </section>
 </div>
 
+@include('client.includes.set_company_modal')
 @endsection
 
 @section('script')
