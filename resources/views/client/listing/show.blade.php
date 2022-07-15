@@ -11,41 +11,43 @@
             <div class="col-sm-8">
                 <div class="card">
                     <div class="card-header">
-                        <h4>{{ $project->title }}</h4>
-                        <span class="badge rounded-pill bg-dark">Tag-01</span>
-                        <span class="badge rounded-pill bg-dark">Tag-01</span>
-                        <span class="badge rounded-pill bg-dark">Tag-01</span>
-                        <span class="badge rounded-pill bg-dark">Tag-01</span>
+                        <h3 class="fw-bold py-1">{{ $project->title }}</h3>
+                        <div class="py-1">
+                            <span class="badge rounded-pill bg-dark">Tag-01</span>
+                            <span class="badge rounded-pill bg-dark">Tag-01</span>
+                            <span class="badge rounded-pill bg-dark">Tag-01</span>
+                            <span class="badge rounded-pill bg-dark">Tag-01</span>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="my-2">
-                            <p>Posted at July 12, 2022 - 9:12 PM</p>
-                            <p>Open till July 31, 2022 - 12:00 PM</p>
+                            <p class="text-secondary fs-6">Posted at July 12, 2022 - 9:12 PM</p>
+                            <p class="text-danger fs-6">Open till July 31, 2022 - 12:00 PM</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5>Description</h5>
-                            <p>{{ $project->description }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Description</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->description }}</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5>Cost & Payment</h5>
-                            <p>{{ $project->cost_and_payment }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Cost & Payment</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->cost_and_payment }}</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5>Scope of Work</h5>
-                            <p>{{ $project->scope_of_work }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Scope of Work</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->scope_of_work }}</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5>Terms & Conditions</h5>
-                            <p>{{ $project->terms_and_conditions }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Terms & Conditions</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->terms_and_conditions }}</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5>Relevant Authorities</h5>
-                            <p>{{ $project->relevant_authorities }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Relevant Authorities</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->relevant_authorities }}</p>
                         </div>
                     </div>
                 </div>
@@ -59,16 +61,16 @@
                         </div>
 
                         <div class="my-5 text-center">
-                            <h1>{{ $project->proposals_count }}</h1>
-                            <p>Current Proposals</p>
+                            <h1 class="fw-bold">{{ $project->proposals_count }}</h1>
+                            <p class="fw-bold text-uppercase fs-6 text-secondary">Current Proposals</p>
                         </div>
 
-                        <div class="border-top my-5">
-                            <h5><i class="fa fa-info-circle"></i> About the Company</h5>
-                            <a href="#">{{ $project->company->name }}</a>
-                            <p>Email: {{ $project->company->email }}</p>
-                            <p>Owned by: {{ $project->company->client->name }}</p>
-                            <p>Total Company's Projects: {{ $project->company->projects_count }}</p>
+                        <div class="border-top my-5 px-3 py-3">
+                            <h5 class="fs-6 fw-bold text-center mb-3 text-uppercase" style="color: #222;"><i class="fa fa-info-circle"></i> About the Company</h5>
+                            <p><span class="fw-bold">Company:</span> <a href="#">{{ $project->company->name }}</a></p>
+                            <p><span class="fw-bold">Email:</span> {{ $project->company->email }}</p>
+                            <p><span class="fw-bold">Owned by:</span> {{ $project->company->client->name }}</p>
+                            <p><span class="fw-bold">Total Company's Projects:</span> {{ $project->company->projects_count }}</p>
                         </div>
                     </div>
                 </div>
