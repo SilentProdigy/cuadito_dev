@@ -16,7 +16,7 @@
 
                             <select name="company_id" class="form-control" selected>
                                 <option value="">Select Company Below</option>
-                                @foreach ($companies as $item)
+                                @foreach (auth('client')->user()->companies as $item)
                                     <option value="{{ $item->id }}" {{ session('config.company') == $item->id ? 'selected' : '' }}>{{ $item->name }}</option>
                                 @endforeach
                             </select>
