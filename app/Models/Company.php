@@ -35,6 +35,10 @@ class Company extends Model
         'have_complete_requirements'
     ];
 
+    protected $withCount = [
+        'projects'
+    ];
+
     public function client()
     {
         return $this->belongsTo(\App\Models\Client::class);

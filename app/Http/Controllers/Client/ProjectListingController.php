@@ -25,7 +25,6 @@ class ProjectListingController extends Controller
 
     public function show(Project $project)
     {
-        return $project;
-        // return view('client.listing.index')->with(compact('projects'));
+        return view('client.listing.show')->with(compact('project'));
     }
 }
