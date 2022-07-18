@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Proposal\SubmitProposalRequest;
+use App\Models\Attachment;
 use App\Models\Project;
 use App\Traits\UploadFile;
 use Exception;
@@ -18,10 +20,42 @@ class ProposalController extends Controller
         return view('client.proposals.create')->with(compact('project'));
     }
 
-    public function store(Request $request, Project $project)
+    public function store(SubmitProposalRequest $request, Project $project)
     {
+        // dd($request->has('attachments'));
+
         try 
         {
+            $paths = collect();
+
+            if($request->has('attachments')) 
+            {
+                foreach($request->file('attachments') as $attachment)
+                {   
+                
+                    $extension = $attachment->getClientOriginalExtension();
+                    
+                    if(!in_array($extension,Attachment::ALLOWED_FILE_TYPES))
+                    {
+                        return redirect()->back()
+                                ->withErrors(['attachments' => 'Unsupported file type!', 
+                                    'message' => "Please upload .jpg, .png, .jpeg or .pdf file types"
+                                ]);
+                    }
+
+                   if($attachment->getSize() > Attachment::MAX_FILE_SIZE)
+                   {
+                        return redirect()->back()
+                        ->withErrors(['attachments' => 'Reached max size!', 
+                            'message' => "Please upload files that are less than or equal to 1 MB."
+                        ]);
+                   }
+                    
+                    $target_dir = "projects/". $project->id ."/proposals/";
+                    $paths->push($this->uploadFile($target_dir, $attachment));
+                }   
+            }
+
             $proposal = $project->biddings()
             ->create(
                 array_merge(
@@ -29,16 +63,13 @@ class ProposalController extends Controller
                     ['company_id' => session('config.company') ]
                 )
             );
-        
-            foreach($request->file('attachments') as $attachment)
-            {
-                $target_dir = "projects/". $project->id ."/proposals/" . $proposal->id;
-                $path = $this->uploadFile($target_dir, $attachment);
+
+            foreach($paths as $path)
                 $proposal->attachments()->create(['url' => $path]);
-            }   
+            
         
             return redirect(route('client.listing.index'))
-                    ->with('success', 'Project was successfully created & posted.');
+                    ->with('success', 'Proposal was successfully posted.');
         }
         catch(Exception $e)
         {
