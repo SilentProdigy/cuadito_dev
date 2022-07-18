@@ -13,6 +13,15 @@ class Attachment extends Model
         'url'
     ];
 
+    public const ALLOWED_FILE_TYPES = [
+        'png',
+        'jpg',
+        'jpeg',
+        'pdf'
+    ];
+
+    public const MAX_FILE_SIZE = 1015506;
+
     /**
      * Get the parent attachmentable model (bidding).
      */
