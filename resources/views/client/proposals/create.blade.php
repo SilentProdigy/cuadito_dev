@@ -49,7 +49,7 @@
                     <div class="card-body px-5">
                         <div class="input-group mb-3">
                             <span class="input-group-text">$</span>
-                            <input type="text" class="form-control" aria-label="Amount (to the nearest dollar)" name="rate">
+                            <input type="text" class="form-control @error('rate') is-invalid @enderror" aria-label="Amount (to the nearest dollar)" name="rate" value="{{ old('rate') }}">
                             <span class="input-group-text">.00</span>
                         </div>
                     </div>
@@ -59,7 +59,7 @@
                     <div class="card-header bg-dark text-white text-uppercase fw-bold">Cover Letter</div>
                     <div class="card-body px-5">
                         <div class="mb-3">
-                            <textarea name="cover_letter" class="form-control" id="exampleFormControlTextarea1" rows="8" placeholder="Please provide your cover letter"></textarea>
+                            <textarea name="cover_letter" class="form-control @error('cover_letter') is-invalid @enderror" id="exampleFormControlTextarea1" rows="8" placeholder="Please provide your cover letter">{{ old('cover_letter') }}</textarea>
                         </div>
                     </div>
                 </div>  
@@ -68,7 +68,7 @@
                     <div class="card-header bg-dark text-white text-uppercase fw-bold">Attachments</div>
                     <div class="card-body px-5">
                         <div class="input-group mb-3">
-                            <input type="file" class="form-control" id="inputGroupFile02" multiple name="attachments[]">
+                            <input type="file" class="form-control @error('attachments[]') is-invalid @enderror" id="inputGroupFile02" multiple name="attachments[]">
                             <label class="input-group-text" for="inputGroupFile02">Upload</label>
                         </div>
                     </div>
