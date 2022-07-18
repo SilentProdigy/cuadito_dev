@@ -9,6 +9,10 @@ class Attachment extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'url'
+    ];
+
     /**
      * Get the parent attachmentable model (bidding).
      */
