@@ -27,4 +27,9 @@ class Bidding extends Model
     {
         return $this->belongsTo(\App\Models\Company::class);
     }
+
+    public function attachments()
+    {
+        return $this->morphMany(\App\Models\Attachment::class, 'attachmentable');
+    }
 }
