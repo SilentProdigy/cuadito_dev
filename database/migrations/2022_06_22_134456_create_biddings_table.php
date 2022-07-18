@@ -17,9 +17,9 @@ class CreateBiddingsTable extends Migration
             $table->id();
             $table->foreignId('company_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('project_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->string('quotation_url');
+            // $table->string('quotation_url');
             $table->text('cover_letter');
-            $table->decimal('amount', 9, 2);
+            $table->decimal('rate', 9, 2);
             $table->timestamps();
             $table->softDeletes();
         });

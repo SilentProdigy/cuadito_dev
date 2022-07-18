@@ -13,9 +13,9 @@ class Bidding extends Model
     protected $fillable = [
         'company_id',
         'project_id',
-        'quotation_url',
+        // 'quotation_url',
         'cover_letter',
-        'amount',
+        'rate',
     ];
 
     public function project()
@@ -23,7 +23,7 @@ class Bidding extends Model
         return $this->belongsTo(\App\Models\Project::class);
     }
 
-    public function company()
+    public function bidder()
     {
         return $this->belongsTo(\App\Models\Company::class);
     }
