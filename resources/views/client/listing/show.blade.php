@@ -56,8 +56,13 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            <a href="{{ route('client.proposals.create', $project) }}" class="btn btn-success">Submit A Proposal</a>
-                            <a href="{{ route('client.listing.index') }}" class="btn btn-dark">Cancel</a>
+                            
+                            @if(!$has_proposal)
+                                <a href="{{ route('client.proposals.create', $project) }}" class="btn btn-outline-success">Submit A Proposal</a>
+                            @else
+                                <button class="btn btn-outline-secondary" disabled>Proposal Submitted</button>
+                            @endif
+                            <a href="{{ route('client.listing.index') }}" class="btn btn-dark">Back</a>
                         </div>
 
                         <div class="my-5 text-center">

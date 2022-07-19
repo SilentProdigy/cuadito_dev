@@ -4,10 +4,14 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Traits\CheckIfCompanyHasProposalToProject;
 use Illuminate\Http\Request;
+
 
 class ProjectListingController extends Controller
 {
+    use CheckIfCompanyHasProposalToProject;
+
     public function index()
     {   
         $projects = Project::query()
@@ -24,7 +28,8 @@ class ProjectListingController extends Controller
     }
 
     public function show(Project $project)
-    {
-        return view('client.listing.show')->with(compact('project'));
+    { 
+        $has_proposal = $this->checkIfCompanyHasProposalToProject($project);
+        return view('client.listing.show')->with(compact('project', 'has_proposal'));
     }
 }

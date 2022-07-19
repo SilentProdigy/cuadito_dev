@@ -5,7 +5,9 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Proposal\SubmitProposalRequest;
 use App\Models\Attachment;
+use App\Models\Bidding;
 use App\Models\Project;
+use App\Traits\CheckIfCompanyHasProposalToProject;
 use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
@@ -13,10 +15,17 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
     
-    use UploadFile;
+    use UploadFile, CheckIfCompanyHasProposalToProject;
     
     public function create(Project $project)
     {
+        if($this->checkIfCompanyHasProposalToProject($project))
+        {
+            return redirect()->back()->withErrors([
+                'message' => 'You already submitted a proposal for this project!'
+            ]);
+        }
+
         return view('client.proposals.create')->with(compact('project'));
     }
 
