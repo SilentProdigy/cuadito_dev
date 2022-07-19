@@ -10,38 +10,32 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
+use App\Traits\UploadFile;
 
 class CompanyRequirementController extends Controller
 {
+    use UploadFile;
+
     public function store(Request $request, Company $company)
     {
-        $target_dir = 'companies/requirements/' . $company->id;
-        $path = $this->createFile($target_dir, $request->file('requirement'));
-        
-        $company->requirements()->attach(
-            $request->input('requirement_id'),
-            ['url' => $path]
-        );
-
-        return redirect()->back()->with('success', 'Requirement was successfully uploaded.');     
-    }
-
-    private function createFile($target_dir, UploadedFile $file)
-    {   
-        try
+        try 
         {
-            // Storing a new file
-            $path = Storage::disk('public')->put($target_dir, $file);
+            $target_dir = 'companies/requirements/' . $company->id;
+            $path = $this->uploadFile($target_dir, $request->file('requirement'));
+            
+            $company->requirements()->attach(
+                $request->input('requirement_id'),
+                ['url' => $path]
+            );
 
-            return $path;
+            return redirect()->back()->with('success', 'Requirement was successfully uploaded.');     
         }
         catch(Exception $e)
         {
-            return redirect()->back()->with('errors', $e->getMessage());
+            dd($e->getMessage());
         }
-
-        return;
     }
+
 
     private function deleteFile($url)
     {
