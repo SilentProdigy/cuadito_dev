@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Project\CreateProjectRequest;
+use App\Http\Requests\Client\Project\SetProjectWinnerRequest;
 use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Models\Company;
@@ -130,6 +131,25 @@ class ProjectController extends Controller
             // TODO: Additional business logic here ...
             $project->update($request->all());
             return redirect(route('client.projects.index'))->with('success', 'Project status was successfully set.');  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
+    public function setWinner(SetProjectWinnerRequest $request, Project $project)
+    {
+        try 
+        {
+            // TODO: Additional business logic here ...
+            $project->update([
+                'status' => Project::CLOSED_STATUS,
+                'remarks' => $request->input('remarks'), 
+                'winner_bidding_id' => $request->input('winner_bidding_id')
+            ]);
+
+            return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
         }
         catch(Exception $e)
         {
