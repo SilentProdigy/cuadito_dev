@@ -90,11 +90,12 @@ Route::prefix('client')->name('client.')->group(function () {
 
         Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
 
-        Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
-        
         Route::middleware('client.validate.companies')
-            ->get('projects/create', [\App\Http\Controllers\Client\ProjectController::class, 'create'])
-            ->name('projects.create');
+        ->get('projects/create', [\App\Http\Controllers\Client\ProjectController::class, 'create'])
+        ->name('projects.create');
+
+        Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
+        Route::get('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'show'])->name('projects.show');
 
         Route::post('projects', [\App\Http\Controllers\Client\ProjectController::class, 'store'])->name('projects.store');
         Route::get('projects/edit/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'edit'])->name('projects.edit');
