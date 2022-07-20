@@ -105,13 +105,16 @@ Route::prefix('client')->name('client.')->group(function () {
         
         Route::get('listing', [\App\Http\Controllers\Client\ProjectListingController::class, 'index'])->name('listing.index');
         Route::get('listing/{project}', [\App\Http\Controllers\Client\ProjectListingController::class, 'show'])->name('listing.show');
-        
+                
         Route::middleware('client.validate.config.company')->group(function() {
             Route::get('proposal/create/{project}',[\App\Http\Controllers\Client\ProposalController::class, 'create'])->name('proposals.create');
             Route::post('proposal/{project}',[\App\Http\Controllers\Client\ProposalController::class, 'store'])->name('proposals.store');
         });
 
+        Route::get('proposals/{bidding}', [\App\Http\Controllers\Client\ProposalController::class, 'show'])->name('proposals.show');
         Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
+
+        Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');
     });
 
 });

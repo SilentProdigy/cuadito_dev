@@ -89,7 +89,7 @@
                                         <td>{{ $proposal->company->email }}</td>
                                         <td>{{ $proposal->rate }}</td>
                                         <td>
-                                            <a href="#" class="btn btn-sm btn-outline-info">
+                                            <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                                 <i class="fa fa-eye"></i>         
                                             </a>
                                             
