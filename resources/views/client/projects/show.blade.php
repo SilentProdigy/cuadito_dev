@@ -93,7 +93,7 @@
                                                 <i class="fa fa-eye"></i>         
                                             </a>
                                             
-                                            <button class="btn btn-sm btn-warning btn-choose-proposal">
+                                            <button class="btn btn-sm btn-warning btn-choose-proposal" data-proposal="{{ json_encode($proposal) }}">
                                                 Choose Proposal
                                             </button>   
                                         </td>
@@ -118,8 +118,11 @@
         choose_proposal_buttons.forEach(button => {
             button.addEventListener('click', function(e) {  
                 e.preventDefault;
-                // let data = button.getAttribute('data-user');   
-                // data = JSON.parse(data);
+                let data = button.getAttribute('data-proposal');   
+                data = JSON.parse(data);
+
+                document.querySelector('#company-name').innerHTML = data.company.name;
+                document.querySelector('#proposal-id').innerHTML = data.id;
 
                 let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
                 myModal.show()
