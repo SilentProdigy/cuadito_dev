@@ -2,16 +2,15 @@
 
 @section('content')
 <div class="container px-5">
-    <div class="my-3">
-        
-    </div>
-
     <section class="mt-4">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h3 class="fw-bold py-1">Proposal Details</h3>
+                        <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($bidding->project) }}" data-proposal="{{ json_encode($bidding) }}">
+                            Choose Proposal
+                        </button>   
                     </div>
                     <div class="card-body">
                         <div class="my-2 py-2">
@@ -82,16 +81,6 @@
                     </div>
                 </div>
             </div>
-            <div class="col-sm-4">
-                <div class="card">
-                    <div class="card-body">
-                        {{-- <div class="my-5 text-center">
-                            <h1 class="fw-bold">{{ $project->proposals_count }}</h1>
-                            <p class="fw-bold text-uppercase fs-6 text-secondary">Current Proposals</p>
-                        </div> --}}
-                    </div>
-                </div>
-            </div>
         </div>
     </section>
 
@@ -100,5 +89,34 @@
 @endsection
 
 @section('script')
+    <script>
+        $(document).ready(function() {
 
+
+            let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
+
+            choose_proposal_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-proposal');   
+                    data = JSON.parse(data);
+
+                    let project = button.getAttribute('data-project');
+                    project = JSON.parse(project);
+
+                    document.querySelector('#company-name').innerHTML = data.company.name;
+                    document.querySelector('#proposal-id').innerHTML = data.id;
+                    document.querySelector('#winner_bidding_id').value = data.id;
+
+                    let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
+                    myModal.show()
+
+                    let form = document.querySelector('#set-project-winner-form');
+                    form.setAttribute('action', `/client/projects/set-winner/${ project.id }`);
+
+                    // document.querySelector('#area-name').innerHTML = data.name;
+                });
+            });
+        });
+    </script>
 @endsection
