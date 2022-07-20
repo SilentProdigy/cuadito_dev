@@ -93,7 +93,7 @@
                                                 <i class="fa fa-eye"></i>         
                                             </a>
                                             
-                                            <button class="btn btn-sm btn-warning btn-choose-proposal" data-proposal="{{ json_encode($proposal) }}">
+                                            <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($project) }}" data-proposal="{{ json_encode($proposal) }}">
                                                 Choose Proposal
                                             </button>   
                                         </td>
@@ -113,6 +113,8 @@
 @section('script')
 <script>
     $(document).ready(function() {
+
+
         let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
 
         choose_proposal_buttons.forEach(button => {
@@ -121,14 +123,18 @@
                 let data = button.getAttribute('data-proposal');   
                 data = JSON.parse(data);
 
+                let project = button.getAttribute('data-project');
+                project = JSON.parse(project);
+
                 document.querySelector('#company-name').innerHTML = data.company.name;
                 document.querySelector('#proposal-id').innerHTML = data.id;
+                document.querySelector('#winner_bidding_id').value = data.id;
 
                 let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
                 myModal.show()
 
-                // let form = document.querySelector('#set-user-status-form');
-                // form.setAttribute('action', `/admin/users/set-status/${ data.id }`);
+                let form = document.querySelector('#set-project-winner-form');
+                form.setAttribute('action', `/client/projects/set-winner/${ project.id }`);
 
                 // document.querySelector('#area-name').innerHTML = data.name;
             });

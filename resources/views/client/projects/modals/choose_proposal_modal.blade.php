@@ -7,7 +7,7 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body mx-3 auth-form">
-                <form method="POST" action="#" id="set-project-status-form">
+                <form method="POST" action="#" id="set-project-winner-form">
                     @csrf
                     @method('PATCH')
                     <div class="row mb-3">
@@ -16,7 +16,8 @@
                                as the winner of this project.<br>Note that this action will mark the project's status to CLOSED. 
                             </p>    
 
-                            <textarea name="note" rows="3" class="form-control" placeholder="Add some notes if neccessary"></textarea>
+                            <textarea name="remarks" rows="3" class="form-control" placeholder="Add some notes if neccessary"></textarea>
+                            <input type="hidden" name="winner_bidding_id" id="winner_bidding_id">
                         </div>
                     </div>
 
