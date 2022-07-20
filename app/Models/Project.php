@@ -32,6 +32,8 @@ class Project extends Model
         'scope_of_work',
         'terms_and_conditions',
         'relevant_authorities',
+        'remarks',
+        'winner_bidding_id',
         'company_id'
     ];
 
@@ -75,5 +77,10 @@ class Project extends Model
         }
 
         return $this->description;
+    }
+    
+    public function winningBidding()
+    {
+        return $this->belongsTo(\App\Models\Bidding::class, 'winner_bidding_id');
     }
 }
