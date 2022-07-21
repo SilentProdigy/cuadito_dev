@@ -2,15 +2,27 @@
 
 @section('content')
 <div class="container px-5">
+    
+    @if($bidding->project->status == 'CLOSED' && $bidding->project->winner_bidding_id == $bidding->id)
+        <div class="alert alert-success d-flex align-items-center fs-4" role="alert">
+            <span class="fa fa-trophy"></span>
+            <div class="m-2">
+                You are viewing the winning proposal for Project #{{ $bidding->project->id }}!
+            </div>
+        </div>
+    @endif
+    
     <section class="mt-4">
         <div class="row">
             <div class="col-sm-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3 class="fw-bold py-1">Proposal Details</h3>
-                        <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($bidding->project) }}" data-proposal="{{ json_encode($bidding) }}">
-                            Choose Proposal
-                        </button>   
+                        @if($bidding->project->status !== 'CLOSED')
+                            <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($bidding->project) }}" data-proposal="{{ json_encode($bidding) }}">
+                                Choose Proposal
+                            </button>   
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="my-2 py-2">
@@ -30,7 +42,7 @@
 
                         <div class="my-2 py-2 border-top">
                             <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Rate</h5>
-                            <p class="fs-6 lh-lg" style="color: #222;">{{ $bidding->rate }}</p>
+                            <p class="fs-6 lh-lg" style="color: #222;">@money($bidding->rate)</p>
                         </div>
 
                         <div class="my-2 py-2 border-top">

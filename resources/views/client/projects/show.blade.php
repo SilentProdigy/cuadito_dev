@@ -69,7 +69,7 @@
                             <div class="my-5 text-center">
                                 <hr>
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Winning Proposal</p>
-                                <h5 class="fw-bold"><span class="fa fa-star"></span> {{ $project->winningBidding->company->name }}</h5>
+                                <h5 class="fw-bold"><span class="fa fa-trophy"></span> {{ $project->winningBidding->company->name }}</h5>
                                 
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Rate</p>
                                 <h5 class="fw-bold">@money($project->winningBidding->rate)</h5>
@@ -125,7 +125,7 @@
                                         <td>
                                             @if($project->winner_bidding_id == $proposal->id)
                                                 <span class="text-success">
-                                                    <i class="fa fa-star"></i>{{ $proposal->company->name }}
+                                                    <i class="fa fa-trophy"></i>{{ $proposal->company->name }}
                                                 </span>
                                             @else
                                                 {{ $proposal->company->name }}
