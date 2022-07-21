@@ -4,7 +4,7 @@ namespace App\Http\Requests\Client\Project;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateProjectRequest extends FormRequest
+class SetProjectWinnerRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,8 +24,8 @@ class UpdateProjectRequest extends FormRequest
     public function rules()
     {
         return [
-            'title' => 'required|string|min:3',
-            'description' => 'required|string|min:3',
+            'remarks' => 'nullable|string|min:3|max:255',
+            'winner_bidding_id' => 'required'
         ];
     }
 }

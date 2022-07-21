@@ -90,11 +90,13 @@ Route::prefix('client')->name('client.')->group(function () {
 
         Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setStatus']);
 
-        Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
-        
         Route::middleware('client.validate.companies')
-            ->get('projects/create', [\App\Http\Controllers\Client\ProjectController::class, 'create'])
-            ->name('projects.create');
+        ->get('projects/create', [\App\Http\Controllers\Client\ProjectController::class, 'create'])
+        ->name('projects.create');
+
+        Route::patch('projects/set-winner/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setWinner'])->name('projects.set-winner');
+        Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
+        Route::get('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'show'])->name('projects.show');
 
         Route::post('projects', [\App\Http\Controllers\Client\ProjectController::class, 'store'])->name('projects.store');
         Route::get('projects/edit/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'edit'])->name('projects.edit');
@@ -103,13 +105,16 @@ Route::prefix('client')->name('client.')->group(function () {
         
         Route::get('listing', [\App\Http\Controllers\Client\ProjectListingController::class, 'index'])->name('listing.index');
         Route::get('listing/{project}', [\App\Http\Controllers\Client\ProjectListingController::class, 'show'])->name('listing.show');
-        
+                
         Route::middleware('client.validate.config.company')->group(function() {
             Route::get('proposal/create/{project}',[\App\Http\Controllers\Client\ProposalController::class, 'create'])->name('proposals.create');
             Route::post('proposal/{project}',[\App\Http\Controllers\Client\ProposalController::class, 'store'])->name('proposals.store');
         });
 
+        Route::get('proposals/{bidding}', [\App\Http\Controllers\Client\ProposalController::class, 'show'])->name('proposals.show');
         Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
+
+        Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');
     });
 
 });

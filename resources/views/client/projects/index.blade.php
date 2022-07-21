@@ -28,6 +28,7 @@
                 <th class="col-span-2">STATUS</th>
                 <th>DATE POSTED</th>
                 <th>MAX AVAILABLE DATE</th>
+                <th>PROPOSALS</th>
                 <th>ACTIONS</th>
             </thead>
             <tbody>
@@ -54,8 +55,11 @@
                         <td>
                             <span>{{ $project->max_date }}</span>
                         </td>
+                        <td>
+                            <span>{{ $project->proposals_count }}</span>
+                        </td>
                         <td class="user-actions">
-                            <a href="#" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i>         
                             </a>
                             <a href="{{ route('client.projects.edit', $project) }}" class="btn btn-sm btn-warning">

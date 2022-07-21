@@ -24,9 +24,11 @@ class CreateProjectsTable extends Migration
             $table->text('terms_and_conditions')->nullable();
             $table->text('relevant_authorities')->nullable();
             $table->foreignId('company_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->text('remarks')->nullable();
+            
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['title']);
+            $table->index(['title', 'status']);
 
             // TODO: Field for expiration date of the project 
         });

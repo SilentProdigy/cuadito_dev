@@ -16,6 +16,11 @@ class ProposalController extends Controller
 {
     
     use UploadFile, CheckIfCompanyHasProposalToProject;
+
+    public function show(Bidding $bidding)
+    {
+        return view('client.proposals.show')->with(compact('bidding'));
+    }
     
     public function create(Project $project)
     {
@@ -60,7 +65,7 @@ class ProposalController extends Controller
                         ]);
                    }
                     
-                    $target_dir = "projects/". $project->id ."/proposals/";
+                    $target_dir = "projects/". $project->id ."/proposals";
                     $paths->push($this->uploadFile($target_dir, $attachment));
                 }   
             }

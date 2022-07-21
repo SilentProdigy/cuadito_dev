@@ -10,6 +10,8 @@ class Bidding extends Model
 {
     use HasFactory, SoftDeletes;
 
+    protected $with = ['company'];
+
     protected $fillable = [
         'company_id',
         'project_id',
@@ -23,7 +25,7 @@ class Bidding extends Model
         return $this->belongsTo(\App\Models\Project::class);
     }
 
-    public function bidder()
+    public function company()
     {
         return $this->belongsTo(\App\Models\Company::class);
     }

@@ -20,6 +20,8 @@ class Attachment extends Model
         'pdf'
     ];
 
+    protected $appends = ['file_name'];
+
     public const MAX_FILE_SIZE = 1015506;
 
     /**
@@ -28,5 +30,12 @@ class Attachment extends Model
     public function attachmentable()
     {
         return $this->morphTo();
+    }
+
+    public function getFileNameAttribute()
+    {
+        $url = $this->url; 
+        $result = explode("/", $url);
+        return $result[count($result) - 1];
     }
 }

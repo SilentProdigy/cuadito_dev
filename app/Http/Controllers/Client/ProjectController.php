@@ -4,8 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Project\CreateProjectRequest;
+use App\Http\Requests\Client\Project\SetProjectWinnerRequest;
 use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
+use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Project;
 use Exception;
@@ -63,9 +65,22 @@ class ProjectController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        //
+    public function show(Project $project)
+    {        
+        $proposals = Bidding::where('project_id', $project->id);
+        
+        if(request('search'))
+        {
+            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')            
+            ->orWhereHas('company', function($query) {
+                $query->where('name', 'LIKE', '%' . request('search') . '%')
+                ->orWhere('email', 'LIKE', '%' . request('search') . '%');
+            });
+        }
+
+        $proposals = $proposals->paginate(10);
+
+        return view('client.projects.show')->with(compact('project', 'proposals'));
     }
 
     /**
@@ -80,7 +95,6 @@ class ProjectController extends Controller
         
         return view('client.projects.edit')->with(compact('project', 'companies'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -135,4 +149,24 @@ class ProjectController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function setWinner(SetProjectWinnerRequest $request, Project $project)
+    {
+        try 
+        {
+            // TODO: Additional business logic here ...
+            $project->update([
+                'status' => Project::CLOSED_STATUS,
+                'remarks' => $request->input('remarks'), 
+                'winner_bidding_id' => $request->input('winner_bidding_id')
+            ]);
+
+            return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
 }
