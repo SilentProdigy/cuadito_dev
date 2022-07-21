@@ -83,4 +83,15 @@ class Project extends Model
     {
         return $this->belongsTo(\App\Models\Bidding::class, 'winner_bidding_id');
     }
+
+    public function getStatusBadgeAttribute()
+    {
+        $badges = [
+            self::ACTIVE_STATUS => "<span class='badge rounded-pill bg-success px-3 py-2'>ACTIVE</span>",
+            self::ON_HOLD_STATUS => "<span class='badge rounded-pill bg-danger px-3 py-2'>ON HOLD</span>",
+            self::CLOSED_STATUS => "<span class='badge rounded-pill bg-warning px-3 py-2'>CLOSED</span>",
+        ];
+    
+        return $badges[$this->status];
+    }
 }

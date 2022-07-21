@@ -10,13 +10,18 @@
         <div class="row">
             <div class="col-sm-8">
                 <div class="card">
-                    <div class="card-header">
-                        <h3 class="fw-bold py-1">{{ $project->title }}</h3>
-                        <div class="py-1">
-                            <span class="badge rounded-pill bg-dark">Tag-01</span>
-                            <span class="badge rounded-pill bg-dark">Tag-01</span>
-                            <span class="badge rounded-pill bg-dark">Tag-01</span>
-                            <span class="badge rounded-pill bg-dark">Tag-01</span>
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            <h3 class="fw-bold py-1">{{ $project->title }}</h3>
+                            <div class="py-1">
+                                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                            </div>
+                        </div>
+                        <div>
+                            {!! $project->status_badge !!}
                         </div>
                     </div>
                     <div class="card-body">
@@ -93,9 +98,11 @@
                                                 <i class="fa fa-eye"></i>         
                                             </a>
                                             
-                                            <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($project) }}" data-proposal="{{ json_encode($proposal) }}">
-                                                Choose Proposal
-                                            </button>   
+                                            @if($project->status !== 'CLOSED')
+                                                <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($project) }}" data-proposal="{{ json_encode($proposal) }}">
+                                                    Choose Proposal
+                                                </button>   
+                                            @endif
                                         </td>
                                     </tr>
                                 @endforeach
