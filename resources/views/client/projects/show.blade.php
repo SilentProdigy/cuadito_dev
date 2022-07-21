@@ -72,8 +72,7 @@
                                 <h5 class="fw-bold"><span class="fa fa-star"></span> {{ $project->winningBidding->company->name }}</h5>
                                 
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Rate</p>
-                                <h5 class="fw-bold">{{ $project->winningBidding->rate }}</h5>
-
+                                <h5 class="fw-bold">@money($project->winningBidding->rate)</h5>
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Owner</p>
                                 <h5 class="fw-bold">{{ $project->winningBidding->company->client->name }}</h5>
 
@@ -133,7 +132,7 @@
                                             @endif
                                         </td>
                                         <td>{{ $proposal->company->email }}</td>
-                                        <td>{{ $proposal->rate }}</td>
+                                        <td>@money($proposal->rate)</td>
                                         <td>
                                             <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                                 <i class="fa fa-eye"></i>         

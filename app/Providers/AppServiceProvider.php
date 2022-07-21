@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\View;
 use App\Models\Category;
 use App\Models\Cart;
 use App\Models\CartItem;
+use Illuminate\Support\Facades\Blade;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -51,6 +52,14 @@ class AppServiceProvider extends ServiceProvider
             
             $view->with('categories', $categories);
             $view->with('cartTotalItems', $cartTotalItems);
+        });
+
+        # Will create a new blade directive money
+        Blade::directive('money', function ($amount) {
+
+            $amount = is_string($amount) ? $amount : number_format($amount, 2, '.', ',');
+
+            return "<span style='font-family: DejaVu Sans; sans-serif;'>&#8369;<?= $amount ?></span>";
         });
     }
 }
