@@ -62,8 +62,28 @@
                     <div class="card-body">
                         <div class="my-5 text-center">
                             <h1 class="fw-bold">{{ $project->proposals_count }}</h1>
-                            <p class="fw-bold text-uppercase fs-6 text-secondary">Current Proposals</p>
+                            <p class="fw-bold text-uppercase fs-6 text-secondary">Total Proposals</p>
                         </div>
+
+                        @if($project->status == 'CLOSED' && $project->winningBidding)
+                            <div class="my-5 text-center">
+                                <hr>
+                                <p class="fw-bold text-uppercase fs-6 text-secondary">Winning Proposal</p>
+                                <h5 class="fw-bold"><span class="fa fa-star"></span> {{ $project->winningBidding->company->name }}</h5>
+                                
+                                <p class="fw-bold text-uppercase fs-6 text-secondary">Rate</p>
+                                <h5 class="fw-bold">{{ $project->winningBidding->rate }}</h5>
+
+                                <p class="fw-bold text-uppercase fs-6 text-secondary">Owner</p>
+                                <h5 class="fw-bold">{{ $project->winningBidding->company->client->name }}</h5>
+
+                                <p class="fw-bold text-uppercase fs-6 text-secondary">#Proposal ID</p>
+                                
+                                <a href="{{ route('client.proposals.show',$project->winningBidding) }}">
+                                    <h5 class="fw-bold">{{ $project->winningBidding->id }}</h5>
+                                </a>
+                            </div>
+                        @endif
                     </div>
                 </div>
             </div>
