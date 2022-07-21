@@ -7,6 +7,7 @@ use App\Http\Requests\Client\Project\CreateProjectRequest;
 use App\Http\Requests\Client\Project\SetProjectWinnerRequest;
 use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
+use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Project;
 use Exception;
@@ -65,9 +66,20 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
-    {
-        // $project->load('proposals');
-        $proposals = $project->proposals()->paginate(10);        
+    {        
+        $proposals = Bidding::where('project_id', $project->id);
+        
+        if(request('search'))
+        {
+            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')            
+            ->orWhereHas('company', function($query) {
+                $query->where('name', 'LIKE', '%' . request('search') . '%')
+                ->orWhere('email', 'LIKE', '%' . request('search') . '%');
+            });
+        }
+
+        $proposals = $proposals->paginate(10);
+
         return view('client.projects.show')->with(compact('project', 'proposals'));
     }
 
@@ -83,7 +95,6 @@ class ProjectController extends Controller
         
         return view('client.projects.edit')->with(compact('project', 'companies'));
     }
-
     /**
      * Update the specified resource in storage.
      *

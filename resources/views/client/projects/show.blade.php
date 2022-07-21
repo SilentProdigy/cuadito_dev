@@ -94,10 +94,23 @@
         <div class="row">
             <div class="col-xs-12">
                 <div class="card">
-                    <div class="card-header">
+                    <div class="card-header d-flex justify-content-between">
                         <h3 class="fw-bold py-1">Project's Proposals</h3>
+                        
+                        <form action="{{ route('client.projects.show', $project) }}" method="get">
+                            <div class="input-group input-group-lg mb-3">
+                                <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+                                <button class="btn btn-warning" type="submit">
+                                    <span class="fa fa-search"></span>
+                                </button>
+                                <a href="{{ route('client.projects.show', $project) }}">Clear</a>
+                            </div>
+                        </form>
                     </div>
                     <div class="card-body">
+
+                        <h5>{{ request('search') ? 'We found ' . $proposals->count() . ' results ...' : 'Current Proposals'}}</h5>
+
                         <table class="table table-borderless table-md user-listing-table">
                             <thead>
                                 <th>SEQ</th>
