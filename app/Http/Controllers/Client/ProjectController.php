@@ -66,8 +66,9 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {
-        $project->load('proposals');
-        return view('client.projects.show')->with(compact('project'));
+        // $project->load('proposals');
+        $proposals = $project->proposals()->paginate(10);        
+        return view('client.projects.show')->with(compact('project', 'proposals'));
     }
 
     /**

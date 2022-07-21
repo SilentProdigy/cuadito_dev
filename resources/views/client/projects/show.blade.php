@@ -107,10 +107,18 @@
                                 <th>ACTIONS</th>
                             </thead>
                             <tbody>
-                                @foreach ($project->proposals as $proposal)
+                                @foreach ($proposals as $proposal)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
-                                        <td>{{ $proposal->company->name }}</td>
+                                        <td>
+                                            @if($project->winner_bidding_id == $proposal->id)
+                                                <span class="text-success">
+                                                    <i class="fa fa-star"></i>{{ $proposal->company->name }}
+                                                </span>
+                                            @else
+                                                {{ $proposal->company->name }}
+                                            @endif
+                                        </td>
                                         <td>{{ $proposal->company->email }}</td>
                                         <td>{{ $proposal->rate }}</td>
                                         <td>
@@ -128,6 +136,8 @@
                                 @endforeach
                             </tbody>
                         </table>
+
+                        <div class="d-flex justify-content-center">{{ $proposals->links() }}</div>
                     </div>
                 </div>
             </div>
