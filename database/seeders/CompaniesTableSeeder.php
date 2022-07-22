@@ -15,8 +15,6 @@ class CompaniesTableSeeder extends Seeder
      */
     public function run()
     {   
-        $companies = $this->generateDummyCompanies();
-
         // $companies = [
         //     [
         //         'name' => 'JohnyDoe',
@@ -26,23 +24,29 @@ class CompaniesTableSeeder extends Seeder
         //     ]
         // ];
 
-        $client = Client::first();
+        $clients = Client::get();
 
-        foreach($companies as $company)
-            $client->companies()->create($company);
+        foreach($clients as $client) 
+        {
+            $companies = $this->generateDummyCompanies($client);
+        
+            foreach($companies as $company)
+                $client->companies()->create($company);
+        }
     }
 
-    public function generateDummyCompanies()
+    public function generateDummyCompanies($client)
     {
         $companies = [];
 
-        for($i = 0; $i < 5; $i++)
+        for($i = 0; $i < 1; $i++)
         {
             $companies[] = [
-                'name' => 'Company ' . $i,
+                'name' => 'Company-' . $client->name . '-' . $i,
                 'address' => 'Street ' . $i . ' York',
                 'email' => 'company'.$i.'.cuadito@gmail.com',
                 'contact_number' => '09123123211',
+                'validation_status' => (random_int(1, 10)) % 2 == 0 ? Company::APPROVED_STATUS : Company::FOR_APPROVAL_STATUS,
             ];
         }
 
