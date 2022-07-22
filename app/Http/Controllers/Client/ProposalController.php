@@ -7,6 +7,7 @@ use App\Http\Requests\Client\Proposal\SubmitProposalRequest;
 use App\Models\Attachment;
 use App\Models\Bidding;
 use App\Models\Project;
+use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
 use App\Traits\UploadFile;
 use Exception;
@@ -15,7 +16,7 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
     
-    use UploadFile, CheckIfCompanyHasProposalToProject;
+    use UploadFile, CheckIfCompanyHasProposalToProject, CheckIfClientOwnedAProject;
 
     public function show(Bidding $bidding)
     {
@@ -24,6 +25,13 @@ class ProposalController extends Controller
     
     public function create(Project $project)
     {
+        if($this->checkIfClientOwnedAProject($project))
+        {
+            return redirect()->back()->withErrors([
+                'message' => "Operation Denied: You can't submit a proposal to your own project!"
+            ]);
+        }
+
         if($this->checkIfCompanyHasProposalToProject($project))
         {
             return redirect()->back()->withErrors([

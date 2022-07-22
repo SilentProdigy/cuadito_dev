@@ -94,4 +94,9 @@ class Project extends Model
     
         return $badges[$this->status];
     }
+
+    public function getOwnerAttribute()
+    {
+        return $this->company->client;
+    }
 }
