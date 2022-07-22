@@ -2,9 +2,15 @@
 
 @section('content')
 <div class="container px-5">
-    <div class="my-3">
-        
-    </div>
+    @if($is_owned_project)
+        <div class="alert alert-info d-flex justify-content-between" role="alert">
+            <div class="alert-body">
+                <span><i class="fa fa-info-circle"></i> Info</span>
+                <p>You are browsing your own project.This means that you cannot submit a proposal to this project.</p>
+            </div>
+            <a class="float-end text-success" data-bs-dismiss="alert" aria-label="Close"><i class="fa fa-close"></i></a>
+        </div>
+    @endif
 
     <section class="mt-4">
         <div class="row">
@@ -56,13 +62,7 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="d-flex justify-content-between">
-                            
-                            @if(!$has_proposal)
-                                <a href="{{ route('client.proposals.create', $project) }}" class="btn btn-outline-success">Submit A Proposal</a>
-                            @else
-                                <button class="btn btn-outline-secondary" disabled>Proposal Submitted</button>
-                            @endif
-                            <a href="{{ route('client.listing.index') }}" class="btn btn-dark">Back</a>
+                            @include('client.listing.includes.action_buttons')
                         </div>
 
                         <div class="my-5 text-center">

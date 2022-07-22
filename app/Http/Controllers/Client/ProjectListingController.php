@@ -29,7 +29,8 @@ class ProjectListingController extends Controller
 
     public function show(Project $project)
     { 
+        $is_owned_project = $project->owner->id == auth('client')->user()->id;
         $has_proposal = $this->checkIfCompanyHasProposalToProject($project);
-        return view('client.listing.show')->with(compact('project', 'has_proposal'));
+        return view('client.listing.show')->with(compact('project', 'has_proposal', 'is_owned_project'));
     }
 }
