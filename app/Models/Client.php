@@ -79,4 +79,9 @@ class Client extends Authenticatable
     {
         return $this->companies()->count();
     }
+
+    public function getApprovedCompaniesAttribute()
+    {
+        return $this->companies()->approved()->get();
+    }
 }
