@@ -33,6 +33,11 @@ class Client extends Authenticatable
         'companies_count'
     ];
 
+    public function company()
+    {
+        return $this->hasOne(\App\Models\Company::class);
+    }
+
     public function companies() 
     {
         return $this->hasMany(\App\Models\Company::class);

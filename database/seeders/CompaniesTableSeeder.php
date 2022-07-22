@@ -46,7 +46,8 @@ class CompaniesTableSeeder extends Seeder
                 'address' => 'Street ' . $i . ' York',
                 'email' => 'company'.$i.'.cuadito@gmail.com',
                 'contact_number' => '09123123211',
-                'validation_status' => (random_int(1, 10)) % 2 == 0 ? Company::APPROVED_STATUS : Company::FOR_APPROVAL_STATUS,
+                // 'validation_status' => (random_int(1, 10)) % 2 == 0 ? Company::APPROVED_STATUS : Company::FOR_APPROVAL_STATUS,
+                'validation_status' => Company::APPROVED_STATUS,
             ];
         }
 
