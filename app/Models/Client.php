@@ -33,6 +33,11 @@ class Client extends Authenticatable
         'companies_count'
     ];
 
+    public function company()
+    {
+        return $this->hasOne(\App\Models\Company::class);
+    }
+
     public function companies() 
     {
         return $this->hasMany(\App\Models\Company::class);
@@ -73,5 +78,10 @@ class Client extends Authenticatable
     public function getCompaniesCountAttribute()
     {
         return $this->companies()->count();
+    }
+
+    public function getApprovedCompaniesAttribute()
+    {
+        return $this->companies()->approved()->get();
     }
 }

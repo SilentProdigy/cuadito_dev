@@ -16,8 +16,13 @@ class EnsureGlobalCompanyIsSet
      */
     public function handle(Request $request, Closure $next)
     {
-        if(!session('config.company'))
-            return redirect()->back()->withErrors('Invalid operation! Please set the GLOBAL Company first!');
+        if(!session('config.company')) 
+        {
+            if(auth('client')->user()->have_valid_companies) 
+                session(['config.company' => auth('client')->user()->company->id]);
+            else 
+                return redirect()->back()->withErrors("Operation Denied: You don't have valid companies!");
+        }
         
         return $next($request);
     }
