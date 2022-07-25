@@ -75,6 +75,12 @@ a {
     color: red;
 }
 
+#main-navbar .navbar-nav .nav-item {
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+
 .nav-link {
     white-space: nowrap;
 }
@@ -94,12 +100,6 @@ a {
 
 .cart .price {
     color: green;
-}
-
-.cart .total-area {
-}
-
-.cart .checkout-area {
 }
 
 .cart .order-summary {
@@ -182,7 +182,7 @@ body {
     overflow-x: hidden;
     overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 }
-======= #search-customer-result {
+#search-customer-result {
     padding: 1em;
 }
 

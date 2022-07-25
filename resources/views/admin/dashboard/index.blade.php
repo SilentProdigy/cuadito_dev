@@ -27,7 +27,7 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-green">
             <div class="inner">
-                <h3>50,000 </h3>
+                <h3>0 </h3>
                 <p> Total Sales </p>
             </div>
             <div class="icon">
@@ -39,7 +39,7 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-orange">
             <div class="inner">
-                <h3> 5464 </h3>
+                <h3> 0 </h3>
                 <p> Bids </p>
             </div>
             <div class="icon">

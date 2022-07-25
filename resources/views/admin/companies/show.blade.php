@@ -1,4 +1,4 @@
-@extends('layouts.dashboard-layout')
+@extends('layouts.client-main-layout')
 
 @section('content')
 <div class="container-fluid mb-3">
