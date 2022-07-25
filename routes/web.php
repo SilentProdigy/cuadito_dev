@@ -110,6 +110,7 @@ Route::prefix('client')->name('client.')->group(function () {
             Route::post('proposal/{project}',[\App\Http\Controllers\Client\ProposalController::class, 'store'])->name('proposals.store');
         });
 
+        Route::get('proposals', [\App\Http\Controllers\Client\ProposalController::class, 'index'])->name('proposals.index');
         Route::get('proposals/{bidding}', [\App\Http\Controllers\Client\ProposalController::class, 'show'])->name('proposals.show');
         Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
 

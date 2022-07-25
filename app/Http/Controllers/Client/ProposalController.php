@@ -18,6 +18,12 @@ class ProposalController extends Controller
     
     use UploadFile, CheckIfCompanyHasProposalToProject, CheckIfClientOwnedAProject;
 
+    public function index()
+    {
+        $proposals = auth('client')->user()->biddings;
+        return view('client.proposals.index')->with(compact('proposals'));
+    }
+
     public function show(Bidding $bidding)
     {
         return view('client.proposals.show')->with(compact('bidding'));
