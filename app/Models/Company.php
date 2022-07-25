@@ -73,4 +73,9 @@ class Company extends Model
             array_diff( $requirements->pluck('id')->toArray(), Requirement::REQUIREMENT_IDS)
         ) > 0;
     }
+
+    public function scopeApproved($query)
+    {
+        return $query->where('validation_status', self::APPROVED_STATUS);
+    }
 }
