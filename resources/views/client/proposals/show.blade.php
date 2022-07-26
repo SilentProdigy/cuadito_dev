@@ -18,7 +18,7 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h3 class="fw-bold py-1">Proposal Details</h3>
-                        @if($bidding->project->status !== 'CLOSED')
+                        @if($bidding->project->status !== 'CLOSED' && auth('client')->user()->id == $bidding->project->company->client_id)
                             <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($bidding->project) }}" data-proposal="{{ json_encode($bidding) }}">
                                 Choose Proposal
                             </button>   
@@ -32,12 +32,23 @@
 
                         <div class="my-2 py-2 border-top">
                             <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Owner</h5>
-                            <p class="fs-6 lh-lg" style="color: #222;">{{ $bidding->company->client->name }}</p>
+                            <p class="fs-6 lh-lg" style="color: #222;">{{ $bidding->company->client_id == auth('client')->user()->id ? 'You owned this Company' : $bidding->company->client->name }}</p>
                         </div>
 
                         <div class="my-2 py-2 border-top">
                             <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Project</h5>
                             <p class="fs-6 lh-lg" style="color: #222;">{{ $bidding->project->title }}</p>
+                        </div>
+
+                        <div class="my-2 py-2 border-top">
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Bidding Status</h5>
+                            @if($bidding->project->status == 'CLOSED' && $bidding->project->winner_bidding_id == $bidding->id)
+                                <span class='badge rounded-pill bg-success px-3 py-2'><i class="fa fa-star"></i> WINNING BID</span>
+                            @elseif($bidding->project->status == 'CLOSED' && $bidding->project->winner_bidding_id != $bidding->id)
+                                <span class='badge rounded-pill bg-dark px-3 py-2'>LOSING BID</span>
+                            @else
+                                -
+                            @endif
                         </div>
 
                         <div class="my-2 py-2 border-top">
