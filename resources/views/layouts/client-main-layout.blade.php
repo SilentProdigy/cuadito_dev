@@ -160,6 +160,10 @@
                     <a href="{{ route('client.listing.index') }}" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
                         <i class="fas fa-list fa-fw me-3"></i><span>Listing</span>
                     </a>
+
+                    <a href="{{ route('client.proposals.index') }}" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
+                        <i class="fas fa-flag fa-fw me-3"></i><span>Proposals</span>
+                    </a>
                 
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
                         <i class="fas fa-circle-question fa-fw me-3"></i><span>Help</span>

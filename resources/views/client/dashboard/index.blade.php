@@ -46,7 +46,7 @@
                 <div class="icon">
                     <i class="fa fa-handshake" aria-hidden="true"></i>
                 </div>
-                <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+                <a href="{{ route('client.proposals.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
             </div>
         </div>
     </div>

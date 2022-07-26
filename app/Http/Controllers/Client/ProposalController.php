@@ -18,6 +18,37 @@ class ProposalController extends Controller
     
     use UploadFile, CheckIfCompanyHasProposalToProject, CheckIfClientOwnedAProject;
 
+    public function index()
+    {
+        // $proposals =  auth('client')->user()->biddings();
+        // $proposals = Bidding::where('client_id', );
+
+        $client_companies = auth('client')->user()->companies->pluck('id')->toArray();
+
+        $proposals = Bidding::with('project')->whereIn('company_id',$client_companies );
+        
+        if(request('search'))
+        {
+            $proposals
+            // ->where('rate', 'LIKE', '%' . request('search') . '%')     
+            ->where(function($query) {
+                $query->where('rate', 'LIKE', '%' . request('search') . '%')
+                ->orWhereDate('created_at', 'LIKE', '%' . request('search') . '%'); // TODO: Make this format to M d,Y
+            })
+            ->orWhereHas('company', function($query) {
+                $query->where('name', 'LIKE', '%' . request('search') . '%');
+            })
+            ->orWhereHas('project', function($query) {
+                $query->where('title', 'LIKE', '%' . request('search') . '%')
+                    ->orWhere('status', 'LIKE', '%' . request('search') . '%');
+            });
+        }
+
+        $proposals = $proposals->paginate(10);
+
+        return view('client.proposals.index')->with(compact('proposals'));
+    }
+
     public function show(Bidding $bidding)
     {
         return view('client.proposals.show')->with(compact('bidding'));
