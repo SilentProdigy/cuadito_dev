@@ -3,8 +3,17 @@
 @section('content')    
 
 <div class="container-fluid mb-3">
-    <div class="d-flex flex-row">
+    <div class="d-flex flex-row justify-content-between align-items-center">
         <div class="table-titles">Your Proposals</div>
+        <form action="{{ route('client.proposals.index') }}" method="get" class="d-flex justify-content-between align-items-center">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+                <button class="btn btn-warning" type="submit">
+                    <span class="fa fa-search"></span>
+                </button>
+            </div>
+            <a href="{{ route('client.proposals.index') }}" class="p-2">Clear</a>
+        </form>
     </div>
 </div>
 <div class="card">
@@ -68,6 +77,8 @@
             
             </tbody>
         </table>
+
+        <div class="d-flex justify-content-center">{{ $proposals->links() }}</div>
     </div>
 </div>
 
