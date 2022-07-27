@@ -41,6 +41,13 @@
 
             <!-- Right links -->
             <ul class="navbar-nav ms-auto flex-row">
+                <li class="nav-item dropdown d-flex justify-content-center align-items-center">
+                    <a href="{{ route('client.notifications.index') }}" class="position-relative fs-5 p-2">
+                        <i class="fa fa-bell"></i>
+                        <span class="position-absolute top-30 translate-middle p-2 bg-danger border border-light rounded-circle">
+                        </span>
+                    </a>
+                </li>
                 <!-- Avatar -->
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
