@@ -44,8 +44,10 @@
                 <li class="nav-item dropdown d-flex justify-content-center align-items-center">
                     <a href="{{ route('client.notifications.index') }}" class="position-relative fs-5 p-2">
                         <i class="fa fa-bell"></i>
-                        <span class="position-absolute top-30 translate-middle p-2 bg-danger border border-light rounded-circle">
-                        </span>
+                        @if(auth('client')->user()->have_unread_notifications)
+                            <span class="position-absolute top-30 translate-middle p-2 bg-danger border border-light rounded-circle">
+                            </span>
+                        @endif
                     </a>
                 </li>
                 <!-- Avatar -->
