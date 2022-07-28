@@ -44,7 +44,7 @@
                                 </a>
                             @endif
 
-                            <a href="#" class="btn btn-sm btn-danger">
+                            <a href="#" class="btn btn-sm btn-danger btn-delete-notification" data-notification="{{ json_encode($notification) }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                         </td>
@@ -59,8 +59,30 @@
         </table>
     </div>
 </div>
+
+@include('client.notifications.modals.confirm_delete_modal')
 @endsection
 
 @section('script')
+    <script>
+         $(document).ready(function() {
+            let delete_buttons = document.querySelectorAll('.btn-delete-notification');
 
+            delete_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-notification');   
+                    data = JSON.parse(data);
+
+                    let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
+                    myModal.show()
+
+                    // document.querySelector('#project-name').innerHTML = data.title;
+                    let form = document.querySelector('#delete-notification-form');
+                    form.setAttribute('action', `/client/notifications/${ data.id }`);
+
+                });
+            });
+         });
+    </script>
 @endsection
