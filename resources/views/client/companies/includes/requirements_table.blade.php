@@ -1,6 +1,6 @@
 <table class="table table-borderless table-md user-listing-table">
     <thead>
-        <th>SEQ</th>
+        <th>STATUS</th>
         <th>REQUIREMENT</th>
         <th>ACTIONS</th>
     </thead>
@@ -8,8 +8,8 @@
         @foreach ($company->requirements as $item)
             <tr>
                 <td class="d-flex flex-row">
-                    <div class="d-flex flex-column user-listing-details px-3">
-                        <span>{{ $loop->iteration }}</span>
+                    <div class="d-flex flex-column user-listing-details">
+                        <span class="badge bg-warning">PENDING</span>
                     </div>
                 </td>
                 <td>

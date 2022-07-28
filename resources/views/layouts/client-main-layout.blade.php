@@ -31,27 +31,87 @@
 </head>
 
 <body>
-    <!-- Navbar -->
     <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top">
         <div class="container">
-            <!-- Brand -->
             <a class="navbar-brand" href="#">
                 <img src="{{asset('images/logo/logo.png')}}" height="50" alt="YCC Logo" loading="lazy" />
             </a>
-
-            <!-- Right links -->
-            <ul class="navbar-nav ms-auto flex-row">
-                <li class="nav-item dropdown d-flex justify-content-center align-items-center">
-                    <a href="{{ route('client.notifications.index') }}" class="position-relative fs-5 p-2">
-                        <i class="fa fa-bell"></i>
-                        @if(auth('client')->user()->have_unread_notifications)
-                            <span class="position-absolute top-30 translate-middle p-2 bg-danger border border-light rounded-circle">
-                            </span>
-                        @endif
+            <!-- <a class="navbar-brand" href="#">Navbar</a> -->
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-client" aria-controls="navbar-client" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbar-client">
+            <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                    <a href="{{ route('client.dashboard') }}" class="nav-link active" aria-current="page">
+                        <!-- <i class="fas fa-home fa-fw me-3"></i> -->
+                        <span>Home</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.companies.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-square fa-fw me-3"></i> -->
+                        <span>Companies</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.projects.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-highlighter fa-fw me-3"></i> -->
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.listing.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <span>Listing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="#" class="nav-link">
+                        <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
+                        <span>Help</span>
+                    </a>
+                </li>
+            </ul>
+            <div class="d-flex dropdown">
+                <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
+                    &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <li>
+                        <a class="dropdown-item" href="#">My Profile</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
+                                    document.getElementById('logout-form').submit();">
+                            {{ __('Logout') }}
+                        </a>
+                        <form id="logout-form" action="{{ route('client.auth.logout') }}" method="POST" class="d-none">
+                            @csrf
+                        </form>
+                    </li>
+                </ul>
+                </div>
+            </div>
+        </div>
+    </nav>
+    <!-- Navbar -->
+    <!-- <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top"> -->
+        <!-- <div class="container"> -->
+            <!-- Brand -->
+            <!-- <a class="navbar-brand" href="#">
+                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="YCC Logo" loading="lazy" />
+            </a> -->
+
+            <!-- Right links -->
+            <!-- <ul class="navbar-nav ms-auto flex-row"> -->
                 <!-- Avatar -->
-                <li class="nav-item dropdown">
+                <!-- <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                         <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
                         &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span>
@@ -73,15 +133,15 @@
                             </form>
                         </li>
                     </ul>
-                </li>
-            </ul>
-        </div>
+                </li> -->
+            <!-- </ul> -->
+        <!-- </div> -->
         <!-- Container wrapper -->
     </nav>
     <!-- Navbar -->
     <header>
         <!-- Sidebar -->
-        <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
+        <!-- <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
                     {{-- @includeIf('panels.admin_sidebar', [auth()->user()->role => 'admin']) --}}
@@ -110,13 +170,13 @@
                     </a>
                 </div>
             </div>
-        </nav>
+        </nav> -->
         <!-- Sidebar -->
     </header>
     <!--Main Navigation-->
 
     <!--Main layout-->
-    <main style="margin-top: 58px; padding-left: 240px; padding-bottom: 100px">
+    <main style="margin-top: 58px;">
         <div class="container pt-5">
 
             @include('panels.flash_messages')
