@@ -116,6 +116,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
 
         Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');
+
+        Route::resource('notifications', \App\Http\Controllers\Client\NotificationController::class);
     });
 
 });
