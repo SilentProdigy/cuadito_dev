@@ -73,6 +73,22 @@
                         <span>Help</span>
                     </a>
                 </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.notifications.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <span>Notifications</span>
+                    </a>
+                </li>
+                {{-- 
+                    <li class="nav-item dropdown">
+                        <a href="{{ route('client.notifications.index') }}">Notifications
+                            @if(auth('client')->user()->have_unread_notifications)
+                                <span class="position-absolute top-30 translate-middle p-2 bg-danger border border-light rounded-circle">
+                                </span>
+                            @endif
+                        </a>
+                    </li> 
+                --}}
             </ul>
             <div class="d-flex dropdown">
                 <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
