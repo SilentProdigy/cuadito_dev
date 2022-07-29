@@ -9,7 +9,7 @@
             <tr>
                 <td class="d-flex flex-row">
                     <div class="d-flex flex-column user-listing-details">
-                        <span class="badge bg-warning">PENDING</span>
+                        <span class="badge bg-warning">{{ $item->file->status }}</span>
                     </div>
                 </td>
                 <td>

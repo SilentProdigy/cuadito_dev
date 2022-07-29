@@ -18,6 +18,8 @@ class CreateCompanyRequirementTable extends Migration
             $table->foreignId('company_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('requirement_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->string('url')->nullable();
+            $table->string('status')->default('FOR APPROVAL');
+            $table->text('remarks')->nullable();
             $table->timestamps();
         });
     }
