@@ -66,7 +66,9 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
     Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
     Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class);
     Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');
-    Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class);
+    Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class); 
+    
+    Route::patch('requirements/set-status/{company_requirement}', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'update'])->name('requirements.set-status');
 });
 
 
