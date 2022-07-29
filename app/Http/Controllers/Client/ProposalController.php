@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Proposal\SubmitProposalRequest;
 use App\Models\Attachment;
 use App\Models\Bidding;
+use App\Models\Company;
+use App\Models\Notification;
 use App\Models\Project;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
@@ -119,8 +121,14 @@ class ProposalController extends Controller
 
             foreach($paths as $path)
                 $proposal->attachments()->create(['url' => $path]);
+
+            $proposing_company = Company::find(session('config.company'));
             
-        
+            $project->owner->notifications()->create([
+                'content' => $proposing_company->name . " submitted a proposal for your Project: " . $project->title . " #" . $project->id,
+                'url' => route('client.projects.show', $project),
+            ]);
+
             return redirect(route('client.listing.index'))
                     ->with('success', 'Proposal was successfully posted.');
         }

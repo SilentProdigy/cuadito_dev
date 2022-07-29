@@ -9,6 +9,7 @@ use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Models\Bidding;
 use App\Models\Company;
+use App\Models\Notification;
 use App\Models\Project;
 use Exception;
 use Illuminate\Http\Request;
@@ -153,12 +154,33 @@ class ProjectController extends Controller
     public function setWinner(SetProjectWinnerRequest $request, Project $project)
     {
         try 
-        {
-            // TODO: Additional business logic here ...
+        {            
+            $winning_proposal = Bidding::findOrFail($request->input('winner_bidding_id'));
+            $winning_company = $winning_proposal->company;
+
             $project->update([
                 'status' => Project::CLOSED_STATUS,
                 'remarks' => $request->input('remarks'), 
-                'winner_bidding_id' => $request->input('winner_bidding_id')
+                'winner_bidding_id' => $winning_proposal->id
+            ]);
+
+            /* 
+                Send notification to the companies / bidders that submitted proposal to this project
+                Informing that the project was closed. 
+            */
+            $project->proposals->each(function($proposal) {
+                $company_owner = $proposal->company->client;
+
+                $company_owner->notifications()->create([
+                    'content' => $proposal->project->title . " - #ID " . $proposal->project->id . " was CLOSED by the owner.",
+                    'url' => route('client.proposals.show', $proposal),    
+                ]);
+            });
+
+            # Send notification to the winning bidder
+            $winning_company->client->notifications()->create([
+                'content' => "Congratulations! Your proposal for Project - " . $project->title . " - #ID " . $project->id . " was selected!",
+                'url' => route('client.projects.show', $project),
             ]);
 
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  

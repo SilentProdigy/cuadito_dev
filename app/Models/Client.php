@@ -30,8 +30,15 @@ class Client extends Authenticatable
         'have_companies',
         'have_valid_companies',
         'projects_count',
-        'companies_count'
+        'companies_count',
+        'have_unread_notifications'
     ];
+
+
+    public function notifications()
+    {
+        return $this->hasMany(\App\Models\Notification::class);
+    }
 
     public function company()
     {
@@ -83,5 +90,10 @@ class Client extends Authenticatable
     public function getApprovedCompaniesAttribute()
     {
         return $this->companies()->approved()->get();
+    }
+
+    public function getHaveUnreadNotificationsAttribute()
+    {
+        return $this->notifications()->where('opened', 0)->exists();
     }
 }
