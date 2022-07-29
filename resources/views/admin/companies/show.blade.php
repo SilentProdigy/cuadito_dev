@@ -17,7 +17,7 @@
             <thead>
                 <th>SEQ</th>
                 <th>REQUIREMENT</th>
-                <th>STATUS</th>
+                <th>STATUS</th> 
                 <th>REMARKS</th>
                 <th>ACTIONS</th>
             </thead>
@@ -52,11 +52,9 @@
                                     <i class="fa fa-check"></i>         
                                 </button>  
                             @else
-                                <a href="#" 
-                                class="btn btn-sm btn-outline-danger"
-                                target="_blank">
+                                <button class="btn btn-sm btn-outline-danger btn-disapprove-requirement" data-file="{{ json_encode($item->file) }}">
                                     <i class="fa fa-close"></i>         
-                                </a>  
+                                </button>  
                             @endif
 
                             <a href="{{ route('admin.companies.requirements.download', [ $company, $item ]) }}" 
@@ -80,6 +78,7 @@
 </form>
 
 @include('admin.companies.modals.set_status_modal')
+@include('admin.companies.modals.disapprove_requirement_modal')
 @endsection
 
 @section('script')
@@ -124,7 +123,23 @@
             });
         });
 
+        let disapprove_requirement_buttons = document.querySelectorAll('.btn-disapprove-requirement');
+        disapprove_requirement_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-file');   
+                data = JSON.parse(data);
 
+                let form = document.querySelector('#disapprove-requirement-form');
+                form.setAttribute('action', `/admin/requirements/set-status/${ data.id }`);
+
+                let myModal = new bootstrap.Modal(document.getElementById('disapprove-requirement-modal'), {keyboard: false})
+                myModal.show()
+
+                // $('#validation_status').val(`${ data.validation_status }`);
+                // document.querySelector('#area-name').innerHTML = data.name;
+            });
+        });
     })
 </script>
 @endsection
