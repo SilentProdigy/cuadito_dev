@@ -68,6 +68,12 @@
                     </a>
                 </li>
                 <li class="nav-item">
+                    <a href="{{ route('client.proposals.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <span>Proposals</span>
+                    </a>
+                </li>
+                <li class="nav-item">
                     <a href="#" class="nav-link">
                         <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
                         <span>Help</span>
