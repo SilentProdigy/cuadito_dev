@@ -7,6 +7,7 @@ use App\Http\Requests\Client\Project\CreateProjectRequest;
 use App\Http\Requests\Client\Project\SetProjectWinnerRequest;
 use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
+use App\Jobs\CreateProjectClosedNotifications;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Notification;
@@ -168,14 +169,7 @@ class ProjectController extends Controller
                 Send notification to the companies / bidders that submitted proposal to this project
                 Informing that the project was closed. 
             */
-            $project->proposals->each(function($proposal) {
-                $company_owner = $proposal->company->client;
-
-                $company_owner->notifications()->create([
-                    'content' => $proposal->project->title . " - #ID " . $proposal->project->id . " was CLOSED by the owner.",
-                    'url' => route('client.proposals.show', $proposal),    
-                ]);
-            });
+            CreateProjectClosedNotifications::dispatch($project);
 
             # Send notification to the winning bidder
             $winning_company->client->notifications()->create([
