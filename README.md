@@ -8,8 +8,8 @@
 2. Create database named **cuadito**
 3. Change the following .env variables:
    **DB_DATABASE=cuadito**
-   **DB_USERNAME=_Your username_**
-   **DB_PASSWORD=_DB password_**
+   **DB*USERNAME=\_Your username***
+   **DB*PASSWORD=\_DB password***
 4. Run the following commands
 
 ```sh
@@ -29,4 +29,16 @@ You can reset the data by running the following command:
 
 ```sh
 php artisan migrate:fresh --seed
+```
+
+### Jobs & Queues
+
+The app uses **Jobs** for the following background tasks:
+
+1. Sending notifications for the bidders of a project (if the project is closed).
+
+To continue please run the worker command:
+
+```sh
+php artisan queue:work
 ```
