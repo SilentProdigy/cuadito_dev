@@ -123,6 +123,11 @@ class ProposalController extends Controller
                 $proposal->attachments()->create(['url' => $path]);
 
             $proposing_company = Company::find(session('config.company'));
+
+            $proposal->company->client->notifications()->create([
+                'content' => "You submitted a proposal for Project: " . $project->title . " #" . $project->id,
+                'url' => route('client.proposals.show', $proposal),
+            ]);
             
             $project->owner->notifications()->create([
                 'content' => $proposing_company->name . " submitted a proposal for your Project: " . $project->title . " #" . $project->id,
