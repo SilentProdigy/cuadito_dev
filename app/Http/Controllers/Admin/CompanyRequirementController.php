@@ -18,7 +18,13 @@ class CompanyRequirementController extends Controller
         try 
         {
             $company_requirement = CompanyRequirement::findOrFail($id);
-            $company_requirement->update($request->all());
+
+            $data = $request->all();
+
+            if($data['status'] == CompanyRequirement::APPROVED_STATUS) 
+                $data['remarks'] = "";
+
+            $company_requirement->update($data);
 
             return redirect()->back()->with('success', "Success in updating the status of the Client's requirement!");
         }
