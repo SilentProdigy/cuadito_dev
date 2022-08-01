@@ -1,7 +1,7 @@
 @extends('layouts.client-main-layout')
 
 @section('content')
-<div class="container px-5">
+<div class="container px-5 py-5">
     
     @if($bidding->project->status == 'CLOSED' && $bidding->project->winner_bidding_id == $bidding->id)
         <div class="alert alert-success d-flex align-items-center fs-4" role="alert">

@@ -2,7 +2,7 @@
 
 @section('content')    
 
-<div class="container-fluid">
+<div class="container-fluid pb-5">
 
     <h2>Submit a Proposal</h2>
 
@@ -34,7 +34,7 @@
     </div>
 
     {{-- Submit Proposal Form --}}
-    <div class="card mt-4">
+    <div class="card mt-4 mb-4">
         <div class="card-header">
             <div class="d-flex justify-content-between">
                 <h4>Proposal Form</h4>
