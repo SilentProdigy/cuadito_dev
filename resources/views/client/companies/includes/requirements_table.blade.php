@@ -1,22 +1,31 @@
 <table class="table table-borderless table-md user-listing-table">
     <thead>
-        <th>STATUS</th>
         <th>REQUIREMENT</th>
+        <th>STATUS</th>
+        <th>REMARKS</th>
         <th>ACTIONS</th>
     </thead>
     <tbody>
         @foreach ($company->requirements as $item)
             <tr>
-                <td class="d-flex flex-row">
-                    <div class="d-flex flex-column user-listing-details">
-                        <span class="badge bg-warning">PENDING</span>
-                    </div>
-                </td>
                 <td>
                     <div class="d-flex flex-column user-listing-details px-3">
                         <span>{{ $item->name }}</span>
                     </div>
                 </td>
+
+                <td>
+                    <div class="d-flex flex-column user-listing-details">
+                       @include('client.companies.includes.status_badge')
+                    </div>
+                </td>
+
+                <td>
+                    <div class="d-flex flex-column user-listing-details">
+                        <span class="badge bg-warning">{{ $item->file->remarks }}</span>
+                    </div>
+                </td>
+
                 <td class="user-actions">
                     <a href="{{ route('client.companies.requirements.download', [ $company, $item ]) }}" 
                         class="btn btn-sm btn-outline-info"

@@ -1,4 +1,4 @@
-@extends('layouts.client-main-layout')
+@extends('layouts.dashboard-layout')
 
 @section('content')
 <div class="container-fluid mb-3">
@@ -17,28 +17,50 @@
             <thead>
                 <th>SEQ</th>
                 <th>REQUIREMENT</th>
+                <th>STATUS</th> 
+                <th>REMARKS</th>
                 <th>ACTIONS</th>
             </thead>
             <tbody>
                 @foreach ($company->requirements as $item)
                     <tr>
                         <td class="d-flex flex-row">
-                            <div class="d-flex flex-column user-listing-details px-3">
+                            <div class="d-flex flex-column user-listing-details">
                                 <span>{{ $loop->iteration }}</span>
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex flex-column user-listing-details px-3">
+                            <div class="d-flex flex-column user-listing-details">
                                 <span>{{ $item->name }}</span>
                             </div>
                         </td>
+                        <td>
+                            @include('admin.companies.includes.status_badge')
+                        </td>
+                        <td>
+                            <div class="d-flex flex-column user-listing-details">
+                                <span>{{ $item->file->remarks }}</span>
+                            </div>
+                        </td>
                         <td class="user-actions">
+
+                            @if($item->file->status == 'FOR APPROVAL' || $item->file->status == 'DISAPPROVED')
+                                <button class="btn btn-sm btn-outline-success btn-approve-requirement" 
+                                    data-file="{{ json_encode($item->file) }}">
+                                    <i class="fa fa-check"></i>         
+                                </button>  
+                            @else
+                                <button class="btn btn-sm btn-outline-danger btn-disapprove-requirement" data-file="{{ json_encode($item->file) }}">
+                                    <i class="fa fa-close"></i>         
+                                </button>  
+                            @endif
+
                             <a href="{{ route('admin.companies.requirements.download', [ $company, $item ]) }}" 
                                 class="btn btn-sm btn-outline-info"
                                 target="_blank"
                             >
                                 <i class="fa fa-download"></i>         
-                            </a>                
+                            </a>  
                         </td>
                     </tr>
                 @endforeach
@@ -47,29 +69,75 @@
     </div>
 </div>
 
+<form action="#" method="POST" id="approve-requirement-form">
+    @method('PATCH')
+    @csrf
+    <input type="hidden" name="status" value="APPROVED">
+</form>
+
 @include('admin.companies.modals.set_status_modal')
+@include('admin.companies.modals.disapprove_requirement_modal')
 @endsection
 
 @section('script')
 <script>
-    let set_status_buttons = document.querySelectorAll('.btn-set-approval-status');
 
-    set_status_buttons.forEach(button => {
-        button.addEventListener('click', function(e) {  
-            e.preventDefault;
-            let data = button.getAttribute('data-company');   
-            data = JSON.parse(data);
+    $(document).ready(function() {
 
-            let myModal = new bootstrap.Modal(document.getElementById('set-company-status-modal'), {keyboard: false})
-            myModal.show()
+        let set_status_buttons = document.querySelectorAll('.btn-set-approval-status');
 
-            let form = document.querySelector('#set-company-status-form');
-            form.setAttribute('action', `/admin/companies/${ data.id }`);
+        set_status_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-company');   
+                data = JSON.parse(data);
 
-            // console.log(data);
-            $('#validation_status').val(`${ data.validation_status }`);
-            // document.querySelector('#area-name').innerHTML = data.name;
+                let myModal = new bootstrap.Modal(document.getElementById('set-company-status-modal'), {keyboard: false})
+                myModal.show()
+
+                let form = document.querySelector('#set-company-status-form');
+                form.setAttribute('action', `/admin/companies/${ data.id }`);
+
+                // console.log(data);
+                $('#validation_status').val(`${ data.validation_status }`);
+                // document.querySelector('#area-name').innerHTML = data.name;
+            });
         });
-    });
+
+        let approve_requirement_buttons = document.querySelectorAll('.btn-approve-requirement');
+
+        approve_requirement_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-file');   
+                data = JSON.parse(data);
+
+                let form = document.querySelector('#approve-requirement-form');
+                form.setAttribute('action', `/admin/requirements/set-status/${ data.id }`);
+
+                form.submit();
+                // $('#validation_status').val(`${ data.validation_status }`);
+                // document.querySelector('#area-name').innerHTML = data.name;
+            });
+        });
+
+        let disapprove_requirement_buttons = document.querySelectorAll('.btn-disapprove-requirement');
+        disapprove_requirement_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-file');   
+                data = JSON.parse(data);
+
+                let form = document.querySelector('#disapprove-requirement-form');
+                form.setAttribute('action', `/admin/requirements/set-status/${ data.id }`);
+
+                let myModal = new bootstrap.Modal(document.getElementById('disapprove-requirement-modal'), {keyboard: false})
+                myModal.show()
+
+                // $('#validation_status').val(`${ data.validation_status }`);
+                // document.querySelector('#area-name').innerHTML = data.name;
+            });
+        });
+    })
 </script>
 @endsection

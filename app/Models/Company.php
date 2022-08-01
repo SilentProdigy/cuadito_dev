@@ -58,7 +58,7 @@ class Company extends Model
     {
         return $this->belongsToMany(\App\Models\Requirement::class, 'company_requirement')
                 ->as('file')
-                ->withPivot(['id','url']);
+                ->withPivot(['id','url', 'status', 'remarks']);
     }
 
     public function getCanUploadRequirementsAttribute()
