@@ -35,9 +35,7 @@
                             </div>
                         </td>
                         <td>
-                            <div class="d-flex flex-column user-listing-details">
-                                <span>{{ $item->file->status }}</span>
-                            </div>
+                            @include('admin.companies.includes.status_badge')
                         </td>
                         <td>
                             <div class="d-flex flex-column user-listing-details">

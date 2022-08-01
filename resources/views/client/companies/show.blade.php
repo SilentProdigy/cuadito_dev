@@ -27,7 +27,7 @@
         </div>
     </div>
     <div class="card-body row">
-        <div class="col-md-4 border-end">
+        <div class="col-md-5 border-end">
             <div class="col d-flex justify-content-end">
                 @if($company->can_upload_requirements && !$company->have_complete_requirements && $missing_requirements->count() > 0)
                     <button class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-requirement-modal">
@@ -39,7 +39,7 @@
                 @include('client.companies.includes.requirements_table')
             </div>
         </div>
-        <div class="col-md-8">
+        <div class="col-md-7">
             <h4 class="mt-3">ABOUT <span class="text-uppercase">{{ $company->name }}</span></h4>
             <div class="company_description">
                 Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
