@@ -16,6 +16,19 @@ class CategoryController extends Controller
         return view('admin.categories.index')->with(compact('categories'));
     }
 
+    public function store(Request $request)
+    {
+        try 
+        {
+            Category::create($request->all());
+            return redirect()->route('admin.categories.index')->with('success', 'Category was successfully added.');  
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
     public function update(Request $request, Category $category)
     {
         try 

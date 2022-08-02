@@ -6,6 +6,12 @@
         <div class="d-flex flex-row d-align-items-center justify-content-center">
             <div class="table-titles">Categories</div>
         </div>
+
+        <div class="col d-flex justify-content-end">
+            <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-category-modal">
+                <i class="fa fa-plus"></i>&ensp;Add Category
+            </button>
+        </div>
     </div>
     <div class="card">
         <div class="card-body">
@@ -47,6 +53,7 @@
             <div class="d-flex justify-content-center">{{ $categories->links() }}</div>
         </div>
     </div>
+    @include('admin.categories.modals.add_category_modal')
     @include('admin.categories.modals.confirm_delete_modal')
     @include('admin.categories.modals.edit_category_modal')
 @endsection
