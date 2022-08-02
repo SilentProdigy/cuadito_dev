@@ -26,6 +26,7 @@ class UpdateProjectRequest extends FormRequest
         return [
             'title' => 'required|string|min:3',
             'description' => 'required|string|min:3',
+            'category_ids' => 'required'
         ];
     }
 }

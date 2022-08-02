@@ -25,6 +25,21 @@
                     @enderror
                 </div>  
 
+                <div class="col-md-12 mt-3">
+                    <label>Category</label>
+                    <select name="category_ids[]" id="" class="mt-1 form-control @error('category_ids') is-invalid @enderror" multiple>
+                        @foreach ($categories as $category)
+                            <option value="{{ $category->id }}">{{ $category->name }}</option>
+                        @endforeach
+                    </select>
+
+                    @error('category_ids')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>  
+
                 <div class="col-md-6 mt-3">
                     <label>Company</label>
                     <select name="company_id" id="" class="mt-1 form-control @error('company_id') is-invalid @enderror"">

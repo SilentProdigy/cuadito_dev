@@ -31,8 +31,12 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
         
-        View::composer('*', function($view)
+        View::composer(['client.projects.create', 'client.projects.edit'], function($view)
         {
+            $categories = Category::all();
+
+            $view->with(compact('categories'));
+
             /*     
                 $categories = Category::where('parent_id', '=', 0)->orderBy('ordering')->get();
                 
