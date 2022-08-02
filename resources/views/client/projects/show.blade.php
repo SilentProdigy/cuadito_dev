@@ -14,10 +14,9 @@
                         <div>
                             <h3 class="fw-bold py-1">{{ $project->title }}</h3>
                             <div class="py-1">
-                                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                                @foreach ($project->categories as $category)
+                                    <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                                @endforeach
                             </div>
                         </div>
                         <div>

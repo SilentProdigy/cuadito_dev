@@ -33,6 +33,9 @@
                                     </button>
                                 </div>
                             </div>
+                            @foreach ($project->categories as $category)
+                                <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                            @endforeach
                         </div>
                         <div class="card-body px-3">
                             <p class="fw-bold fs-6 text-start">
