@@ -52,7 +52,9 @@ class ProjectController extends Controller
         try 
         {
             $company = Company::find($request->input('company_id'));
-            $company->projects()->create($request->except(['company_id']));
+            $project = $company->projects()->create($request->except(['company_id', 'category_ids']));
+            $project->categories()->sync($request->input('category_ids'));
+
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
         }
         catch(Exception $e)
