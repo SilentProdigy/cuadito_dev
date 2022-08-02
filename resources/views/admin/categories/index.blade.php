@@ -25,7 +25,7 @@
                                 <span>{{ ucfirst($category->name) }}</span>
                             </td>
                             <td class="user-actions">
-                                <a href="#" class="btn btn-sm btn-warning" data-category="{{ json_encode($category) }}">
+                                <a href="#" class="btn btn-sm btn-warning btn-edit-category" data-category="{{ json_encode($category) }}">
                                     <i class="fa fa-pencil"></i>          
                                 </a>
                                 <a href="#" class="btn btn-sm btn-danger btn-delete" data-category="{{ json_encode($category) }}">
@@ -48,6 +48,7 @@
         </div>
     </div>
     @include('admin.categories.modals.confirm_delete_modal')
+    @include('admin.categories.modals.edit_category_modal')
 @endsection
 
 @section('script')
@@ -68,6 +69,24 @@
                 form.setAttribute('action', `/admin/categories/${ data.id }`);
 
                 document.querySelector('#category-name').innerHTML = data.name;
+            });
+        });
+
+        let edit_category_buttons = document.querySelectorAll('.btn-edit-category');
+
+        edit_category_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-category');   
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('edit-category-modal'), {keyboard: false})
+                myModal.show()
+
+                let form = document.querySelector('#edit-category-form');
+                form.setAttribute('action', `/admin/categories/${ data.id }`);
+
+                document.querySelector('#category-name-txt').setAttribute("value", data.name);
             });
         });
     });
