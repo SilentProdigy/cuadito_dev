@@ -47,30 +47,29 @@
             <div class="d-flex justify-content-center">{{ $categories->links() }}</div>
         </div>
     </div>
+    @include('admin.categories.modals.confirm_delete_modal')
 @endsection
 
 @section('script')
 <script>
     $(document).ready(function() {
-        // let set_status_buttons = document.querySelectorAll('.btn-set-approval-status');
+        let delete_buttons = document.querySelectorAll('.btn-delete');
 
-        // set_status_buttons.forEach(button => {
-        //     button.addEventListener('click', function(e) {  
-        //         e.preventDefault;
-        //         let data = button.getAttribute('data-company');   
-        //         data = JSON.parse(data);
+        delete_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-category');   
+                data = JSON.parse(data);
 
-        //         let myModal = new bootstrap.Modal(document.getElementById('set-company-status-modal'), {keyboard: false})
-        //         myModal.show()
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
+                myModal.show()
 
-        //         let form = document.querySelector('#set-company-status-form');
-        //         form.setAttribute('action', `/admin/companies/${ data.id }`);
+                let form = document.querySelector('#delete-category-form');
+                form.setAttribute('action', `/admin/categories/${ data.id }`);
 
-        //         // console.log(data);
-        //         $('#validation_status').val(`${ data.validation_status }`);
-        //         // document.querySelector('#area-name').innerHTML = data.name;
-        //     });
-        // });
+                document.querySelector('#category-name').innerHTML = data.name;
+            });
+        });
     });
 </script>
 @endsection
