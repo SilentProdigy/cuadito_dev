@@ -21,6 +21,7 @@ use App\Http\Controllers\ProductController;
 
 // Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 Route::redirect('/', '/client/auth/login');
+Route::get('/login', [HomeController::class, 'index'])->middleware('auth');
 
 Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
 
