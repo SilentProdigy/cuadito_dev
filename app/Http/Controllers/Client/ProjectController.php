@@ -52,7 +52,9 @@ class ProjectController extends Controller
         try 
         {
             $company = Company::find($request->input('company_id'));
-            $company->projects()->create($request->except(['company_id']));
+            $project = $company->projects()->create($request->except(['company_id', 'category_ids']));
+            $project->categories()->sync($request->input('category_ids'));
+
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
         }
         catch(Exception $e)
@@ -94,8 +96,10 @@ class ProjectController extends Controller
     public function edit(Project $project)
     {
         $companies = auth('client')->user()->companies;
+
+        $selected_category_ids = $project->categories->pluck('id')->toArray();
         
-        return view('client.projects.edit')->with(compact('project', 'companies'));
+        return view('client.projects.edit')->with(compact('project', 'companies', 'selected_category_ids'));
     }
     /**
      * Update the specified resource in storage.
@@ -109,7 +113,8 @@ class ProjectController extends Controller
         try 
         {
             // TODO: Additional business logic here ...
-            $project->update($request->all());
+            $project->update($request->except(['company_id', 'category_ids']));
+            $project->categories()->sync($request->input('category_ids'));
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully updated.');  
         }
         catch(Exception $e)

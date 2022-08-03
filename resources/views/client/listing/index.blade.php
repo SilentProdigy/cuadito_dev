@@ -33,10 +33,13 @@
                                     </button>
                                 </div>
                             </div>
+                            @foreach ($project->categories as $category)
+                                <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                            @endforeach
                         </div>
                         <div class="card-body px-3">
                             <p class="fw-bold fs-6 text-start">
-                                <span class="px-1">{{ $project->company->name }}|</span>
+                                <a href="{{ route('client.companies.show', $project->company) }}" class="px-1">{{ $project->company->name }}</a> |
                                 <span class="px-1">Posted at {{ $project->created_at->format('M d,Y') }}|</span>
                                 <span class="px-1">Open till {{ $project->max_active_date }}</span>
                             </ul>

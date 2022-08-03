@@ -27,8 +27,8 @@ class Project extends Model
         'title',
         'description',
         'status',
-        'max_date',
-        'cost_and_payment',
+        'due_date',
+        'cost',
         'scope_of_work',
         'terms_and_conditions',
         'relevant_authorities',
@@ -38,7 +38,7 @@ class Project extends Model
     ];
 
     protected $cast = [
-        'max_date' => 'date'
+        'due_date' => 'date'
     ];
 
     protected $with = ['company'];
@@ -66,7 +66,7 @@ class Project extends Model
 
     public function getMaxActiveDateAttribute()
     {
-        return Carbon::parse($this->max_date)->format('M d,Y');
+        return Carbon::parse($this->due_date)->format('M d,Y');
     }
 
     public function getDescriptionTextAttribute()
@@ -98,5 +98,10 @@ class Project extends Model
     public function getOwnerAttribute()
     {
         return $this->company->client;
+    }
+
+    public function categories()
+    {
+        return $this->belongsToMany(\App\Models\Category::class);
     }
 }

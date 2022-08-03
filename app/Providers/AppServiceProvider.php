@@ -30,28 +30,34 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         Paginator::useBootstrap();
- 
-        View::composer('*', function($view)
+        
+        View::composer(['client.projects.create', 'client.projects.edit'], function($view)
         {
-            $categories = Category::where('parent_id', '=', 0)->orderBy('ordering')->get();
-            
-            foreach ($categories as $key => $category) {
-                $subCategories = Category::where('parent_id', '=', $category->id)->orderBy('ordering')->get();
-                $category->subCategories = $subCategories;
-                $categories[$key] = $category;
-            }
+            $categories = Category::all();
 
-            $cartTotalItems = 0;
-            $sessionId = session()->getId();
-            $cart = Cart::where('session_id', '=', $sessionId)->first();
+            $view->with(compact('categories'));
 
-            if ($cart) {
-                $cartItems = CartItem::where('cart_id', '=', $cart->id)->get();
-                $cartTotalItems = $cartItems->count();
-            }
-            
-            $view->with('categories', $categories);
-            $view->with('cartTotalItems', $cartTotalItems);
+            /*     
+                $categories = Category::where('parent_id', '=', 0)->orderBy('ordering')->get();
+                
+                foreach ($categories as $key => $category) {
+                    $subCategories = Category::where('parent_id', '=', $category->id)->orderBy('ordering')->get();
+                    $category->subCategories = $subCategories;
+                    $categories[$key] = $category;
+                }
+
+                $cartTotalItems = 0;
+                $sessionId = session()->getId();
+                $cart = Cart::where('session_id', '=', $sessionId)->first();
+
+                if ($cart) {
+                    $cartItems = CartItem::where('cart_id', '=', $cart->id)->get();
+                    $cartTotalItems = $cartItems->count();
+                }
+                
+                $view->with('categories', $categories);
+                $view->with('cartTotalItems', $cartTotalItems); 
+            */
         });
 
         # Will create a new blade directive money

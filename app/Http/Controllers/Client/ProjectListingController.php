@@ -19,6 +19,7 @@ class ProjectListingController extends Controller
                         $query->where('title', 'LIKE', '%' . request('search') . '%')
                         ->orWhere('description', 'LIKE', '%' . request('search') . '%');
                     })
+                    ->with('categories')
                     ->where('status', Project::ACTIVE_STATUS)
                     ->orderBy('id', 'desc')
                     ->paginate(5);
