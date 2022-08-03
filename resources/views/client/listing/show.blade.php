@@ -26,8 +26,8 @@
                     </div>
                     <div class="card-body">
                         <div class="my-2">
-                            <p class="text-secondary fs-6">Posted at July 12, 2022 - 9:12 PM</p>
-                            <p class="text-danger fs-6">Open till July 31, 2022 - 12:00 PM</p>
+                            <p class="text-secondary fs-6">Posted At: {{ $project->created_at->format('M d,Y') }}</p>
+                            <p class="text-danger fs-6">Due Date: {{ \Carbon\Carbon::parse($project->max_date)->format('M d,Y') }}</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
@@ -71,7 +71,7 @@
 
                         <div class="border-top my-5 px-3 py-3">
                             <h5 class="fs-6 fw-bold text-center mb-3 text-uppercase" style="color: #222;"><i class="fa fa-info-circle"></i> About the Company</h5>
-                            <p><span class="fw-bold">Company:</span> <a href="#">{{ $project->company->name }}</a></p>
+                            <p><span class="fw-bold">Company:</span> <a href="{{ route('client.companies.show', $project->company) }}">{{ $project->company->name }}</a></p>
                             <p><span class="fw-bold">Email:</span> {{ $project->company->email }}</p>
                             <p><span class="fw-bold">Owned by:</span> {{ $project->company->client->name }}</p>
                             <p><span class="fw-bold">Total Company's Projects:</span> {{ $project->company->projects_count }}</p>
