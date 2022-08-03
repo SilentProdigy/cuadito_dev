@@ -35,8 +35,8 @@
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Cost & Payment</h5>
-                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->cost_and_payment }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Cost</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">@money($project->cost)</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">

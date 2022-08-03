@@ -27,7 +27,7 @@
                     <div class="card-body">
                         <div class="my-2">
                             <p class="text-secondary fs-6">Posted At: {{ $project->created_at->format('M d,Y') }}</p>
-                            <p class="text-danger fs-6">Due Date: {{ \Carbon\Carbon::parse($project->max_date)->format('M d,Y') }}</p>
+                            <p class="text-danger fs-6">Due Date: {{ $project->max_active_date }}</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">
@@ -36,8 +36,8 @@
                         </div>
 
                         <div class="my-2 py-3 border-top">
-                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Cost & Payment</h5>
-                            <p class="fs-6 lh-lg" style="color: #222;">{{ $project->cost_and_payment }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Cost</h5>
+                            <p class="fs-6 lh-lg" style="color: #222;">@money($project->cost)</p>
                         </div>
 
                         <div class="my-2 py-3 border-top">

@@ -43,33 +43,7 @@
     
                     <div class="row mt-5">
                         <h4>FEATURED PROJECTS</h4>
-                        @foreach($featured_projects as $project)
-                            <div class="col-md-6 mb-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <h5 class="card-project-titles">
-                                                {{ $project->title }}
-                                            </h5>
-                                        </div>
-                                        @foreach ($project->categories as $category)
-                                            <span class="badge bg-success">{{ $category->name }}</span>
-                                        @endforeach
-                                        
-                                        <p class="text-muted card-project-desc">
-                                            {{ $project->description }}
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        {!!  $project->status_badge !!}
-                                        <br>
-                                        Cost & Payment: <span class="card-project-cost fw-bold">{{ $project->cost_and_payment }}</span>
-                                        <br>
-                                        Due Date: <span class="card-project-due fw-bold">{{ \Carbon\Carbon::parse($project->max_date)->format('M d,Y') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        @include('client.companies.includes.featured_projects')
                     </div>
                 </div>
             @else
@@ -81,33 +55,7 @@
 
                     <div class="row mt-5">
                         <h4>FEATURED PROJECTS</h4>
-                        @foreach($featured_projects as $project)
-                            <div class="col-md-6 mb-2">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <div class="d-flex">
-                                            <h5 class="card-project-titles">
-                                                {{ $project->title }}
-                                            </h5>
-                                        </div>
-                                        @foreach ($project->categories as $category)
-                                            <span class="badge bg-success">{{ $category->name }}</span>
-                                        @endforeach
-                                        
-                                        <p class="text-muted card-project-desc">
-                                            {{ $project->description }}
-                                        </p>
-                                    </div>
-                                    <div class="card-footer">
-                                        {!!  $project->status_badge !!}
-                                        <br>
-                                        Cost & Payment: <span class="card-project-cost fw-bold">{{ $project->cost_and_payment }}</span>
-                                        <br>
-                                        Due Date: <span class="card-project-due fw-bold">{{ \Carbon\Carbon::parse($project->max_date)->format('M d,Y') }}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        @endforeach
+                        @include('client.companies.includes.featured_projects')
                     </div>
                 </div>
             @endif

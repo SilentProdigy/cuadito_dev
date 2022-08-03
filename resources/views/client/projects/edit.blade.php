@@ -58,18 +58,18 @@
                 </div>  
 
                 <div class="col-md-6 mt-3">
-                    <label>Cost & Payment</label>
+                    <label>Cost</label>
                     <input 
                         type="text" 
-                        class="mt-1 form-control @error('cost_and_payment') is-invalid @enderror" 
-                        name="cost_and_payment" 
-                        value="{{ $project->cost_and_payment }}" 
-                        placeholder="* Enter Project Cost & Payment"
+                        class="mt-1 form-control @error('cost') is-invalid @enderror" 
+                        name="cost" 
+                        value="{{ $project->cost }}" 
+                        placeholder="* Enter Project Cost"
                         required 
                         autocomplete="" 
                         autofocus>
 
-                    @error('cost_and_payment')
+                    @error('cost')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -93,14 +93,14 @@
                 </div>
                 
                 <div class="col-md-6 mt-3">
-                    <label>Max Project Availability Date</label>
+                    <label>Due Date</label>
                     <input 
                         type="date" 
-                        class="mt-1 form-control @error('max_date') is-invalid @enderror" name="max_date" 
-                        value="{{ $project->max_date }}" 
-                        placeholder="* Enter Project Max Date" 
+                        class="mt-1 form-control @error('due_date') is-invalid @enderror" name="due_date" 
+                        value="{{ $project->due_date }}" 
+                        placeholder="* Enter Project Due Date" 
                         required 
-                        autocomplete="max_date" 
+                        autocomplete="due_date" 
                         autofocus>
 
                     @error('max_date')
