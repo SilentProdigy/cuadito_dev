@@ -99,4 +99,9 @@ class Project extends Model
     {
         return $this->company->client;
     }
+
+    public function categories()
+    {
+        return $this->belongsToMany(\App\Models\Category::class);
+    }
 }
