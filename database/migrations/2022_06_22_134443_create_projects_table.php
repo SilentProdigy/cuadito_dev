@@ -18,8 +18,9 @@ class CreateProjectsTable extends Migration
             $table->string('title');
             $table->text('description')->nullable();
             $table->string('status')->default('ACTIVE');
-            $table->date('max_date')->nullable();
-            $table->string('cost_and_payment')->nullable();
+            $table->date('due_date')->nullable();
+            // $table->string('cost_and_payment')->nullable();
+            $table->decimal('cost', 9, 2);
             $table->string('scope_of_work')->nullable();
             $table->text('terms_and_conditions')->nullable();
             $table->text('relevant_authorities')->nullable();
