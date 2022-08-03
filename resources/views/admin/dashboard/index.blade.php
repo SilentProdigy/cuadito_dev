@@ -39,7 +39,7 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-orange">
             <div class="inner">
-                <h3> 0 </h3>
+                <h3> {{ $biddings_count }} </h3>
                 <p> Bids </p>
             </div>
             <div class="icon">
