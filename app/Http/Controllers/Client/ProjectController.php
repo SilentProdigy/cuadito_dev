@@ -10,6 +10,7 @@ use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Jobs\CreateProjectClosedNotifications;
 use App\Mail\Project\ProjectClosed;
 use App\Mail\Project\ProposalApproved;
+use App\Mail\Project\ProposalDisapproved;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Notification;
@@ -167,11 +168,11 @@ class ProjectController extends Controller
             $winning_proposal = Bidding::findOrFail($request->input('winner_bidding_id'));
             $winning_company = $winning_proposal->company;
 
-            $project->update([
-                'status' => Project::CLOSED_STATUS,
-                'remarks' => $request->input('remarks'), 
-                'winner_bidding_id' => $winning_proposal->id
-            ]);
+            // $project->update([
+            //     'status' => Project::CLOSED_STATUS,
+            //     'remarks' => $request->input('remarks'), 
+            //     'winner_bidding_id' => $winning_proposal->id
+            // ]);
 
             /* 
                 Send notification to the companies / bidders that submitted proposal to this project
@@ -180,9 +181,16 @@ class ProjectController extends Controller
             CreateProjectClosedNotifications::dispatch($project);
 
             $emails = $project->biddings->pluck('company.email')->toArray();
+
+            $did_not_win_emails = $project->biddings()
+                                ->where('id', '!=', $winning_proposal->id)
+                                ->get()
+                                ->pluck('company.email')
+                                ->toArray();
             
             Mail::to($emails)->send(new ProjectClosed($project));
             Mail::to($winning_company->email)->send(new ProposalApproved($project));
+            Mail::to($did_not_win_emails)->send(new ProposalDisapproved($project));
 
             # Send notification to the winning bidder
             $winning_company->client->notifications()->create([
