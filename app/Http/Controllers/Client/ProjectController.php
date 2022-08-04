@@ -9,6 +9,7 @@ use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Jobs\CreateProjectClosedNotifications;
 use App\Mail\Project\ProjectClosed;
+use App\Mail\Project\ProposalApproved;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Notification;
@@ -181,6 +182,7 @@ class ProjectController extends Controller
             $emails = $project->biddings->pluck('company.email')->toArray();
             
             Mail::to($emails)->send(new ProjectClosed($project));
+            Mail::to($winning_company->email)->send(new ProposalApproved($project));
 
             # Send notification to the winning bidder
             $winning_company->client->notifications()->create([
