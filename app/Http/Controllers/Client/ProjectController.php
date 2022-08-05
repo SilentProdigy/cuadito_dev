@@ -8,12 +8,16 @@ use App\Http\Requests\Client\Project\SetProjectWinnerRequest;
 use App\Http\Requests\Client\Project\UpdateProjectRequest;
 use App\Http\Requests\Client\Project\UpdateProjectStatusRequest;
 use App\Jobs\CreateProjectClosedNotifications;
+use App\Mail\Project\ProjectClosed;
+use App\Mail\Project\ProposalApproved;
+use App\Mail\Project\ProposalDisapproved;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Notification;
 use App\Models\Project;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
@@ -175,6 +179,18 @@ class ProjectController extends Controller
                 Informing that the project was closed. 
             */
             CreateProjectClosedNotifications::dispatch($project);
+
+            $emails = $project->biddings->pluck('company.email')->toArray();
+
+            $did_not_win_emails = $project->biddings()
+                                ->where('id', '!=', $winning_proposal->id)
+                                ->get()
+                                ->pluck('company.email')
+                                ->toArray();
+            
+            Mail::to($emails)->send(new ProjectClosed($project));
+            Mail::to($winning_company->email)->send(new ProposalApproved($project));
+            Mail::to($did_not_win_emails)->send(new ProposalDisapproved($project));
 
             # Send notification to the winning bidder
             $winning_company->client->notifications()->create([
