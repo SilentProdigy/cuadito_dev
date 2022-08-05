@@ -19,6 +19,12 @@ class NotificationController extends Controller
         return view('client.notifications.index')->with(compact('notifications'));
     }
 
+    public function show(Notification $notification)
+    {
+        $notification->update(['opened' => true]);
+        return redirect($notification->url);
+    }
+
     /**
      *
      * @param  int  $id
@@ -37,5 +43,4 @@ class NotificationController extends Controller
             dd($e->getMessage());
         }
     }
-
 }

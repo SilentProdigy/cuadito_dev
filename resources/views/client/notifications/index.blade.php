@@ -28,7 +28,7 @@
                         </td>
                         <td>
                             <span>
-                                <a href="{{ $notification->url }}" target="_blank" rel="noopener noreferrer">
+                                <a href="{{ route('client.notifications.show', $notification) }}">
                                     {{ $notification->content }}
                                 </a>
                             </span>

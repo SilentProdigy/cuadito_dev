@@ -121,6 +121,7 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');
         
         Route::get('notifications', [\App\Http\Controllers\Client\NotificationController::class, 'index'])->name('notifications.index');
+        Route::get('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'show'])->name('notifications.show');
         // Route::patch('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'update'])->name('notifications.update');
         Route::delete('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'destroy'])->name('notifications.delete');
     });

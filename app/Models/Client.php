@@ -96,4 +96,9 @@ class Client extends Authenticatable
     {
         return $this->notifications()->where('opened', 0)->exists();
     }
+
+    public function getUnreadNotificationsCountAttribute()
+    {
+        return $this->notifications()->where('opened', 0)->count();
+    }
 }

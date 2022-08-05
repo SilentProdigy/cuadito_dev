@@ -103,11 +103,8 @@
                     <li class="nav-item">
                         <a href="{{ route('client.notifications.index') }}" class="nav-link position-relative">Notifications
                             @if(auth('client')->user()->have_unread_notifications)
-                            @php    
-                            $notif_count = count(auth('client')->user()->notifications);
-                            @endphp
                                 <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-danger">
-                                    {{ $notif_count }}
+                                    {{ auth('client')->user()->unread_notifications_count }}
                                 </span>
                             @endif
                         </a>
