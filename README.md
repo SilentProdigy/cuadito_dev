@@ -42,3 +42,18 @@ To continue please run the worker command:
 ```sh
 php artisan queue:work
 ```
+
+### Mailgun Environment Setup
+
+Put the following lines on the **.env** file:
+
+```sh
+   MAIL_DRIVER=mailgun
+   MAIL_HOST=smtp.mailgun.org
+   MAIL_PORT=587
+   MAIL_USERNAME=postmaster@sandboxc97f3b1dc7dc4ee0af2f50effd22dd40.mailgun.org
+   MAIL_PASSWORD=f6762319807907b6885b24a76356ee09-1b3a03f6-10864e7a
+   MAIL_ENCRYPTION=tls
+   MAIL_FROM_ADDRESS=briancalmadevacc@gmail.com
+   MAIL_FROM_NAME="${APP_NAME}"
+```
