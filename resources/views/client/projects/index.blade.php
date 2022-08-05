@@ -20,9 +20,8 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <table class="table table-borderless table-md user-listing-table">
+        <table class="table table-borderless table-sm">
             <thead>
-                <th>SEQ</th>
                 <th>PROJECT</th>
                 <th>COMPANY</th>
                 <th class="col-span-2">STATUS</th>
@@ -35,11 +34,6 @@
 
                 @forelse ($projects as $project)
                     <tr>
-                        <td class="d-flex flex-row">
-                            <div class="d-flex flex-column user-listing-details px-3">
-                                <span>{{ $loop->iteration }}</span>
-                            </div>
-                        </td>
                         <td>
                             <span>{{ $project->title }}</span>
                         </td>
@@ -58,20 +52,55 @@
                         <td>
                             <span>{{ $project->proposals_count }}</span>
                         </td>
-                        <td class="user-actions">
+                        <td>
                             <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info">
-                                <i class="fa fa-eye"></i>         
+                                <i class="fa fa-eye"></i>
                             </a>
                             <a href="{{ route('client.projects.edit', $project) }}" class="btn btn-sm btn-warning">
-                                <i class="fa fa-pencil"></i>          
+                                <i class="fa fa-pencil"></i>
                             </a>
                             <a href="#" class="btn btn-sm btn-danger btn-delete-project" data-project="{{ json_encode($project) }}">
                                 <i class="fa fa-trash"></i>
                             </a>
                             <a href="#" class="btn btn-sm btn-dark btn-set-project-status" data-project="{{ json_encode($project) }}">
-                               Set Status
+                                <i class="fa fa-check"></i>
                             </a>
                         </td>
+                        <!-- <td class="user-actions">
+                            <div class="dropdown">
+                                <button
+                                    class="btn btn-primary dropdown-toggle"
+                                    type="button"
+                                    id="userActionsDropdown"
+                                    data-mdb-toggle="dropdown"
+                                    aria-expanded="false"
+                                >
+                                    Actions
+                                </button>
+                                <ul class="dropdown-menu" aria-labelledby="userActionsDropdown">
+                                    <li class="p-2">
+                                        <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info dropdown-item">
+                                            <i class="fa fa-eye"></i> View   
+                                        </a>
+                                    </li>
+                                    <li class="p-2">
+                                        <a href="{{ route('client.projects.edit', $project) }}" class="btn btn-sm btn-warning dropdown-item">
+                                            <i class="fa fa-pencil"></i> Edit
+                                        </a>
+                                    </li>
+                                    <li class="p-2">
+                                        <a href="#" class="btn btn-sm btn-danger btn-delete-project dropdown-item" data-project="{{ json_encode($project) }}">
+                                            <i class="fa fa-trash"></i> Delete
+                                        </a>
+                                    </li>
+                                    <li class="p-2">
+                                        <a href="#" class="btn btn-sm btn-dark btn-set-project-status dropdown-item" data-project="{{ json_encode($project) }}">
+                                            <i class="fa fa-check"></i> Status
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </td> -->
                     </tr>        
                 @empty
                     <tr>

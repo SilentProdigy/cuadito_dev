@@ -10,7 +10,7 @@
 
     <title>{{ config('app.name', 'Cuadito') }}</title>
 
-    <link rel="shortcut icon" type="image/x-icon" href="{{ App::environment('local') ? asset('images/logo/logo.png') : secure_asset('images/logo/favicon.ico') }}"
+    <link rel="shortcut icon" type="image/x-icon" href="{{ App::environment('local') ? asset('images/logo/logo.png') : secure_asset('images/logo/favicon.ico') }}">
 
     <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/main.js') }}" defer></script>
@@ -30,6 +30,17 @@
     <link href="{{ asset('css/style.css') }}" rel="stylesheet">
     <script src="https://kit.fontawesome.com/7a6e9affc7.js" crossorigin="anonymous"></script>
 
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
 </head>
 
 <body>
@@ -44,6 +55,12 @@
             @yield('content')
         </main>
     </div>
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"
+    ></script>
 </body>
 
 </html>

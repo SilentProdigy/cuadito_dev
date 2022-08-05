@@ -22,7 +22,7 @@
                     </div>
 
                     <div class="row mb-3 mx-0">
-                        <button type="submit" class="btn btn-outline-success">Continue</button>
+                        <button type="submit" class="btn btn-outline-success text-white">Continue</button>
                     </div>
                 </form>
             </div>

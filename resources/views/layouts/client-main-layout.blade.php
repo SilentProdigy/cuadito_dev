@@ -28,6 +28,17 @@
 
     <script src="https://kit.fontawesome.com/7a6e9affc7.js" crossorigin="anonymous"></script>
 
+    <!-- Google Fonts -->
+    <link
+    href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+    rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+    href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
+    rel="stylesheet"
+    />
+
 </head>
 
 <body>
@@ -73,28 +84,34 @@
                         <span>Proposals</span>
                     </a>
                 </li>
+                {{-- 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
                         <span>Help</span>
                     </a>
                 </li>
+                --}}
+                {{-- 
                 <li class="nav-item">
                     <a href="{{ route('client.notifications.index') }}" class="nav-link">
                         <!-- <i class="fas fa-list fa-fw me-3"></i> -->
                         <span>Notifications</span>
                     </a>
                 </li>
-                {{-- 
-                    <li class="nav-item dropdown">
-                        <a href="{{ route('client.notifications.index') }}">Notifications
+                --}}
+                    <li class="nav-item">
+                        <a href="{{ route('client.notifications.index') }}" class="nav-link position-relative">Notifications
                             @if(auth('client')->user()->have_unread_notifications)
-                                <span class="position-absolute top-30 translate-middle p-2 bg-danger border border-light rounded-circle">
+                            @php    
+                            $notif_count = count(auth('client')->user()->notifications);
+                            @endphp
+                                <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-danger">
+                                    {{ $notif_count }}
                                 </span>
                             @endif
                         </a>
-                    </li> 
-                --}}
+                    </li>
             </ul>
             <div class="d-flex dropdown">
                 <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
@@ -107,6 +124,9 @@
                     </li>
                     <li>
                         <a class="dropdown-item" href="#">Settings</a>
+                    </li>
+                    <li>
+                        <a class="dropdown-item" href="#">Help</a>
                     </li>
                     <li>
                         <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
@@ -207,6 +227,12 @@
         </div>
     </main>
     <!--Main layout-->
+
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"
+    ></script>
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
