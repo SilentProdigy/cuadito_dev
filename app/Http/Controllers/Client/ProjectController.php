@@ -168,11 +168,11 @@ class ProjectController extends Controller
             $winning_proposal = Bidding::findOrFail($request->input('winner_bidding_id'));
             $winning_company = $winning_proposal->company;
 
-            // $project->update([
-            //     'status' => Project::CLOSED_STATUS,
-            //     'remarks' => $request->input('remarks'), 
-            //     'winner_bidding_id' => $winning_proposal->id
-            // ]);
+            $project->update([
+                'status' => Project::CLOSED_STATUS,
+                'remarks' => $request->input('remarks'), 
+                'winner_bidding_id' => $winning_proposal->id
+            ]);
 
             /* 
                 Send notification to the companies / bidders that submitted proposal to this project
