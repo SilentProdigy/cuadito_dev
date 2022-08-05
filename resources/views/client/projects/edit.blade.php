@@ -27,12 +27,22 @@
                 </div>  
 
                 <div class="col-md-12 mt-3">
-                    <label>Category</label>
-                    <select name="category_ids[]" id="" class="mt-1 form-control @error('category_ids') is-invalid @enderror" multiple>
+                    <label>Category</label><br>
+                    @foreach ($categories as $category)
+                    <div class="form-check form-check-inline">
+                        <input class="form-check-input" name="category_ids[]" type="checkbox" value="{{ $category->id }}" id="{{ $category->id }}" {{ in_array($category->id, $selected_category_ids) ? 'checked' : '' }}>
+                        <label class="form-check-label" for="{{ $category->id }}">
+                            {{ $category->name }}
+                        </label>
+                    </div>
+                    @endforeach
+                    {{-- 
+                    <select name="category_ids[]" id="" class="mt-1 form-select @error('category_ids') is-invalid @enderror">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}" {{ in_array($category->id, $selected_category_ids) ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
+                    --}}
 
                     @error('category_ids')
                         <span class="invalid-feedback" role="alert">
