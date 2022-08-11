@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateMessagesTable extends Migration
+class CreateConvoSubLabelsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,10 @@ class CreateMessagesTable extends Migration
      */
     public function up()
     {
-        Schema::create('messages', function (Blueprint $table) {
+        Schema::create('convo_sub_labels', function (Blueprint $table) {
             $table->id();
-            $table->foreignId('sender_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('receiver_id')->constrained('companies')->onDelete('cascade')->onUpdate('cascade');
-            $table->text('content');
+            $table->foreignId('label_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('convo_sub_id')->constrained('conversation_subscriptions')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
@@ -29,6 +28,6 @@ class CreateMessagesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('messages');
+        Schema::dropIfExists('convo_sub_labels');
     }
 }
