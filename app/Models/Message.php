@@ -9,13 +9,13 @@ class Message extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'sender_id',
+        'content'
+    ];
+    
     public function sender()
     {
-        return $this->belongsTo(\App\Models\Company::class, 'sender_id');
-    }
-
-    public function receiver()
-    {
-        return $this->belongsTo(\App\Models\Company::class, 'receiver_id');
+        return $this->belongsTo(\App\Models\Client::class, 'sender_id');
     }
 }
