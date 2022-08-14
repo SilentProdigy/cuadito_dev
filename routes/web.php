@@ -124,6 +124,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'show'])->name('notifications.show');
         // Route::patch('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'update'])->name('notifications.update');
         Route::delete('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'destroy'])->name('notifications.delete');
+        
+        Route::get('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'index'])->name('conversations.index');
     });
 
 });
