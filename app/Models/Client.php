@@ -101,4 +101,14 @@ class Client extends Authenticatable
     {
         return $this->notifications()->where('opened', 0)->count();
     }
+
+    public function conversationSubscriptions()
+    {
+       return $this->hasMany(\App\Models\ConversationSubscription::class);
+    }
+
+    public function labels()
+    {
+        return $this->hasMany(\App\Models\Label::class);
+    }
 }
