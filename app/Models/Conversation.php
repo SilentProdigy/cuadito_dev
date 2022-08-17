@@ -13,6 +13,8 @@ class Conversation extends Model
         "subject"
     ];
 
+    protected $appends = ['latest_message'];
+
     public function messages()
     {
         return $this->hasMany(\App\Models\Message::class);
@@ -21,5 +23,17 @@ class Conversation extends Model
     public function subscriptions()
     {
         return $this->hasMany(\App\Models\ConversationSubscription::class);
+    }
+
+    public function getLatestMessageAttribute()
+    {
+        return $this->messages()->latest()->first();
+    }
+
+    public function getOtherClientAttribute()
+    {
+        $subscription = $this->subscriptions()->where('client_id','!=',auth('client')->user()->id)->first();
+
+        return $subscription->client;
     }
 }

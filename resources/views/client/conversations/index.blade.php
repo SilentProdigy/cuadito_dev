@@ -17,22 +17,21 @@
     <section class="border p-4 border-2 rounded my-2">
         <div>
             <div class="d-flex justify-content-between align-content-center">
-                <p class="fs-5 fw-bold">John Doe</p>
-                <p class="fs-5 fw-bold">Aug. 17, 2022</p>
+                <p class="fs-5 fw-bold">{{ $item->conversation->other_client->name }}</p>
+                <p class="fs-5 fw-bold">{{ $item->conversation->latest_message->created_at->format('M d, Y') }}</p>
             </div>
 
             <p class="fs-6 fw-bold">{{ $item->conversation->subject }}</p>
-
         </div>
 
         <div>
             <p class="fs-6 fw-light">
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Reiciendis minima tempora facilis recusandae officia ad perferendis, tempore, ab assumenda natus dolorum voluptas aliquid obcaecati illo nulla. Eaque sequi delectus impedit sunt doloribus ipsa nesciunt porro eligendi consectetur facere commodi, nihil ipsum, earum dolore dolor! Incidunt consequuntur, dicta dolorem illum aliquid, illo facere consectetur corrupti magnam quos quisquam, cumque sapiente consequatur facilis iusto nihil debitis. Eius natus veniam illo non ratione repellat atque quod sapiente veritatis dolor, ex doloribus nisi alias fuga facere reprehenderit odio fugiat incidunt consectetur et mollitia, reiciendis perferendis in. Sapiente quis, consequatur vitae sequi architecto atque iste.
+                {{ $item->conversation->latest_message->content }}
             </p>
         </div>
 
         <div class="d-flex justify-content-end align-content-center">
-            <a href="#" class="text-info p-1">
+            <a href="{{ route('client.conversations.show', $item->conversation) }}" class="text-info p-1">
                 <i class="fa fa-eye"></i>
             </a>
             <a href="#" class="text-dark p-1">
@@ -48,22 +47,6 @@
     </section>
 @endforeach
 
-{{-- <div class="card">
-    <div class="card-body">
-        
-            <div class="border-top border-3 py-4">
-                <div class="d-flex flex-row d-align-items-center justify-content-between">
-                    
-                    <p>Latest Date Reply</p>
-                </div>
-                <p>
-                    Latest Message
-                </p>
-                <a href="{{ route('client.conversations.show', $item->conversation) }}">View</a>
-            </div>
-        @endforeach        
-    </div>
-</div> --}}
 
 @include('client.conversations.includes.create_conversation_modal')
 @endsection
