@@ -126,6 +126,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::delete('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'destroy'])->name('notifications.delete');
         
         Route::get('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'index'])->name('conversations.index');
+        Route::get('conversations/{conversation}', [\App\Http\Controllers\Client\ConversationController::class, 'show'])->name('conversations.show');
+        Route::post('messages/{conversation}', [\App\Http\Controllers\Client\MessageController::class, 'store'])->name('messages.store');
     });
 
 });
