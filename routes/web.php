@@ -124,11 +124,13 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'show'])->name('notifications.show');
         // Route::patch('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'update'])->name('notifications.update');
         Route::delete('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'destroy'])->name('notifications.delete');
-        
+            
         Route::get('conversations/create', [\App\Http\Controllers\Client\ConversationController::class, 'create'])->name('conversations.create');
         Route::get('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'index'])->name('conversations.index');
         Route::get('conversations/{conversation}', [\App\Http\Controllers\Client\ConversationController::class, 'show'])->name('conversations.show');
         Route::post('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'store'])->name('conversations.store');
+        
+        Route::patch('convo-subs/archive/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'archive'])->name('conversation-subs.archive');
 
         Route::post('messages/{conversation}', [\App\Http\Controllers\Client\MessageController::class, 'store'])->name('messages.store');
     });

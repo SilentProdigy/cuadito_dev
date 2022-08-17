@@ -35,7 +35,7 @@
             <a href="{{ route('client.conversations.show', $item->conversation) }}" class="text-info p-1">
                 <i class="fa fa-eye"></i>
             </a>
-            <a href="#" class="text-dark p-1">
+            <a href="javascript::void()" class="text-dark p-1 btn-archive" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-archive"></i>
             </a>
             <a href="#" class="text-success p-1">
@@ -68,8 +68,29 @@
 
 
 @include('client.conversations.includes.create_conversation_modal')
+@include('client.conversations.includes.confirm_archived_modal')
 @endsection
 
 @section('script')
-   
+<script>
+     $(document).ready(function() {
+        let archived_buttons = document.querySelectorAll('.btn-archive');
+
+        archived_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-archived-modal'), {keyboard: false})
+                myModal.show()
+
+                // document.querySelector('#project-name').innerHTML = data.title;
+
+                let form = document.querySelector('#archive-conversation-form');
+                form.setAttribute('action', `/client/convo-subs/archive/${ data.id }`);
+            });
+        });
+    });
+</script>
 @endsection
