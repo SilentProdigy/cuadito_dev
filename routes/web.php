@@ -127,6 +127,8 @@ Route::prefix('client')->name('client.')->group(function () {
         
         Route::get('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'index'])->name('conversations.index');
         Route::get('conversations/{conversation}', [\App\Http\Controllers\Client\ConversationController::class, 'show'])->name('conversations.show');
+        Route::post('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'store'])->name('conversations.store');
+
         Route::post('messages/{conversation}', [\App\Http\Controllers\Client\MessageController::class, 'store'])->name('messages.store');
     });
 

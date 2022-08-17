@@ -3,14 +3,50 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
+use App\Models\Conversation;
 use Illuminate\Http\Request;
 
 class ConversationController extends Controller
 {
     public function index()
     {
-        $conversations = auth('client')->user()->conversations;
+        $conversation_subscriptions = auth('client')->user()->conversationSubscriptions()
+                                    ->orderBy('created_at', 'desc')
+                                    ->get();
+        // return $conversation_subscriptions;
+
+        return view('client.conversations.index')->with(compact('conversation_subscriptions'));
+    }
+
+    public function show(Conversation $conversation)
+    {
+        $messages = $conversation->messages;
+
+        return view('client.conversations.show')->with(compact('messages', 'conversation'));
+    }
+
+    public function store(Request $request)
+    {
+        $recipient = Client::where('email', $request->input('email'))->first();
         
-        return view('client.conversations.index')->with(compact('conversations'));
+        # Create conversation
+        $conversation = Conversation::create(['subject' => $request->input('subject')]);
+
+        # Subscribe client to conversation
+        collect([ auth('client')->user(), $recipient ])->each(function($item) use ($conversation){
+            $conversation->subscriptions()->create([
+                'client_id' => $item->id,
+                'conversation_id' => $conversation->id,
+            ]);
+        });
+
+        # Create messages for the conversation
+        $conversation->messages()->create([
+            'sender_id' => auth('client')->user()->id,
+            'content' => $request->input('content')
+        ]);
+
+        return redirect()->back()->with('success', 'Successfuly sent a message!');     
     }
 }
