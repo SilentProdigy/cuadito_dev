@@ -130,6 +130,7 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('conversations/{conversation}', [\App\Http\Controllers\Client\ConversationController::class, 'show'])->name('conversations.show');
         Route::post('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'store'])->name('conversations.store');
         
+        Route::delete('convo-subs/delete/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'destroy'])->name('conversation-subs.delete');
         Route::patch('convo-subs/archive/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'archive'])->name('conversation-subs.archive');
 
         Route::post('messages/{conversation}', [\App\Http\Controllers\Client\MessageController::class, 'store'])->name('messages.store');

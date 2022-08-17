@@ -36,4 +36,17 @@ class ConversationSubscriptionController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function destroy(Request $request, ConversationSubscription $conversationSubscription)
+    {
+        try
+        {
+            $conversationSubscription->delete();
+            return redirect(route('client.conversations.index'))->with('success', 'Conversation was deleted!');     
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
 }

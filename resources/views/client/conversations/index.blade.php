@@ -18,7 +18,10 @@
     <section class="border p-4 border-2 rounded my-2">
         <div>
             <div class="d-flex justify-content-between align-content-center">
-                <div class="fs-5 fw-bold">{{ $item->conversation->other_client->name }}</div>
+                <div class="fs-5 fw-bold">
+                    @if( $item->is_starred )<i class="fa fa-star fa-star text-warning"></i>@endif 
+                    {{ $item->conversation->other_client->name }}
+                </div>
                 <p class="fs-5 fw-bold">{{ $item->conversation->latest_message->created_at->format('M d, Y') }}</p>
             </div>
 
@@ -38,10 +41,10 @@
             <a href="javascript::void()" class="text-dark p-1 btn-archive" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-archive"></i>
             </a>
-            <a href="#" class="text-success p-1">
+            <a href="#" class="text-warning p-1">
                 <i class="fa fa-star"></i>
             </a>
-            <a href="#" class="text-danger p-1">
+            <a href="#" class="text-danger p-1 btn-delete" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-trash"></i>
             </a>
         </div>
@@ -69,6 +72,7 @@
 
 @include('client.conversations.includes.create_conversation_modal')
 @include('client.conversations.includes.confirm_archived_modal')
+@include('client.conversations.includes.confirm_delete_modal')
 @endsection
 
 @section('script')
@@ -89,6 +93,24 @@
 
                 let form = document.querySelector('#archive-conversation-form');
                 form.setAttribute('action', `/client/convo-subs/archive/${ data.id }`);
+            });
+        });
+
+        let delete_buttons = document.querySelectorAll('.btn-delete');
+
+        delete_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-conversation-modal'), {keyboard: false})
+                myModal.show()
+
+                // document.querySelector('#project-name').innerHTML = data.title;
+
+                let form = document.querySelector('#delete-conversation-form');
+                form.setAttribute('action', `/client/convo-subs/delete/${ data.id }`);
             });
         });
     });
