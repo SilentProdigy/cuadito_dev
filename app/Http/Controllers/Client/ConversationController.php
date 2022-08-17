@@ -26,6 +26,11 @@ class ConversationController extends Controller
         return view('client.conversations.show')->with(compact('messages', 'conversation'));
     }
 
+    public function create()
+    {
+        return view('client.conversations.create');
+    }
+
     public function store(Request $request)
     {
         $recipient = Client::where('email', $request->input('email'))->first();
@@ -47,6 +52,6 @@ class ConversationController extends Controller
             'content' => $request->input('content')
         ]);
 
-        return redirect()->back()->with('success', 'Successfuly sent a message!');     
+        return redirect(route('client.conversations.index'))->with('success', 'Successfuly sent a message!');     
     }
 }
