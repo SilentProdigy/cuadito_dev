@@ -52,6 +52,11 @@ class ConversationController extends Controller
             'content' => $request->input('content')
         ]);
 
+        $recipient->notifications()->create([
+            'content' => auth('client')->user()->name . ' messaged you!',
+            'url' => route('client.conversations.show', $conversation),    
+        ]);
+
         return redirect(route('client.conversations.index'))->with('success', 'Successfuly sent a message!');     
     }
 }
