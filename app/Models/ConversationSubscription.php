@@ -9,7 +9,8 @@ class ConversationSubscription extends Model
 {
     use HasFactory;
 
-    protected $table = ['conversation_subscriptions'];
+
+    // protected $appends = ['subject'];
 
     protected $fillable = [
         'client_id',
@@ -20,7 +21,7 @@ class ConversationSubscription extends Model
         'is_archived',
     ];
 
-    public function conversations()
+    public function conversation()
     {
         return $this->belongsTo(\App\Models\Conversation::class);
     }
@@ -28,5 +29,20 @@ class ConversationSubscription extends Model
     public function client()
     {
         return $this->belongsTo(\App\Models\Client::class);
+    }
+
+    public function getSubjectAttribute()
+    {
+        return $this->conversation->subject;
+    }
+
+    // public function messages()
+    // {
+    //     return $this->hasManyThrough(\App\Models\Message::class, \App\Models\Conversation::class);
+    // }
+
+    public function getLatestMessageDateAttribute()
+    {
+        return $this->conversation->messages()->latest()->first()->created_at;
     }
 }
