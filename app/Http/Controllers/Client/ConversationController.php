@@ -13,7 +13,7 @@ class ConversationController extends Controller
     {
         $conversation_subscriptions = auth('client')->user()->conversationSubscriptions()
                                     ->orderBy('created_at', 'desc')
-                                    ->get();
+                                    ->paginate(5);
         // return $conversation_subscriptions;
 
         return view('client.conversations.index')->with(compact('conversation_subscriptions'));

@@ -13,11 +13,12 @@
     </div>
 </div>
 
+
 @foreach ($conversation_subscriptions as $item)
     <section class="border p-4 border-2 rounded my-2">
         <div>
             <div class="d-flex justify-content-between align-content-center">
-                <p class="fs-5 fw-bold">{{ $item->conversation->other_client->name }}</p>
+                <div class="fs-5 fw-bold">{{ $item->conversation->other_client->name }}</div>
                 <p class="fs-5 fw-bold">{{ $item->conversation->latest_message->created_at->format('M d, Y') }}</p>
             </div>
 
@@ -46,6 +47,24 @@
         </div>
     </section>
 @endforeach
+
+<section class="mt-3 d-flex justify-content-center">
+    {{-- <nav aria-label="Page navigation example">
+        <ul class="pagination justify-content-center">
+          <li class="page-item disabled">
+            <a class="page-link">Previous</a>
+          </li>
+          <li class="page-item"><a class="page-link" href="#">1</a></li>
+          <li class="page-item"><a class="page-link" href="#">2</a></li>
+          <li class="page-item"><a class="page-link" href="#">3</a></li>
+          <li class="page-item">
+            <a class="page-link" href="#">Next</a>
+          </li>
+        </ul>
+    </nav> --}}
+     
+    {{ $conversation_subscriptions->links() }}
+</section>
 
 
 @include('client.conversations.includes.create_conversation_modal')
