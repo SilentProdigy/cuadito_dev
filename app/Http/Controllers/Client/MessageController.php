@@ -17,7 +17,17 @@ class MessageController extends Controller
             'content' => $request->input('content')
         ];
 
-        $conversation->messages()->create($data);
+        $message = $conversation->messages()->create($data);
+
+        $conversation->subscriptions
+        ->where('client_id', '!=', auth('client')->user()->id)
+        ->each(function($item) use ($message) {
+            $item->client->notifications()->create([
+                'content' => auth('client')->user()->name . ' messaged you!',
+                'url' => route('client.conversations.show', $message->conversation),    
+            ]);
+        });
+
         return redirect()->back()->with('success', 'Message was successfully sent.');     
     }
 }

@@ -30,7 +30,8 @@ class ConversationSubscriptionController extends Controller
                 'is_starred' => $request->input('star') == "true" 
             ]);
 
-            return redirect(route('client.conversations.index'))->with('success', 'Conversation was starred!');     
+            // return redirect(route('client.conversations.index'))->with('success', 'Conversation was starred!');     
+            return redirect(route('client.conversations.index'));     
         }
         catch(Exception $e)
         {
