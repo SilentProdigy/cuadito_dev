@@ -13,14 +13,13 @@
     </div>
 </div>
 
-
-@foreach ($conversation_subscriptions as $item)
+@forelse ($conversation_subscriptions as $item)
     <section class="border p-4 border-2 rounded my-2">
         <div>
             <div class="d-flex justify-content-between align-content-center">
                 <div class="fs-5 fw-bold">
                     @if( $item->is_starred )
-                      <a href="#" class="text-warning btn-unstar" data-subscription="{{ json_encode($item) }}"><i class="fa fa-star fa-star"></i></a> 
+                    <a href="#" class="text-warning btn-unstar" data-subscription="{{ json_encode($item) }}"><i class="fa fa-star fa-star"></i></a> 
                     @endif 
                     
                     {{ $item->conversation->other_client->name }}
@@ -35,7 +34,7 @@
             <p class="fs-6 fw-light">
                 {{ $item->conversation->latest_message->content }}
             </p>	
-	
+    
         </div>
 
         <div class="d-flex justify-content-end align-content-center">
@@ -45,7 +44,7 @@
             <a href="javascript::void()" class="text-dark p-1 btn-archive" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-archive"></i>
             </a>
-            @if(!$item->is_starred)
+            @if(!$item->is_sta)
                 <a href="#" class="text-warning p-1 btn-star" data-subscription="{{ json_encode($item) }}">
                     <i class="fa fa-star"></i>
                 </a>
@@ -61,25 +60,30 @@
         <input type="hidden" name="star" value="true" id="star-txt">
     </form>
 
-@endforeach
+    <section class="mt-3 d-flex justify-content-center">
+        {{-- <nav aria-label="Page navigation example">
+            <ul class="pagination justify-content-center">
+                <li class="page-item disabled">
+                <a class="page-link">Previous</a>
+                </li>
+                <li class="page-item"><a class="page-link" href="#">1</a></li>
+                <li class="page-item"><a class="page-link" href="#">2</a></li>
+                <li class="page-item"><a class="page-link" href="#">3</a></li>
+                <li class="page-item">
+                <a class="page-link" href="#">Next</a>
+                </li>
+            </ul>
+        </nav> --}}
+            
+        {{ $conversation_subscriptions->links() }}
+    </section>
+@empty
+    <section class="border p-4 border-2 rounded my-2">
+        <p class="fs-4">You don't have any messages in your Inbox!</p>
+    </section>
+@endforelse
 
-<section class="mt-3 d-flex justify-content-center">
-    {{-- <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-    </nav> --}}
-     
-    {{ $conversation_subscriptions->links() }}
-</section>
+
 
 
 @include('client.conversations.includes.create_conversation_modal')
