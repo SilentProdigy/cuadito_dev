@@ -12,6 +12,7 @@ class ConversationController extends Controller
     public function index()
     {
         $conversation_subscriptions = auth('client')->user()->conversationSubscriptions()
+                                    ->where('is_archived', false)
                                     ->orderBy('created_at', 'desc')
                                     ->paginate(5);
         // return $conversation_subscriptions;
