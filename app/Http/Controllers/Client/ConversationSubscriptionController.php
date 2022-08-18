@@ -25,8 +25,9 @@ class ConversationSubscriptionController extends Controller
     {
         try
         {
+
             $conversationSubscription->update([
-                'is_starred' => true
+                'is_starred' => $request->input('star') == "true" 
             ]);
 
             return redirect(route('client.conversations.index'))->with('success', 'Conversation was starred!');     
