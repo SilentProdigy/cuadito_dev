@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Conversations\CreateConversationFormRequest;
 use App\Models\Client;
 use App\Models\Conversation;
 use App\Models\ConversationSubscription;
@@ -35,7 +36,7 @@ class ConversationController extends Controller
         return view('client.conversations.create');
     }
 
-    public function store(Request $request)
+    public function store(CreateConversationFormRequest $request)
     {
         $recipient = Client::where('email', $request->input('email'))->first();
         

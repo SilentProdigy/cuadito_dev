@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Messages\CreateMessageFormRequest;
 use App\Models\Company;
 use App\Models\Conversation;
 use Illuminate\Http\Request;
 
 class MessageController extends Controller
 {
-    public function store(Request $request, Conversation $conversation)
+    public function store(CreateMessageFormRequest $request, Conversation $conversation)
     {
         $data = [
             'sender_id' => auth('client')->user()->id,

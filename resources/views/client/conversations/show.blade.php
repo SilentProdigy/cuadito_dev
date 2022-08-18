@@ -31,7 +31,7 @@
     <h6 class="my-3">Reply:</h6>
     <form action="{{ route('client.messages.store', $conversation) }}" method="POST">
         @csrf
-        <textarea name="content" rows="5" class="form-control border border-3 border-dark" placeholder="Enter message here ..."></textarea><br>
+        <textarea name="content" rows="5" class="form-control border border-3 border-dark  @error('content') is-invalid @enderror" placeholder="Enter message here ..."></textarea><br>
         <input type="submit" value="Send Message" class="btn btn-primary my-2">
     </form>
 </div>

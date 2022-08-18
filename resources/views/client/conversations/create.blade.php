@@ -18,17 +18,17 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <label for="">Subject</label>
-                    <input type="text" name="subject" class="form-control">
+                    <input type="text" name="subject" class="form-control @error('subject') is-invalid @enderror">
                 </div>
 
                 <div class="col-md-12">
                     <label for="">Recipient Email</label>
-                    <input type="email" name="email" class="form-control" value="{{ request()->input('email') }}">
+                    <input type="email" name="email" class="form-control @error('email') is-invalid @enderror" value="{{ request()->input('email') }}">
                 </div>
 
                 <div class="col-md-12">
                     <label for="">Content</label>
-                    <textarea name="content" id="" rows="5" class="form-control"></textarea>
+                    <textarea name="content" id="" rows="5" class="form-control @error('content') is-invalid @enderror"></textarea>
                 </div>
             </div>
             
