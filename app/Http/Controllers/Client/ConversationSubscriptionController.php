@@ -21,6 +21,22 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
+    public function star(Request $request, ConversationSubscription $conversationSubscription)
+    {
+        try
+        {
+            $conversationSubscription->update([
+                'is_starred' => true
+            ]);
+
+            return redirect(route('client.conversations.index'))->with('success', 'Conversation was starred!');     
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
     public function archive(Request $request, ConversationSubscription $conversationSubscription)
     {
         try

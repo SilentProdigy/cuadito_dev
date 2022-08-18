@@ -41,7 +41,7 @@
             <a href="javascript::void()" class="text-dark p-1 btn-archive" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-archive"></i>
             </a>
-            <a href="#" class="text-warning p-1">
+            <a href="#" class="text-warning p-1 btn-star" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-star"></i>
             </a>
             <a href="#" class="text-danger p-1 btn-delete" data-subscription="{{ json_encode($item) }}">
@@ -49,6 +49,11 @@
             </a>
         </div>
     </section>
+
+    <form action="#" id="star-form" method="POST">
+        @csrf
+    </form>
+
 @endforeach
 
 <section class="mt-3 d-flex justify-content-center">
@@ -111,6 +116,21 @@
 
                 let form = document.querySelector('#delete-conversation-form');
                 form.setAttribute('action', `/client/convo-subs/delete/${ data.id }`);
+            });
+        });
+
+        let star_buttons = document.querySelectorAll('.btn-star');
+
+        star_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+
+                let form = document.querySelector('#star-form');
+                form.setAttribute('action', `/client/convo-subs/star/${ data.id }`);
+
+                form.submit();
             });
         });
     });
