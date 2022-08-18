@@ -32,10 +32,10 @@
 
         <div>
             <p class="fs-6 fw-light">
-                {{ $item->conversation->latest_message->content }}
+                {!! $item->conversation->latest_message->content_text !!}
             </p>	
-    
         </div>
+
 
         <div class="d-flex justify-content-end align-content-center">
             <a href="{{ route('client.conversations.show', $item->conversation) }}" class="text-info p-1">
