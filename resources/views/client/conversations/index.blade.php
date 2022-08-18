@@ -44,7 +44,7 @@
             <a href="javascript::void()" class="text-dark p-1 btn-archive" data-subscription="{{ json_encode($item) }}">
                 <i class="fa fa-archive"></i>
             </a>
-            @if(!$item->is_sta)
+            @if(!$item->is_starred)
                 <a href="#" class="text-warning p-1 btn-star" data-subscription="{{ json_encode($item) }}">
                     <i class="fa fa-star"></i>
                 </a>
