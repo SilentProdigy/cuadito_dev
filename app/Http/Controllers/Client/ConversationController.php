@@ -5,18 +5,21 @@ namespace App\Http\Controllers\Client;
 use App\Http\Controllers\Controller;
 use App\Models\Client;
 use App\Models\Conversation;
+use App\Models\ConversationSubscription;
 use Illuminate\Http\Request;
 
 class ConversationController extends Controller
 {
     public function index()
     {
-        $conversation_subscriptions = auth('client')->user()->conversationSubscriptions()
-                                    ->where('is_archived', false)
-                                    ->orderBy('created_at', 'desc')
-                                    ->paginate(5);
-        // return $conversation_subscriptions;
-
+        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+                $query->where('sender_id', "!=", auth('client')->user()->id );
+            }, ">", 0)
+            ->where('client_id', auth('client')->user()->id )
+            ->where('is_archived', false)
+            ->orderBy('created_at', 'desc')
+            ->paginate(5);
+     
         return view('client.conversations.index')->with(compact('conversation_subscriptions'));
     }
 
