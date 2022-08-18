@@ -22,6 +22,14 @@ class ClientsTableSeeder extends Seeder
                 'marital_status' => 'Single',
                 'email' => 'johndoe.cuadito@gmail.com',
                 'password' => bcrypt('password')
+            ],
+            [
+                'name' => 'Brian Calma',
+                'gender' => 'MALE',
+                'address' => 'Washington DC',
+                'marital_status' => 'Single',
+                'email' => 'bcalma.cuadito@gmail.com',
+                'password' => bcrypt('password')
             ]
         ];
 
