@@ -7,7 +7,7 @@
             <div class="input-group input-group-lg mb-3">
                 <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
                 <button class="btn btn-warning" type="submit">
-                    <span class="fa fa-search"></span>
+                    SEARCH
                 </button>
             </div>
             <a href="{{ route('client.listing.index') }}">Clear Search</a>
@@ -20,7 +20,7 @@
         
         <div class="row">
             @foreach ($projects as $project)
-                <div class="col-xs-12">
+                <div class="col-xs-12 col-md-6">
                     <div class="card my-3">
                         <div class="card-header py-3">
                             <div class="row">

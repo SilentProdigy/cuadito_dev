@@ -38,6 +38,8 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
     rel="stylesheet"
     />
+    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/mdb.min.js') }}" defer></script>
 
 </head>
 
@@ -55,7 +57,7 @@
             <ul class="navbar-nav mx-auto mb-2 mb-lg-0">
                 <li class="nav-item">
                 <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-                    <a href="{{ route('client.dashboard') }}" class="nav-link active" aria-current="page">
+                    <a href="{{ route('client.dashboard') }}" class="nav-link" aria-current="page">
                         <!-- <i class="fas fa-home fa-fw me-3"></i> -->
                         <span>Home</span>
                     </a>

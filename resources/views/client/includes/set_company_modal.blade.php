@@ -33,8 +33,8 @@
     </div>
 </div>
 
-<div class="d-flex justify-content-end fixed-bottom p-4">
-    <button type="button" class="btn btn-dark btn-lg" data-bs-toggle="modal" data-bs-target="#set-company-modal">
+<div class="fixed-action-btn d-flex justify-content-end p-4 float-end">
+    <button type="button" class="btn btn-floating btn-lg" data-bs-toggle="modal" data-bs-target="#set-company-modal">
         <span class="fa fa-cog"></span>
     </button>
 </div>

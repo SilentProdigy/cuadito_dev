@@ -7,6 +7,7 @@ use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
+use App\Http\Contorllers\Client\MessageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +23,10 @@ use App\Http\Controllers\ProductController;
 // Route::get('/', [HomeController::class, 'index'])->middleware('auth');
 Route::redirect('/', '/client/auth/login');
 Route::get('/login', [HomeController::class, 'index'])->middleware('auth');
+
+Route::get('/landing-page', function(){
+    return view('landing-page');
+});
 
 Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
 
@@ -124,6 +129,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'show'])->name('notifications.show');
         // Route::patch('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'update'])->name('notifications.update');
         Route::delete('notifications/{notification}', [\App\Http\Controllers\Client\NotificationController::class, 'destroy'])->name('notifications.delete');
+
+        Route::resource('messages', \App\Http\Controllers\Client\MessageController::class);
     });
 
 });

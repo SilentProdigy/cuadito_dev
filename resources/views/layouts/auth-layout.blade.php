@@ -40,6 +40,8 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
     rel="stylesheet"
     />
+    <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
+    <script src="{{ asset('js/mdb.min.js') }}" defer></script>
 
 </head>
 
