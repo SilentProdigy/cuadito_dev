@@ -73,7 +73,7 @@ class Project extends Model
     {
         if(strlen($this->description) > self::MAX_DESCRIPTION_LENGTH)
         {
-            return $this->description . "<br>" . "<a href='" . route('client.listing.show', $this->id) . "'>See More</a>";
+            return substr($this->description, 0, self::MAX_DESCRIPTION_LENGTH) . "<br>" . "<a href='" . route('client.listing.show', $this->id) . "'>See More</a>";
         }
 
         return $this->description;

@@ -1,0 +1,43 @@
+@extends('layouts.client-main-layout')
+
+@section('content')    
+<div class="container-fluid mb-3">
+    <div class="d-flex flex-row d-align-items-center justify-content-center">
+        <div class="table-titles">{{ $conversation->subject }}</div>
+        <div class="col d-flex justify-content-end">
+            
+        </div>
+    </div>
+</div>
+
+@foreach ($messages as $message)
+<section class="border p-4 border-2 rounded my-2">
+    <div>
+        <div class="d-flex justify-content-between align-content-center">
+            <div class="fs-6 fw-bold">    
+                {{ $message->sender->name }}
+            </div>
+            <p class="fs-6 fw-bold">{{ $message->created_at->format('M d, Y') }}</p>
+        </div>
+
+        <div>
+            <p class="fs-6 fw-light">{{ $message->content }}</p>	
+        </div>
+    </div>
+</section>
+
+@endforeach
+<div class="my-3 p-2 border">
+    <h6 class="my-3">Reply:</h6>
+    <form action="{{ route('client.messages.store', $conversation) }}" method="POST">
+        @csrf
+        <textarea name="content" rows="5" class="form-control border border-3 border-dark  @error('content') is-invalid @enderror" placeholder="Enter message here ..."></textarea><br>
+        <input type="submit" value="Send Message" class="btn btn-primary my-2">
+    </form>
+</div>
+
+@endsection
+
+@section('script')
+   
+@endsection
