@@ -4,7 +4,7 @@
 
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Inbox</div>
+        <div class="table-titles">Archived Emails</div>
         <div class="col d-flex justify-content-end">
             <button class="btn btn-warning header-btn" data-bs-toggle="modal" data-bs-target="#create-new-conversation-modal">
                 <i class="fa fa-plus"></i>&ensp;New Email
@@ -12,13 +12,7 @@
         </div>
     </div>
 
-    <div>
-        <a href="#">Your Inbox</a>
-        <a href="{{ route('client.inbox.starred') }}" class="px-2">Starred Items</a>
-        <a href="#" class="px-2">Sent Messages</a>
-        <a href="#" class="px-2">Archived Items</a>
-        <a href="#" class="px-2">Labels</a>
-    </div>
+    @include('client.inbox.includes.inbox_links')
 </div>
 
 @forelse ($conversation_subscriptions as $item)
@@ -87,11 +81,9 @@
     </section>
 @empty
     <section class="border p-4 border-2 rounded my-2">
-        <p class="fs-4">You don't have any messages in your Inbox!</p>
+        <p class="fs-4">You don't have any archived emails!</p>
     </section>
 @endforelse
-
-
 
 
 @include('client.conversations.includes.create_conversation_modal')

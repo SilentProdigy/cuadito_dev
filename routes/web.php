@@ -135,6 +135,10 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::patch('convo-subs/archive/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'archive'])->name('conversation-subs.archive');
 
         Route::post('messages/{conversation}', [\App\Http\Controllers\Client\MessageController::class, 'store'])->name('messages.store');
+
+        Route::get('inbox', [\App\Http\Controllers\Client\InboxController::class, 'inbox'])->name('inbox.index');
+        Route::get('inbox/starred', [\App\Http\Controllers\Client\InboxController::class, 'starred'])->name('inbox.starred');
+        Route::get('inbox/archived', [\App\Http\Controllers\Client\InboxController::class, 'archived'])->name('inbox.archived');
     });
 
 });

@@ -12,13 +12,7 @@
         </div>
     </div>
 
-    <div>
-        <a href="#">Your Inbox</a>
-        <a href="{{ route('client.inbox.starred') }}" class="px-2">Starred Items</a>
-        <a href="#" class="px-2">Sent Messages</a>
-        <a href="#" class="px-2">Archived Items</a>
-        <a href="#" class="px-2">Labels</a>
-    </div>
+    @include('client.inbox.includes.inbox_links')
 </div>
 
 @forelse ($conversation_subscriptions as $item)
