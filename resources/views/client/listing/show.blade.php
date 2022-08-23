@@ -74,6 +74,11 @@
                             <p><span class="fw-bold">Company:</span> <a href="{{ route('client.companies.show', $project->company) }}">{{ $project->company->name }}</a></p>
                             <p><span class="fw-bold">Email:</span> {{ $project->company->email }}</p>
                             <p><span class="fw-bold">Owned by:</span> {{ $project->company->client->name }}</p>
+                            <p><span class="fw-bold">Owner Email:</span> 
+                                <a href="{{ route('client.conversations.create') . "?email=" . $project->company->client->email }}" target="_blank">
+                                {{ $project->company->client->email }}
+                                </a>
+                            </p>
                             <p><span class="fw-bold">Total Company's Projects:</span> {{ $project->company->projects_count }}</p>
                         </div>
                     </div>
