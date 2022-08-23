@@ -15,6 +15,6 @@
         <a href="{{ route('client.inbox.archived') }}"><i class="fa fa-archive"></i> Archive</a>
     </li>
     <li>
-        <a href="#"><i class="fa fa-bookmark"></i> Important<span class="label label-info">5</span></a>
+        <a href="{{ route('client.inbox.important') }}"><i class="fa fa-bookmark"></i> Important<span class="label label-info">5</span></a>
     </li>
 </ul>

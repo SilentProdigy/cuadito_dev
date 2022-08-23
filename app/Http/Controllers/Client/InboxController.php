@@ -50,7 +50,15 @@ class InboxController extends Controller
 
     public function important()
     {
-
+        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+            $query->where('sender_id', "!=", auth('client')->user()->id );
+        }, ">", 0)
+        ->where('client_id', auth('client')->user()->id )
+        ->where('is_important', true)
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+        
+        return view('client.inbox.important')->with(compact('conversation_subscriptions'));
     }
 
     public function sent()
