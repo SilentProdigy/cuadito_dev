@@ -47,4 +47,14 @@ class InboxController extends Controller
         
         return view('client.inbox.archived')->with(compact('conversation_subscriptions'));
     }
+
+    public function important()
+    {
+
+    }
+
+    public function sent()
+    {
+        
+    }
 }
