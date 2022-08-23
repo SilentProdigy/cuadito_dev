@@ -23,7 +23,7 @@
                     <ul class="messages-list">
                         @foreach ($conversation_subscriptions as $item)
                             <li class="unread">
-                                <a href="page-inbox-message.html">
+                                <a href="{{ route('client.conversations.show', $item->conversation) }}">
                                     <div class="header">
                                         <span class="action"><i class="fa fa-square-o"></i><i class="fa fa-square"></i></span> 
                                         <span class="from">{{ $item->conversation->other_client->name }}</span>
