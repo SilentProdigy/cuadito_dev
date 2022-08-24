@@ -41,6 +41,8 @@
     <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/mdb.min.js') }}" defer></script>
 
+    @yield('style')
+
 </head>
 
 <body>

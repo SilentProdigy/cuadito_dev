@@ -21,6 +21,10 @@ class ConversationSubscription extends Model
         'is_archived',
     ];
 
+    protected $with = [
+        'conversation'
+    ];
+
     public function conversation()
     {
         return $this->belongsTo(\App\Models\Conversation::class);

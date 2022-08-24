@@ -17,7 +17,6 @@ class InboxController extends Controller
         ->where('is_archived', false)
         ->orderBy('created_at', 'desc')
         ->paginate(5);
-        
         return view('client.inbox.inbox')->with(compact('conversation_subscriptions'));
     }
 

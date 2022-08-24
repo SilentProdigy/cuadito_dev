@@ -1,9 +1,17 @@
 @extends('client.inbox.includes.inbox_layout')
 
+@section('style')
+    <style>
+        .read {
+            background-color: darkgray;
+        }
+    </style>
+@endsection
+
 @section('main_room_section')
     <ul class="messages-list">
         @forelse ($conversation_subscriptions as $item)
-            <li class="unread">
+            <li class="{{ $item->have_unread_messages ? 'read' : 'unread' }}">
                 <a href="{{ route('client.conversations.show', $item->conversation) }}">
                     <div class="header">
                         <span class="action"><i class="fa fa-square-o"></i><i class="fa fa-square"></i></span> 
