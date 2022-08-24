@@ -62,6 +62,6 @@ class ConversationController extends Controller
             'url' => route('client.conversations.show', $conversation),    
         ]);
 
-        return redirect(route('client.conversations.index'))->with('success', 'Successfuly sent a message!');     
+        return redirect(route('client.inbox.index'))->with('success', 'Successfuly sent a message!');     
     }
 }
