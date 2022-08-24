@@ -63,6 +63,14 @@ class InboxController extends Controller
 
     public function sent()
     {
-        
+        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+            $query->where('sender_id', auth('client')->user()->id );
+        }, ">", 0)
+        ->where('client_id', auth('client')->user()->id )
+        ->where('is_archived', false)
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+
+        return view('client.inbox.sent')->with(compact('conversation_subscriptions'));
     }
 }
