@@ -5,13 +5,14 @@
         .read {
             background-color: darkgray;
         }
+
     </style>
 @endsection
 
 @section('main_room_section')
     <ul class="messages-list">
         @foreach ($conversation_subscriptions as $item)
-            <li class="{{ $item->have_unread_messages ? 'read' : 'unread' }}">
+            <li class="{{ $item->conversation->have_unread_messages ? 'unread' : 'read'}}">
                 <a href="{{ route('client.conversations.show', $item->conversation) }}">
                     <div class="header">
                         <span class="action"><i class="fa fa-square-o"></i><i class="fa fa-square"></i></span> 
