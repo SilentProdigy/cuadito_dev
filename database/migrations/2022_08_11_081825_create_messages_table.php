@@ -18,6 +18,7 @@ class CreateMessagesTable extends Migration
             $table->foreignId('sender_id')->constrained('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('conversation_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->text('content');
+            $table->boolean('read')->default(false);
             $table->timestamps();
         });
     }
