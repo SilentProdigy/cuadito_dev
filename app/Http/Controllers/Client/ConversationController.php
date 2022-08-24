@@ -26,6 +26,13 @@ class ConversationController extends Controller
 
     public function show(Conversation $conversation)
     {
+        if($conversation->have_unread_messages)
+        {
+            $conversation->unreadMessages->each(function($item) {
+                $item->update(['read' => true]);
+            });
+        }
+
         $messages = $conversation->messages;
 
         return view('client.conversations.show')->with(compact('messages', 'conversation'));

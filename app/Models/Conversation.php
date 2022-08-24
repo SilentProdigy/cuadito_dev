@@ -45,4 +45,9 @@ class Conversation extends Model
         ])
         ->count() > 0;
     }
+
+    public function unreadMessages()
+    {
+        return $this->messages()->where('read',false);
+    }
 }
