@@ -33,9 +33,11 @@ class ConversationController extends Controller
             });
         }
 
+        $subscription = $conversation->subscriptions->where('client_id', auth('client')->user()->id)->first();
+
         $messages = $conversation->messages;
 
-        return view('client.conversations.show')->with(compact('messages', 'conversation'));
+        return view('client.conversations.show')->with(compact('messages', 'conversation', 'subscription'));
     }
 
     public function create()

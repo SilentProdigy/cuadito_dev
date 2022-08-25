@@ -31,7 +31,7 @@ class ConversationSubscriptionController extends Controller
             ]);
 
             // return redirect(route('client.conversations.index'))->with('success', 'Conversation was starred!');     
-            return redirect(route('client.conversations.index'));     
+            return redirect(route('client.inbox.index'));     
         }
         catch(Exception $e)
         {
