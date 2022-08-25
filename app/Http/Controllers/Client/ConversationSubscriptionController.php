@@ -60,7 +60,7 @@ class ConversationSubscriptionController extends Controller
         try
         {
             $conversationSubscription->delete();
-            return redirect(route('client.conversations.index'))->with('success', 'Conversation was deleted!');     
+            return redirect(route('client.inbox.index'))->with('success', 'Conversation was deleted!');     
         }
         catch(Exception $e)
         {

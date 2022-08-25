@@ -23,7 +23,7 @@
                             <button class="btn btn-default"><span class="fa fa-envelope"></span></button>
                             <button class="btn btn-default btn-star" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star"></span></button>
                             <button class="btn btn-default btn-unstar" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star-o"></span></button>
-                            <button class="btn btn-default"><span class="fa fa-bookmark-o"></span></button>
+                            <button class="btn btn-default btn-important" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-bookmark-o"></span></button>
                         </span>
                     
                         <span class="btn-group">
@@ -32,7 +32,7 @@
                             <button class="btn btn-default"><span class="fa fa-mail-forward"></span></button>
                         </span>
                     
-                        <button class="btn btn-default"><span class="fa fa-trash-o"></span></button>
+                        <button class="btn btn-default btn-delete" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-trash-o"></span></button>
                     
                         <span class="btn-group">
                             <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="fa fa-tags"></span> <span class="caret"></span></button>
@@ -95,6 +95,7 @@
 
 @include('client.includes.set_company_modal')
 @include('client.conversations.includes.create_conversation_modal')
+@include('client.conversations.includes.confirm_delete_modal')
 @endsection
 
 @section('script')
@@ -124,6 +125,20 @@
                 document.querySelector('#star-txt').value = false;
                 form.setAttribute('action', `/client/convo-subs/star/${ data.id }`);
                 form.submit();
+            });
+        });
+
+        let delete_buttons = document.querySelectorAll('.btn-delete');
+        delete_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-conversation-modal'), {keyboard: false})
+                myModal.show()
+                // document.querySelector('#project-name').innerHTML = data.title;
+                let form = document.querySelector('#delete-conversation-form');
+                form.setAttribute('action', `/client/convo-subs/delete/${ data.id }`);
             });
         });
     });
