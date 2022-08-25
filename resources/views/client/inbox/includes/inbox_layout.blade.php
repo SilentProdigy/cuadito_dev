@@ -1,5 +1,14 @@
 @extends('layouts.client-main-layout')
 
+@section('style')
+    <style>
+        .read {
+            background-color: darkgray;
+        }
+
+    </style>
+@endsection
+
 @section('content')
 <div class="container px-5">
     <div class="row inbox">

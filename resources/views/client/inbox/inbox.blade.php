@@ -1,14 +1,5 @@
 @extends('client.inbox.includes.inbox_layout')
 
-@section('style')
-    <style>
-        .read {
-            background-color: darkgray;
-        }
-
-    </style>
-@endsection
-
 @section('main_room_section')
     <ul class="messages-list">
         @foreach ($conversation_subscriptions as $item)
