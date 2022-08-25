@@ -44,10 +44,10 @@ class ConversationSubscriptionController extends Controller
         try
         {
             $conversationSubscription->update([
-                'is_archived' => true
+                'is_archived' => $request->input('archived') == 'true'
             ]);
 
-            return redirect(route('client.inbox.index'))->with('success', 'Conversation was archived!');     
+            return redirect(route('client.inbox.index'));     
         }
         catch(Exception $e)
         {
