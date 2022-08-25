@@ -67,4 +67,20 @@ class ConversationSubscriptionController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function important(Request $request, ConversationSubscription $conversationSubscription)
+    {
+        try
+        {
+            $conversationSubscription->update([
+                'is_important' => $request->input('important') == 'true'
+            ]);
+
+            return redirect(route('client.inbox.index'));     
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
 }

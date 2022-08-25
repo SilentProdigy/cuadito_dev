@@ -41,7 +41,16 @@
                                     <span class="fa fa-box-open"></span>
                                 </button>
                             @endif
-                            <button class="btn btn-default btn-important" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-bookmark-o"></span></button>
+
+                            @if(!$subscription->is_important)
+                                <button class="btn btn-default btn-important" data-subscription="{{ json_encode($subscription) }}">
+                                    <span class="fa fa-bookmark-o"></span>
+                                </button>
+                            @else 
+                                <button class="btn btn-default btn-unimportant" data-subscription="{{ json_encode($subscription) }}">
+                                    <span class="fa fa-bookmark"></span>
+                                </button>
+                            @endif
                         </span>
                     
                         <span class="btn-group">
@@ -111,6 +120,10 @@
     <input type="hidden" name="star" value="true" id="star-txt">
 </form>
 
+<form action="#" id="important-form" method="POST">
+    @csrf
+    <input type="hidden" name="important" value="true" id="important-txt">
+</form>
 
 @include('client.includes.set_company_modal')
 @include('client.conversations.includes.create_conversation_modal')
@@ -121,6 +134,36 @@
 @section('script')
 <script>
     $(document).ready(function() {
+
+        let important_buttons = document.querySelectorAll('.btn-important');
+        important_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+
+                document.querySelector('#important-txt').value = 'true';
+                let form = document.querySelector('#important-form');
+                form.setAttribute('action', `/client/convo-subs/important/${ data.id }`);
+                form.submit();
+            });
+        });
+
+        let unimportant_buttons = document.querySelectorAll('.btn-unimportant');
+        unimportant_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+
+                document.querySelector('#important-txt').value = 'false';
+                let form = document.querySelector('#important-form');
+                form.setAttribute('action', `/client/convo-subs/important/${ data.id }`);
+                form.submit();
+            });
+        });
+
+
         let archived_buttons = document.querySelectorAll('.btn-archive');
         archived_buttons.forEach(button => {
             button.addEventListener('click', function(e) {  
