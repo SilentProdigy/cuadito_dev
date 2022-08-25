@@ -3,7 +3,7 @@
 @section('style')
     <style>
         .read {
-            background-color: darkgray;
+            background-color: #ecf0f1;
         }
 
     </style>
