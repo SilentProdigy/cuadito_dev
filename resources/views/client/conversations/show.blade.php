@@ -21,8 +21,16 @@
                     <div class="mb-3">
                         <span class="btn-group">
                             <button class="btn btn-default"><span class="fa fa-envelope"></span></button>
-                            <button class="btn btn-default btn-star" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star"></span></button>
-                            {{-- <button class="btn btn-default btn-unstar" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star-o"></span></button> --}}
+                            
+                            @if(!$subscription->is_starred)
+                                <button class="btn btn-default btn-star" data-subscription="{{ json_encode($subscription) }}">
+                                    <span class="fa fa-star"></span>
+                                </button>
+                            @else
+                                <button class="btn btn-default btn-unstar" data-subscription="{{ json_encode($subscription) }}">
+                                    <span class="fa fa-star-o"></span>
+                                </button>
+                            @endif
                             
                             @if(!$subscription->is_archived)
                                 <button class="btn btn-default btn-archive" data-subscription="{{ json_encode($subscription) }}">
