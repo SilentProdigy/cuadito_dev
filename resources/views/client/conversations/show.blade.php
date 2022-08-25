@@ -22,7 +22,8 @@
                         <span class="btn-group">
                             <button class="btn btn-default"><span class="fa fa-envelope"></span></button>
                             <button class="btn btn-default btn-star" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star"></span></button>
-                            <button class="btn btn-default btn-unstar" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star-o"></span></button>
+                            {{-- <button class="btn btn-default btn-unstar" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-star-o"></span></button> --}}
+                            <button class="btn btn-default btn-archive" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-archive"></span></button>
                             <button class="btn btn-default btn-important" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-bookmark-o"></span></button>
                         </span>
                     
@@ -95,12 +96,27 @@
 
 @include('client.includes.set_company_modal')
 @include('client.conversations.includes.create_conversation_modal')
+@include('client.conversations.includes.confirm_archived_modal')
 @include('client.conversations.includes.confirm_delete_modal')
 @endsection
 
 @section('script')
 <script>
     $(document).ready(function() {
+        let archived_buttons = document.querySelectorAll('.btn-archive');
+        archived_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-subscription');   
+                data = JSON.parse(data);
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-archived-modal'), {keyboard: false})
+                myModal.show()
+                // document.querySelector('#project-name').innerHTML = data.title;
+                let form = document.querySelector('#archive-conversation-form');
+                form.setAttribute('action', `/client/convo-subs/archive/${ data.id }`);
+            });
+        });
+
         let star_buttons = document.querySelectorAll('.btn-star');
         star_buttons.forEach(button => {
             button.addEventListener('click', function(e) {  

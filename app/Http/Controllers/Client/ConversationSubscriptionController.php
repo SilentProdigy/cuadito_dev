@@ -47,7 +47,7 @@ class ConversationSubscriptionController extends Controller
                 'is_archived' => true
             ]);
 
-            return redirect(route('client.conversations.index'))->with('success', 'Conversation was archived!');     
+            return redirect(route('client.inbox.index'))->with('success', 'Conversation was archived!');     
         }
         catch(Exception $e)
         {
