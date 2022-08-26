@@ -83,4 +83,26 @@ class ConversationSubscriptionController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function unread(ConversationSubscription $conversationSubscription)
+    {
+        try
+        {
+            $conversation = $conversationSubscription->conversation;
+            
+            $latest_message = $conversation
+                              ->messages()
+                              ->where('sender_id', '!=', auth('client')->user()->id)
+                              ->latest()
+                              ->first();
+
+            $latest_message->update(['read' => false]);
+
+            return redirect(route('client.inbox.index'));     
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
 }

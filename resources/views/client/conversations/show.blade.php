@@ -20,7 +20,10 @@
                     
                     <div class="mb-3">
                         <span class="btn-group">
-                            <button class="btn btn-default"><span class="fa fa-envelope"></span></button>
+                            {{-- Mark as unread --}}
+                            <a href="{{ route('client.conversation-subs.unread', $subscription) }}" class="btn btn-default btn-unread">
+                                <span class="fa fa-envelope"></span>
+                            </a>
                             
                             @if(!$subscription->is_starred)
                                 <button class="btn btn-default btn-star" data-subscription="{{ json_encode($subscription) }}">

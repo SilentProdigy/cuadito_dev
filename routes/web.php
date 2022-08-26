@@ -134,7 +134,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'index'])->name('conversations.index');
         Route::get('conversations/{conversation}', [\App\Http\Controllers\Client\ConversationController::class, 'show'])->name('conversations.show');
         Route::post('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'store'])->name('conversations.store');
-        
+
+        Route::get('convo-subs/unread/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'unread'])->name('conversation-subs.unread');
         Route::post('convo-subs/star/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'star'])->name('conversation-subs.star');
         Route::post('convo-subs/important/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'important'])->name('conversation-subs.important');
         Route::delete('convo-subs/delete/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'destroy'])->name('conversation-subs.delete');
