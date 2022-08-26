@@ -56,12 +56,14 @@
                             @endif
                         </span>
                     
-                        <span class="btn-group">
-                            <button class="btn btn-default"><span class="fa fa-mail-reply"></span></button>
-                            <button class="btn btn-default"><span class="fa fa-mail-reply-all"></span></button>
-                            <button class="btn btn-default"><span class="fa fa-mail-forward"></span></button>
-                        </span>
-                    
+                        {{-- 
+                            <span class="btn-group">
+                                <button class="btn btn-default"><span class="fa fa-mail-reply"></span></button>
+                                <button class="btn btn-default"><span class="fa fa-mail-reply-all"></span></button>
+                                <button class="btn btn-default"><span class="fa fa-mail-forward"></span></button>
+                            </span>
+                        --}}
+                        
                         <button class="btn btn-default btn-delete" data-subscription="{{ json_encode($subscription) }}"><span class="fa fa-trash-o"></span></button>
                     
                         <span class="btn-group">

@@ -3,11 +3,13 @@
 @section('main_room_section')
     <ul class="messages-list">
         @foreach ($conversation_subscriptions as $item)
-            <li class="{{ $item->conversation->have_unread_messages ? 'unread' : 'read'}}">
+            <li 
+                class="{{ $item->conversation->have_unread_messages ? 'unread' : 'read'}}"
+            >
                 <a href="{{ route('client.conversations.show', $item->conversation) }}">
                     <div class="header">
                         <span class="action">
-                            <input type="checkbox" name="" id="">
+                            <input type="checkbox" class="select-sub-checkbox" data-subscription="{{ json_encode($item) }}">
                         </span> 
                         <span class="from">{{ $item->conversation->other_client->name }}</span>
                         <span class="date"><span class="fa fa-paper-clip"></span> {{ $item->conversation->latest_message->created_at->format('M d, Y, g:i A') }}</span>
@@ -26,3 +28,5 @@
         @endforeach
     </ul>
 @endsection
+
+

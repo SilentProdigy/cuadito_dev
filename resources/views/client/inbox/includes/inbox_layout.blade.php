@@ -49,5 +49,53 @@
 @endsection
 
 @section('script')
+    <script>
+        $(document).ready(function() {
+            const checkboxes = document.querySelectorAll(".select-sub-checkbox");
 
+            let checkedItems = [];
+
+            checkboxes.forEach(checkbox => {
+                checkbox.addEventListener("change", (e) => {
+                    e.preventDefault;
+                    let data = e.target.getAttribute('data-subscription');   
+                    data = JSON.parse(data);
+
+                    if (e.target.checked) 
+                    {
+                        checkedItems.push(data);
+                    }
+                    else 
+                    {
+                        let index = checkedItems.findIndex(item => item.id == data.id);
+                        checkedItems = checkedItems.splice(index, 1);
+                    }
+                });    
+            });
+
+            // Unread Button 
+            
+            let unread_button = document.querySelector('.btn-unread');
+
+            unread_button.addEventListener('click' , () => {
+                if(checkedItems.length == 0)
+                    return;
+                
+                
+            });
+
+            // important_buttons.forEach(button => {
+            //     button.addEventListener('click', function(e) {  
+            //         e.preventDefault;
+            //         let data = button.getAttribute('data-subscription');   
+            //         data = JSON.parse(data);
+
+            //         document.querySelector('#important-txt').value = 'true';
+            //         let form = document.querySelector('#important-form');
+            //         form.setAttribute('action', `/client/convo-subs/important/${ data.id }`);
+            //         form.submit();
+            //     });
+            // });
+        });
+    </script>
 @endsection
