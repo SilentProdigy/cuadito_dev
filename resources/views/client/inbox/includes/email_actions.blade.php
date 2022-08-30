@@ -13,7 +13,12 @@
     </span> --}}
 
     <span class="btn-group">
-        <button class="btn btn-default btn-archive"><span class="fa fa-archive"></span></button>
+        @if(request()->route()->getName() !== 'client.inbox.archived')
+            <button class="btn btn-default btn-archive"><span class="fa fa-archive"></span></button>
+        @else 
+            <button class="btn btn-default btn-unarchive"><span class="fa fa-box-open"></span></button>
+        @endif
+
         <button class="btn btn-default btn-delete"><span class="fa fa-trash-o"></span></button>
     </span>
 

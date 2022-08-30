@@ -3,9 +3,7 @@
 @section('main_room_section')
     <ul class="messages-list">
         @foreach ($conversation_subscriptions as $item)
-            <li 
-                class="{{ $item->conversation->have_unread_messages ? 'unread' : 'read'}}"
-            >
+            <li class="{{ $item->conversation->have_unread_messages ? 'unread' : 'read'}}">
                 <a href="{{ route('client.conversations.show', $item->conversation) }}">
                     <div class="header">
                         <span class="action">

@@ -97,69 +97,102 @@
 
             let unread_button = document.querySelector('.btn-unread');
 
-            unread_button.addEventListener('click' , () => {
-                if(checkedItems.length == 0)
-                    return;
-                
-                let targetInput = document.querySelector('#unread-conversation-ids');
-                targetInput.value = checkedItems.map(item => item.id);
-                
-                document.querySelector('#unread-form').submit();
-            });
+            if(unread_button)
+            {
+                unread_button.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    let targetInput = document.querySelector('#unread-conversation-ids');
+                    targetInput.value = checkedItems.map(item => item.id);
+                    
+                    document.querySelector('#unread-form').submit();
+                });
+            }
 
             let star_button = document.querySelector('.btn-star');
 
-            star_button.addEventListener('click' , () => {
-                if(checkedItems.length == 0)
-                    return;
-                
-                document.querySelector('#star-conversation-ids').value = checkedItems.map(item => item.id); 
-                document.querySelector('#star-txt').value = 'true';
-                document.querySelector('#star-form').submit();
-            });
+            if(star_button)
+            {
+                star_button.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#star-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#star-txt').value = 'true';
+                    document.querySelector('#star-form').submit();
+                });
+            }
 
             let unstar_button = document.querySelector('.btn-unstar');
 
-            unstar_button.addEventListener('click' , () => {
-                if(checkedItems.length == 0)
-                    return;
-                
-                document.querySelector('#star-conversation-ids').value = checkedItems.map(item => item.id); 
-                document.querySelector('#star-txt').value = 'false';
-                document.querySelector('#star-form').submit();
-            });
+            if(unstar_button)
+            {
+                unstar_button.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#star-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#star-txt').value = 'false';
+                    document.querySelector('#star-form').submit();
+                });
+            }
             
             let important_button = document.querySelector('.btn-important');
 
-            important_button.addEventListener('click' , () => {
-                if(checkedItems.length == 0)
-                    return;
-                
-                document.querySelector('#important-conversation-ids').value = checkedItems.map(item => item.id); 
-                document.querySelector('#important-txt').value = 'true';
-                document.querySelector('#important-form').submit();
-            });
+            if(important_button) 
+            {
+                important_button.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#important-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#important-txt').value = 'true';
+                    document.querySelector('#important-form').submit();
+                });
+            }
 
             let archive_buttons = document.querySelector('.btn-archive');
 
-            archive_buttons.addEventListener('click' , () => {
-                if(checkedItems.length == 0)
-                    return;
-                
-                document.querySelector('#archive-conversation-ids').value = checkedItems.map(item => item.id); 
-                document.querySelector('#archive-txt').value = 'true';
-                document.querySelector('#archive-form').submit();
-            });
+            if(archive_buttons) 
+            {
+                archive_buttons.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#archive-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#archive-txt').value = 'true';
+                    document.querySelector('#archive-form').submit();
+                });
+            }
+            
+            let unarchive_button = document.querySelector('.btn-unarchive');
+
+            if(unarchive_button) 
+            {
+                unarchive_button.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#archive-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#archive-txt').value = 'false';
+                    document.querySelector('#archive-form').submit();
+                });
+            }
+            
 
             let delete_buttons = document.querySelector('.btn-delete');
 
-            delete_buttons.addEventListener('click' , () => {
-                if(checkedItems.length == 0)
-                    return;
-                
-                document.querySelector('#delete-conversation-ids').value = checkedItems.map(item => item.id); 
-                document.querySelector('#delete-convo-form').submit();
-            });
+            if(delete_buttons) 
+            {
+                delete_buttons.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#delete-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#delete-convo-form').submit();
+                });
+            }
         });
 
     </script>
