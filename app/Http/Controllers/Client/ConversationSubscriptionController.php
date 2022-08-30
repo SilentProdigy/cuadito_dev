@@ -69,13 +69,16 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
-    public function important(Request $request, ConversationSubscription $conversationSubscription)
+    public function important()
     {
         try
         {
-            $conversationSubscription->update([
-                'is_important' => $request->input('important') == 'true'
-            ]);
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
+            ->each(function($item) {
+                $item->update([
+                    'is_important' => request()->input('important') == 'true'
+                ]);
+            });
 
             return redirect(route('client.inbox.index'));     
         }

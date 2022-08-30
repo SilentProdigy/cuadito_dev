@@ -45,6 +45,12 @@
         <input type="hidden" name="star" id="star-txt">
     </form>
 
+    <form action="{{ route('client.conversation-subs.important') }}" method="post" id="important-form">
+        @csrf
+        <input type="hidden" name="subscription_ids" id="important-conversation-ids">
+        <input type="hidden" name="important" id="important-txt">
+    </form>
+
     @include('client.includes.set_company_modal')
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.create_conversation_modal')
@@ -111,6 +117,16 @@
                 document.querySelector('#star-form').submit();
             });
             
+            let important_button = document.querySelector('.btn-important');
+
+            important_button.addEventListener('click' , () => {
+                if(checkedItems.length == 0)
+                    return;
+                
+                document.querySelector('#important-conversation-ids').value = checkedItems.map(item => item.id); 
+                document.querySelector('#important-txt').value = 'true';
+                document.querySelector('#important-form').submit();
+            });
 
             // important_buttons.forEach(button => {
             //     button.addEventListener('click', function(e) {  
