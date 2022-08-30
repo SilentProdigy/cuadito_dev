@@ -14,7 +14,7 @@
 
     <span class="btn-group">
         <button class="btn btn-default btn-archive"><span class="fa fa-archive"></span></button>
-        <button class="btn btn-default"><span class="fa fa-trash-o"></span></button>
+        <button class="btn btn-default btn-delete"><span class="fa fa-trash-o"></span></button>
     </span>
 
     <span class="btn-group">

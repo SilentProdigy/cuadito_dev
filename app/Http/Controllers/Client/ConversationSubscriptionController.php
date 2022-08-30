@@ -59,12 +59,17 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
-    public function destroy(Request $request, ConversationSubscription $conversationSubscription)
+    public function destroy()
     {
         try
         {
-            $conversationSubscription->delete();
-            return redirect(route('client.inbox.index'))->with('success', 'Conversation was deleted!');     
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
+            ->each(function($item) {
+               $item->delete();
+            });
+
+            // return redirect(route('client.inbox.index'))->with('success', 'Conversation was deleted!');     
+            return redirect(route('client.inbox.index'));
         }
         catch(Exception $e)
         {

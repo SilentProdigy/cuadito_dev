@@ -56,6 +56,12 @@
         <input type="hidden" name="subscription_ids" id="archive-conversation-ids">
         <input type="hidden" name="archived" id="archive-txt">
     </form>
+
+    <form action="{{ route('client.conversation-subs.delete') }}" method="post" id="delete-convo-form">
+        @csrf
+        @method('DELETE')
+        <input type="hidden" name="subscription_ids" id="delete-conversation-ids">
+    </form>
     
     @include('client.includes.set_company_modal')
     @include('client.conversations.includes.create_conversation_modal')
@@ -144,6 +150,17 @@
                 document.querySelector('#archive-txt').value = 'true';
                 document.querySelector('#archive-form').submit();
             });
+
+            let delete_buttons = document.querySelector('.btn-delete');
+
+            delete_buttons.addEventListener('click' , () => {
+                if(checkedItems.length == 0)
+                    return;
+                
+                document.querySelector('#delete-conversation-ids').value = checkedItems.map(item => item.id); 
+                document.querySelector('#delete-convo-form').submit();
+            });
         });
+
     </script>
 @endsection
