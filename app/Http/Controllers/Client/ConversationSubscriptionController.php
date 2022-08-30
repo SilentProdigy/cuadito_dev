@@ -84,20 +84,30 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
-    public function unread(ConversationSubscription $conversationSubscription)
+    public function unread()
     {
         try
         {
-            $conversation = $conversationSubscription->conversation;
+            $ids = request()->input('subscription_ids'); 
+
+            $ids = explode(",", $ids);
+
+            if(!$ids)
+                abort(404);
+
+            ConversationSubscription::whereIn('id', $ids)->get()
+            ->each(function($item) {
+                $conversation = $item->conversation;
             
-            $latest_message = $conversation
-                              ->messages()
-                              ->where('sender_id', '!=', auth('client')->user()->id)
-                              ->latest()
-                              ->first();
+                $latest_message = $conversation
+                                ->messages()
+                                ->where('sender_id', '!=', auth('client')->user()->id)
+                                ->latest()
+                                ->first();
 
-            $latest_message->update(['read' => false]);
-
+                $latest_message->update(['read' => false]);
+            });
+    
             return redirect(route('client.inbox.index'));     
         }
         catch(Exception $e)

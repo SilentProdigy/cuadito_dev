@@ -10,42 +10,40 @@
 @endsection
 
 @section('content')
-<div class="container px-5">
-    <div class="row inbox">
-        <div class="col-md-3">
-            <div class="panel panel-default">
-                <div class="panel-body inbox-menu">
-                    <button class="btn btn-danger btn-block" data-bs-toggle="modal" data-bs-target="#create-new-conversation-modal">New Email</button>
-                    @include('client.inbox.includes.rooms_links')
-                    @include('client.inbox.includes.labels_links')
-                </div>	
-            </div>
-            @include('client.inbox.includes.contact_list')
-        </div><!--/.col-->
-        
-        <div class="col-md-9">
-            <div class="panel panel-default">
-                <div class="panel-body">
-                    
-                    @include('client.inbox.includes.email_actions')
-
-                    @yield('main_room_section')
-                </div>	
-                
-            </div>	
-
+    <div class="container px-5">
+        <div class="row inbox">
+            <div class="col-md-3">
+                <div class="panel panel-default">
+                    <div class="panel-body inbox-menu">
+                        <button class="btn btn-danger btn-block" data-bs-toggle="modal" data-bs-target="#create-new-conversation-modal">New Email</button>
+                        @include('client.inbox.includes.rooms_links')
+                        @include('client.inbox.includes.labels_links')
+                    </div>	
+                </div>
+                @include('client.inbox.includes.contact_list')
+            </div><!--/.col-->
             
-        </div><!--/.col-->	
-                
+            <div class="col-md-9">
+                <div class="panel panel-default">
+                    <div class="panel-body">
+                        @include('client.inbox.includes.email_actions')
+                        @yield('main_room_section')
+                    </div>	
+                </div>	
+            </div><!--/.col-->	
+        </div>
     </div>
-</div>
 
+    <form action="{{ route('client.conversation-subs.unread') }}" method="post" id="unread-form">
+        @csrf
+        <input type="hidden" name="subscription_ids" id="unread-conversation-ids">
+    </form>
 
-@include('client.includes.set_company_modal')
-@include('client.conversations.includes.create_conversation_modal')
-@include('client.conversations.includes.create_conversation_modal')
-@include('client.conversations.includes.confirm_archived_modal')
-@include('client.conversations.includes.confirm_delete_modal')
+    @include('client.includes.set_company_modal')
+    @include('client.conversations.includes.create_conversation_modal')
+    @include('client.conversations.includes.create_conversation_modal')
+    @include('client.conversations.includes.confirm_archived_modal')
+    @include('client.conversations.includes.confirm_delete_modal')
 @endsection
 
 @section('script')
@@ -81,7 +79,10 @@
                 if(checkedItems.length == 0)
                     return;
                 
+                let targetInput = document.querySelector('#unread-conversation-ids');
+                targetInput.value = checkedItems.map(item => item.id);
                 
+                document.querySelector('#unread-form').submit();
             });
 
             // important_buttons.forEach(button => {
