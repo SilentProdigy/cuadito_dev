@@ -152,6 +152,20 @@
                 });
             }
 
+            let unimportant_button = document.querySelector('.btn-unimportant');
+
+            if(unimportant_button) 
+            {
+                unimportant_button.addEventListener('click' , () => {
+                    if(checkedItems.length == 0)
+                        return;
+                    
+                    document.querySelector('#important-conversation-ids').value = checkedItems.map(item => item.id); 
+                    document.querySelector('#important-txt').value = 'false';
+                    document.querySelector('#important-form').submit();
+                });
+            }
+
             let archive_buttons = document.querySelector('.btn-archive');
 
             if(archive_buttons) 

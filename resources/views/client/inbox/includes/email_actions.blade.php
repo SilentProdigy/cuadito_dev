@@ -3,7 +3,11 @@
         <button class="btn btn-default btn-unread"><span class="fa fa-envelope"></span></button>
         <button class="btn btn-default btn-star"><span class="fa fa-star"></span></button>
         <button class="btn btn-default btn-unstar"><span class="fa fa-star-o"></span></button>
-        <button class="btn btn-default btn-important"><span class="fa fa-bookmark"></span></button>
+        @if(request()->route()->getName() !== 'client.inbox.important')
+            <button class="btn btn-default btn-important"><span class="fa fa-bookmark"></span></button>
+        @else 
+            <button class="btn btn-default btn-unimportant"><span class="fa fa-bookmark-o"></span></button>
+        @endif
     </span>
 
     {{-- <span class="btn-group">
