@@ -74,26 +74,35 @@
     <script>
         $(document).ready(function() {
             const checkboxes = document.querySelectorAll(".select-sub-checkbox");
-
             let checkedItems = [];
 
-            checkboxes.forEach(checkbox => {
-                checkbox.addEventListener("change", (e) => {
-                    e.preventDefault;
-                    let data = e.target.getAttribute('data-subscription');   
-                    data = JSON.parse(data);
-
-                    if (e.target.checked) 
-                    {
-                        checkedItems.push(data);
-                    }
-                    else 
-                    {
-                        let index = checkedItems.findIndex(item => item.id == data.id);
-                        checkedItems = checkedItems.splice(index, 1);
-                    }
-                });    
-            });
+            if(!checkboxes.length) 
+            {
+                let data = document.querySelector('#subscription-div').getAttribute('data-subscription');   
+                data = JSON.parse(data);
+                checkedItems.push(data);
+            }
+            else 
+            {
+                checkboxes.forEach(checkbox => {
+                    checkbox.addEventListener("change", (e) => {
+                        e.preventDefault;
+                        let data = e.target.getAttribute('data-subscription');   
+                        data = JSON.parse(data);
+    
+                        if (e.target.checked) 
+                        {
+                            checkedItems.push(data);
+                        }
+                        else 
+                        {
+                            let index = checkedItems.findIndex(item => item.id == data.id);
+                            checkedItems = checkedItems.splice(index, 1);
+                        }
+                    });    
+                });
+            }
+            
 
             let unread_button = document.querySelector('.btn-unread');
 
