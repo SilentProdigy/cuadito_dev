@@ -99,6 +99,17 @@
                 document.querySelector('#star-txt').value = 'true';
                 document.querySelector('#star-form').submit();
             });
+
+            let unstar_button = document.querySelector('.btn-unstar');
+
+            unstar_button.addEventListener('click' , () => {
+                if(checkedItems.length == 0)
+                    return;
+                
+                document.querySelector('#star-conversation-ids').value = checkedItems.map(item => item.id); 
+                document.querySelector('#star-txt').value = 'false';
+                document.querySelector('#star-form').submit();
+            });
             
 
             // important_buttons.forEach(button => {
