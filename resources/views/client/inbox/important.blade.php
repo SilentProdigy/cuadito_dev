@@ -31,11 +31,8 @@
             </li>
         @empty
             <li>
-                <p>No Messages Here!</p>
+                <p>No Messages Tag as Important Here!</p>
             </li>
         @endforelse
     </ul>
 @endsection
-
-
-

@@ -17,7 +17,6 @@ class InboxController extends Controller
         ->where('is_archived', false)
         ->orderBy('created_at', 'desc')
         ->paginate(5);
-        
         return view('client.inbox.inbox')->with(compact('conversation_subscriptions'));
     }
 
@@ -46,5 +45,31 @@ class InboxController extends Controller
         ->paginate(5);
         
         return view('client.inbox.archived')->with(compact('conversation_subscriptions'));
+    }
+
+    public function important()
+    {
+        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+            $query->where('sender_id', "!=", auth('client')->user()->id );
+        }, ">", 0)
+        ->where('client_id', auth('client')->user()->id )
+        ->where('is_important', true)
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+        
+        return view('client.inbox.important')->with(compact('conversation_subscriptions'));
+    }
+
+    public function sent()
+    {
+        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+            $query->where('sender_id', auth('client')->user()->id );
+        }, ">", 0)
+        ->where('client_id', auth('client')->user()->id )
+        ->where('is_archived', false)
+        ->orderBy('created_at', 'desc')
+        ->paginate(5);
+
+        return view('client.inbox.sent')->with(compact('conversation_subscriptions'));
     }
 }

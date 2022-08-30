@@ -26,9 +26,18 @@ class ConversationController extends Controller
 
     public function show(Conversation $conversation)
     {
+        if($conversation->have_unread_messages)
+        {
+            $conversation->unreadMessages->each(function($item) {
+                $item->update(['read' => true]);
+            });
+        }
+
+        $subscription = $conversation->subscriptions->where('client_id', auth('client')->user()->id)->first();
+
         $messages = $conversation->messages;
 
-        return view('client.conversations.show')->with(compact('messages', 'conversation'));
+        return view('client.conversations.show')->with(compact('messages', 'conversation', 'subscription'));
     }
 
     public function create()
@@ -62,6 +71,6 @@ class ConversationController extends Controller
             'url' => route('client.conversations.show', $conversation),    
         ]);
 
-        return redirect(route('client.conversations.index'))->with('success', 'Successfuly sent a message!');     
+        return redirect(route('client.inbox.index'))->with('success', 'Successfuly sent a message!');     
     }
 }

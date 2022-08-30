@@ -10,14 +10,15 @@
                 Are you sure you want to <span class="text-danger text-bold">archive</span> this <strong>conversation</strong>?
             </p>
 
-            <form action="#" method="post" id="archive-conversation-form">
-              @csrf
-              @method('PATCH')
+            <form action="#" id="archive-form" method="POST">
+                @csrf
+                @method('PATCH')
+                <input type="hidden" name="archived" value="true" id="archived-txt">
             </form>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-          <button type="button" class="btn btn-danger" onclick="document.getElementById('archive-conversation-form').submit()">CONTINUE</button>
+          <button type="button" class="btn btn-danger" onclick="document.getElementById('archive-form').submit()">CONTINUE</button>
         </div>
       </div>
     </div>

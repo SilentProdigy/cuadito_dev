@@ -13,7 +13,7 @@ class Conversation extends Model
         "subject"
     ];
 
-    protected $appends = ['latest_message'];
+    protected $appends = ['latest_message', 'have_unread_messages'];
 
     public function messages()
     {
@@ -35,5 +35,19 @@ class Conversation extends Model
         $subscription = $this->subscriptions()->where('client_id','!=',auth('client')->user()->id)->first();
 
         return $subscription->client;
+    }
+
+    public function getHaveUnreadMessagesAttribute()
+    {
+        return $this->messages()->where([
+            ['read',false], 
+            ['sender_id','!=',auth('client')->user()->id] 
+        ])
+        ->count() > 0;
+    }
+
+    public function unreadMessages()
+    {
+        return $this->messages()->where('read',false);
     }
 }

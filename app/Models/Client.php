@@ -111,4 +111,20 @@ class Client extends Authenticatable
     {
         return $this->hasMany(\App\Models\Label::class);
     }
+
+    public function getUnreadConversationsCountAttribute()
+    {
+        return $this->conversationSubscriptions->filter(function($item) {
+            return $item->conversation->have_unread_messages;
+        })
+        ->count();
+    }
+
+    public function getUnreadImportantConversationsCountAttribute()
+    {
+        return $this->conversationSubscriptions->filter(function($item) {
+            return $item->conversation->have_unread_messages && $item->is_important;
+        })
+        ->count();
+    }
 }
