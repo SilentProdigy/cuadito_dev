@@ -1,8 +1,12 @@
 <div>
     <span class="btn-group">
         <button class="btn btn-default btn-unread"><span class="fa fa-envelope"></span></button>
-        <button class="btn btn-default btn-star"><span class="fa fa-star"></span></button>
-        <button class="btn btn-default btn-unstar"><span class="fa fa-star-o"></span></button>
+        @if(request()->route()->getName() !== 'client.inbox.starred')
+            <button class="btn btn-default btn-star"><span class="fa fa-star"></span></button>
+        @else 
+            <button class="btn btn-default btn-unstar"><span class="fa fa-star-o"></span></button>
+        @endif
+
         @if(request()->route()->getName() !== 'client.inbox.important')
             <button class="btn btn-default btn-important"><span class="fa fa-bookmark"></span></button>
         @else 
