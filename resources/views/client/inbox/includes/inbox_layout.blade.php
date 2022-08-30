@@ -51,6 +51,12 @@
         <input type="hidden" name="important" id="important-txt">
     </form>
 
+    <form action="{{ route('client.conversation-subs.archive') }}" method="post" id="archive-form">
+        @csrf
+        <input type="hidden" name="subscription_ids" id="archive-conversation-ids">
+        <input type="hidden" name="archived" id="archive-txt">
+    </form>
+    
     @include('client.includes.set_company_modal')
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.create_conversation_modal')
@@ -128,18 +134,16 @@
                 document.querySelector('#important-form').submit();
             });
 
-            // important_buttons.forEach(button => {
-            //     button.addEventListener('click', function(e) {  
-            //         e.preventDefault;
-            //         let data = button.getAttribute('data-subscription');   
-            //         data = JSON.parse(data);
+            let archive_buttons = document.querySelector('.btn-archive');
 
-            //         document.querySelector('#important-txt').value = 'true';
-            //         let form = document.querySelector('#important-form');
-            //         form.setAttribute('action', `/client/convo-subs/important/${ data.id }`);
-            //         form.submit();
-            //     });
-            // });
+            archive_buttons.addEventListener('click' , () => {
+                if(checkedItems.length == 0)
+                    return;
+                
+                document.querySelector('#archive-conversation-ids').value = checkedItems.map(item => item.id); 
+                document.querySelector('#archive-txt').value = 'true';
+                document.querySelector('#archive-form').submit();
+            });
         });
     </script>
 @endsection

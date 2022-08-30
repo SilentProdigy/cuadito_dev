@@ -3,16 +3,19 @@
         <button class="btn btn-default btn-unread"><span class="fa fa-envelope"></span></button>
         <button class="btn btn-default btn-star"><span class="fa fa-star"></span></button>
         <button class="btn btn-default btn-unstar"><span class="fa fa-star-o"></span></button>
-        <button class="btn btn-default btn-important"><span class="fa fa-bookmark-o"></span></button>
+        <button class="btn btn-default btn-important"><span class="fa fa-bookmark"></span></button>
     </span>
 
-    <span class="btn-group">
+    {{-- <span class="btn-group">
         <button class="btn btn-default"><span class="fa fa-mail-reply"></span></button>
         <button class="btn btn-default"><span class="fa fa-mail-reply-all"></span></button>
         <button class="btn btn-default"><span class="fa fa-mail-forward"></span></button>
-    </span>
+    </span> --}}
 
-    <button class="btn btn-default"><span class="fa fa-trash-o"></span></button>
+    <span class="btn-group">
+        <button class="btn btn-default btn-archive"><span class="fa fa-archive"></span></button>
+        <button class="btn btn-default"><span class="fa fa-trash-o"></span></button>
+    </span>
 
     <span class="btn-group">
         <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="fa fa-tags"></span> <span class="caret"></span></button>

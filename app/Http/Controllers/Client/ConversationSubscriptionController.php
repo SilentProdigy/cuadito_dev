@@ -40,13 +40,16 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
-    public function archive(Request $request, ConversationSubscription $conversationSubscription)
+    public function archive()
     {
         try
-        {
-            $conversationSubscription->update([
-                'is_archived' => $request->input('archived') == 'true'
-            ]);
+        {  
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
+            ->each(function($item) {
+                $item->update([
+                    'is_archived' => request()->input('archived') == 'true'
+                ]);
+            });
 
             return redirect(route('client.inbox.index'));     
         }
