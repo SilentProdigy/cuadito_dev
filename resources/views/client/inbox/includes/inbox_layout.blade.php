@@ -39,6 +39,12 @@
         <input type="hidden" name="subscription_ids" id="unread-conversation-ids">
     </form>
 
+    <form action="{{ route('client.conversation-subs.star') }}" method="post" id="star-form">
+        @csrf
+        <input type="hidden" name="subscription_ids" id="star-conversation-ids">
+        <input type="hidden" name="star" id="star-txt">
+    </form>
+
     @include('client.includes.set_company_modal')
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.create_conversation_modal')
@@ -71,8 +77,6 @@
                 });    
             });
 
-            // Unread Button 
-            
             let unread_button = document.querySelector('.btn-unread');
 
             unread_button.addEventListener('click' , () => {
@@ -84,6 +88,18 @@
                 
                 document.querySelector('#unread-form').submit();
             });
+
+            let star_button = document.querySelector('.btn-star');
+
+            star_button.addEventListener('click' , () => {
+                if(checkedItems.length == 0)
+                    return;
+                
+                document.querySelector('#star-conversation-ids').value = checkedItems.map(item => item.id); 
+                document.querySelector('#star-txt').value = 'true';
+                document.querySelector('#star-form').submit();
+            });
+            
 
             // important_buttons.forEach(button => {
             //     button.addEventListener('click', function(e) {  

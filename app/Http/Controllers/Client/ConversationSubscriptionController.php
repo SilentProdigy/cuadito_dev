@@ -21,16 +21,17 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
-    public function star(Request $request, ConversationSubscription $conversationSubscription)
+    public function star()
     {
         try
-        {
-
-            $conversationSubscription->update([
-                'is_starred' => $request->input('star') == "true" 
-            ]);
-
-            // return redirect(route('client.conversations.index'))->with('success', 'Conversation was starred!');     
+        {   
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
+            ->each(function($item) {
+                $item->update([
+                    'is_starred' => request()->input('star') == "true" 
+                ]);
+            });
+            
             return redirect(route('client.inbox.index'));     
         }
         catch(Exception $e)
@@ -88,14 +89,7 @@ class ConversationSubscriptionController extends Controller
     {
         try
         {
-            $ids = request()->input('subscription_ids'); 
-
-            $ids = explode(",", $ids);
-
-            if(!$ids)
-                abort(404);
-
-            ConversationSubscription::whereIn('id', $ids)->get()
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
             ->each(function($item) {
                 $conversation = $item->conversation;
             
@@ -114,5 +108,17 @@ class ConversationSubscriptionController extends Controller
         {
             dd($e->getMessage());
         }
+    }
+
+    private function getSubscriptionIds()
+    {
+        $ids = request()->input('subscription_ids'); 
+
+        $ids = explode(",", $ids);
+
+        if(!$ids)
+            abort(404);        
+
+        return $ids;
     }
 }

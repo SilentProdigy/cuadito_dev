@@ -137,9 +137,7 @@ Route::prefix('client')->name('client.')->group(function () {
 
         // Route::get('convo-subs/unread/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'unread'])->name('conversation-subs.unread');
         Route::post('convo-subs/unread', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'unread'])->name('conversation-subs.unread');
-
-
-        Route::post('convo-subs/star/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'star'])->name('conversation-subs.star');
+        Route::post('convo-subs/star', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'star'])->name('conversation-subs.star');
         Route::post('convo-subs/important/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'important'])->name('conversation-subs.important');
         Route::delete('convo-subs/delete/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'destroy'])->name('conversation-subs.delete');
         Route::patch('convo-subs/archive/{conversationSubscription}', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'archive'])->name('conversation-subs.archive');
