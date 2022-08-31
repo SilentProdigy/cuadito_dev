@@ -25,7 +25,7 @@ class ContactController extends Controller
      */
     public function create()
     {
-        //
+        return view('client.contacts.create');
     }
 
     /**
@@ -36,7 +36,18 @@ class ContactController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        try 
+        {
+            auth('client')->user()->contacts()->create(
+                $request->all()
+            );
+
+            return redirect(route('client.contacts.index'));
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
     }
 
     /**
