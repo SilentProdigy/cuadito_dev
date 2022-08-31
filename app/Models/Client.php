@@ -77,6 +77,11 @@ class Client extends Authenticatable
                 ->withPivot(['id','url']);
     }
 
+    public function contacts()
+    {
+        return $this->hasMany(\App\Models\Contact::class, 'client_id');
+    }
+
     public function getProjectsCountAttribute()
     {
         return $this->projects()->count();
