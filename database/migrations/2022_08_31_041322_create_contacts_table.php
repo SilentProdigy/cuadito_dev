@@ -18,7 +18,7 @@ class CreateContactsTable extends Migration
             $table->string('name');
             $table->string('email');
             $table->foreignId('client_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
-            $table->foreignId('contact_id')->constrained('clients')->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('contact_id')->nullable()->constrained('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
         });
     }
