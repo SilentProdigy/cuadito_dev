@@ -14,6 +14,7 @@ class Contact extends Model
     ];
 
     protected $fillable = [
+        'name',
         'client_id',
         'contact_id'
     ];

@@ -29,7 +29,7 @@
                             <span>{{ $loop->iteration }}</span>
                         </td>
                         <td>
-                            <span>{{ $item->contact_name }}</span>
+                            <span>{{ $item->name }}</span>
                         </td>
                         <td><span>{{ $item->contact->email }}</span></td>
                         <td class="user-actions">
