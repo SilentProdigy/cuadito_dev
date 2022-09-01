@@ -151,7 +151,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('inbox/important', [\App\Http\Controllers\Client\InboxController::class, 'important'])->name('inbox.important');
         Route::get('inbox/sent', [\App\Http\Controllers\Client\InboxController::class, 'sent'])->name('inbox.sent');
 
-        Route::resource('contacts', \App\Http\Controllers\Client\ContactController::Class);
+        Route::get('contacts/invite/{contact}', [\App\Http\Controllers\Client\ContactController::class, 'invite'])->name('contacts.invite');
+        Route::resource('contacts', \App\Http\Controllers\Client\ContactController::class);
     });
 
 });

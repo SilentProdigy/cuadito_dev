@@ -179,7 +179,7 @@
                         <td><span>{{ $item->email }}</span></td>
                         <td class="user-actions">
                             @if(!$item->contact)
-                                <a href="#" class="btn btn-sm btn-info">
+                                <a href="{{ route('client.contacts.invite', $item) }}" class="btn btn-sm btn-info">
                                     <i class="fa fa-send"></i> Send Invitation
                                 </a>
                             @endif 
