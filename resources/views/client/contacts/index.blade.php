@@ -5,10 +5,22 @@
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
         <div class="table-titles">Your Contacts</div>
-        <div class="col d-flex justify-content-end">
-            <a href="{{ route('client.contacts.create') }}" class="btn btn-primary header-btn">
+        <div class="col d-flex gap-4 flex-row-reverse">
+            <a href="{{ route('client.contacts.create') }}" class="btn btn-orange header-btn">
                 <i class="fa fa-plus"></i>&ensp;Add Contact
             </a>
+            <div>
+                
+                <div class="input-group">
+                    <div class="form-outline">
+                        <input id="search-focus" type="search" id="form1" class="form-control" />
+                        <label class="form-label" for="form1">Search</label>
+                    </div>
+                    <button type="button" class="btn border-orange btn-orange">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div> 
         </div>
     </div>
 </div>
@@ -71,7 +83,7 @@
                         <p class="text-muted mb-0">alex.ray@gmail.com</p>
                         </div>
                     </div>
-                    <<span class="badge rounded-pill badge-success">Active</span>
+                    <span class="badge rounded-pill badge-success">Active</span>
                     </div>
                 </div>
                 <div
