@@ -45,11 +45,12 @@
                                 <a class="btn btn-link m-0 text-reset" href="#" role="button" data-ripple-color="primary">
                                     Invite<i class="fas fa-paper-plane ms-2"></i>
                                 </a>
+
+                                <a class="btn btn-link m-0 text-reset" href="#" role="button" data-ripple-color="primary">
+                                    Edit<i class="fas fa-pencil ms-2"></i>
+                                </a>
                             @endif 
                             
-                            <a class="btn btn-link m-0 text-reset" href="#" role="button" data-ripple-color="primary">
-                                Edit<i class="fas fa-pencil ms-2"></i>
-                            </a>
 
                             <a class="btn btn-link m-0 text-reset" href="#" role="button" data-ripple-color="primary">
                                 Delete<i class="fas fa-trash ms-2"></i>
