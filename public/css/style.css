@@ -691,13 +691,15 @@ body {
 #pricing_table .btn-yellow{
     background: #ffb901;
 }
-#pricing_table .border-orange{
+.border-orange{
     border-color: #f26722 !important;
 }
 .btn-orange{
     background-color: #f26722 !important;
+    color: white !important;
 }
 #pricing_table .btn-gray{
     background-color: #3e3e3e;
 }
+	
   /* End of Landing Page Styles */
