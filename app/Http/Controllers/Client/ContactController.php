@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Contacts\CreateContactRequest;
 use App\Models\Client;
 use Exception;
 use Illuminate\Http\Request;
@@ -36,7 +37,7 @@ class ContactController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CreateContactRequest $request)
     {
         try 
         {
