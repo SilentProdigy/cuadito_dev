@@ -115,7 +115,7 @@ class ContactController extends Controller
         try 
         {
             Mail::to($contact->email)->send(new SignupInvitation($contact));
-            return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
+            return redirect(route('client.contacts.index'))->with('success', 'Invitation was successfully sent!');
         }
         catch(Exception $e)
         {
