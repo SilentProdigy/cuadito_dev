@@ -53,21 +53,21 @@
       }
 
       .carousel-item:nth-child(1) {
-        background-image: url('https://mdbootstrap.com/img/Photos/Others/images/76.jpg');
+        background-image: url("{{ asset('images/slider/slider_bg_01.jpeg') }}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
       }
 
       .carousel-item:nth-child(2) {
-        background-image: url('https://mdbootstrap.com/img/Photos/Others/images/77.jpg');
+        background-image: url("{{ asset('images/slider/slider_bg_02.jpg') }}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
       }
 
       .carousel-item:nth-child(3) {
-        background-image: url('https://mdbootstrap.com/img/Photos/Others/images/78.jpg');
+        background-image: url("{{ asset('images/slider/slider_bg_03.jpg') }}");
         background-repeat: no-repeat;
         background-size: cover;
         background-position: center center;
@@ -75,7 +75,9 @@
 
       .owl-carousel .item {
           height: 10rem;
-          background: #4DC7A0;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           padding: 1rem;
       }
 
@@ -154,17 +156,22 @@
     <!-- Carousel wrapper -->
     <div id="introCarousel" class="carousel slide carousel-fade shadow-2-strong" data-mdb-ride="carousel">
       <!-- Indicators -->
-      <ol class="carousel-indicators">
+      <!-- <ol class="carousel-indicators">
         <li data-mdb-target="#introCarousel" data-mdb-slide-to="0" class="active"></li>
         <li data-mdb-target="#introCarousel" data-mdb-slide-to="1"></li>
         <li data-mdb-target="#introCarousel" data-mdb-slide-to="2"></li>
-      </ol>
+      </ol> -->
 
       <!-- Inner -->
       <div class="carousel-inner">
         <!-- Single item -->
         <div class="carousel-item active">
-          <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
+          <div class="mask" style="
+                background: linear-gradient(
+                  45deg,
+                  rgba(242, 103, 34, 0.7),
+                  rgba(255, 185, 1, 0.7) 100%
+                );">
             <div class="d-flex justify-content-center align-items-center h-100">
               <div class="text-white text-center">
                 <h1 class="mb-3">Find Your Next Deal!</h1>
@@ -179,7 +186,7 @@
 
         <!-- Single item -->
         <div class="carousel-item">
-          <div class="mask" style="background-color: rgba(0, 0, 0, 0.3);">
+          <div class="mask" style="background-color: rgba(0, 0, 0, 0.6);">
             <div class="d-flex justify-content-center align-items-center h-100">
               <div class="text-white text-center">
                 <h2>You can place here any content</h2>
@@ -193,8 +200,8 @@
           <div class="mask" style="
                 background: linear-gradient(
                   45deg,
-                  rgba(29, 236, 197, 0.7),
-                  rgba(91, 14, 214, 0.7) 100%
+                  rgba(242, 103, 34, 0.7),
+                  rgba(255, 185, 1, 0.7) 100%
                 );
               ">
             <div class="d-flex justify-content-center align-items-center h-100">
@@ -227,37 +234,58 @@
   <!--Main layout-->
   <main class="mt-5">
     <div class="container">
-        <section>
+        <section id="logoCarousel">
             <div class="row">
                 <div class="owl-carousel owl-theme">
-                    <div class="item"><h4>1</h4></div>
-                    <div class="item"><h4>2</h4></div>
-                    <div class="item"><h4>3</h4></div>
-                    <div class="item"><h4>4</h4></div>
-                    <div class="item"><h4>5</h4></div>
-                    <div class="item"><h4>6</h4></div>
-                    <div class="item"><h4>7</h4></div>
-                    <div class="item"><h4>8</h4></div>
-                    <div class="item"><h4>9</h4></div>
-                    <div class="item"><h4>10</h4></div>
-                    <div class="item"><h4>11</h4></div>
-                    <div class="item"><h4>12</h4></div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/1mc_logo_v.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_01.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_02.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_03.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_04.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_05.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_06.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_07.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_08.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_09.png') }}"/>
+                    </div>
+                    <div class="item">
+                      <img src="{{ asset('images/slider/partner_logo_10.png') }}"/>
+                    </div>
                 </div>
             </div>
         </section>
       <!--Section: Content-->
       <section>
-        <div class="row">
-          <div class="col-md-6 gx-5 mb-4">
+        <div class="row mt-5">
+          <div class="col-md-6 gx-5">
             <div class="bg-image hover-overlay ripple shadow-2-strong" data-mdb-ripple-color="light">
-              <img src="https://mdbootstrap.com/img/new/slides/031.jpg" class="img-fluid" />
+              <img src="{{ asset('images/landing_page/section01_img.jpg') }}" class="img-fluid" />
               <a href="#!">
                 <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
               </a>
             </div>
           </div>
 
-          <div class="col-md-6 gx-5 mb-4">
+          <div class="col-md-6 gx-5">
             <h4><strong>Facilis consequatur eligendi</strong></h4>
             <p class="text-muted">
               Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur
@@ -277,12 +305,12 @@
 
       <hr class="my-5" />
 
-      <section class="text-center">
+      <section class="text-center" id="pricing_table">
         <h4 class="mb-4"><strong>Pricing</strong></h4>
 
         <div class="btn-group mb-4" role="group" aria-label="Basic example">
-          <button type="button" class="btn btn-primary active">Monthly billing</button>
-          <button type="button" class="btn btn-primary">
+          <button type="button" class="btn btn-primary btn-orange active">Monthly billing</button>
+          <button type="button" class="btn btn-primary btn-yellow">
             Annual billign <small>(2 months FREE)</small>
           </button>
         </div>
@@ -309,7 +337,7 @@
               </div>
 
               <div class="card-footer bg-white py-3">
-                <button type="button" class="btn btn-success btn-sm">Get it</button>
+                <button type="button" class="btn btn-success btn-gray btn-sm">Get it</button>
               </div>
 
             </div>
@@ -322,7 +350,7 @@
           <div class="col-lg-3 col-md-6 mb-4">
 
             <!-- Card -->
-            <div class="card border border-primary">
+            <div class="card border border-orange">
 
               <div class="card-header bg-white py-3">
                 <p class="text-uppercase small mb-2"><strong>Essential</strong></p>
@@ -339,7 +367,7 @@
               </div>
 
               <div class="card-footer bg-white py-3">
-                <button type="button" class="btn btn-primary btn-sm">Buy now</button>
+                <button type="button" class="btn btn-primary btn-orange btn-sm">Buy now</button>
               </div>
 
             </div>
@@ -370,7 +398,7 @@
               </div>
 
               <div class="card-footer bg-white py-3">
-                <button type="button" class="btn btn-info btn-sm">Buy now</button>
+                <button type="button" class="btn btn-info btn-yellow btn-sm">Buy now</button>
               </div>
 
             </div>
@@ -402,7 +430,7 @@
               </div>
 
               <div class="card-footer bg-white py-3">
-                <button type="button" class="btn btn-info btn-sm">Buy now</button>
+                <button type="button" class="btn btn-info btn-yellow btn-sm">Buy now</button>
               </div>
 
             </div>
@@ -416,7 +444,7 @@
 
       <!--Section: Content-->
       <section class="text-center">
-        <h4 class="mb-5"><strong>Facilis consequatur eligendi</strong></h4>
+        <h4 class="mb-5"><strong>Featured Projects</strong></h4>
 
         <div class="row">
           <div class="col-lg-4 col-md-12 mb-4">
@@ -428,12 +456,11 @@
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Job Title 001</h5>
                 <p class="card-text">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
                 </p>
-                <a href="#!" class="btn btn-primary">Button</a>
               </div>
             </div>
           </div>
@@ -447,12 +474,11 @@
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Job Title 002</h5>
                 <p class="card-text">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
                 </p>
-                <a href="#!" class="btn btn-primary">Button</a>
               </div>
             </div>
           </div>
@@ -466,12 +492,11 @@
                 </a>
               </div>
               <div class="card-body">
-                <h5 class="card-title">Card title</h5>
+                <h5 class="card-title">Job Title 003</h5>
                 <p class="card-text">
                   Some quick example text to build on the card title and make up the bulk of the
                   card's content.
                 </p>
-                <a href="#!" class="btn btn-primary">Button</a>
               </div>
             </div>
           </div>
@@ -525,26 +550,26 @@
               </div>
 
               <!-- Submit button -->
-              <button type="submit" class="btn btn-primary btn-block mb-4">
+              <button type="submit" class="btn btn-primary btn-orange btn-block mb-4">
                 Sign up
               </button>
 
               <!-- Register buttons -->
               <div class="text-center">
                 <p>or sign up with:</p>
-                <button type="button" class="btn btn-primary btn-floating mx-1">
+                <button type="button" class="btn btn-primary btn-orange btn-floating mx-1">
                   <i class="fab fa-facebook-f"></i>
                 </button>
 
-                <button type="button" class="btn btn-primary btn-floating mx-1">
+                <button type="button" class="btn btn-primary btn-orange btn-floating mx-1">
                   <i class="fab fa-google"></i>
                 </button>
 
-                <button type="button" class="btn btn-primary btn-floating mx-1">
+                <button type="button" class="btn btn-primary btn-orange btn-floating mx-1">
                   <i class="fab fa-twitter"></i>
                 </button>
 
-                <button type="button" class="btn btn-primary btn-floating mx-1">
+                <button type="button" class="btn btn-primary btn-orange btn-floating mx-1">
                   <i class="fab fa-github"></i>
                 </button>
               </div>
@@ -559,42 +584,10 @@
 
   <!--Footer-->
   <footer class="bg-light text-lg-start">
-    <div class="py-4 text-center">
-      <a role="button" class="btn btn-primary btn-lg m-2"
-        href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" rel="nofollow" target="_blank">
-        Learn Bootstrap 5
-      </a>
-      <a role="button" class="btn btn-primary btn-lg m-2" href="https://mdbootstrap.com/docs/standard/" target="_blank">
-        Download MDB UI KIT
-      </a>
-    </div>
-
-    <hr class="m-0" />
-
-    <div class="text-center py-4 align-items-center">
-      <p>Follow MDB on social media</p>
-      <a href="https://www.youtube.com/channel/UC5CF7mLQZhvx8O5GODZAhdA" class="btn btn-primary m-1" role="button"
-        rel="nofollow" target="_blank">
-        <i class="fab fa-youtube"></i>
-      </a>
-      <a href="https://www.facebook.com/mdbootstrap" class="btn btn-primary m-1" role="button" rel="nofollow"
-        target="_blank">
-        <i class="fab fa-facebook-f"></i>
-      </a>
-      <a href="https://twitter.com/MDBootstrap" class="btn btn-primary m-1" role="button" rel="nofollow"
-        target="_blank">
-        <i class="fab fa-twitter"></i>
-      </a>
-      <a href="https://github.com/mdbootstrap/mdb-ui-kit" class="btn btn-primary m-1" role="button" rel="nofollow"
-        target="_blank">
-        <i class="fab fa-github"></i>
-      </a>
-    </div>
-
     <!-- Copyright -->
-    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-      © 2020 Copyright:
-      <a class="text-dark" href="https://mdbootstrap.com/">MDBootstrap.com</a>
+    <div class="text-center p-3 text-white" style="background-color: rgba(242, 103, 34);">
+      © 2020 Copyright
+      <a class="text-white" href="#">1MC Digital Inc.</a>
     </div>
     <!-- Copyright -->
   </footer>
@@ -609,7 +602,10 @@
         $('.owl-carousel').owlCarousel({
             loop:true,
             margin:10,
-            nav:true,
+            nav:false,
+            autoplay:true,
+            autoplayTimeout:2000,
+            autoplayHoverPause:true,
             responsive:{
                 0:{
                     items:1

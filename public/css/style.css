@@ -608,7 +608,7 @@ body {
 }
 
 .inbox .message .header .date {
-    display: inline-block;
+    display: block;
     width: 29%;
     text-align: right;
     float: right;
@@ -677,3 +677,27 @@ body {
     background: #e4e5e6
 }
   /* End of Messaging Styles */
+
+  /* Carousel Styles */
+#logoCarousel{
+    margin-top: -10%;
+}
+#logoCarousel .owl-stage-outer{
+    background: #fff;
+}
+  /* End of Carousel Styles */
+
+  /* Landing Page Styles */
+#pricing_table .btn-yellow{
+    background: #ffb901;
+}
+#pricing_table .border-orange{
+    border-color: #f26722 !important;
+}
+.btn-orange{
+    background-color: #f26722 !important;
+}
+#pricing_table .btn-gray{
+    background-color: #3e3e3e;
+}
+  /* End of Landing Page Styles */
