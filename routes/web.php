@@ -150,6 +150,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('inbox/archived', [\App\Http\Controllers\Client\InboxController::class, 'archived'])->name('inbox.archived');
         Route::get('inbox/important', [\App\Http\Controllers\Client\InboxController::class, 'important'])->name('inbox.important');
         Route::get('inbox/sent', [\App\Http\Controllers\Client\InboxController::class, 'sent'])->name('inbox.sent');
+
+        Route::resource('contacts', \App\Http\Controllers\Client\ContactController::Class);
     });
 
 });
