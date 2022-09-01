@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\Client;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -39,9 +40,18 @@ class ContactController extends Controller
     {
         try 
         {
-            auth('client')->user()->contacts()->create(
-                $request->all()
-            );
+            $data = $request->all();
+
+            if( auth('client')->user()->contacts()->where('email', $request->input('email'))->exists() )
+            {
+                return redirect()->back()->withErrors('Email already exist in your contact list!');
+            }
+
+            $client = Client::where('email', $request->input('email'))->first(); 
+
+            $data = isset($client) ? array_merge( $data, ['contact_id' => $client->id]) : $data;
+
+            auth('client')->user()->contacts()->create($data);
 
             return redirect(route('client.contacts.index'));
         }
