@@ -4,9 +4,12 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Contacts\CreateContactRequest;
+use App\Mail\Contact\SignupInvitation;
 use App\Models\Client;
+use App\Models\Contact;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
@@ -54,7 +57,7 @@ class ContactController extends Controller
 
             auth('client')->user()->contacts()->create($data);
 
-            return redirect(route('client.contacts.index'));
+            return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
         }
         catch(Exception $e)
         {
@@ -105,5 +108,18 @@ class ContactController extends Controller
     public function destroy($id)
     {
         //
+    }
+
+    public function invite(Contact $contact)
+    {   
+        try 
+        {
+            Mail::to($contact->email)->send(new SignupInvitation($contact));
+            return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
     }
 }
