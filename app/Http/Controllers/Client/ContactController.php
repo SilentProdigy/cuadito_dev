@@ -7,12 +7,15 @@ use App\Http\Requests\Client\Contacts\CreateContactRequest;
 use App\Mail\Contact\SignupInvitation;
 use App\Models\Client;
 use App\Models\Contact;
+use App\Traits\SendSignupInvitationEmail;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
 {
+    use SendSignupInvitationEmail;
+
     /**
      * Display a listing of the resource.
      *
@@ -60,7 +63,9 @@ class ContactController extends Controller
                 return redirect(route('client.contacts.index'))->withErrors('Cannot add contact, please try to search and connect instead.');
             }
 
-            auth('client')->user()->contacts()->create($data);
+            $contact = auth('client')->user()->contacts()->create($data);
+            
+            $this->sendSignupInvitationEmail($contact);
 
             return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
         }
@@ -119,7 +124,7 @@ class ContactController extends Controller
     {   
         try 
         {
-            Mail::to($contact->email)->send(new SignupInvitation($contact));
+            $this->sendSignupInvitationEmail($contact);
             return redirect(route('client.contacts.index'))->with('success', 'Invitation was successfully sent!');
         }
         catch(Exception $e)
