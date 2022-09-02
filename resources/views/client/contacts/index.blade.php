@@ -10,16 +10,17 @@
                 <i class="fa fa-plus"></i>&ensp;Add Contact
             </a>
             <div>
-                
-                <div class="input-group">
-                    <div class="form-outline">
-                        <input id="search-focus" type="search" id="form1" class="form-control" />
-                        <label class="form-label" for="form1">Search</label>
+                <form action="{{ route('client.contacts.index') }}" method="GET">
+                    <div class="input-group">
+                        <div class="form-outline">
+                            <input id="search-focus" type="search" id="form1" class="form-control" name="search"/>
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn border-orange btn-orange">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-                    <button type="button" class="btn border-orange btn-orange">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                </form>
             </div> 
         </div>
     </div>
@@ -28,52 +29,8 @@
 <div class="container-fluid mb-3 d-flex flex-row">
     <div class="bg-white">
         <div class="row">
-
-            @foreach ($contacts as $item)
-                <div class="col-xl-6 mb-4">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="d-flex align-items-center">
-                                    <img
-                                    src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                                    alt=""
-                                    style="width: 45px; height: 45px"
-                                    class="rounded-circle"
-                                    />
-                                    <div class="ms-3">
-                                    <p class="fw-bold mb-1">{{ $item->contact_name }}</p>
-                                    <p class="text-muted mb-0">{{ $item->contact_email }}</p>
-                                    </div>
-                                </div>
-                                <span class="badge rounded-pill badge-success">Active</span>
-                            </div>
-                        </div>
-                        <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">
-                            @if($item->is_existing_client)
-                                <a
-                                    class="btn btn-link m-0 text-reset"
-                                    href="#"
-                                    role="button"
-                                    data-ripple-color="primary"
-                                >Message<i class="fas fa-envelope ms-2"></i
-                                ></a>
-                                <a
-                                class="btn btn-link m-0 text-reset"
-                                href="#"
-                                role="button"
-                                data-ripple-color="primary"
-                                >Call<i class="fas fa-phone ms-2"></i
-                                ></a>
-                            @else 
-                                <a class="btn btn-link m-0 text-reset" href="{{ route('client.contacts.invite', $item) }}" role="button" data-ripple-color="primary">
-                                    Invite<i class="fas fa-paper-plane ms-2"></i>
-                                </a>
-                            @endif
-                        </div>
-                    </div>
-                </div>
-            @endforeach
+            @includeWhen(!request()->has('search'), 'client.contacts.includes.contact_list')
+            @includeWhen(request()->has('search'), 'client.contacts.includes.client_list')
         </div>
     </div>
 </div>
