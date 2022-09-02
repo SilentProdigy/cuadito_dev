@@ -44,6 +44,8 @@ class ContactController extends Controller
     {
         try 
         {
+            // Will store non existing client. 
+
             $data = $request->all();
 
             if( auth('client')->user()->contacts()->where('email', $request->input('email'))->exists() )
@@ -53,7 +55,10 @@ class ContactController extends Controller
 
             $client = Client::where('email', $request->input('email'))->first(); 
 
-            $data = isset($client) ? array_merge( $data, ['contact_id' => $client->id]) : $data;
+            if($client)
+            {
+                return redirect(route('client.contacts.index'))->withErrors('Cannot add contact, please try to search and connect instead.');
+            }
 
             auth('client')->user()->contacts()->create($data);
 
