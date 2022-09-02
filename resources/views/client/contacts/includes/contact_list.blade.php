@@ -22,7 +22,7 @@
             @if($item->is_existing_client)
                 <a
                     class="btn btn-link m-0 text-reset"
-                    href="#"
+                    href="{{ route('client.conversations.create', ['email' => $item->contact_email]) }}"
                     role="button"
                     data-ripple-color="primary"
                 >Message<i class="fas fa-envelope ms-2"></i
