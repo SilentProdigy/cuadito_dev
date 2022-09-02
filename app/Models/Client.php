@@ -132,4 +132,9 @@ class Client extends Authenticatable
         })
         ->count();
     }
+
+    public function getIsConnectedAttribute()
+    {
+        return auth('client')->user()->contacts()->where('client_id', $this->id)->exists();
+    }
 }

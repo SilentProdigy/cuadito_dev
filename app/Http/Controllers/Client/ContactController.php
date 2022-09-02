@@ -23,8 +23,22 @@ class ContactController extends Controller
      */
     public function index()
     {
+        $clients = null;
+
+        if(request()->has('search'))
+        {
+            $clients = Client::where('id', '!=',auth('client')->user()->id)
+            ->where(function($q) {
+                $q->where('name', 'LIKE', '%' . request()->input('search') . '%')
+                ->orWhere('email', 'LIKE', '%' . request()->input('search') . '%');
+            })
+            ->get();
+
+            // return $clients;
+        }
+
         $contacts = auth('client')->user()->contacts;
-        return view('client.contacts.index')->with(compact('contacts'));
+        return view('client.contacts.index')->with(compact('contacts', 'clients'));
     }
 
     /**
