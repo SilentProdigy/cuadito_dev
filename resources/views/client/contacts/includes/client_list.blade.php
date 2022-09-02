@@ -24,9 +24,9 @@
                         Message<i class="fas fa-envelope ms-2"></i>
                     </a>
                 @else 
-                    <a class="btn btn-link m-0 text-reset" href="#" role="button" data-ripple-color="primary">
+                    <button class="btn btn-link m-0 text-reset btn-connect" role="button" data-ripple-color="primary" data-client="{{ json_encode( $item ) }}">
                         Connect<i class="fas fa-plus ms-2"></i>
-                    </a>
+                    </button>
                 @endif
             </div>
         </div>

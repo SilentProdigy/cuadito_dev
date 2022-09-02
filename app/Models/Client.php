@@ -31,7 +31,7 @@ class Client extends Authenticatable
         'have_valid_companies',
         'projects_count',
         'companies_count',
-        'have_unread_notifications'
+        'have_unread_notifications',
     ];
 
 
@@ -135,6 +135,6 @@ class Client extends Authenticatable
 
     public function getIsConnectedAttribute()
     {
-        return auth('client')->user()->contacts()->where('client_id', $this->id)->exists();
+        return auth('client')->user()->contacts()->where('contact_id', $this->id)->exists();
     }
 }

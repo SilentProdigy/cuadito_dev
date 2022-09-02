@@ -35,44 +35,32 @@
     </div>
 </div>
 
-<!-- <div class="card">
-    <div class="card-body">
-        <table class="table table-borderless table-md user-listing-table">
-            <thead>
-                <th>NAME</th>
-                <th>EMAIL ADDRESS</th>
-                <th>ACTIONS</th>
-            </thead>
-            <tbody>
-                @forelse ($contacts as $item)
-                    <tr>
-                        <td>
-                            <span>{{ $item->name }}</span>
-                        </td>
-                        <td><span>{{ $item->email }}</span></td>
-                        <td class="user-actions">
-                            @if(!$item->contact)
-                                <a href="{{ route('client.contacts.invite', $item) }}" class="btn btn-sm btn-info">
-                                    <i class="fa fa-send"></i> Send Invitation
-                                </a>
-                            @endif 
-                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-contact="{{ json_encode($item) }}">
-                                <i class="fa fa-trash"></i>
-                            </a> 
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td>No contact records here!</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-</div> -->
-
+<form action="{{ route('client.connect.store')}}" method="post" id="connect-form">
+    @csrf
+    <input type="hidden" name="contact_id" id="contact-id-txt">
+</form>
 @endsection
 
 @section('script')
+<script>
+    $(document).ready(function() {
+        let connect_btns = document.querySelectorAll('.btn-connect');
 
+        if(connect_btns) 
+        {
+            connect_btns.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-client');   
+                    data = JSON.parse(data);
+
+                    let form = document.querySelector('#connect-form');
+                    // form.setAttribute('action', `/client/connect`);
+                    $('#contact-id-txt').val(`${ data.id }`);
+                    form.submit();
+                });
+            });   
+        }
+    });
+</script>
 @endsection

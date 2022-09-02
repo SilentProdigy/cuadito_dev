@@ -153,6 +153,8 @@ Route::prefix('client')->name('client.')->group(function () {
 
         Route::get('contacts/invite/{contact}', [\App\Http\Controllers\Client\ContactController::class, 'invite'])->name('contacts.invite');
         Route::resource('contacts', \App\Http\Controllers\Client\ContactController::class);
+
+        Route::post('connect', [\App\Http\Controllers\Client\ConnectionController::class, 'store'])->name('connect.store');
     });
 
 });
