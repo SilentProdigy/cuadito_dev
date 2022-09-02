@@ -66,7 +66,7 @@
                                 >Call<i class="fas fa-phone ms-2"></i
                                 ></a>
                             @else 
-                                <a class="btn btn-link m-0 text-reset" href="#" role="button" data-ripple-color="primary">
+                                <a class="btn btn-link m-0 text-reset" href="{{ route('client.contacts.invite', $item) }}" role="button" data-ripple-color="primary">
                                     Invite<i class="fas fa-paper-plane ms-2"></i>
                                 </a>
                             @endif
