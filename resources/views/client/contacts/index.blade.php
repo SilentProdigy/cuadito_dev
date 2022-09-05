@@ -39,6 +39,13 @@
     @csrf
     <input type="hidden" name="contact_id" id="contact-id-txt">
 </form>
+
+<form action="#" method="post" id="delete-connect-form">
+    @csrf
+    @method('DELETE')
+    <input type="hidden" name="contact_id" id="delete-contact-id-txt">
+    <input type="hidden" name="type" id="delete-contact-type-txt">
+</form>
 @endsection
 
 @section('script')
@@ -61,6 +68,48 @@
                 });
             });   
         }
+        
+        let delete_contacts_btns = document.querySelectorAll('.btn-delete-contact');
+
+        if(delete_contacts_btns) 
+        {
+            delete_contacts_btns.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault;
+                    let data = button.getAttribute('data-contact');   
+                    data = JSON.parse(data);
+                    
+                    let form = document.querySelector('#delete-connect-form');
+                    // form.setAttribute('action', `/client/connect`);
+                    $('#delete-contact-id-txt').val(`${ data.id }`);
+                    $('#delete-contact-type-txt').val('contact');
+
+                    form.setAttribute('action', `/client/contacts`);
+                    form.submit();
+                });
+            });
+        }
+
+        let delete_clients_btns = document.querySelectorAll('.btn-delete-client');
+        if(delete_clients_btns) 
+        {
+            delete_clients_btns.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault;
+                    let data = button.getAttribute('data-contact');   
+                    data = JSON.parse(data);
+                    
+                    let form = document.querySelector('#delete-connect-form');
+                    // form.setAttribute('action', `/client/connect`);
+                    $('#delete-contact-id-txt').val(`${ data.id }`);
+                    $('#delete-contact-type-txt').val('client');
+                    
+                    form.setAttribute('action', `/client/contacts`);
+                    form.submit();
+                });
+            });
+        }
+
     });
 </script>
 @endsection

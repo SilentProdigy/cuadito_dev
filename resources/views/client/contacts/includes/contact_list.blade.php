@@ -27,12 +27,13 @@
                     data-ripple-color="primary"
                 >Message<i class="fas fa-envelope ms-2"></i
                 ></a>
-                <a
-                class="btn btn-link m-0 text-reset"
-                href="#"
-                role="button"
-                data-ripple-color="primary"
-                >Call<i class="fas fa-phone ms-2"></i
+                <a 
+                    class="btn btn-link m-0 text-reset btn-delete-contact"
+                    href="#"
+                    role="button"
+                    data-ripple-color="primary"
+                    data-contact="{{ json_encode($item) }}"
+                >Delete<i class="fas fa-trash ms-2"></i
                 ></a>
             @else 
                 <a class="btn btn-link m-0 text-reset" href="{{ route('client.contacts.invite', $item) }}" role="button" data-ripple-color="primary">

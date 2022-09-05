@@ -62,7 +62,6 @@ class ContactController extends Controller
         try 
         {
             // Will store non existing client. 
-
             $data = $request->all();
 
             if( auth('client')->user()->contacts()->where('email', $request->input('email'))->exists() )
@@ -90,48 +89,31 @@ class ContactController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, $id)
-    {
-        //
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Contact $contact)
+    public function destroy(Request $request)
     {
-        
+        try
+        {              
+            $contact = Contact::query();
+            
+            $contact = $request->input('type') == 'contact' ? 
+                        $contact->findOrFail($request->input('contact_id')) : 
+                        auth('client')->user()->contacts
+                        ->where('contact_id', $request->input('contact_id'))
+                        ->firstOrFail();
+
+            $contact->delete();
+
+            return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
     }
 
     public function invite(Contact $contact)
