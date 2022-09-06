@@ -14,6 +14,14 @@ class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
+        if(request()->has('code'))
+        {
+            $contact = Contact::where('id', request()->input('code'))->first();
+
+            if(!$contact)
+                abort(404);
+        }
+
         return view('client.auth.register');
     }
 
