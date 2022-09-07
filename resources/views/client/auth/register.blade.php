@@ -9,6 +9,7 @@
                     <form method="POST" action="{{ route('client.auth.register') }}">
                         @csrf
 
+                        <input type="hidden" name="code" value="{{ request()->input('code') }}">
                         <h5 style="border-bottom: 1px solid #eeeeee" class="text-center">Welcome to CUADITO</h5>
                         <div class="row mb-3">
                             <div class="col-md-12">

@@ -152,7 +152,13 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('inbox/sent', [\App\Http\Controllers\Client\InboxController::class, 'sent'])->name('inbox.sent');
 
         Route::get('contacts/invite/{contact}', [\App\Http\Controllers\Client\ContactController::class, 'invite'])->name('contacts.invite');
-        Route::resource('contacts', \App\Http\Controllers\Client\ContactController::class);
+        // Route::resource('contacts', \App\Http\Controllers\Client\ContactController::class);
+        Route::get('contacts', [\App\Http\Controllers\Client\ContactController::class, 'index'])->name('contacts.index');
+        Route::get('contacts/create', [\App\Http\Controllers\Client\ContactController::class, 'create'])->name('contacts.create');
+        Route::post('contacts', [\App\Http\Controllers\Client\ContactController::class, 'store'])->name('contacts.store');
+        Route::delete('contacts', [\App\Http\Controllers\Client\ContactController::class, 'destroy'])->name('contacts.delete');
+
+        Route::post('connect', [\App\Http\Controllers\Client\ConnectionController::class, 'store'])->name('connect.store');
     });
 
 });

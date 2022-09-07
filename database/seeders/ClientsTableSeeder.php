@@ -28,7 +28,7 @@ class ClientsTableSeeder extends Seeder
                 'gender' => 'MALE',
                 'address' => 'Washington DC',
                 'marital_status' => 'Single',
-                'email' => 'bcalma.cuadito@gmail.com',
+                'email' => 'briancalmadevacc@gmail.com',
                 'password' => bcrypt('password')
             ]
         ];

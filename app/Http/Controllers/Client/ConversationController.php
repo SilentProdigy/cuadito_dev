@@ -4,10 +4,13 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Conversations\CreateConversationFormRequest;
+use App\Mail\Message\NotifyReceiver;
 use App\Models\Client;
 use App\Models\Conversation;
 use App\Models\ConversationSubscription;
+use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class ConversationController extends Controller
 {
@@ -47,30 +50,46 @@ class ConversationController extends Controller
 
     public function store(CreateConversationFormRequest $request)
     {
-        $recipient = Client::where('email', $request->input('email'))->first();
-        
-        # Create conversation
-        $conversation = Conversation::create(['subject' => $request->input('subject')]);
-
-        # Subscribe client to conversation
-        collect([ auth('client')->user(), $recipient ])->each(function($item) use ($conversation){
-            $conversation->subscriptions()->create([
-                'client_id' => $item->id,
-                'conversation_id' => $conversation->id,
+        try
+        {
+            $recipient = Client::where('email', $request->input('email'))->first();
+    
+            # Create conversation
+            $conversation = Conversation::create(['subject' => $request->input('subject')]);
+    
+            # Subscribe client to conversation
+            collect([ auth('client')->user(), $recipient ])->each(function($item) use ($conversation){
+                $conversation->subscriptions()->create([
+                    'client_id' => $item->id,
+                    'conversation_id' => $conversation->id,
+                ]);
+            });
+    
+            # Create messages for the conversation
+            $conversation->messages()->create([
+                'sender_id' => auth('client')->user()->id,
+                'content' => $request->input('content')
             ]);
-        });
+    
+            $recipient->notifications()->create([
+                'content' => auth('client')->user()->name . ' messaged you!',
+                'url' => route('client.conversations.show', $conversation),    
+            ]);
+    
+            // NotifyReceiver::dispatch(auth('client')->user(), $recipient, $conversation);
+            Mail::to($recipient->email)->send(new NotifyReceiver(
+                auth('client')->user(), 
+                $recipient, 
+                $conversation
+            ));
+    
+            return redirect(route('client.inbox.index'))->with('success', 'Successfuly sent a message!');     
 
-        # Create messages for the conversation
-        $conversation->messages()->create([
-            'sender_id' => auth('client')->user()->id,
-            'content' => $request->input('content')
-        ]);
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
 
-        $recipient->notifications()->create([
-            'content' => auth('client')->user()->name . ' messaged you!',
-            'url' => route('client.conversations.show', $conversation),    
-        ]);
-
-        return redirect(route('client.inbox.index'))->with('success', 'Successfuly sent a message!');     
     }
 }

@@ -10,16 +10,17 @@
                 <i class="fa fa-plus"></i>&ensp;Add Contact
             </a>
             <div>
-                
-                <div class="input-group">
-                    <div class="form-outline">
-                        <input id="search-focus" type="search" id="form1" class="form-control" />
-                        <label class="form-label" for="form1">Search</label>
+                <form action="{{ route('client.contacts.index') }}" method="GET">
+                    <div class="input-group">
+                        <div class="form-outline">
+                            <input id="search-focus" type="search" id="form1" class="form-control" name="search"/>
+                            <label class="form-label" for="form1">Search</label>
+                        </div>
+                        <button type="submit" class="btn border-orange btn-orange">
+                            <i class="fas fa-search"></i>
+                        </button>
                     </div>
-                    <button type="button" class="btn border-orange btn-orange">
-                        <i class="fas fa-search"></i>
-                    </button>
-                </div>
+                </form>
             </div> 
         </div>
     </div>
@@ -28,190 +29,87 @@
 <div class="container-fluid mb-3 d-flex flex-row">
     <div class="bg-white">
         <div class="row">
-            <div class="col-xl-6 mb-4">
-                <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                        src="https://mdbootstrap.com/img/new/avatars/8.jpg"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                        <p class="fw-bold mb-1">John Doe</p>
-                        <p class="text-muted mb-0">john.doe@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-success">Active</span>
-                    </div>
-                </div>
-                <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-                >
-                    <a
-                    class="btn btn-link m-0 text-reset"
-                    href="#"
-                    role="button"
-                    data-ripple-color="primary"
-                    >Message<i class="fas fa-envelope ms-2"></i
-                    ></a>
-                    <a
-                    class="btn btn-link m-0 text-reset"
-                    href="#"
-                    role="button"
-                    data-ripple-color="primary"
-                    >Call<i class="fas fa-phone ms-2"></i
-                    ></a>
-                </div>
-                </div>
-            </div>
-            <div class="col-xl-6 mb-4">
-                <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                        src="https://mdbootstrap.com/img/new/avatars/6.jpg"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                        <p class="fw-bold mb-1">Alex Ray</p>
-                        <p class="text-muted mb-0">alex.ray@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-success">Active</span>
-                    </div>
-                </div>
-                <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-                >
-                    <a
-                    class="btn btn-link m-0 text-reset"
-                    href="#"
-                    role="button"
-                    data-ripple-color="primary"
-                    >Invite<i class="fas fa-paper-plane ms-2"></i
-                    ></a>
-                </div>
-                </div>
-            </div>
-            <div class="col-xl-6 mb-4">
-                <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                        src="https://mdbootstrap.com/img/new/avatars/7.jpg"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                        <p class="fw-bold mb-1">Kate Hunington</p>
-                        <p class="text-muted mb-0">kate.hunington@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-danger">Away</span>
-                    </div>
-                </div>
-                <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-                >
-                <a
-                    class="btn btn-link m-0 text-reset"
-                    href="#"
-                    role="button"
-                    data-ripple-color="primary"
-                    >Invite<i class="fas fa-paper-plane ms-2"></i
-                    ></a>
-                </div>
-                </div>
-            </div>
-            <div class="col-xl-6 mb-4">
-                <div class="card">
-                <div class="card-body">
-                    <div class="d-flex justify-content-between align-items-center">
-                    <div class="d-flex align-items-center">
-                        <img
-                        src="https://mdbootstrap.com/img/new/avatars/3.jpg"
-                        alt=""
-                        style="width: 45px; height: 45px"
-                        class="rounded-circle"
-                        />
-                        <div class="ms-3">
-                        <p class="fw-bold mb-1">Michael Bale</p>
-                        <p class="text-muted mb-0">michael.bale@gmail.com</p>
-                        </div>
-                    </div>
-                    <span class="badge rounded-pill badge-danger">Away</span>
-                    </div>
-                </div>
-                <div
-                    class="card-footer border-0 bg-light p-2 d-flex justify-content-around"
-                >
-                    <a
-                    class="btn btn-link m-0 text-reset"
-                    href="#"
-                    role="button"
-                    data-ripple-color="primary"
-                    >Message<i class="fas fa-envelope ms-2"></i
-                    ></a>
-                    <a
-                    class="btn btn-link m-0 text-reset"
-                    href="#"
-                    role="button"
-                    data-ripple-color="primary"
-                    >Call<i class="fas fa-phone ms-2"></i
-                    ></a>
-                </div>
-                </div>
-            </div>
+            @includeWhen(!request()->has('search'), 'client.contacts.includes.contact_list')
+            @includeWhen(request()->has('search'), 'client.contacts.includes.client_list')
         </div>
     </div>
 </div>
 
-<!-- <div class="card">
-    <div class="card-body">
-        <table class="table table-borderless table-md user-listing-table">
-            <thead>
-                <th>NAME</th>
-                <th>EMAIL ADDRESS</th>
-                <th>ACTIONS</th>
-            </thead>
-            <tbody>
-                @forelse ($contacts as $item)
-                    <tr>
-                        <td>
-                            <span>{{ $item->name }}</span>
-                        </td>
-                        <td><span>{{ $item->email }}</span></td>
-                        <td class="user-actions">
-                            @if(!$item->contact)
-                                <a href="{{ route('client.contacts.invite', $item) }}" class="btn btn-sm btn-info">
-                                    <i class="fa fa-send"></i> Send Invitation
-                                </a>
-                            @endif 
-                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-contact="{{ json_encode($item) }}">
-                                <i class="fa fa-trash"></i>
-                            </a> 
-                        </td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td>No contact records here!</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-</div> -->
+<form action="{{ route('client.connect.store')}}" method="post" id="connect-form">
+    @csrf
+    <input type="hidden" name="contact_id" id="contact-id-txt">
+</form>
 
+<form action="#" method="post" id="delete-connect-form">
+    @csrf
+    @method('DELETE')
+    <input type="hidden" name="contact_id" id="delete-contact-id-txt">
+    <input type="hidden" name="type" id="delete-contact-type-txt">
+</form>
 @endsection
 
 @section('script')
+<script>
+    $(document).ready(function() {
+        let connect_btns = document.querySelectorAll('.btn-connect');
 
+        if(connect_btns) 
+        {
+            connect_btns.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-client');   
+                    data = JSON.parse(data);
+
+                    let form = document.querySelector('#connect-form');
+                    // form.setAttribute('action', `/client/connect`);
+                    $('#contact-id-txt').val(`${ data.id }`);
+                    form.submit();
+                });
+            });   
+        }
+        
+        let delete_contacts_btns = document.querySelectorAll('.btn-delete-contact');
+
+        if(delete_contacts_btns) 
+        {
+            delete_contacts_btns.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault;
+                    let data = button.getAttribute('data-contact');   
+                    data = JSON.parse(data);
+                    
+                    let form = document.querySelector('#delete-connect-form');
+                    // form.setAttribute('action', `/client/connect`);
+                    $('#delete-contact-id-txt').val(`${ data.id }`);
+                    $('#delete-contact-type-txt').val('contact');
+
+                    form.setAttribute('action', `/client/contacts`);
+                    form.submit();
+                });
+            });
+        }
+
+        let delete_clients_btns = document.querySelectorAll('.btn-delete-client');
+        if(delete_clients_btns) 
+        {
+            delete_clients_btns.forEach(button => {
+                button.addEventListener('click', (e) => {
+                    e.preventDefault;
+                    let data = button.getAttribute('data-contact');   
+                    data = JSON.parse(data);
+                    
+                    let form = document.querySelector('#delete-connect-form');
+                    // form.setAttribute('action', `/client/connect`);
+                    $('#delete-contact-id-txt').val(`${ data.id }`);
+                    $('#delete-contact-type-txt').val('client');
+                    
+                    form.setAttribute('action', `/client/contacts`);
+                    form.submit();
+                });
+            });
+        }
+
+    });
+</script>
 @endsection

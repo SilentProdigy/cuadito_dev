@@ -9,12 +9,17 @@ class Contact extends Model
 {
     use HasFactory;
 
-
     protected $fillable = [
         'name',
         'email',
         'client_id',
         'contact_id'
+    ];
+
+    protected $appends = [
+        'contact_name',
+        'contact_email',
+        'is_existing_client'
     ];
 
     public function client()
@@ -29,6 +34,17 @@ class Contact extends Model
 
     public function getContactNameAttribute()
     {
-        return $this->contact->name;
+        return $this->contact_id ? $this->contact->name : $this->name;
     }
+
+    public function getContactEmailAttribute()
+    {
+        return $this->contact_id ? $this->contact->email : $this->email;
+    }
+
+    public function getIsExistingClientAttribute()
+    {
+        return isset( $this->contact_id );
+    }
+
 }
