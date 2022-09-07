@@ -68,11 +68,22 @@
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.confirm_archived_modal')
     @include('client.conversations.includes.confirm_delete_modal')
+    @include('client.inbox.includes.create_label_modal')
 @endsection
 
 @section('script')
     <script>
         $(document).ready(function() {
+
+            let add_label_btn = document.querySelector('#add-label-btn');
+
+            add_label_btn.addEventListener('click', function(e) {
+                e.preventDefault;
+
+                let myModal = new bootstrap.Modal(document.getElementById('add-label-modal'), {keyboard: false})
+                myModal.show()
+            });
+
             const checkboxes = document.querySelectorAll(".select-sub-checkbox");
             let checkedItems = [];
 
@@ -220,6 +231,14 @@
                     document.querySelector('#delete-convo-form').submit();
                 });
             }
+
+            // $("#add-label-btn").click(function(e) {
+            //     e.preventDefault;
+            //     // let data = button.getAttribute('data-subscription');   
+            //     // data = JSON.parse(data);
+            //     let myModal = new bootstrap.Modal(document.getElementById('add-label-modal'), {keyboard: false})
+            //     myModal.show()
+            // });
         });
 
     </script>

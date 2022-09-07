@@ -44,6 +44,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('contacts'));
         });
 
+        View::composer(['client.inbox.includes.labels_links'], function($view)
+        {    
+            $labels = auth('client')->user()->labels;
+            $view->with(compact('labels'));
+        });
+
         View::composer(['client.inbox.includes.*'], function($view)
         {    
             $client = auth('client')->user();
