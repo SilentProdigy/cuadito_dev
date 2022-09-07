@@ -38,7 +38,7 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('categories'));
         });
 
-        View::composer(['client.inbox.includes.contact_list'], function($view)
+        View::composer(['client.inbox.includes.contact_list', 'client.conversations.includes.create_conversation_modal'], function($view)
         {    
             $contacts = auth('client')->user()->contacts()->where('contact_id', '!=', null)->get();
             $view->with(compact('contacts'));

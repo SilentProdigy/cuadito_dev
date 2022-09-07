@@ -17,7 +17,16 @@
 
                         <div class="col-md-12">
                             <label for="">Recipient Email</label>
-                            <input type="email" name="email" class="form-control">
+                            {{-- <input type="email" name="email" class="form-control"> --}}
+                            <select name="email" id="" class="form-control">
+                                @forelse ($contacts as $item)
+                                    @if($item->contact)
+                                        <option value="{{ $item->contact->email }}">{{ $item->contact->name }}</option>
+                                    @endif
+                                @empty
+                                    <option value="">No available contact</option>
+                                @endforelse
+                            </select>
                         </div>
 
                         <div class="col-md-12">
