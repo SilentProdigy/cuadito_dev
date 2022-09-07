@@ -159,6 +159,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::delete('contacts', [\App\Http\Controllers\Client\ContactController::class, 'destroy'])->name('contacts.delete');
 
         Route::post('connect', [\App\Http\Controllers\Client\ConnectionController::class, 'store'])->name('connect.store');
+
+        Route::resource('labels', \App\Http\Controllers\Client\LabelController::class);
     });
 
 });

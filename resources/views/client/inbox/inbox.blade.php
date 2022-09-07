@@ -35,7 +35,21 @@
             </li>
         @endforelse
     </ul>
+
+    @include('client.inbox.includes.create_label_modal')
 @endsection
 
+@section('script')
+<script>
+    $(document).ready(function() {
+        $("#add-label-btn").click(function(e) {
+            e.preventDefault;
+            // let data = button.getAttribute('data-subscription');   
+            // data = JSON.parse(data);
 
-
+            let myModal = new bootstrap.Modal(document.getElementById('add-label-modal'), {keyboard: false})
+            myModal.show()
+        });
+    }); 
+</script>
+@endsection
