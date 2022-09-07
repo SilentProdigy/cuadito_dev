@@ -76,9 +76,12 @@ class ConversationController extends Controller
                 'url' => route('client.conversations.show', $conversation),    
             ]);
     
+            $client = auth('client')->user();
+
             // NotifyReceiver::dispatch(auth('client')->user(), $recipient, $conversation);
-            Mail::to($recipient->email)->send(new NotifyReceiver(
-                auth('client')->user(), 
+            Mail::to($recipient->email)
+            ->queue(new NotifyReceiver(
+                $client, 
                 $recipient, 
                 $conversation
             ));

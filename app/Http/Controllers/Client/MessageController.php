@@ -35,7 +35,7 @@ class MessageController extends Controller
             $recipient = $conversation->other_client;
 
             // NotifyReceiver::dispatch(auth('client')->user(), $recipient, $conversation);
-            Mail::to($recipient->email)->send(new NotifyReceiver(
+            Mail::to($recipient->email)->queue(new NotifyReceiver(
                 auth('client')->user(), 
                 $recipient, 
                 $conversation
