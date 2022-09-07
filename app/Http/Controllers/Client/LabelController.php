@@ -13,7 +13,8 @@ class LabelController extends Controller
     {
         try 
         {
-            Label::create($request->all());
+            // Label::create($request->all());
+            auth('client')->user()->labels()->create($request->all());
             return redirect()->back()->with('success', 'Message was successfully sent.');     
         }
         catch(Exception $e)
