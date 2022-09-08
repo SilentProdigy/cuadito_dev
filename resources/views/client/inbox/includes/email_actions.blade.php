@@ -31,13 +31,9 @@
     </span>
 
     <span class="btn-group">
-        <button class="btn btn-default dropdown-toggle" data-toggle="dropdown"><span class="fa fa-tags"></span> <span class="caret"></span></button>
-        <ul class="dropdown-menu">
-            <li><a href="#">add label <span class="label label-danger"> Home</span></a></li>
-            <li><a href="#">add label <span class="label label-info">Job</span></a></li>
-            <li><a href="#">add label <span class="label label-success">Clients</span></a></li>
-            <li><a href="#">add label <span class="label label-warning">News</span></a></li>
-        </ul>
+        <button class="btn btn-default" id="btn-set-label">
+            <span class="fa fa-tags"></span>
+        </button>
     </span> 
 
     <span class="btn-group pull-right">

@@ -69,6 +69,7 @@
     @include('client.conversations.includes.confirm_archived_modal')
     @include('client.conversations.includes.confirm_delete_modal')
     @include('client.inbox.includes.create_label_modal')
+    @include('client.inbox.includes.set_labels_modal')
 @endsection
 
 @section('script')
@@ -218,7 +219,6 @@
                 });
             }
             
-
             let delete_buttons = document.querySelector('.btn-delete');
 
             if(delete_buttons) 
@@ -232,14 +232,12 @@
                 });
             }
 
-            // $("#add-label-btn").click(function(e) {
-            //     e.preventDefault;
-            //     // let data = button.getAttribute('data-subscription');   
-            //     // data = JSON.parse(data);
-            //     let myModal = new bootstrap.Modal(document.getElementById('add-label-modal'), {keyboard: false})
-            //     myModal.show()
-            // });
-        });
+            let set_label_button = document.querySelector('#btn-set-label');
 
+            set_label_button.addEventListener('click', () => {
+                let myModal = new bootstrap.Modal(document.getElementById('set-labels-modal'), {keyboard: false})
+                myModal.show()
+            });
+        });
     </script>
 @endsection

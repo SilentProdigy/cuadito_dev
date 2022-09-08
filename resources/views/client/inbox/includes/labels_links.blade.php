@@ -7,7 +7,7 @@
     </li>
     @foreach ($labels as $label)
     <li>
-        <a href="#">{{ $label->name }} <span class="label label-danger"></span></a>
+        <a href="{{ route('client.inbox.index') }}">{{ $label->name }} <span class="label label-danger"></span></a>
     </li>
     @endforeach
 </ul>
