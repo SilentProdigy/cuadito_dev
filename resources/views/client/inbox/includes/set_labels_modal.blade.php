@@ -7,13 +7,21 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body mx-3 auth-form">
-                <select id="multiSelection" class="select form-control" multiple>
-                <option value="1">One</option>
-                <option value="2">Two</option>
-                <option value="3">Three</option>
-                <option value="4">Four</option>
-                <option value="5">Five</option>
-                </select>
+                <form action="#" method="POST">
+                    @csrf
+                    <label>Select Label:</label>
+                    <select id="multiSelection" class="select form-control" multiple>
+                        @foreach ($labels as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
+
+                    <div class="row mt-3 mx-0">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Save') }}
+                        </button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
