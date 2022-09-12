@@ -26,7 +26,7 @@
                         <td>{{ $loop->iteration }}</td>
                         <td class="col-span-2">{{ $label->name }}</td>
                         <td class="user-actions">
-                            <a href="#" class="btn btn-sm btn-warning">
+                            <a href="#" class="btn btn-sm btn-warning btn-edit-lbl" data-label="{{ json_encode($label) }}">
                                 <i class="fa fa-pencil"></i>          
                             </a>                            
                             <a href="#" class="btn btn-sm btn-danger btn-delete" data-label="{{ json_encode($label) }}">
@@ -40,8 +40,34 @@
     </div>
 </div>
 @include('client.inbox.includes.create_label_modal')
+@include('client.inbox.includes.edit_label_modal')
 @endsection
 
 @section('script')
-    
+<script>
+    $(document).ready(function() {
+        let btnEditLabels = document.querySelectorAll('.btn-edit-lbl');
+
+        if(btnEditLabels)
+        {
+            btnEditLabels.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-label');   
+                    data = JSON.parse(data);
+
+                    let myModal = new bootstrap.Modal(document.getElementById('edit-label-modal'), {keyboard: false})
+                    myModal.show()
+
+                    document.querySelector('#edit-lbl-txt').value = data.name;
+
+                    let form = document.querySelector('#edit-label-form');
+                    form.setAttribute('action', `/client/labels/${ data.id }`);
+
+                    // $('#validation_status').val(`${ data.validation_status }`);
+                });
+            });
+        }
+    });
+</script>
 @endsection

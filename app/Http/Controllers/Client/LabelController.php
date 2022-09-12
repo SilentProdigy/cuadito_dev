@@ -22,7 +22,22 @@ class LabelController extends Controller
         {
             // Label::create($request->all());
             auth('client')->user()->labels()->create($request->all());
-            return redirect()->back()->with('success', 'Message was successfully sent.');     
+            return redirect()->back()->with('success', 'Label was successfully created.');     
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
+    public function update(Label $label,Request $request)
+    {
+        try 
+        {
+            // Label::create($request->all());
+            // auth('client')->user()->labels()->create($request->all());
+            $label->update($request->all());
+            return redirect()->back()->with('success', 'Label was successfully updated.');     
         }
         catch(Exception $e)
         {
