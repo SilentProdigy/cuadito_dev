@@ -6,9 +6,9 @@
     <div class="d-flex flex-row d-align-items-center justify-content-center">
         <div class="table-titles">Your Labels</div>
         <div class="col d-flex justify-content-end">
-            {{-- <a href="{{ route('client.companies.create') }}" class="btn btn-primary header-btn">
-                <i class="fa fa-plus"></i>&ensp;Add Company
-            </a> --}}
+            <button class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-label-modal">
+                <i class="fa fa-plus"></i>&ensp;Add Label
+            </button>
         </div>
     </div>
 </div>
@@ -39,6 +39,7 @@
         </table>
     </div>
 </div>
+@include('client.inbox.includes.create_label_modal')
 @endsection
 
 @section('script')
