@@ -44,4 +44,20 @@ class LabelController extends Controller
             dd($e->getMessage());
         }
     }
+
+    public function destroy(Label $label, Request $request)
+    {
+        try
+        {              
+            $label->delete();
+
+            return redirect(route('client.labels.index'))->with('success', 'Label was deleted successfully!');
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
+
+    
 }

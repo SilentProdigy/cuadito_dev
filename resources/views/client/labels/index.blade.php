@@ -29,7 +29,7 @@
                             <a href="#" class="btn btn-sm btn-warning btn-edit-lbl" data-label="{{ json_encode($label) }}">
                                 <i class="fa fa-pencil"></i>          
                             </a>                            
-                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-label="{{ json_encode($label) }}">
+                            <a href="#" class="btn btn-sm btn-danger btn-delete btn-delete-lbl" data-label="{{ json_encode($label) }}">
                                 <i class="fa fa-trash"></i>
                             </a> 
                         </td>
@@ -41,6 +41,7 @@
 </div>
 @include('client.inbox.includes.create_label_modal')
 @include('client.inbox.includes.edit_label_modal')
+@include('client.inbox.includes.confirm_delete_label_modal')
 @endsection
 
 @section('script')
@@ -62,6 +63,27 @@
                     document.querySelector('#edit-lbl-txt').value = data.name;
 
                     let form = document.querySelector('#edit-label-form');
+                    form.setAttribute('action', `/client/labels/${ data.id }`);
+
+                    // $('#validation_status').val(`${ data.validation_status }`);
+                });
+            });
+        }
+
+        let btnDeleteLabels = document.querySelectorAll('.btn-delete-lbl');
+
+        if(btnDeleteLabels)
+        {
+            btnDeleteLabels.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-label');   
+                    data = JSON.parse(data);
+
+                    let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-label-modal'), {keyboard: false})
+                    myModal.show()
+
+                    let form = document.querySelector('#delete-label-form');
                     form.setAttribute('action', `/client/labels/${ data.id }`);
 
                     // $('#validation_status').val(`${ data.validation_status }`);
