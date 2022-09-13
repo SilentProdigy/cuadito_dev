@@ -10,7 +10,8 @@ class InboxController extends Controller
 {
     public function inbox()
     {
-        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+        $conversation_subscriptions = ConversationSubscription::with('labels')
+        ->whereHas('conversation.messages', function($query) {
             $query->where('sender_id', "!=", auth('client')->user()->id );
         }, ">", 0)
         ->where('client_id', auth('client')->user()->id )
@@ -22,7 +23,8 @@ class InboxController extends Controller
 
     public function starred()
     {
-        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+        $conversation_subscriptions = ConversationSubscription::with('labels')
+        ->whereHas('conversation.messages', function($query) {
             $query->where('sender_id', "!=", auth('client')->user()->id );
         }, ">", 0)
         ->where('client_id', auth('client')->user()->id )
@@ -36,7 +38,8 @@ class InboxController extends Controller
 
     public function archived()
     {
-        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+        $conversation_subscriptions = ConversationSubscription::with('labels')
+        ->whereHas('conversation.messages', function($query) {
             $query->where('sender_id', "!=", auth('client')->user()->id );
         }, ">", 0)
         ->where('client_id', auth('client')->user()->id )
@@ -49,7 +52,8 @@ class InboxController extends Controller
 
     public function important()
     {
-        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+        $conversation_subscriptions = ConversationSubscription::with('labels')
+        ->whereHas('conversation.messages', function($query) {
             $query->where('sender_id', "!=", auth('client')->user()->id );
         }, ">", 0)
         ->where('client_id', auth('client')->user()->id )
@@ -62,7 +66,8 @@ class InboxController extends Controller
 
     public function sent()
     {
-        $conversation_subscriptions = ConversationSubscription::whereHas('conversation.messages', function($query) {
+        $conversation_subscriptions = ConversationSubscription::with('labels')
+        ->whereHas('conversation.messages', function($query) {
             $query->where('sender_id', auth('client')->user()->id );
         }, ">", 0)
         ->where('client_id', auth('client')->user()->id )
