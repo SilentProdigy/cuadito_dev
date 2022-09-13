@@ -34,6 +34,8 @@
         </div>
     </div>
 
+    <div style="display:none" data-labels="{{ json_encode( auth('client')->user()->labels ) }}" id="user-labels-div"></div>
+
     <form action="{{ route('client.conversation-subs.unread') }}" method="post" id="unread-form">
         @csrf
         <input type="hidden" name="subscription_ids" id="unread-conversation-ids">
@@ -69,6 +71,7 @@
     @include('client.conversations.includes.confirm_archived_modal')
     @include('client.conversations.includes.confirm_delete_modal')
     @include('client.inbox.includes.create_label_modal')
+    @include('client.inbox.includes.set_labels_modal')
 @endsection
 
 @section('script')
@@ -234,8 +237,40 @@
             let set_label_button = document.querySelector('#btn-set-label');
 
             set_label_button.addEventListener('click', () => {
+
+                if(checkedItems.length == 0)
+                    return;
+
                 let myModal = new bootstrap.Modal(document.getElementById('set-labels-modal'), {keyboard: false})
                 myModal.show()
+
+                let data = document.querySelector('#user-labels-div').getAttribute('data-labels');   
+                data = JSON.parse(data);
+
+                let selectBox = document.querySelector('#label-select-box');
+
+                selectBox.innerHTML = "";
+
+                let userLabels = checkedItems.flatMap(item => {
+                    return item.labels.map(item => item.id)
+                });
+
+    
+                // console.log(data);
+                data.forEach(item => {
+                    let option = document.createElement('option');
+                    option.text = item.name; 
+                    option.value = item.id;
+
+                    if( userLabels.length > 0 && userLabels.includes( item.id )) {
+                        console.log('right here!');
+                        option.setAttribute('selected', true);
+                    }
+                        
+
+                    selectBox.appendChild(option);
+
+                });
             });
         });
     </script>

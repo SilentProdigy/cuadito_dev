@@ -7,17 +7,14 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body mx-3 auth-form">
-                <form action="{{ route('client.conversation-subs.set-labels') }}" method="POST">
+                <form action="{{ route('client.conversation-subs.set-labels') }}" method="POST" id="set-labels-convo-form">
                     @csrf
                     @method('PATCH')
                     <label>Select Label:</label>
-                    <select id="multiSelection" class="select form-control" name="labels[]" multiple>
-                        @foreach ($labels as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
+                    <select id="label-select-box" class="select form-control" name="labels[]" multiple>
                     </select>
 
-                    <input type="hidden" name="subscription_ids[]" value="{{  $subscription->id }}">
+                    <input type="hidden" name="subscription_ids" id="labels-conversation-ids">
 
                     <div class="row mt-3 mx-0">
                         <button type="submit" class="btn btn-primary">
