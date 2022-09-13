@@ -22,7 +22,7 @@ class ConversationSubscription extends Model
     ];
 
     protected $with = [
-        'conversation'
+        'conversation',
     ];
 
     public function conversation()
