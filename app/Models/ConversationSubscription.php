@@ -23,6 +23,7 @@ class ConversationSubscription extends Model
 
     protected $with = [
         'conversation',
+        'labels'
     ];
 
     public function conversation()
