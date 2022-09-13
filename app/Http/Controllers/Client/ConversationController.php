@@ -38,6 +38,8 @@ class ConversationController extends Controller
 
         $subscription = $conversation->subscriptions->where('client_id', auth('client')->user()->id)->first();
 
+        $subscription->load('labels');
+
         $messages = $conversation->messages;
 
         return view('client.conversations.show')->with(compact('messages', 'conversation', 'subscription'));
