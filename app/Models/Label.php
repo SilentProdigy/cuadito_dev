@@ -18,4 +18,9 @@ class Label extends Model
     {
         return $this->belongsTo(\App\Models\Client::class);
     }
+
+    public function conversationSubscription()
+    {
+        return $this->belongsToMany(\App\Models\ConversationSubscription::class, 'conversation_sub_label');
+    }
 }

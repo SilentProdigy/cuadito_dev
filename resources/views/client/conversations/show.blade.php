@@ -30,4 +30,6 @@
             <input type="submit" value="Send Message" class="btn btn-primary my-2">
         </form>
     </div>
+
+    @include('client.inbox.includes.set_labels_modal')
 @endsection

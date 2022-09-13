@@ -40,6 +40,11 @@ class ConversationSubscription extends Model
         return $this->conversation->subject;
     }
 
+    public function labels()
+    {
+        return $this->belongsToMany(\App\Models\Label::class, 'conversation_sub_label', 'conversation_subscription_id', 'label_id');
+    }
+
     // public function messages()
     // {
     //     return $this->hasManyThrough(\App\Models\Message::class, \App\Models\Conversation::class);

@@ -69,7 +69,6 @@
     @include('client.conversations.includes.confirm_archived_modal')
     @include('client.conversations.includes.confirm_delete_modal')
     @include('client.inbox.includes.create_label_modal')
-    @include('client.inbox.includes.set_labels_modal')
 @endsection
 
 @section('script')
