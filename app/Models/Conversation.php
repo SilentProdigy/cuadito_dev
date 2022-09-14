@@ -34,6 +34,13 @@ class Conversation extends Model
     {
         $subscription = $this->subscriptions()->where('client_id','!=',auth('client')->user()->id)->first();
 
+        // The other person on the conversation delete the convo!
+        if(!$subscription) {
+            $subscription = $this->subscriptions()->withTrashed()
+                            ->where('client_id','!=',auth('client')->user()->id)
+                            ->first();
+        }
+
         return $subscription->client;
     }
 
