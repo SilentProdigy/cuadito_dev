@@ -35,5 +35,4 @@
         </form>
     </div>
 
-    @include('client.inbox.includes.set_labels_modal')
 @endsection
