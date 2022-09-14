@@ -25,6 +25,9 @@
                             </span>
                         @endif
                         {{ $item->conversation->subject }}
+                        @foreach ($item->labels as $label)
+                            <span class="badge rounded-pill badge-dark">{{ $label->name }}</span>
+                        @endforeach
                     </div>	
                     <div class="description">
                         {!! $item->conversation->latest_message->content_text !!}

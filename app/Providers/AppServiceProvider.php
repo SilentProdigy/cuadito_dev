@@ -38,10 +38,16 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('categories'));
         });
 
-        View::composer(['client.inbox.includes.contact_list'], function($view)
+        View::composer(['client.inbox.includes.contact_list', 'client.conversations.includes.create_conversation_modal'], function($view)
         {    
             $contacts = auth('client')->user()->contacts()->where('contact_id', '!=', null)->get();
             $view->with(compact('contacts'));
+        });
+
+        View::composer(['client.inbox.includes.labels_links','client.inbox.includes.set_labels_modal'], function($view)
+        {    
+            $labels = auth('client')->user()->labels;
+            $view->with(compact('labels'));
         });
 
         View::composer(['client.inbox.includes.*'], function($view)

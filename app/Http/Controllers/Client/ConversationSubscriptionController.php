@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\ConversationSubscription;
+use App\Models\Label;
 use Exception;
 use Illuminate\Http\Request;
 
@@ -121,6 +122,23 @@ class ConversationSubscriptionController extends Controller
         }
     }
 
+    public function setLabel(Request $request)
+    {
+        try
+        {
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
+            ->each(function($item) use($request) {
+                $labels = Label::whereIn('id', $request->input('labels'))->get();
+                $item->labels()->sync($labels);
+            });
+
+            return redirect()->back();
+        }
+        catch(Exception $e)
+        {
+            dd($e->getMessage());
+        }
+    }
     private function getSubscriptionIds()
     {
         $ids = request()->input('subscription_ids'); 

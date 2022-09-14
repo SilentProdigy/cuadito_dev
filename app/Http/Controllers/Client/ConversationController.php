@@ -38,6 +38,8 @@ class ConversationController extends Controller
 
         $subscription = $conversation->subscriptions->where('client_id', auth('client')->user()->id)->first();
 
+        $subscription->load('labels');
+
         $messages = $conversation->messages;
 
         return view('client.conversations.show')->with(compact('messages', 'conversation', 'subscription'));
@@ -76,9 +78,12 @@ class ConversationController extends Controller
                 'url' => route('client.conversations.show', $conversation),    
             ]);
     
+            $client = auth('client')->user();
+
             // NotifyReceiver::dispatch(auth('client')->user(), $recipient, $conversation);
-            Mail::to($recipient->email)->send(new NotifyReceiver(
-                auth('client')->user(), 
+            Mail::to($recipient->email)
+            ->queue(new NotifyReceiver(
+                $client, 
                 $recipient, 
                 $conversation
             ));

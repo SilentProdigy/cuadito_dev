@@ -4,10 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ConversationSubscription extends Model
 {
-    use HasFactory;
+    use HasFactory, SoftDeletes;
 
 
     // protected $appends = ['subject'];
@@ -22,7 +23,8 @@ class ConversationSubscription extends Model
     ];
 
     protected $with = [
-        'conversation'
+        'conversation',
+        'labels'
     ];
 
     public function conversation()
@@ -38,6 +40,11 @@ class ConversationSubscription extends Model
     public function getSubjectAttribute()
     {
         return $this->conversation->subject;
+    }
+
+    public function labels()
+    {
+        return $this->belongsToMany(\App\Models\Label::class, 'conversation_sub_label', 'conversation_subscription_id', 'label_id');
     }
 
     // public function messages()

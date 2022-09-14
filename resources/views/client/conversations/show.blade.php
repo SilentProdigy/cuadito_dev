@@ -3,7 +3,11 @@
 @section('main_room_section')
     <h4>{{ $conversation->subject }}</h4>
 
-    <div style="display: none" data-subscription="{{ json_encode($subscription) }}" id="subscription-div">aaa</div>
+    @foreach ($subscription->labels as $label )
+        <span class="badge rounded-pill badge-dark">{{ $label->name }}</span>
+    @endforeach
+
+    <div style="display: none" data-subscription="{{ json_encode($subscription) }}" id="subscription-div"></div>
 
     @foreach ($messages as $message)
         <section class="border p-4 border-2 rounded my-2">
@@ -30,4 +34,5 @@
             <input type="submit" value="Send Message" class="btn btn-primary my-2">
         </form>
     </div>
+
 @endsection

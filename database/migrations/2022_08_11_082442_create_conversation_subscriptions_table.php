@@ -21,6 +21,7 @@ class CreateConversationSubscriptionsTable extends Migration
             $table->boolean('is_trashed')->default(false);
             $table->boolean('is_important')->default(false);
             $table->boolean('is_archived')->default(false);
+            $table->softDeletes();
             $table->timestamps();
         });
     }

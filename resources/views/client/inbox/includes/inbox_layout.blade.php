@@ -34,6 +34,8 @@
         </div>
     </div>
 
+    <div style="display:none" data-labels="{{ json_encode( auth('client')->user()->labels ) }}" id="user-labels-div"></div>
+
     <form action="{{ route('client.conversation-subs.unread') }}" method="post" id="unread-form">
         @csrf
         <input type="hidden" name="subscription_ids" id="unread-conversation-ids">
@@ -68,22 +70,36 @@
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.confirm_archived_modal')
     @include('client.conversations.includes.confirm_delete_modal')
+    @include('client.inbox.includes.create_label_modal')
+    @include('client.inbox.includes.set_labels_modal')
 @endsection
 
 @section('script')
     <script>
         $(document).ready(function() {
+
+            let add_label_btn = document.querySelector('#add-label-btn');
+
+            add_label_btn.addEventListener('click', function(e) {
+                e.preventDefault;
+
+                let myModal = new bootstrap.Modal(document.getElementById('add-label-modal'), {keyboard: false})
+                myModal.show()
+            });
+
             const checkboxes = document.querySelectorAll(".select-sub-checkbox");
             let checkedItems = [];
 
             if(!checkboxes.length) 
             {
+                // Conversation show page
                 let data = document.querySelector('#subscription-div').getAttribute('data-subscription');   
                 data = JSON.parse(data);
                 checkedItems.push(data);
             }
             else 
             {
+                // Inbox rooms (multiple conversations)
                 checkboxes.forEach(checkbox => {
                     checkbox.addEventListener("change", (e) => {
                         e.preventDefault;
@@ -96,8 +112,7 @@
                         }
                         else 
                         {
-                            let index = checkedItems.findIndex(item => item.id == data.id);
-                            checkedItems = checkedItems.splice(index, 1);
+                            checkedItems = checkedItems.filter(item => item.id != data.id);
                         }
                     });    
                 });
@@ -207,7 +222,6 @@
                 });
             }
             
-
             let delete_buttons = document.querySelector('.btn-delete');
 
             if(delete_buttons) 
@@ -220,7 +234,41 @@
                     document.querySelector('#delete-convo-form').submit();
                 });
             }
-        });
 
+            let set_label_button = document.querySelector('#btn-set-label');
+
+            set_label_button.addEventListener('click', () => {                
+                if(checkedItems.length == 0)
+                    return;
+
+                let myModal = new bootstrap.Modal(document.getElementById('set-labels-modal'), {keyboard: false})
+                myModal.show()
+
+                let data = document.querySelector('#user-labels-div').getAttribute('data-labels');   
+                data = JSON.parse(data);
+
+                let selectBox = document.querySelector('#label-select-box');
+
+                selectBox.innerHTML = "";
+
+                let userLabels = checkedItems.flatMap(item => {
+                    return item.labels.map(item => item.id)
+                });
+
+                document.querySelector('#labels-conversation-ids').value = checkedItems.map(item => item.id); 
+    
+                // console.log(data);
+                data.forEach(item => {
+                    let option = document.createElement('option');
+                    option.text = item.name; 
+                    option.value = item.id;
+
+                    if( userLabels.length > 0 && userLabels.includes( item.id )) 
+                        option.setAttribute('selected', true);
+                    
+                    selectBox.appendChild(option);
+                });
+            });
+        });
     </script>
 @endsection
