@@ -126,20 +126,11 @@ class ConversationSubscriptionController extends Controller
     {
         try
         {
-            ConversationSubscription::where('id', $request->input('subscription_ids'))->get()
+            ConversationSubscription::whereIn('id', $this->getSubscriptionIds())->get()
             ->each(function($item) use($request) {
                 $labels = Label::whereIn('id', $request->input('labels'))->get();
                 $item->labels()->sync($labels);
             });
-
-            // $subscription->labels()->sync($request->input('labels'));
-            
-            // $labels->each(function($item) use($subscription) {
-            //     ConversationSubLabel::create([
-            //         'label_id' => $item->id,
-            //         'conversation_subscription_id' => $subscription->id
-            //     ]);
-            // });
 
             return redirect()->back();
         }

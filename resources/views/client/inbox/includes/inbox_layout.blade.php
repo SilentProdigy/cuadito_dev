@@ -254,6 +254,8 @@
                 let userLabels = checkedItems.flatMap(item => {
                     return item.labels.map(item => item.id)
                 });
+
+                document.querySelector('#labels-conversation-ids').value = checkedItems.map(item => item.id); 
     
                 // console.log(data);
                 data.forEach(item => {
@@ -261,14 +263,10 @@
                     option.text = item.name; 
                     option.value = item.id;
 
-                    if( userLabels.length > 0 && userLabels.includes( item.id )) {
-                        console.log('right here!');
+                    if( userLabels.length > 0 && userLabels.includes( item.id )) 
                         option.setAttribute('selected', true);
-                    }
-                        
-
+                    
                     selectBox.appendChild(option);
-
                 });
             });
         });
