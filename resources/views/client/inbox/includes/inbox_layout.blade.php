@@ -92,12 +92,14 @@
 
             if(!checkboxes.length) 
             {
+                // Conversation show page
                 let data = document.querySelector('#subscription-div').getAttribute('data-subscription');   
                 data = JSON.parse(data);
                 checkedItems.push(data);
             }
             else 
             {
+                // Inbox rooms (multiple conversations)
                 checkboxes.forEach(checkbox => {
                     checkbox.addEventListener("change", (e) => {
                         e.preventDefault;
@@ -110,8 +112,7 @@
                         }
                         else 
                         {
-                            let index = checkedItems.findIndex(item => item.id == data.id);
-                            checkedItems = checkedItems.splice(index, 1);
+                            checkedItems = checkedItems.filter(item => item.id != data.id);
                         }
                     });    
                 });
@@ -236,8 +237,7 @@
 
             let set_label_button = document.querySelector('#btn-set-label');
 
-            set_label_button.addEventListener('click', () => {
-
+            set_label_button.addEventListener('click', () => {                
                 if(checkedItems.length == 0)
                     return;
 
@@ -254,7 +254,6 @@
                 let userLabels = checkedItems.flatMap(item => {
                     return item.labels.map(item => item.id)
                 });
-
     
                 // console.log(data);
                 data.forEach(item => {
