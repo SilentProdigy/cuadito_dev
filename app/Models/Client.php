@@ -34,6 +34,7 @@ class Client extends Authenticatable
         'have_unread_notifications',
     ];
 
+    public const ITEMS_PER_PAGE = 5;
 
     public function notifications()
     {
