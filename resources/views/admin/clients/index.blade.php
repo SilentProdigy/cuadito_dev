@@ -13,6 +13,8 @@
                 <thead>
                     <th>SEQ</th>
                     <th>NAME</th>
+                    <th>EMAIL</th>
+                    <th>COMPANIES</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
@@ -23,6 +25,12 @@
                             </td>
                             <td class="">
                                 <span>{{ ucfirst($client->name) }}</span>
+                            </td>
+                            <td>
+                                <span>{{ $client->email }}</span>
+                            </td>
+                            <td>
+                                <span>{{ $client->companies_count }}</span>
                             </td>
                             <td class="user-actions">
                                 <a href="{{ route('admin.clients.show', $client) }}" class="btn btn-sm btn-outline-info">
