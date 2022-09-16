@@ -15,4 +15,9 @@ class ClientController extends Controller
 
         return view('admin.clients.index')->with(compact('clients'));
     }
+
+    public function show(Client $client)
+    {
+        return view('admin.clients.show')->with(compact('client'));
+    }
 }
