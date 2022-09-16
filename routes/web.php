@@ -75,6 +75,8 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
     Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class); 
     Route::patch('requirements/set-status/{company_requirement}', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'update'])->name('requirements.set-status');
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+
+    Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
 });
 
 
