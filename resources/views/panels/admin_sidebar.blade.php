@@ -1,6 +1,15 @@
 <a href="{{ route('admin.dashboard') }}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
     <i class="fas fa-home fa-fw me-3"></i><span>Home</span>
 </a>
+
+<a href="{{ route('admin.clients.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+    <i class="fas fa-user fa-fw me-3"></i><span>Clients</span>
+</a>
+
+<a href="{{ route('admin.companies.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+    <i class="fas fa-square fa-fw me-3"></i><span>Companies</span>
+</a>
+
 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-credit-card fa-fw me-3"></i><span>Sales</span>
 </a>
@@ -12,14 +21,6 @@
 
 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-highlighter fa-fw me-3"></i><span>Auctions</span>
-</a>
-
-<a href="#" class="list-group-item list-group-item-action py-2 ripple">
-    <i class="fas fa-user fa-fw me-3"></i><span>Customers</span>
-</a>
-
-<a href="{{ route('admin.companies.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-    <i class="fas fa-square fa-fw me-3"></i><span>Companies</span>
 </a>
 
 <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
