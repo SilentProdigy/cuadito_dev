@@ -11,7 +11,15 @@ class ClientController extends Controller
 {
     public function index()
     {
-        $clients = Client::paginate(Client::ITEMS_PER_PAGE);
+        
+        $clients = Client::query()
+                    ->when(request('search'), function($query) {
+                        $query->where('name', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('email', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('contact_number', 'LIKE', '%' . request('search') . '%');
+                    })
+                    ->withCount(['companies', 'projects', 'biddings'])
+                    ->paginate(Client::ITEMS_PER_PAGE);
 
         return view('admin.clients.index')->with(compact('clients'));
     }
