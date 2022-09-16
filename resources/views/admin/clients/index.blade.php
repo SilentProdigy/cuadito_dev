@@ -48,6 +48,11 @@
         </div>
     </div>
 
+
+    <section class="mt-3 d-flex justify-content-center">        
+        {{ $clients->links() }}
+    </section>
+
 @endsection
 
 @section('script')
