@@ -1,10 +1,20 @@
 @extends('layouts.dashboard-layout')
 
 @section('content')
-
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
         <div class="table-titles">Projects</div>
+        <div class="col d-flex justify-content-end">
+            <form action="{{ route('admin.projects.index') }}" method="get">
+                <div class="input-group input-group-lg mb-3">
+                    <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+                    <button class="btn btn-warning" type="submit">
+                        SEARCH
+                    </button>
+                    <a href="{{ route('admin.projects.index') }}">Clear Search</a>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
 

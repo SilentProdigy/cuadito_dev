@@ -12,7 +12,15 @@ class ProjectListingController extends Controller
 {
     public function index()
     {
-        $projects = Project::paginate(Project::ITEMS_PER_PAGE);
+        $projects = Project::query()
+                    ->when(request('search'), function($query) {
+                        $query->where('title', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('description', 'LIKE', '%' . request('search') . '%');
+                    })
+                    ->with('categories')
+                    ->orderBy('id', 'desc')
+                    ->paginate(Project::ITEMS_PER_PAGE);
+        
         $project_states = Project::PROJECT_STATES;
 
         return view('admin.projects.index')->with(compact('projects', 'project_states'));
