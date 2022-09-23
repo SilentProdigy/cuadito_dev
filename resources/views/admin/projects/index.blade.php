@@ -60,7 +60,7 @@
                             <span>{{ $project->proposals_count }}</span>
                         </td>
                         <td>
-                            <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info">
+                            <a href="{{ route('admin.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i>
                             </a>
                             {{-- <a href="{{ route('client.projects.edit', $project) }}" class="btn btn-sm btn-warning">
