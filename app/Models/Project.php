@@ -17,6 +17,8 @@ class Project extends Model
 
     const MAX_DESCRIPTION_LENGTH = 200;
 
+    public const ITEMS_PER_PAGE = 5;
+
     public const PROJECT_STATES = [
         self::ACTIVE_STATUS,
         self::ON_HOLD_STATUS,
