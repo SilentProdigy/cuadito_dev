@@ -12,7 +12,7 @@ class ProjectListingController extends Controller
 {
     public function index()
     {
-        $projects = Project::get();
+        $projects = Project::paginate(Project::ITEMS_PER_PAGE);
         $project_states = Project::PROJECT_STATES;
 
         return view('admin.projects.index')->with(compact('projects', 'project_states'));
