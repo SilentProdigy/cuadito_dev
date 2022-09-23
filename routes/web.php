@@ -79,6 +79,9 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
     Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
     Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Admin\ProjectListingController::class, 'setStatus']);
     Route::resource('projects', \App\Http\Controllers\Admin\ProjectListingController::class);
+
+    Route::get('proposals/{bidding}', [\App\Http\Controllers\Admin\ProposalController::class, 'show'])->name('proposals.show');
+    Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Admin\AttachmentController::class, 'download'])->name('attachments.download');
 });
 
 

@@ -129,7 +129,7 @@
                                         <td>{{ $proposal->company->email }}</td>
                                         <td>@money($proposal->rate)</td>
                                         <td>
-                                            <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
+                                            <a href="{{ route('admin.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                                 <i class="fa fa-eye"></i>         
                                             </a>
                                         </td>
