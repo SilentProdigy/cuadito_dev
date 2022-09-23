@@ -20,7 +20,7 @@
     </a> 
 --}}
 
-<a href="{{ route('admin.listings.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+<a href="{{ route('admin.projects.index') }}" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-highlighter fa-fw me-3"></i><span>Projects</span>
 </a>
 

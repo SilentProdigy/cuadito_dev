@@ -77,7 +77,8 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
     Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
 
     Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
-    Route::resource('listings', \App\Http\Controllers\Admin\ProjectListingController::class);
+    Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Admin\ProjectListingController::class, 'setStatus']);
+    Route::resource('projects', \App\Http\Controllers\Admin\ProjectListingController::class);
 });
 
 
