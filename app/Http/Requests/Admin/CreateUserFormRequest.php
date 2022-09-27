@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateUserFormRequest extends FormRequest
@@ -14,7 +15,7 @@ class CreateUserFormRequest extends FormRequest
     public function authorize()
     {
         //TODO: Build the logic of this one.
-        return true;
+        return auth()->user()->role == User::ADMIN_ROLE;
     }
 
     /**

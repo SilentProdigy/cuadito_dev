@@ -29,12 +29,12 @@
         <i class="fas fa-shield fa-fw me-3"></i><span>System Users</span>
     </a>
 
-<a href="{{ route('admin.requirements.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-    <i class="fas fa-file fa-fw me-3"></i><span>Requirements</span>
-</a>
-<a href="{{ route('admin.categories.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-    <i class="fas fa-file fa-fw me-3"></i><span>Categories</span>
-</a>
+    <a href="{{ route('admin.requirements.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+        <i class="fas fa-file fa-fw me-3"></i><span>Requirements</span>
+    </a>
+    <a href="{{ route('admin.categories.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+        <i class="fas fa-file fa-fw me-3"></i><span>Categories</span>
+    </a>
 @endif
 {{-- 
     <div class="list-group-item list-group-item-action dropdown ripple py-0 px-0 mb-auto">

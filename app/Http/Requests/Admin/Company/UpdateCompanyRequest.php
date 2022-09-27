@@ -3,6 +3,7 @@
 namespace App\Http\Requests\Admin\Company;
 
 use App\Models\Company;
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
@@ -15,7 +16,7 @@ class UpdateCompanyRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->role == User::ADMIN_ROLE;
     }
 
     /**

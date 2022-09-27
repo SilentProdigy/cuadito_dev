@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.role.ensure_is_admin');
+    }
+    
     public function index()
     {
         $categories = Category::paginate(5);

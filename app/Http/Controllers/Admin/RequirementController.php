@@ -11,6 +11,11 @@ use Illuminate\Http\Request;
 
 class RequirementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth.role.ensure_is_admin');
+    }
+
     public function index()
     {
         $requirements = Requirement::get();

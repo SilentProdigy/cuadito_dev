@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Admin\Requirement;
 
+use App\Models\User;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateRequirementRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateRequirementRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return auth()->user()->role == User::ADMIN_ROLE;
     }
 
     /**
