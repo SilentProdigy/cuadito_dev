@@ -36,10 +36,12 @@
                                 <a href="{{ route('admin.companies.show', $company) }}" class="btn btn-sm btn-outline-info">
                                     <i class="fa fa-eye"></i>         
                                 </a>
-                            
-                                <a href="#" class="btn btn-sm btn-warning btn-set-approval-status" data-company="{{ json_encode($company) }}">
-                                    Set Approval Status
-                                </a>
+                                
+                                @if(auth()->user()->role == 'admin')
+                                    <a href="#" class="btn btn-sm btn-warning btn-set-approval-status" data-company="{{ json_encode($company) }}">
+                                        Set Approval Status
+                                    </a>
+                                @endif
                             </td>
                         </tr>
                     @endforeach

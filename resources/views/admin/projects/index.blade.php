@@ -69,9 +69,12 @@
                             <a href="#" class="btn btn-sm btn-danger btn-delete-project" data-project="{{ json_encode($project) }}">
                                 <i class="fa fa-trash"></i>
                             </a> --}}
-                            <a href="#" class="btn btn-sm btn-dark btn-set-project-status" data-project="{{ json_encode($project) }}">
-                                <i class="fa fa-check"></i>
-                            </a>
+
+                            @if(auth()->user()->role == 'admin')
+                                <a href="#" class="btn btn-sm btn-dark btn-set-project-status" data-project="{{ json_encode($project) }}">
+                                    <i class="fa fa-check"></i>
+                                </a>
+                            @endif
                         </td>
                     </tr>        
                 @empty

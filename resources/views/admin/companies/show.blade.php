@@ -5,9 +5,11 @@
     <div class="d-flex flex-row">
         <div class="table-titles">{{ $company->name }} Requirements</div>
         <div class="col d-flex justify-content-end">
-            <a href="#" class="btn btn-sm btn-warning btn-set-approval-status" data-company="{{ json_encode($company) }}">
-                Set Approval Status
-            </a>
+            @if(auth()->user()->role == 'admin')
+                <a href="#" class="btn btn-sm btn-warning btn-set-approval-status" data-company="{{ json_encode($company) }}">
+                    Set Approval Status
+                </a>
+            @endif
         </div>
     </div>
 </div>

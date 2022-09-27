@@ -24,15 +24,18 @@
     <i class="fas fa-highlighter fa-fw me-3"></i><span>Projects</span>
 </a>
 
-<a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-    <i class="fas fa-shield fa-fw me-3"></i><span>System Users</span>
-</a>
+@if(auth()->user()->role == 'admin')
+    <a href="{{ route('admin.users.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+        <i class="fas fa-shield fa-fw me-3"></i><span>System Users</span>
+    </a>
+
 <a href="{{ route('admin.requirements.index') }}" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-file fa-fw me-3"></i><span>Requirements</span>
 </a>
 <a href="{{ route('admin.categories.index') }}" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-file fa-fw me-3"></i><span>Categories</span>
 </a>
+@endif
 {{-- 
     <div class="list-group-item list-group-item-action dropdown ripple py-0 px-0 mb-auto">
         <a  class="dropdown-toggle list-group-item list-group-item-action py-2 ripple" style="border: none;" id="ProductsDropdown" data-bs-toggle="dropdown" aria-expanded="true" role="button">
