@@ -169,6 +169,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::post('connect', [\App\Http\Controllers\Client\ConnectionController::class, 'store'])->name('connect.store');
 
         Route::resource('labels', \App\Http\Controllers\Client\LabelController::class);
+
+        Route::get('profile/{client}', [\App\Http\Controllers\Client\ProfileController::class, 'show'])->name('profile.show');
     });
 
 });
