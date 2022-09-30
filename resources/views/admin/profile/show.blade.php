@@ -14,28 +14,34 @@
             </div>
         </div>
     </div>
+    
     <div class="card mt-3">
-        <div class="card-header">
-            <h5>About the Company</h5>
-        </div>
-        <div class="card-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>Security</h5>
+            <a href="{{ route('admin.profile.change-password.form', $user) }}" class="btn btn-sm btn-warning">Change Password</a>
         </div>
     </div>
+
     <div class="card mt-3">
-        <div class="card-header">
-            <h5>Product / Services</h5>
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>About</h5>
+            <a href="{{ route('admin.profile.edit', $user) }}" class="btn btn-sm btn-info">Edit Account Info</a>
         </div>
         <div class="card-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
-        </div>
-    </div>
-    <div class="card mt-3">
-        <div class="card-header">
-            <h5>Projects</h5>
-        </div>
-        <div class="card-body">
-            "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+            <div class="my-1 py-1">
+                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">NAME</h5>
+                <p class="fs-6 lh-lg" style="color: #222;">{{ $user->name }}</p>
+            </div>
+
+            <div class="my-1 py-1">
+                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">EMAIL</h5>
+                <p class="fs-6 lh-lg" style="color: #222;">{{ $user->email }}</p>
+            </div>
+
+            <div class="my-1 py-1">
+                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">ROLE</h5>
+                <p class="fs-6 lh-lg" style="color: #222;">{{ $user->role }}</p>
+            </div>
         </div>
     </div>
 </div>

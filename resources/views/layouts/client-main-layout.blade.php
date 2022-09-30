@@ -138,9 +138,9 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
                     </li>
-                    <li>
+                    {{-- <li>
                         <a class="dropdown-item" href="#">Settings</a>
-                    </li>
+                    </li> --}}
                     <li>
                         <a class="dropdown-item" href="#">Help</a>
                     </li>

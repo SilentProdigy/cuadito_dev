@@ -14,6 +14,14 @@
             </div>
         </div>
     </div>
+
+    <div class="card mt-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>Security</h5>
+            <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning">Change Password</a>
+        </div>
+    </div>
+
     <div class="card mt-3">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5>About</h5>

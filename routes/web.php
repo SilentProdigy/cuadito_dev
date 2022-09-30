@@ -82,6 +82,12 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
 
     Route::get('proposals/{bidding}', [\App\Http\Controllers\Admin\ProposalController::class, 'show'])->name('proposals.show');
     Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Admin\AttachmentController::class, 'download'])->name('attachments.download');
+
+    Route::get('profile/{user}/edit', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('profile/{user}/update', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
+
+    Route::get('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
+    Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
 });
 
 
@@ -173,6 +179,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::get('profile/{client}', [\App\Http\Controllers\Client\ProfileController::class, 'show'])->name('profile.show');
         Route::get('profile/{client}/edit', [\App\Http\Controllers\Client\ProfileController::class, 'edit'])->name('profile.edit');
         Route::patch('profile/{client}/update', [\App\Http\Controllers\Client\ProfileController::class, 'update'])->name('profile.update');
+        Route::get('profile/{client}/change-password', [\App\Http\Controllers\Client\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
+        Route::patch('profile/{client}/change-password', [\App\Http\Controllers\Client\ProfileController::class, 'changePassword'])->name('profile.change-password');
     });
 
 });
