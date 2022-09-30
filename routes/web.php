@@ -171,6 +171,8 @@ Route::prefix('client')->name('client.')->group(function () {
         Route::resource('labels', \App\Http\Controllers\Client\LabelController::class);
 
         Route::get('profile/{client}', [\App\Http\Controllers\Client\ProfileController::class, 'show'])->name('profile.show');
+        Route::get('profile/{client}/edit', [\App\Http\Controllers\Client\ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('profile/{client}/update', [\App\Http\Controllers\Client\ProfileController::class, 'update'])->name('profile.update');
     });
 
 });

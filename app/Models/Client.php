@@ -36,6 +36,13 @@ class Client extends Authenticatable
 
     public const ITEMS_PER_PAGE = 5;
 
+    public const CIVIL_STATUS_OPTIONS = [ 
+        "Single",
+        "Married",
+        "Widowed",
+        "Divorced"
+    ];
+
     public function notifications()
     {
         return $this->hasMany(\App\Models\Notification::class);
