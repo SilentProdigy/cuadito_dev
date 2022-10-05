@@ -66,9 +66,10 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'inactive' => \App\Http\Middleware\Admin\RestrictAccessIfInactive::class,
         'auth.client' => \App\Http\Middleware\AuthenticateClient::class,
+        'preventBackHistory' => \App\Http\Middleware\RevalidateBackHistory::class,
+        'auth.role.ensure_is_admin' => \App\Http\Middleware\Admin\RestrictAccessIfNotAdmin::class,
         'client.validate.companies' => \App\Http\Middleware\Client\EnsureClientHaveValidCompanies::class,
         'client.validate.config.company' => \App\Http\Middleware\Client\EnsureGlobalCompanyIsSet::class,
-        'preventBackHistory' => \App\Http\Middleware\RevalidateBackHistory::class,
-        'auth.role.ensure_is_admin' => \App\Http\Middleware\Admin\RestrictAccessIfNotAdmin::class
+        'client.validate.comanies.max_count' => \App\Http\Middleware\Client\EnsureClientDidNotReachMaxCompanies::class,
     ];
 }

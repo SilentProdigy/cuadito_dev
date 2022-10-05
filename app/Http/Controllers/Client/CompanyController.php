@@ -12,6 +12,12 @@ use Illuminate\Http\Request;
 
 class CompanyController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('client.validate.comanies.max_count')->only(['create', 'store']);
+    }
+
     public function index()
     {
         $companies = auth('client')->user()->companies;
@@ -23,7 +29,6 @@ class CompanyController extends Controller
     {  
         $client_submitted_requirements = $company->requirements->pluck('id')->toArray();
         $missing_requirements = Requirement::whereNotIn('id', $client_submitted_requirements)->get();
-        
         $featured_projects = $company->projects()->orderBy('id', 'desc')->take(5)->get();
         
         return view('client.companies.show')->with(compact('company', 'client_submitted_requirements', 'missing_requirements', 'featured_projects'));
@@ -31,13 +36,6 @@ class CompanyController extends Controller
 
     public function create()
     {
-        if(auth('client')->user()->have_companies) 
-        {
-            return redirect()->back()->withErrors([
-                'Invalid Company Count' => 'Reached the max count of companies!'
-            ]);
-        }
-        
         return view('client.companies.create');   
     }
 
