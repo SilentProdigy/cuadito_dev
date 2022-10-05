@@ -2,13 +2,13 @@
 
 namespace App\Http\Middleware\Client;
 
-use App\Traits\Middleware\CheckIfClientReachedMaxAllowedComapnies;
+use App\Traits\Middleware\CheckIfClientReachedMaxAllowedCompanies;
 use Closure;
 use Illuminate\Http\Request;
 
 class EnsureClientDidNotReachMaxCompanies
 {
-    use CheckIfClientReachedMaxAllowedComapnies;
+    use CheckIfClientReachedMaxAllowedCompanies;
 
     /**
      * Handle an incoming request.

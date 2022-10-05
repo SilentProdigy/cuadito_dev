@@ -1,8 +1,6 @@
 <?php 
-
 namespace App\Traits\Middleware;
-
-trait CheckIfClientReachedMaxAllowedComapnies 
+trait CheckIfClientReachedMaxAllowedCompanies 
 {
     public function checkIfClientReachedMaxAllowedCompanies() : bool
     {

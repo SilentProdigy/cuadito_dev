@@ -7,7 +7,6 @@ use App\Http\Requests\Client\Company\CreateCompanyFormRequest;
 use App\Http\Requests\Client\Company\EditCompanyFormRequest;
 use App\Models\Company;
 use App\Models\Requirement;
-use Exception;
 use Illuminate\Http\Request;
 
 class CompanyController extends Controller
@@ -49,12 +48,16 @@ class CompanyController extends Controller
         try 
         {
             // Company::create($request->all());
-            auth('client')->user()->companies()->create($request->all());
-            return redirect()->route('client.companies.index')->with('success', 'Company was successfully created.');  
+            auth('client')->user()->companies()->create($request->validated());
+
+            return redirect(route('client.companies.index'))
+                ->with('success', 'Company was successfully created.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
@@ -62,12 +65,15 @@ class CompanyController extends Controller
     {
         try 
         {
-            $company->update($request->all());
-            return redirect()->route('client.companies.index')->with('success', 'Company was successfully updated.');  
+            $company->update($request->validated());
+            return redirect(route('client.companies.index'))
+                    ->with('success', 'Company was successfully updated.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
@@ -76,11 +82,14 @@ class CompanyController extends Controller
         try
         {
             $company->delete();
-            return redirect()->route('client.companies.index')->with('success', 'Company was successfully deleted.');  
+            return redirect(route('client.companies.index'))
+            ->with('success', 'Company was successfully deleted.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect(route('client.companies.index'))->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 }
