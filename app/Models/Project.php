@@ -106,4 +106,11 @@ class Project extends Model
     {
         return $this->belongsToMany(\App\Models\Category::class);
     }
+
+    public function scopeActive($query)
+    {
+        return $query->where('status', self::ACTIVE_STATUS);
+    }
+
+    
 }
