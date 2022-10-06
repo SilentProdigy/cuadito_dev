@@ -15,6 +15,7 @@ use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Project;
 use App\Services\CompanyService;
+use App\Services\ProjectService;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
@@ -22,10 +23,12 @@ class ProjectController extends Controller
 {
 
     private $companyService;
+    private $projectService;
 
-    public function __construct(CompanyService $companyService)
+    public function __construct(CompanyService $companyService, ProjectService $projectService)
     {
         $this->companyService = $companyService;
+        $this->projectService = $projectService;
     }
 
     /**
@@ -113,7 +116,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        $companies = auth('client')->user()->companies;
+        $companies = $this->companyService->getApprovedCompaniesOfClient();
 
         $selected_category_ids = $project->categories->pluck('id')->toArray();
         
@@ -128,16 +131,24 @@ class ProjectController extends Controller
      */
     public function update(UpdateProjectRequest $request, Project $project)
     {
+        DB::beginTransaction();
         try 
         {
-            // TODO: Additional business logic here ...
-            $project->update($request->except(['company_id', 'category_ids']));
-            $project->categories()->sync($request->input('category_ids'));
+            // TODO: Additional business logic here
+            $project_details = $request->except(['company_id', 'category_ids']);
+            $category_ids = $request->input('category_ids');
+            $this->projectService->updateProject($project, $project_details, $category_ids);
+
+            DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully updated.');  
         }
         catch(\Exception $e)
         {
-            dd($e->getMessage());
+            DB::rollBack();
+            
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
