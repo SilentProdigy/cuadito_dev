@@ -13,21 +13,21 @@ use App\Mail\Project\ProposalApproved;
 use App\Mail\Project\ProposalDisapproved;
 use App\Models\Bidding;
 use App\Models\Company;
-use App\Models\Notification;
 use App\Models\Project;
 use App\Services\CompanyService;
-use Exception;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
+
     private $companyService;
 
     public function __construct(CompanyService $companyService)
     {
         $this->companyService = $companyService;
     }
+
     /**
      * Display a listing of the resource.
      *
@@ -59,17 +59,24 @@ class ProjectController extends Controller
      */
     public function store(CreateProjectRequest $request)
     {
+        DB::beginTransaction();
+
         try 
         {
+            $project_details = $request->except(['company_id', 'categories_ids']);
+            $category_ids = $request->input('category_ids');
             $company = Company::find($request->input('company_id'));
-            $project = $company->projects()->create($request->except(['company_id', 'category_ids']));
-            $project->categories()->sync($request->input('category_ids'));
-
+            $project = $this->companyService->createProject($company, $project_details, $category_ids);
+            DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            DB::rollBack();
+            
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
@@ -127,7 +134,7 @@ class ProjectController extends Controller
             $project->categories()->sync($request->input('category_ids'));
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully updated.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             dd($e->getMessage());
         }
@@ -147,7 +154,7 @@ class ProjectController extends Controller
             $project->delete();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             dd($e->getMessage());
         }
@@ -161,7 +168,7 @@ class ProjectController extends Controller
             $project->update($request->all());
             return redirect(route('client.projects.index'))->with('success', 'Project status was successfully set.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             dd($e->getMessage());
         }
@@ -206,7 +213,7 @@ class ProjectController extends Controller
 
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
             dd($e->getMessage());
         }
