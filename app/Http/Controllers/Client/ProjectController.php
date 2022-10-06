@@ -15,12 +15,19 @@ use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Notification;
 use App\Models\Project;
+use App\Services\CompanyService;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {
+    private $companyService;
+
+    public function __construct(CompanyService $companyService)
+    {
+        $this->companyService = $companyService;
+    }
     /**
      * Display a listing of the resource.
      *
@@ -40,8 +47,7 @@ class ProjectController extends Controller
      */
     public function create()
     {
-        // TODO: Add some more business logic here...
-        $companies = auth('client')->user()->companies->where('validation_status', Company::APPROVED_STATUS);
+        $companies = $this->companyService->getApprovedCompaniesOfClient();
         return view('client.projects.create')->with(compact('companies'));
     }
 
