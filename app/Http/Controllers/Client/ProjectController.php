@@ -88,7 +88,8 @@ class ProjectController extends Controller
      */
     public function show(Project $project)
     {        
-        $proposals = Bidding::where('project_id', $project->id);
+        // $proposals = Bidding::where('project_id', $project->id);
+        $proposals = $project->proposals();
         
         if(request('search'))
         {
