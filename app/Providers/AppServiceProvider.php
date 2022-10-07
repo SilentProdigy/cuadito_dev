@@ -38,6 +38,12 @@ class AppServiceProvider extends ServiceProvider
             $view->with(compact('categories'));
         });
 
+        View::composer(['client.includes.set_company_modal.blade'], function($view)
+        {
+            $companies = auth('client')->user()->approved_companies;
+            $view->with(compact('companies'));
+        });
+
         View::composer(['client.inbox.includes.contact_list', 'client.conversations.includes.create_conversation_modal'], function($view)
         {    
             $contacts = auth('client')->user()->contacts()->where('contact_id', '!=', null)->get();

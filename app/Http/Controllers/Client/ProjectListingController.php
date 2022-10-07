@@ -24,8 +24,7 @@ class ProjectListingController extends Controller
                     ->orderBy('id', 'desc')
                     ->paginate(5);
 
-        $companies = auth('client')->user()->companies;                    
-        return view('client.listing.index')->with(compact('projects', 'companies'));
+        return view('client.listing.index')->with(compact('projects'));
     }
 
     public function show(Project $project)
