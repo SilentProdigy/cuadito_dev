@@ -4,13 +4,14 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Project;
+use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
 use Illuminate\Http\Request;
 
 
 class ProjectListingController extends Controller
 {
-    use CheckIfCompanyHasProposalToProject;
+    use CheckIfCompanyHasProposalToProject, CheckIfClientOwnedAProject;
 
     public function index()
     {   
@@ -29,7 +30,7 @@ class ProjectListingController extends Controller
 
     public function show(Project $project)
     { 
-        $is_owned_project = $project->owner->id == auth('client')->user()->id;
+        $is_owned_project = $this->checkIfClientOwnedAProject($project);
         $has_proposal = $this->checkIfCompanyHasProposalToProject($project);
         return view('client.listing.show')->with(compact('project', 'has_proposal', 'is_owned_project'));
     }
