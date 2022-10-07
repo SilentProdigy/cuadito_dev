@@ -178,13 +178,14 @@ class ProjectController extends Controller
     {
         try 
         {
-            // TODO: Additional business logic here ...
-            $project->update($request->all());
+            $project->update($request->validated());
             return redirect(route('client.projects.index'))->with('success', 'Project status was successfully set.');  
         }
         catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
