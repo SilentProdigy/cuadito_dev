@@ -193,44 +193,14 @@ class ProjectController extends Controller
     {
         try 
         {            
-            $winning_proposal = Bidding::findOrFail($request->input('winner_bidding_id'));
-            $winning_company = $winning_proposal->company;
-
-            $project->update([
-                'status' => Project::CLOSED_STATUS,
-                'remarks' => $request->input('remarks'), 
-                'winner_bidding_id' => $winning_proposal->id
-            ]);
-
-            /* 
-                Send notification to the companies / bidders that submitted proposal to this project
-                Informing that the project was closed. 
-            */
-            CreateProjectClosedNotifications::dispatch($project);
-
-            $emails = $project->biddings->pluck('company.email')->toArray();
-
-            $did_not_win_emails = $project->biddings()
-                                ->where('id', '!=', $winning_proposal->id)
-                                ->get()
-                                ->pluck('company.email')
-                                ->toArray();
-            
-            Mail::to($emails)->send(new ProjectClosed($project));
-            Mail::to($winning_company->email)->send(new ProposalApproved($project));
-            Mail::to($did_not_win_emails)->send(new ProposalDisapproved($project));
-
-            # Send notification to the winning bidder
-            $winning_company->client->notifications()->create([
-                'content' => "Congratulations! Your proposal for Project - " . $project->title . " - #ID " . $project->id . " was selected!",
-                'url' => route('client.projects.show', $project),
-            ]);
-
+            $this->projectService->setWinner($project, $request->validated());
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
         }
         catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
