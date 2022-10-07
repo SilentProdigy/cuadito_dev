@@ -3,11 +3,14 @@
 namespace App\Http\Requests\Client\Project;
 
 use App\Models\Project;
+use App\Traits\CheckIfClientOwnedAProject;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
 class UpdateProjectStatusRequest extends FormRequest
 {
+    use CheckIfClientOwnedAProject;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -15,7 +18,7 @@ class UpdateProjectStatusRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->checkIfClientOwnedAProject($this->project);
     }
 
     /**
