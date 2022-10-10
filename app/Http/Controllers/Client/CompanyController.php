@@ -14,7 +14,7 @@ class CompanyController extends Controller
 
     public function __construct()
     {
-        $this->middleware('client.validate.comanies.max_count')->only(['create', 'store']);
+        $this->middleware('client.validate.companies.max_count')->only(['create', 'store']);
     }
 
     public function index()

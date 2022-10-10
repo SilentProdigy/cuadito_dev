@@ -70,6 +70,6 @@ class Kernel extends HttpKernel
         'auth.role.ensure_is_admin' => \App\Http\Middleware\Admin\RestrictAccessIfNotAdmin::class,
         'client.validate.companies' => \App\Http\Middleware\Client\EnsureClientHaveValidCompanies::class,
         'client.validate.config.company' => \App\Http\Middleware\Client\EnsureGlobalCompanyIsSet::class,
-        'client.validate.comanies.max_count' => \App\Http\Middleware\Client\EnsureClientDidNotReachMaxCompanies::class,
+        'client.validate.companies.max_count' => \App\Http\Middleware\Client\EnsureClientDidNotReachMaxCompanies::class,
     ];
 }
