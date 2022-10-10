@@ -11,6 +11,11 @@ class CompanyService
         return auth('client')->user()->companies()->approved()->get();
     }
 
+    public function getClientApprovedCompaniesIds()
+    {
+        return $this->getApprovedCompaniesOfClient()->pluck('id')->toArray();
+    }
+
     public function createProject(Company $company, $project_details, $category_ids)
     {
         $project = $company->projects()->create($project_details);

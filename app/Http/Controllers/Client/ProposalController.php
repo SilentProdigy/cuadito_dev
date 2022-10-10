@@ -10,6 +10,7 @@ use App\Models\Company;
 use App\Models\Notification;
 use App\Models\Project;
 use App\Services\CompanyService;
+use App\Services\ProposalService;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
 use App\Traits\UploadFile;
@@ -22,10 +23,12 @@ class ProposalController extends Controller
     use UploadFile;
 
     private $companyService;
+    private $proposalService;
 
-    public function __construct(CompanyService $companyService)
+    public function __construct(CompanyService $companyService, ProposalService $proposalService)
     {
         $this->companyService = $companyService;
+        $this->proposalService = $proposalService;
 
         $this->middleware(['client.validate.ensure_project_not_owned_by_client'])
         ->only(['create']);
@@ -70,51 +73,29 @@ class ProposalController extends Controller
 
     public function store(SubmitProposalRequest $request, Project $project)
     {
-        // dd($request->has('attachments'));
-
         try 
         {
             $paths = collect();
 
             if($request->has('attachments')) 
             {
-                foreach($request->file('attachments') as $attachment)
-                {   
-                
-                    $extension = $attachment->getClientOriginalExtension();
-                    
-                    if(!in_array($extension,Attachment::ALLOWED_FILE_TYPES))
-                    {
-                        return redirect()->back()
-                                ->withErrors(['attachments' => 'Unsupported file type!', 
-                                    'message' => "Please upload .jpg, .png, .jpeg or .pdf file types"
-                                ]);
-                    }
-
-                   if($attachment->getSize() > Attachment::MAX_FILE_SIZE)
-                   {
-                        return redirect()->back()
-                        ->withErrors(['attachments' => 'Reached max size!', 
-                            'message' => "Please upload files that are less than or equal to 1 MB."
-                        ]);
-                   }
-                    
-                    $target_dir = "projects/". $project->id ."/proposals";
-                    $paths->push($this->uploadFile($target_dir, $attachment));
-                }   
+                $paths = $this->proposalService->uploadProposalAttachments(
+                    $project,
+                    $request->file('attachments')
+                );
             }
 
-            $proposal = $project->biddings()
-            ->create(
+            $proposal = $this->proposalService->createProposal($project, 
                 array_merge(
                     $request->only('rate', 'cover_letter'),
                     ['company_id' => session('config.company') ]
                 )
             );
 
+            // Attaching files to proposal
             foreach($paths as $path)
                 $proposal->attachments()->create(['url' => $path]);
-
+ 
             $proposing_company = Company::find(session('config.company'));
 
             $proposal->company->client->notifications()->create([
@@ -130,9 +111,11 @@ class ProposalController extends Controller
             return redirect(route('client.listing.index'))
                     ->with('success', 'Proposal was successfully posted.');
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
 
     }
