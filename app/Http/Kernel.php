@@ -71,5 +71,7 @@ class Kernel extends HttpKernel
         'client.validate.companies' => \App\Http\Middleware\Client\EnsureClientHaveValidCompanies::class,
         'client.validate.config.company' => \App\Http\Middleware\Client\EnsureGlobalCompanyIsSet::class,
         'client.validate.companies.max_count' => \App\Http\Middleware\Client\EnsureClientDidNotReachMaxCompanies::class,
+        'client.validate.ensure_project_not_owned_by_client' => \App\Http\Middleware\Client\EnsureClientNotOwnAProject::class,
+        'client.validate.ensure_company_dont_have_proposal' => \App\Http\Middleware\Client\EnsureCompanyDontHaveProposal::class,
     ];
 }

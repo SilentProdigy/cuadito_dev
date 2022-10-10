@@ -9,6 +9,7 @@ use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Notification;
 use App\Models\Project;
+use App\Services\CompanyService;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
 use App\Traits\UploadFile;
@@ -18,21 +19,27 @@ use Illuminate\Http\Request;
 class ProposalController extends Controller
 {
     
-    use UploadFile, CheckIfCompanyHasProposalToProject, CheckIfClientOwnedAProject;
+    use UploadFile;
+
+    private $companyService;
+
+    public function __construct(CompanyService $companyService)
+    {
+        $this->companyService = $companyService;
+
+        $this->middleware(['client.validate.ensure_project_not_owned_by_client'])
+        ->only(['create']);
+    }
 
     public function index()
     {
-        // $proposals =  auth('client')->user()->biddings();
-        // $proposals = Bidding::where('client_id', );
-
-        $client_companies = auth('client')->user()->companies->pluck('id')->toArray();
-
+        $client_companies = $this->companyService->getClientApprovedCompaniesIds();
+                           
         $proposals = Bidding::with('project')->whereIn('company_id',$client_companies );
         
         if(request('search'))
         {
             $proposals
-            // ->where('rate', 'LIKE', '%' . request('search') . '%')     
             ->where(function($query) {
                 $query->where('rate', 'LIKE', '%' . request('search') . '%')
                 ->orWhereDate('created_at', 'LIKE', '%' . request('search') . '%'); // TODO: Make this format to M d,Y
@@ -58,20 +65,6 @@ class ProposalController extends Controller
     
     public function create(Project $project)
     {
-        if($this->checkIfClientOwnedAProject($project))
-        {
-            return redirect()->back()->withErrors([
-                'message' => "Operation Denied: You can't submit a proposal to your own project!"
-            ]);
-        }
-
-        if($this->checkIfCompanyHasProposalToProject($project))
-        {
-            return redirect()->back()->withErrors([
-                'message' => 'You already submitted a proposal for this project!'
-            ]);
-        }
-
         return view('client.proposals.create')->with(compact('project'));
     }
 
