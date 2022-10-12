@@ -16,6 +16,7 @@ use App\Traits\CheckIfCompanyHasProposalToProject;
 use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProposalController extends Controller
 {
@@ -73,6 +74,8 @@ class ProposalController extends Controller
 
     public function store(SubmitProposalRequest $request, Project $project)
     {
+        DB::beginTransaction();
+
         try 
         {
             $paths = collect();
@@ -108,11 +111,14 @@ class ProposalController extends Controller
                 'url' => route('client.projects.show', $project),
             ]);
 
+            DB::commit();
+
             return redirect(route('client.listing.index'))
                     ->with('success', 'Proposal was successfully posted.');
         }
         catch(\Exception $e)
         {
+            DB::rollBack();
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
