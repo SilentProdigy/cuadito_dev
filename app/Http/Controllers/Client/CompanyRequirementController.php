@@ -3,6 +3,8 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\Client\Company\UploadRequirementRequest;
+use App\Http\Requests\Client\StoreRequirementRequest;
 use App\Models\Company;
 use App\Models\CompanyRequirement;
 use App\Models\Requirement;
@@ -16,7 +18,7 @@ class CompanyRequirementController extends Controller
 {
     use UploadFile;
 
-    public function store(Request $request, Company $company)
+    public function store(UploadRequirementRequest $request, Company $company)
     {
         try 
         {
@@ -30,9 +32,11 @@ class CompanyRequirementController extends Controller
 
             return redirect()->back()->with('success', 'Requirement was successfully uploaded.');     
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect(route('client.companies.show', $company))->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 
