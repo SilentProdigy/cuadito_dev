@@ -26,6 +26,7 @@ class SubmitProposalRequest extends FormRequest
         return [
             'rate' => 'required|numeric',
             'cover_letter' => 'required|string|min:20',
+            'attachments.*' => 'mimes:pdf,docx,docs,png,jpg,jpeg|max:2048',
         ];
     }
 }
