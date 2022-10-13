@@ -79,7 +79,7 @@ class CompanyRequirementController extends Controller
 
     public function destroy(Request $request, Company $company, Requirement $requirement)
     {    
-        DB::transaction();
+        DB::beginTransaction();
 
         try
         {
