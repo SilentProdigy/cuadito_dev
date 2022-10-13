@@ -1,4 +1,4 @@
-@foreach ($contacts as $item)
+@forelse ($contacts as $item)
 <div class="col-xl-6 mb-4">
     <div class="card">
         <div class="card-body">
@@ -43,4 +43,6 @@
         </div>
     </div>
 </div>
-@endforeach
+@empty
+<p>You don't have any contacts yet!</p>
+@endforelse
