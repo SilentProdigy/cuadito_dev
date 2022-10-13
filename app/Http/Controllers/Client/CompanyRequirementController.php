@@ -4,13 +4,10 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Company\UploadRequirementRequest;
-use App\Http\Requests\Client\StoreRequirementRequest;
 use App\Models\Company;
-use App\Models\CompanyRequirement;
 use App\Models\Requirement;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Http\UploadedFile;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\UploadFile;
 
@@ -43,26 +40,40 @@ class CompanyRequirementController extends Controller
 
     private function deleteFile($url)
     {
-        if( Storage::disk('public')->exists($url) )
-        {
-            try 
+        try 
+        {   
+            if( Storage::disk('public')->exists($url) )
             {
                 Storage::disk('public')->delete($url);
             }
-            catch(Exception $e)
-            {
-                return redirect()->back()->with('errors', $e->getMessage());
-            }
         }
-
-        return;
+        catch(\Exception $e)
+        {
+            return redirect()->back()->with('errors', $e->getMessage());
+        }
     }
 
     public function download(Company $company, Requirement $requirement)
     {
-        $target_file = $company->requirements->where('id', $requirement->id)->first();
+        try 
+        {
+            $target_file = $company->requirements->where('id', $requirement->id)->firstOrFail();
 
-        return Storage::disk('public')->download($target_file->file->url);
+            return Storage::disk('public')->download($target_file->file->url);
+        }
+        catch(\Illuminate\Support\ItemNotFoundException $e)
+        {
+            return redirect(route('client.companies.show', $company))->withErrors([
+                "Company requirement not found!"
+            ]);
+        }
+        catch(\Exception $e)
+        {
+            return redirect(route('client.companies.show', $company))
+                    ->withErrors([
+                        'Operation Failed!' => $e->getMessage()
+                    ]);
+        }
     }   
 
     public function destroy(Request $request, Company $company, Requirement $requirement)
