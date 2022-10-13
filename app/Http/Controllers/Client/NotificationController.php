@@ -4,15 +4,12 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
-use Exception;
-use Illuminate\Http\Request;
 
 class NotificationController extends Controller
 {
     public function index()
     {
-        $notifications = auth('client')->user()
-                        ->notifications()
+        $notifications = auth('client')->user()->notifications()
                         ->orderBy('id', 'desc')
                         ->paginate();
 
@@ -38,9 +35,11 @@ class NotificationController extends Controller
             $notification->delete();
             return redirect(route('client.notifications.index'))->with('success', 'Notification was successfully removed.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect(route('client.notifications.index'))->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
         }
     }
 }
