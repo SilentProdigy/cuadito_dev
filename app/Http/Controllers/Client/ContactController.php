@@ -108,11 +108,13 @@ class ContactController extends Controller
 
             $contact->delete();
 
-            return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
+            return redirect(route('client.contacts.index'))->with('success', 'Contact was deleted successfully!');
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'message' => $e->getMessage()
+            ]);
         }
     }
 
