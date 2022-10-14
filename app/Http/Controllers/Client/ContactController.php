@@ -11,6 +11,7 @@ use App\Services\ContactService;
 use App\Traits\SendSignupInvitationEmail;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ContactController extends Controller
@@ -96,6 +97,8 @@ class ContactController extends Controller
      */
     public function destroy(Request $request)
     {
+        DB::beginTransaction();
+
         try
         {              
             $contact = Contact::query();
@@ -108,10 +111,14 @@ class ContactController extends Controller
 
             $contact->delete();
 
+            DB::commit();
+
             return redirect(route('client.contacts.index'))->with('success', 'Contact was deleted successfully!');
         }
         catch(\Exception $e)
         {
+            DB::rollBack();
+
             return redirect()->back()->withErrors([
                 'message' => $e->getMessage()
             ]);
