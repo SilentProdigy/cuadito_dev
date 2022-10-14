@@ -132,9 +132,11 @@ class ContactController extends Controller
             $this->sendSignupInvitationEmail($contact);
             return redirect(route('client.contacts.index'))->with('success', 'Invitation was successfully sent!');
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'message' => $e->getMessage()
+            ]);
         }
     }
 }

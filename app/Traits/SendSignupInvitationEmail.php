@@ -11,13 +11,6 @@ trait SendSignupInvitationEmail
 {
     public function sendSignupInvitationEmail(Contact $contact)
     {
-        try 
-        {
-            Mail::to($contact->email)->send(new SignupInvitation($contact));
-        }
-        catch(Exception $e)
-        {
-            dd($e->getMessage());
-        }
+        Mail::to($contact->email)->send(new SignupInvitation($contact));
     }
 }
