@@ -7,6 +7,7 @@ use App\Http\Requests\Client\Contacts\CreateContactRequest;
 use App\Mail\Contact\SignupInvitation;
 use App\Models\Client;
 use App\Models\Contact;
+use App\Services\ContactService;
 use App\Traits\SendSignupInvitationEmail;
 use Exception;
 use Illuminate\Http\Request;
@@ -15,6 +16,18 @@ use Illuminate\Support\Facades\Mail;
 class ContactController extends Controller
 {
     use SendSignupInvitationEmail;
+
+    private $contactService;
+
+    public function __construct(ContactService $contactService)
+    {
+        $this->contactService = $contactService;
+        $this->middleware([
+            'client.validate.ensure_email_dont_exist_on_contacts', 
+            'client.validate.ensure_email_dont_exist_on_system'
+        ])
+        ->only('store');
+    }
 
     /**
      * Display a listing of the resource.
@@ -63,28 +76,15 @@ class ContactController extends Controller
         {
             // Will store non existing client. 
             $data = $request->all();
-
-            if( auth('client')->user()->contacts()->where('email', $request->input('email'))->exists() )
-            {
-                return redirect()->back()->withErrors('Email already exist in your contact list!');
-            }
-
-            $client = Client::where('email', $request->input('email'))->first(); 
-
-            if($client)
-            {
-                return redirect(route('client.contacts.index'))->withErrors('Cannot add contact, please try to search and connect instead.');
-            }
-
             $contact = auth('client')->user()->contacts()->create($data);
-            
             $this->sendSignupInvitationEmail($contact);
-
             return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return redirect()->back()->withErrors([
+                'message' => $e->getMessage()
+            ]);
         }
     }
 
