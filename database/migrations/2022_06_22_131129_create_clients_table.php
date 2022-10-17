@@ -25,6 +25,7 @@ class CreateClientsTable extends Migration
             $table->string('email')->unique();
             $table->string('password');
             $table->string('contact_number')->nullable();
+            $table->string('profile_pic')->nullable();
             
             $table->timestamps();
             $table->softDeletes();
