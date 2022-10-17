@@ -29,11 +29,15 @@
                         href="#"
                         role="button"
                         data-ripple-color="primary"
-                        data-contact="{{ json_encode($item) }}"
-                    >Delete<i class="fas fa-trash ms-2"></i
+                        data-contact='@json($item)'
+                        >Delete<i class="fas fa-trash ms-2"></i
                     ></a>
                 @else 
-                    <button class="btn btn-link m-0 text-reset btn-connect" role="button" data-ripple-color="primary" data-client="{{ json_encode( $item ) }}">
+                    <button 
+                    class="btn btn-link m-0 text-reset btn-connect" 
+                    role="button" 
+                    data-ripple-color="primary" 
+                    data-client='@json($item)'>
                         Connect<i class="fas fa-plus ms-2"></i>
                     </button>
                 @endif
