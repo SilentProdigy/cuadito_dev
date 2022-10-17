@@ -1,5 +1,5 @@
 @foreach ($clients as $item)
-    <div class="col-xl-6 mb-4">
+    <div class="col-lg-4 mb-4">
         <div class="card">
             <div class="card-body">
                 <div class="d-flex justify-content-between align-items-center">
