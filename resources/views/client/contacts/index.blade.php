@@ -25,7 +25,7 @@
         </div>
     </div>
 
-    <div class="container-fluid mb-3 d-flex flex-row">
+    <div class="container-fluid mb-3">
         <div class="bg-white">
             <div class="row">
                 @includeWhen(!request()->has('search'), 'client.contacts.includes.contact_list')
