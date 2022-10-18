@@ -38,7 +38,7 @@ class ContactController extends Controller
     public function index()
     {
         $clients = null;
-
+        
         if(request()->has('search'))
         {
             $clients = Client::where('id', '!=',auth('client')->user()->id)
@@ -52,6 +52,7 @@ class ContactController extends Controller
         }
 
         $contacts = auth('client')->user()->contacts;
+
         return view('client.contacts.index')->with(compact('contacts', 'clients'));
     }
 

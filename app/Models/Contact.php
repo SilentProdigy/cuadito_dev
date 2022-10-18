@@ -19,6 +19,7 @@ class Contact extends Model
     protected $appends = [
         'contact_name',
         'contact_email',
+        'contact_profile_picture',
         'is_existing_client'
     ];
 
@@ -40,6 +41,17 @@ class Contact extends Model
     public function getContactEmailAttribute()
     {
         return $this->contact_id ? $this->contact->email : $this->email;
+    }
+
+    public function getContactProfilePictureAttribute()
+    {
+        // return $this->contact_id ? $this->contact-> : $this->email;
+        if($this->contact_id) {
+            return $this->contact->profile_pic !== "" ? 
+            $this->contact->profile_pic : "https://mdbootstrap.com/img/new/avatars/8.jpg";
+        }
+
+        return "https://mdbootstrap.com/img/new/avatars/8.jpg";
     }
 
     public function getIsExistingClientAttribute()
