@@ -21,10 +21,12 @@ class CreateClientsTable extends Migration
             $table->string('gender')->nullable();
             $table->string('address')->nullable();
             $table->string('marital_status')->nullable();
+            $table->string('tag_line')->nullable();
 
             $table->string('email')->unique();
             $table->string('password');
             $table->string('contact_number')->nullable();
+            $table->string('profile_pic')->nullable();
             
             $table->timestamps();
             $table->softDeletes();

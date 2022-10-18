@@ -11,7 +11,7 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('client.profile.update', $client) }}" method="POST">
+        <form action="{{ route('client.profile.update', $client) }}" method="POST" enctype="multipart/form-data">
             @method("PATCH")
             @csrf
             <div class="row mb-3">
@@ -20,6 +20,28 @@
                     <input type="text" class="mt-1 form-control @error('name') is-invalid @enderror" name="name" value="{{ $client->name }}" placeholder="* Enter Fullname" required autocomplete="name" autofocus>
         
                     @error('name')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>  
+
+                <div class="col-md-6 my-2">
+                    <label>Profile Picture</label>
+                    <input type="file" class="mt-1 form-control @error('profile_pic') is-invalid @enderror" name="profile_pic">
+        
+                    @error('profile_pic')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>  
+
+                <div class="col-md-6 my-2">
+                    <label>Tagline</label>
+                    <input type="text" class="mt-1 form-control @error('tag_line') is-invalid @enderror" name="tag_line" placeholder="* Enter your tagline">
+        
+                    @error('tag_line')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -70,6 +92,12 @@
                           Female
                         </label>
                       </div>
+
+                    @error('gender')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>  
 
                 <div class="col-md-4 my-2">
@@ -80,6 +108,11 @@
                             <option value="{{ $option }}" {{ $option == $client->marital_status ? "selected" : "" }}>{{ $option }}</option>
                         @endforeach
                     </select>
+                    @error('marital_status')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>  
 
                 <div class="col-md-4 my-2">
@@ -91,6 +124,11 @@
                           required 
                           autocomplete="birth_date" 
                           autofocus>
+                    @error('birth_date')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>  
 
                 <div class="col-md-12 my-3">

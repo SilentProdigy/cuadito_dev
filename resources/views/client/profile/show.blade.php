@@ -4,12 +4,12 @@
 <div class="container-fluid user-profile">
     <div class="card profile-header">
         <div class="card-header image d-flex flex-column px-5">
-            <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
+            <img src="{{ asset($client->profile_pic) }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
         </div>
         <div class="d-flex flex-row">
             <div class="card-body mt-5 mx-3 d-flex flex-column">
                 <span class="name mt-3">{{ $client->name }}</span>
-                <span>CEO | LOPEZ DIGITAL INDUSTRY</span>
+                <span>{{ $client->tag_line }}</span>
                 <span>{{ $client->email }}</span>
             </div>
         </div>

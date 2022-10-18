@@ -19,7 +19,9 @@ class Client extends Authenticatable
         'marital_status',
         'email',
         'password',
-        'contact_number'
+        'contact_number',
+        'profile_pic',
+        'tag_line'
     ];
 
     protected $cast = [

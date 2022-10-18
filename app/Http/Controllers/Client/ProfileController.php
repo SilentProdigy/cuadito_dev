@@ -4,13 +4,18 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Admin\ChangePasswordFormRequest;
+use App\Http\Requests\Client\Profile\UpdateProfileRequest;
 use App\Models\Client;
+use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 
 class ProfileController extends Controller
 {
+    use UploadFile;
+
     public function show(Client $client)
     {
         return view('client.profile.show')->with(compact('client'));
@@ -22,11 +27,33 @@ class ProfileController extends Controller
         return view('client.profile.edit')->with(compact('client', 'civil_status_options'));
     }
 
-    public function update(Request $request, Client $client)
+    public function update(UpdateProfileRequest $request, Client $client)
     {
-        $client->update($request->all());
+        try {
+            DB::beginTransaction();
 
-        return redirect(route('client.profile.show', $client));
+            $data = $request->except('profile_pic');
+            
+            $target_dir = "clients/profile_pics/" . $client->id;
+
+            if($request->has('profile_pic')) {
+                $path = $this->uploadFile($target_dir, $request->file('profile_pic'));
+                $data['profile_pic'] = $path;
+            }
+
+            $client->update($data);
+            
+            DB::commit();
+            
+            return redirect(route('client.profile.show', $client));
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => $e->getMessage()
+            ]);
+        }
     }
 
     public function editPassword(Client $client)
