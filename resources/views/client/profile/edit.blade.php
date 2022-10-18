@@ -15,7 +15,7 @@
             @method("PATCH")
             @csrf
             <div class="row mb-3">
-                <div class="col-md-8 my-2">
+                <div class="col-md-12 my-2">
                     <label>Fullname</label>
                     <input type="text" class="mt-1 form-control @error('name') is-invalid @enderror" name="name" value="{{ $client->name }}" placeholder="* Enter Fullname" required autocomplete="name" autofocus>
         
@@ -26,11 +26,22 @@
                     @enderror
                 </div>  
 
-                <div class="col-md-4 my-2">
+                <div class="col-md-6 my-2">
                     <label>Profile Picture</label>
                     <input type="file" class="mt-1 form-control @error('profile_pic') is-invalid @enderror" name="profile_pic">
         
                     @error('profile_pic')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>  
+
+                <div class="col-md-6 my-2">
+                    <label>Tagline</label>
+                    <input type="text" class="mt-1 form-control @error('tag_line') is-invalid @enderror" name="tag_line" placeholder="* Enter your tagline">
+        
+                    @error('tag_line')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>

@@ -20,7 +20,8 @@ class Client extends Authenticatable
         'email',
         'password',
         'contact_number',
-        'profile_pic'
+        'profile_pic',
+        'tag_line'
     ];
 
     protected $cast = [

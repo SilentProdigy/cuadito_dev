@@ -9,7 +9,7 @@
         <div class="d-flex flex-row">
             <div class="card-body mt-5 mx-3 d-flex flex-column">
                 <span class="name mt-3">{{ $client->name }}</span>
-                <span>CEO | LOPEZ DIGITAL INDUSTRY</span>
+                <span>{{ $client->tag_line }}</span>
                 <span>{{ $client->email }}</span>
             </div>
         </div>
