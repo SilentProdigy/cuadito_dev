@@ -81,6 +81,12 @@
                           Female
                         </label>
                       </div>
+
+                    @error('gender')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>  
 
                 <div class="col-md-4 my-2">
@@ -91,6 +97,11 @@
                             <option value="{{ $option }}" {{ $option == $client->marital_status ? "selected" : "" }}>{{ $option }}</option>
                         @endforeach
                     </select>
+                    @error('marital_status')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>  
 
                 <div class="col-md-4 my-2">
@@ -102,6 +113,11 @@
                           required 
                           autocomplete="birth_date" 
                           autofocus>
+                    @error('birth_date')
+                      <span class="invalid-feedback" role="alert">
+                          <strong>{{ $message }}</strong>
+                      </span>
+                    @enderror
                 </div>  
 
                 <div class="col-md-12 my-3">
