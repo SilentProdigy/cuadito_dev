@@ -74,16 +74,22 @@ class ContactController extends Controller
      */
     public function store(CreateContactRequest $request)
     {
+        DB::beginTransaction();
+
         try 
         {
+            
             // Will store non existing client. 
             $data = $request->all();
             $contact = auth('client')->user()->contacts()->create($data);
             $this->sendSignupInvitationEmail($contact);
+            DB::commit();
             return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
         }
         catch(\Exception $e)
         {
+            DB::rollBack();
+
             return redirect()->back()->withErrors([
                 'message' => $e->getMessage()
             ]);
