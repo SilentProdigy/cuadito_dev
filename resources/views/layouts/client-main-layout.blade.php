@@ -131,7 +131,7 @@
             </ul>
             <div class="d-flex dropdown">
                 <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
+                    <img src="{{ auth('client')->user()->profile_picture_url }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
                     &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">

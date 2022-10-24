@@ -34,6 +34,7 @@ class Client extends Authenticatable
         'projects_count',
         'companies_count',
         'have_unread_notifications',
+        'profile_picture_url'
     ];
 
     public const ITEMS_PER_PAGE = 5;
@@ -146,5 +147,10 @@ class Client extends Authenticatable
     public function getIsConnectedAttribute()
     {
         return auth('client')->user()->contacts()->where('contact_id', $this->id)->exists();
+    }
+
+    public function getProfilePictureUrlAttribute()
+    {
+        return $this->profile_pic ? asset($this->profile_pic) : asset('images/avatar/12.png');
     }
 }
