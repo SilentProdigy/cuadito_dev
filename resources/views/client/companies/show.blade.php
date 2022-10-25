@@ -93,7 +93,7 @@
                 document.querySelector('#requirement-name').innerHTML = requirementData.name;
 
                 let form = document.querySelector('#delete-requirement-form');
-                form.setAttribute('action', `/client/companies/${companyData.id}/requirements/${requirementData.id}`);
+                form.setAttribute('action', `/companies/${companyData.id}/requirements/${requirementData.id}`);
 
                 companies/{company}/requirements/{requirement}
 

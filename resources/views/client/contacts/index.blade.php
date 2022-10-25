@@ -61,7 +61,7 @@
                     data = JSON.parse(data);
 
                     let form = document.querySelector('#connect-form');
-                    // form.setAttribute('action', `/client/connect`);
+                    // form.setAttribute('action', `/connect`);
                     $('#contact-id-txt').val(`${ data.id }`);
                     form.submit();
                 });
@@ -82,7 +82,7 @@
                     $('#delete-contact-id-txt').val(`${ data.id }`);
                     $('#delete-contact-type-txt').val('contact');
 
-                    form.setAttribute('action', `/client/contacts`);
+                    form.setAttribute('action', `/contacts`);
                     form.submit();
                 });
             });
@@ -98,11 +98,11 @@
                     data = JSON.parse(data);
                     
                     let form = document.querySelector('#delete-connect-form');
-                    // form.setAttribute('action', `/client/connect`);
+                    // form.setAttribute('action', `/connect`);
                     $('#delete-contact-id-txt').val(`${ data.id }`);
                     $('#delete-contact-type-txt').val('client');
                     
-                    form.setAttribute('action', `/client/contacts`);
+                    form.setAttribute('action', `/contacts`);
                     form.submit();
                 });
             });

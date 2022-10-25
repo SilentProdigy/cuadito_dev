@@ -134,7 +134,7 @@
                     document.querySelector('#project-name').innerHTML = data.title;
 
                     let form = document.querySelector('#delete-project-form');
-                    form.setAttribute('action', `/client/projects/${ data.id }`);
+                    form.setAttribute('action', `/projects/${ data.id }`);
 
                 });
             });
@@ -151,7 +151,7 @@
                     myModal.show()
 
                     let form = document.querySelector('#set-project-status-form');
-                    form.setAttribute('action', `/client/projects/set-status/${ data.id }`);
+                    form.setAttribute('action', `/projects/set-status/${ data.id }`);
 
                     $('#project-status').val(`${ data.status }`);
                 });

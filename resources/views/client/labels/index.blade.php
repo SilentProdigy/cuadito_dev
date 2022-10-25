@@ -63,7 +63,7 @@
                     document.querySelector('#edit-lbl-txt').value = data.name;
 
                     let form = document.querySelector('#edit-label-form');
-                    form.setAttribute('action', `/client/labels/${ data.id }`);
+                    form.setAttribute('action', `/labels/${ data.id }`);
 
                     // $('#validation_status').val(`${ data.validation_status }`);
                 });
@@ -84,7 +84,7 @@
                     myModal.show()
 
                     let form = document.querySelector('#delete-label-form');
-                    form.setAttribute('action', `/client/labels/${ data.id }`);
+                    form.setAttribute('action', `/labels/${ data.id }`);
 
                     // $('#validation_status').val(`${ data.validation_status }`);
                 });

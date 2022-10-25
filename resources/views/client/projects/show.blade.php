@@ -182,7 +182,7 @@
                 myModal.show()
 
                 let form = document.querySelector('#set-project-winner-form');
-                form.setAttribute('action', `/client/projects/set-winner/${ project.id }`);
+                form.setAttribute('action', `/projects/set-winner/${ project.id }`);
 
                 // document.querySelector('#area-name').innerHTML = data.name;
             });

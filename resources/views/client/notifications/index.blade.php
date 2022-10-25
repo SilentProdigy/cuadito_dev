@@ -77,7 +77,7 @@
 
                     // document.querySelector('#project-name').innerHTML = data.title;
                     let form = document.querySelector('#delete-notification-form');
-                    form.setAttribute('action', `/client/notifications/${ data.id }`);
+                    form.setAttribute('action', `/notifications/${ data.id }`);
 
                 });
             });

@@ -113,7 +113,7 @@
                 // document.querySelector('#project-name').innerHTML = data.title;
 
                 let form = document.querySelector('#archive-conversation-form');
-                form.setAttribute('action', `/client/convo-subs/archive/${ data.id }`);
+                form.setAttribute('action', `/convo-subs/archive/${ data.id }`);
             });
         });
 
@@ -131,7 +131,7 @@
                 // document.querySelector('#project-name').innerHTML = data.title;
 
                 let form = document.querySelector('#delete-conversation-form');
-                form.setAttribute('action', `/client/convo-subs/delete/${ data.id }`);
+                form.setAttribute('action', `/convo-subs/delete/${ data.id }`);
             });
         });
 
@@ -145,7 +145,7 @@
 
                 let form = document.querySelector('#star-form');
                 document.querySelector('#star-txt').value = true;
-                form.setAttribute('action', `/client/convo-subs/star/${ data.id }`);
+                form.setAttribute('action', `/convo-subs/star/${ data.id }`);
                 form.submit();
             });
         });
@@ -160,7 +160,7 @@
 
                 let form = document.querySelector('#star-form');
                 document.querySelector('#star-txt').value = false;
-                form.setAttribute('action', `/client/convo-subs/star/${ data.id }`);
+                form.setAttribute('action', `/convo-subs/star/${ data.id }`);
                 form.submit();
             });
         });

@@ -91,7 +91,7 @@ Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(f
 });
 
 
-Route::prefix('client')->name('client.')->group(function () {
+Route::name('client.')->group(function () {
     Route::prefix('auth')->name('auth.')->group(function() {
         Route::get('login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'showLoginForm'])->name('show-login-form');
         Route::post('login', [\App\Http\Controllers\Client\Auth\LoginController::class, 'login'])->name('login');

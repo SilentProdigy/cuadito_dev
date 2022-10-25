@@ -79,7 +79,7 @@
                     document.querySelector('#company-name').innerHTML = data.name;
 
                     let form = document.querySelector('#delete-company-form');
-                    form.setAttribute('action', `/client/companies/${ data.id }`);
+                    form.setAttribute('action', `/companies/${ data.id }`);
 
                     // $('#validation_status').val(`${ data.validation_status }`);
                 });
