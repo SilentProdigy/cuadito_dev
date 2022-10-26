@@ -22,7 +22,8 @@ use App\Http\Contorllers\Client\MessageController;
 
 Route::redirect('/', '/auth/login');
 
-Route::get('/login', [HomeController::class, 'index'])->middleware('auth');
+// Route::get('/login', [HomeController::class, 'index'])->middleware('auth');
+Route::redirect('/login', '/admin/login');
 
 Route::get('/landing-page', function(){
     return view('landing-page');
@@ -65,6 +66,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth','inactive'])->group(function() {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
+        
     
         Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
         Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
