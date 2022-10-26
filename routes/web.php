@@ -20,8 +20,8 @@ use App\Http\Contorllers\Client\MessageController;
 |
 */
 
-// Route::get('/', [HomeController::class, 'index'])->middleware('auth');
-Route::redirect('/', '/client/auth/login');
+Route::redirect('/', '/auth/login');
+
 Route::get('/login', [HomeController::class, 'index'])->middleware('auth');
 
 Route::get('/landing-page', function(){
@@ -58,36 +58,36 @@ Route::get('profile/{id}', ['uses' => 'App\Http\Controllers\DashboardController@
 
 Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
 
-Auth::routes();
-
-
-
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
-Route::middleware(['auth','inactive'])->prefix('admin')->name('admin.')->group(function () {
-    Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
-    Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
-
-    Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
-    Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
-    Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
-    Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class);
-    Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');
-    Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class); 
-    Route::patch('requirements/set-status/{company_requirement}', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'update'])->name('requirements.set-status');
-    Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
-
-    Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
-    Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Admin\ProjectListingController::class, 'setStatus']);
-    Route::resource('projects', \App\Http\Controllers\Admin\ProjectListingController::class);
-
-    Route::get('proposals/{bidding}', [\App\Http\Controllers\Admin\ProposalController::class, 'show'])->name('proposals.show');
-    Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Admin\AttachmentController::class, 'download'])->name('attachments.download');
-
-    Route::get('profile/{user}/edit', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('profile/{user}/update', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
-
-    Route::get('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
-    Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
+Route::prefix('admin')->name('admin.')->group(function () {
+    Auth::routes();
+    
+    Route::middleware(['auth','inactive'])->group(function() {
+        Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
+        Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
+    
+        Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
+        Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
+        Route::resource('users', \App\Http\Controllers\Admin\UserController::class);
+        Route::resource('companies', \App\Http\Controllers\Admin\CompanyController::class);
+        Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');
+        Route::resource('requirements', \App\Http\Controllers\Admin\RequirementController::class); 
+        Route::patch('requirements/set-status/{company_requirement}', [\App\Http\Controllers\Admin\CompanyRequirementController::class, 'update'])->name('requirements.set-status');
+        Route::resource('categories', \App\Http\Controllers\Admin\CategoryController::class);
+    
+        Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
+        Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Admin\ProjectListingController::class, 'setStatus']);
+        Route::resource('projects', \App\Http\Controllers\Admin\ProjectListingController::class);
+    
+        Route::get('proposals/{bidding}', [\App\Http\Controllers\Admin\ProposalController::class, 'show'])->name('proposals.show');
+        Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Admin\AttachmentController::class, 'download'])->name('attachments.download');
+    
+        Route::get('profile/{user}/edit', [\App\Http\Controllers\Admin\ProfileController::class, 'edit'])->name('profile.edit');
+        Route::patch('profile/{user}/update', [\App\Http\Controllers\Admin\ProfileController::class, 'update'])->name('profile.update');
+    
+        Route::get('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
+        Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
+    });
 });
 
 

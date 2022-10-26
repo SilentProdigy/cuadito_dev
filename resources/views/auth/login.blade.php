@@ -6,7 +6,7 @@
         <div class="col-md-4">
             <div class="card" style="border-radius: 20px;">
                 <div class="card-body"> 
-                    <form method="POST" action="{{ route('login') }}">
+                    <form method="POST" action="{{ route('admin.login') }}">
                         @csrf
 
                         <div class="row mb-3">
