@@ -28,35 +28,35 @@ Route::get('/landing-page', function(){
     return view('landing-page');
 });
 
-Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
+// Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
 
-Route::match(['get', 'post'], '/contact', [HomeController::class, 'contact'])->name('contact');
+// Route::match(['get', 'post'], '/contact', [HomeController::class, 'contact'])->name('contact');
 
-Route::get('/search', [HomeController::class, 'search'])->name('search');
+// Route::get('/search', [HomeController::class, 'search'])->name('search');
 
-Route::match(['get', 'post'], '/product', [HomeController::class, 'product'])->name('product');
+// Route::match(['get', 'post'], '/product', [HomeController::class, 'product'])->name('product');
 
-Route::get('/register/confirmation', [RegisterController::class, 'confirmation'])->name('confirmation');
+// Route::get('/register/confirmation', [RegisterController::class, 'confirmation'])->name('confirmation');
 
-Route::match(['get', 'post'], '/cart', [CartController::class, 'myCart'])->name('my-cart');
+// Route::match(['get', 'post'], '/cart', [CartController::class, 'myCart'])->name('my-cart');
 
-Route::get('/checkout/confirmation', [CartController::class, 'confirmation'])->name('confirmation');
+// Route::get('/checkout/confirmation', [CartController::class, 'confirmation'])->name('confirmation');
 
-Route::get('/search/customer', [OrderController::class, 'searchCustomer'])->name('searchCustomer');
+// Route::get('/search/customer', [OrderController::class, 'searchCustomer'])->name('searchCustomer');
 
-Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('myOrders');
+// Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('myOrders');
 
-Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin-dashboard');
+// Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin-dashboard');
 
 // Route::get('/dashboard/user_listing', [DashboardController::class, 'show_users'])->name('user_listing');
 
-Route::get('/dashboard/orders', [DashboardController::class, 'showOrders'])->name('orders');
-Route::get('/dashboard/product-listing', [ProductController::class, 'index'])->name('product-listing');
+// Route::get('/dashboard/orders', [DashboardController::class, 'showOrders'])->name('orders');
+// Route::get('/dashboard/product-listing', [ProductController::class, 'index'])->name('product-listing');
 
 // Route::get('/profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
-Route::get('profile/{id}', ['uses' => 'App\Http\Controllers\DashboardController@profile', 'as' => 'profile']);
+// Route::get('profile/{id}', ['uses' => 'App\Http\Controllers\DashboardController@profile', 'as' => 'profile']);
 
-Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
+// Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
 
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
@@ -156,7 +156,6 @@ Route::name('client.')->group(function () {
         Route::delete('convo-subs/delete', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'destroy'])->name('conversation-subs.delete');
         Route::patch('convo-subs/set-labels', [\App\Http\Controllers\Client\ConversationSubscriptionController::class, 'setLabel'])->name('conversation-subs.set-labels');
         
-
         Route::post('messages/{conversation}', [\App\Http\Controllers\Client\MessageController::class, 'store'])->name('messages.store');
 
         Route::get('inbox', [\App\Http\Controllers\Client\InboxController::class, 'inbox'])->name('inbox.index');
