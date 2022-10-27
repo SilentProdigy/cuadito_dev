@@ -9,6 +9,7 @@ use App\Mail\Project\ProposalDisapproved;
 use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Project;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectService 
@@ -83,6 +84,6 @@ class ProjectService
 
     private function sendEmail($receiving_emails, $mailable)
     {
-        Mail::to($receiving_emails)->send($mailable);
+        $result = Mail::to($receiving_emails)->queue($mailable);
     }
 }
