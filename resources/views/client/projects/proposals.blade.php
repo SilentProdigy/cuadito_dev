@@ -4,6 +4,28 @@
 <div class="container px-5">
     <section class="mt-4">
         <div class="row">
+            <div class="col-sm-12">
+                <div class="card">
+                    <div class="card-header d-flex justify-content-between">
+                        <div>
+                            <h3 class="fw-bold py-1">{{ $project->title }}</h3>
+                            <div class="py-1">
+                                @foreach ($project->categories as $category)
+                                    <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                                @endforeach
+                            </div>
+                        </div>
+                        <div>
+                            {!! $project->status_badge !!}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="mt-4">
+        <div class="row">
             <div class="col-xs-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
