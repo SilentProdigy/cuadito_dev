@@ -4,32 +4,10 @@
 <div class="container px-5">
     <section class="mt-4">
         <div class="row">
-            <div class="col-sm-12">
-                <div class="card">
-                    <div class="card-header d-flex justify-content-between">
-                        <div>
-                            <h3 class="fw-bold py-1">{{ $project->title }}</h3>
-                            <div class="py-1">
-                                @foreach ($project->categories as $category)
-                                    <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
-                                @endforeach
-                            </div>
-                        </div>
-                        <div>
-                            {!! $project->status_badge !!}
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="mt-4">
-        <div class="row">
             <div class="col-xs-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <h3 class="fw-bold py-1">Project's Proposals</h3>
+                        <h3 class="fw-bold py-1">{{ $project->title }}'s Proposals</h3>
                         
                         <form action="{{ route('client.projects.proposals', $project) }}" method="get">
                             <div class="input-group input-group-lg mb-3">
@@ -39,6 +17,14 @@
                                 </button>
                                 <a href="{{ route('client.projects.proposals', $project) }}">Clear</a>
                             </div>
+
+                            <label>Rate Filter</label>
+                            <input type="text" name="min_rate" placeholder="* Min Rate" value="{{ request('min_rate') }}">
+                            <input type="text" name="max_rate" placeholder="* Max Rate" value="{{ request('max_rate') }}"/><br/>
+
+                            <label>Date Filter</label>
+                            <input type="date" name="min_date" placeholder="* Min Date" value="{{ request('min_date') }}"/>
+                            <input type="date" name="max_date" placeholder="* Max Date" value="{{ request('max_date') }}"/>
                         </form>
                     </div>
                     <div class="card-body">

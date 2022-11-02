@@ -217,6 +217,16 @@ class ProjectController extends Controller
             });
         }
 
+        if(request('min_rate') && request('max_rate'))
+        {
+            $proposals->whereBetween('rate', [ request('min_rate'), request('max_rate') ]);
+        }
+
+        if(request('min_date') && request('max_date'))
+        {
+            $proposals->whereBetween('created_at', [ request('min_date'), request('max_date') ]);
+        }
+
         $proposals = $proposals->paginate(10);
         
         return view('client.projects.proposals')->with(compact('proposals', 'project'));
