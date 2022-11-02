@@ -204,4 +204,21 @@ class ProjectController extends Controller
         }
     }
 
+    public function proposals(Project $project) 
+    {
+        $proposals = $project->proposals();
+        
+        if(request('search'))
+        {
+            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')            
+            ->orWhereHas('company', function($query) {
+                $query->where('name', 'LIKE', '%' . request('search') . '%')
+                ->orWhere('email', 'LIKE', '%' . request('search') . '%');
+            });
+        }
+
+        $proposals = $proposals->paginate(10);
+        
+        return view('client.projects.proposals')->with(compact('proposals', 'project'));
+    }
 }
