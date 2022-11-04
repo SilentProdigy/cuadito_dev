@@ -28,4 +28,17 @@ class SubscriptionTypeController extends Controller
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
+
+    public function destroy(SubscriptionType $subscriptionType)
+    {
+        try
+        {
+            $subscriptionType->delete();
+            return redirect()->back()->with('success', 'Product was successfully deleted.');  
+        }
+        catch(\Exception $e)
+        {
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        }
+    }
 }

@@ -31,10 +31,10 @@
                             <td>@money($item->amount)</td>
                             <td>{{ $item->description }}</td>
                             <td>
-                                <a href="#" class="btn btn-sm btn-warning btn-edit-category" data-category="@json($item)">
+                                <a href="#" class="btn btn-sm btn-warning btn-edit-product" data-product='@json($item)'>
                                     <i class="fa fa-pencil"></i>          
                                 </a>
-                                <a href="#" class="btn btn-sm btn-danger btn-delete" data-category="@json($item)">
+                                <a href="#" class="btn btn-sm btn-danger btn-delete" data-product='@json($item)'>
                                     <i class="fa fa-trash"></i>
                                 </a> 
                             </td>
@@ -53,29 +53,30 @@
     </div>
 
     @include('admin.subcription_types.modals.add_subscription_type_modal')
+    @include('admin.subcription_types.modals.confirm_delete_product_modal')
 @endsection
 
 @section('script')
 <script>
-    // $(document).ready(function() {
-    //     let delete_buttons = document.querySelectorAll('.btn-delete');
+    $(document).ready(function() {
+        let delete_buttons = document.querySelectorAll('.btn-delete');
 
-    //     delete_buttons.forEach(button => {
-    //         button.addEventListener('click', function(e) {  
-    //             e.preventDefault;
-    //             let data = button.getAttribute('data-category');   
-    //             data = JSON.parse(data);
+        delete_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-product');   
+                data = JSON.parse(data);
 
-    //             let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
-    //             myModal.show()
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
+                myModal.show()
 
-    //             let form = document.querySelector('#delete-category-form');
-    //             form.setAttribute('action', `/admin/categories/${ data.id }`);
+                let form = document.querySelector('#delete-product-form');
+                form.setAttribute('action', `/admin/subscription-types/${ data.id }`);
 
-    //             document.querySelector('#category-name').innerHTML = data.name;
-    //         });
-    //     });
-
+                // document.querySelector('#category-name').innerHTML = data.name;
+            });
+        });
+    });
     //     let edit_category_buttons = document.querySelectorAll('.btn-edit-category');
 
     //     edit_category_buttons.forEach(button => {
