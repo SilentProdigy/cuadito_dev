@@ -29,36 +29,6 @@ Route::get('/landing-page', function(){
     return view('landing-page');
 });
 
-// Route::get('/access-denied', [HomeController::class, 'accessDenied'])->name('access-denied');
-
-// Route::match(['get', 'post'], '/contact', [HomeController::class, 'contact'])->name('contact');
-
-// Route::get('/search', [HomeController::class, 'search'])->name('search');
-
-// Route::match(['get', 'post'], '/product', [HomeController::class, 'product'])->name('product');
-
-// Route::get('/register/confirmation', [RegisterController::class, 'confirmation'])->name('confirmation');
-
-// Route::match(['get', 'post'], '/cart', [CartController::class, 'myCart'])->name('my-cart');
-
-// Route::get('/checkout/confirmation', [CartController::class, 'confirmation'])->name('confirmation');
-
-// Route::get('/search/customer', [OrderController::class, 'searchCustomer'])->name('searchCustomer');
-
-// Route::get('/my-orders', [OrderController::class, 'myOrders'])->name('myOrders');
-
-// Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('admin-dashboard');
-
-// Route::get('/dashboard/user_listing', [DashboardController::class, 'show_users'])->name('user_listing');
-
-// Route::get('/dashboard/orders', [DashboardController::class, 'showOrders'])->name('orders');
-// Route::get('/dashboard/product-listing', [ProductController::class, 'index'])->name('product-listing');
-
-// Route::get('/profile', [App\Http\Controllers\DashboardController::class, 'profile'])->name('profile');
-// Route::get('profile/{id}', ['uses' => 'App\Http\Controllers\DashboardController@profile', 'as' => 'profile']);
-
-// Route::get('/invoice', [OrderController::class, 'invoice'])->name('invoice');
-
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
     Auth::routes();
@@ -66,7 +36,6 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware(['auth','inactive'])->group(function() {
         Route::get('/dashboard', [\App\Http\Controllers\Admin\DashboardController::class, 'index'])->name('dashboard');
         Route::get('/profile/{user}', [\App\Http\Controllers\Admin\ProfileController::class, 'show'])->name('profile.show');
-        
     
         Route::patch('/users/set-status/{user}', [\App\Http\Controllers\Admin\UserController::class, 'setStatus'])->name('set-status');
         Route::patch('/users/change-password/{user}', [\App\Http\Controllers\Admin\UserController::class, 'changePassword'])->name('change-password');
@@ -89,6 +58,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
     
         Route::get('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
         Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
+
+        Route::resource('subscription-types', \App\Http\Controllers\Admin\SubscriptionTypeController::class);
     });
 });
 
