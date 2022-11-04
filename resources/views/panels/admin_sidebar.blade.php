@@ -51,6 +51,11 @@
 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-chart-area fa-fw me-3"></i><span>Reports</span>
 </a>
+
+<a href="{{ route('admin.subscription-types.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+    <i class="fas fa-th-large fa-fw me-3"></i><span>Products</span>
+</a>
+
 {{-- 
     <a href="{{ route('admin.dashboard') }}" target="_blank" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-store fa-fw me-3"></i><span>Go to Platform&nbsp;<i class="fa fa-external-link fa-fw"></i></span>
