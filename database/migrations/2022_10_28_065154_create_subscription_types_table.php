@@ -17,7 +17,7 @@ class CreateSubscriptionTypesTable extends Migration
             $table->id();
             $table->string('name');
             $table->decimal('amount', 9, 2);
-            $table->text('description');
+            $table->text('description')->nullable();
             $table->timestamps();
 
             $table->index('name');
