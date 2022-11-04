@@ -8,7 +8,7 @@
         </div>
 
         <div class="col d-flex justify-content-end">
-            <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-category-modal">
+            <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-product-modal">
                 <i class="fa fa-plus"></i>&ensp;Add New Product
             </button>
         </div>
@@ -52,6 +52,7 @@
         </div>
     </div>
 
+    @include('admin.subcription_types.modals.add_subscription_type_modal')
 @endsection
 
 @section('script')
