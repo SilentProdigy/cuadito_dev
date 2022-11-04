@@ -204,4 +204,31 @@ class ProjectController extends Controller
         }
     }
 
+    public function proposals(Project $project) 
+    {
+        $proposals = $project->proposals();
+        
+        if(request('search'))
+        {
+            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')            
+            ->orWhereHas('company', function($query) {
+                $query->where('name', 'LIKE', '%' . request('search') . '%')
+                ->orWhere('email', 'LIKE', '%' . request('search') . '%');
+            });
+        }
+
+        if(request('min_rate') && request('max_rate'))
+        {
+            $proposals->whereBetween('rate', [ request('min_rate'), request('max_rate') ]);
+        }
+
+        if(request('min_date') && request('max_date'))
+        {
+            $proposals->whereBetween('created_at', [ request('min_date'), request('max_date') ]);
+        }
+
+        $proposals = $proposals->paginate(10);
+        
+        return view('client.projects.proposals')->with(compact('proposals', 'project'));
+    }
 }

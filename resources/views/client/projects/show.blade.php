@@ -62,6 +62,7 @@
                         <div class="my-5 text-center">
                             <h1 class="fw-bold">{{ $project->proposals_count }}</h1>
                             <p class="fw-bold text-uppercase fs-6 text-secondary">Total Proposals</p>
+                            <a class="btn btn-sm btn-primary" href="{{route('client.projects.proposals', $project)}}">View all proposals</a>
                         </div>
 
                         @if($project->status == 'CLOSED' && $project->winningBidding)
@@ -88,7 +89,7 @@
         </div>
     </section>
 
-    <section class="mt-4">
+    {{-- <section class="mt-4">
         <div class="row">
             <div class="col-xs-12">
                 <div class="card">
@@ -153,40 +154,40 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> --}}
 </div>
-@include('client.projects.modals.choose_proposal_modal')
+{{-- @include('client.projects.modals.choose_proposal_modal') --}}
 @endsection
 
 @section('script')
 <script>
-    $(document).ready(function() {
+    // $(document).ready(function() {
 
 
-        let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
+    //     let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
 
-        choose_proposal_buttons.forEach(button => {
-            button.addEventListener('click', function(e) {  
-                e.preventDefault;
-                let data = button.getAttribute('data-proposal');   
-                data = JSON.parse(data);
+    //     choose_proposal_buttons.forEach(button => {
+    //         button.addEventListener('click', function(e) {  
+    //             e.preventDefault;
+    //             let data = button.getAttribute('data-proposal');   
+    //             data = JSON.parse(data);
 
-                let project = button.getAttribute('data-project');
-                project = JSON.parse(project);
+    //             let project = button.getAttribute('data-project');
+    //             project = JSON.parse(project);
 
-                document.querySelector('#company-name').innerHTML = data.company.name;
-                document.querySelector('#proposal-id').innerHTML = data.id;
-                document.querySelector('#winner_bidding_id').value = data.id;
+    //             document.querySelector('#company-name').innerHTML = data.company.name;
+    //             document.querySelector('#proposal-id').innerHTML = data.id;
+    //             document.querySelector('#winner_bidding_id').value = data.id;
 
-                let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
-                myModal.show()
+    //             let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
+    //             myModal.show()
 
-                let form = document.querySelector('#set-project-winner-form');
-                form.setAttribute('action', `/projects/set-winner/${ project.id }`);
+    //             let form = document.querySelector('#set-project-winner-form');
+    //             form.setAttribute('action', `/projects/set-winner/${ project.id }`);
 
-                // document.querySelector('#area-name').innerHTML = data.name;
-            });
-        });
-    });
+    //             // document.querySelector('#area-name').innerHTML = data.name;
+    //         });
+    //     });
+    // });
 </script>
 @endsection
