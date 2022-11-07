@@ -41,7 +41,7 @@ class BillingController extends Controller
                 'details' => 'Lorem ipsum dulum'
             ]);
             
-            return redirect(route('client.invoice.show', $payment));
+            return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
         }
         catch(\Exception $e)
         {
