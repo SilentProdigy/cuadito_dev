@@ -153,4 +153,9 @@ class Client extends Authenticatable
     {
         return $this->profile_pic ? asset($this->profile_pic) : asset('images/avatar/12.png');
     }
+
+    public function subscriptions()
+    {
+        return $this->hasMany(\App\Models\Subscription::class);
+    }
 }
