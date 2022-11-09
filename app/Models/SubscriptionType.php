@@ -12,7 +12,8 @@ class SubscriptionType extends Model
     public $fillable = [
         'name',
         'description',
-        'amount'
+        'amount',
+        'points'
     ];
 
     public function subscriptions()

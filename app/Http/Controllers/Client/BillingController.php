@@ -30,7 +30,8 @@ class BillingController extends Controller
             $subscription = auth('client')->user()->subscriptions()->create([
                 'subscription_type_id' => $subscription_type->id,
                 'expiration_date' => $expiration_date,
-                'status' => Subscription::ACTIVE_STATUS
+                'status' => Subscription::ACTIVE_STATUS,
+                'points' => $subscription_type->points
             ]);
             
             $payment = $subscription->payments()->create([

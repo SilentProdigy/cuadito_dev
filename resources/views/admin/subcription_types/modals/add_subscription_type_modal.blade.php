@@ -35,6 +35,18 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12">
+                        <input type="number" class="form-control @error('points') is-invalid @enderror" name="points" value="{{ old('points') }}" placeholder="Points" required>
+
+                        @error('points')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
                         <textarea class="form-control @error('description') is-invalid @enderror" name="description" rows="10" placeholder="Description"></textarea>
 
                         @error('description')

@@ -18,14 +18,17 @@ class SubscriptionTypesTableSeeder extends Seeder
             [
                 'name' => 'Silver',
                 'amount' => 2000,
+                'points' => 100
             ], 
             [
                 'name' => 'Gold',
                 'amount' => 3000,
+                'points' => 200
             ], 
             [
                 'name' => 'Platinum',
                 'amount' => 4000,
+                'points' => 300
             ], 
         ])
         ->each(function($item) {
