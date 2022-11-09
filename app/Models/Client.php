@@ -158,4 +158,16 @@ class Client extends Authenticatable
     {
         return $this->hasMany(\App\Models\Subscription::class);
     }
+
+    public function getHaveSubscriptionAttribute()
+    {
+        return $this->subscriptions()
+                    ->where('status', \App\Models\Subscription::ACTIVE_STATUS)
+                    ->exists();
+    }
+
+    // public function activeSubscription()
+    // {
+    //     // return $this->subscriptions()->where('status', Subscription::ACTIVE_STATUS)->first();
+    // }
 }

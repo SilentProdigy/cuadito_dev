@@ -75,5 +75,6 @@ class Kernel extends HttpKernel
         'client.validate.ensure_company_dont_have_proposal' => \App\Http\Middleware\Client\EnsureCompanyDontHaveProposal::class,
         'client.validate.ensure_email_dont_exist_on_contacts' => \App\Http\Middleware\Client\EnsureEmailIsNotOnContactList::class,
         'client.validate.ensure_email_dont_exist_on_system' => \App\Http\Middleware\Client\EnsureEmailIsNotOnTheSystem::class,
+        'client.validate.enseure_client_have_subscription' => \App\Http\Middleware\Client\EnsureClientHaveActiveSubscription::class,
     ];
 }
