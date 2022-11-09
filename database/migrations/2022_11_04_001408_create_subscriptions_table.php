@@ -19,6 +19,7 @@ class CreateSubscriptionsTable extends Migration
             $table->foreignId('client_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->dateTime('expiration_date')->nullable();
             $table->string('status')->default('ACTIVE');
+            $table->unsignedBigInteger('points')->default(0);
             $table->timestamps();
 
             $table->index(['subscription_type_id', 'client_id', 'status']);

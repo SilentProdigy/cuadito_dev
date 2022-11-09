@@ -13,7 +13,8 @@ class Subscription extends Model
         'subscription_type_id',
         'client_id',
         'expiration_date',
-        'status'
+        'status',
+        'points'
     ];
 
     public const ACTIVE_STATUS = "ACTIVE";
