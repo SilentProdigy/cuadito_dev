@@ -114,6 +114,12 @@ class ProposalController extends Controller
                 'url' => route('client.projects.show', $project),
             ]);
 
+            $active_subscrption = auth('client')->user()->active_subscription;
+
+            $active_subscrption->update([
+                'points' => $active_subscrption->points - Bidding::DEFAULT_DECREASE_VALUE
+            ]);
+
             DB::commit();
 
             return redirect(route('client.listing.index'))
