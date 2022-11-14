@@ -77,7 +77,8 @@ Route::name('client.')->group(function () {
         Route::post('logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout'])->name('auth.logout');
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
 
-        Route::middleware(['client.validate.ensure_client_have_subscription'])->group(function() {
+        Route::middleware(['client.validate.ensure_client_have_subscription', 'client.validate.ensure_client_subscription_is_not_expire'])
+        ->group(function() {
             Route::resource('companies', \App\Http\Controllers\Client\CompanyController::class);
             Route::post('companies/{company}/requirements', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'store'])->name('companies.requirements.store');
             Route::get('companies/{company}/requirements/{requirement}/download', [\App\Http\Controllers\Client\CompanyRequirementController::class, 'download'])->name('companies.requirements.download');

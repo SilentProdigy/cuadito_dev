@@ -20,6 +20,10 @@ class Subscription extends Model
     public const ACTIVE_STATUS = "ACTIVE";
     public const INACTIVE_STATUS = "INACTIVE";
 
+    protected $casts = [
+        'expiration_date' => 'datetime',
+    ];
+
     public function subscription_type()
     {
         return $this->belongsTo(\App\Models\SubscriptionType::class);

@@ -77,5 +77,6 @@ class Kernel extends HttpKernel
         'client.validate.ensure_email_dont_exist_on_system' => \App\Http\Middleware\Client\EnsureEmailIsNotOnTheSystem::class,
         'client.validate.ensure_client_have_subscription' => \App\Http\Middleware\Client\EnsureClientHaveActiveSubscription::class,
         'client.validate.ensure_client_have_subscription_points' => \App\Http\Middleware\Client\EnsureClientHaveSubscriptionPoints::class,
+        'client.validate.ensure_client_subscription_is_not_expire' => \App\Http\Middleware\Client\EnsureClientSubscriptionIsNotExpired::class,
     ];
 }
