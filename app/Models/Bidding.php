@@ -10,6 +10,8 @@ class Bidding extends Model
 {
     use HasFactory, SoftDeletes;
 
+    public const DEFAULT_DECREASE_VALUE = 10;
+
     protected $with = ['company'];
 
     protected $fillable = [

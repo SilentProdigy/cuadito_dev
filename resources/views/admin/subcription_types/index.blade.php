@@ -20,6 +20,7 @@
                     <th>SEQ</th>
                     <th>NAME</th>
                     <th>AMOUNT</th>
+                    <th>POINTS</th>
                     <th>DESCRIPTION</th>
                     <th>ACTIONS</th>
                 </thead>
@@ -29,6 +30,7 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
                             <td>@money($item->amount)</td>
+                            <td>{{ $item->points }}</td>
                             <td>{{ $item->description }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning btn-edit-product" data-product='@json($item)'>
@@ -95,6 +97,7 @@
                 // document.querySelector('#category-name-txt').setAttribute("value", data.name);
                 $('#edit-name').val(data.name);
                 $('#edit-amount').val(data.amount);
+                $('#edit-points').val(data.points);
                 $('#edit-description').val(data.description);
             });
         });

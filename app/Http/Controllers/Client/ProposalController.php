@@ -31,8 +31,11 @@ class ProposalController extends Controller
         $this->companyService = $companyService;
         $this->proposalService = $proposalService;
 
-        $this->middleware(['client.validate.ensure_project_not_owned_by_client'])
-        ->only(['create']);
+        $this->middleware([
+            'client.validate.ensure_project_not_owned_by_client', 
+            'client.validate.ensure_client_have_subscription_points'
+        ])
+        ->only(['create', 'store']);
     }
 
     public function index()
@@ -109,6 +112,12 @@ class ProposalController extends Controller
             $project->owner->notifications()->create([
                 'content' => $proposing_company->name . " submitted a proposal for your Project: " . $project->title . " #" . $project->id,
                 'url' => route('client.projects.show', $project),
+            ]);
+
+            $active_subscrption = auth('client')->user()->active_subscription;
+
+            $active_subscrption->update([
+                'points' => $active_subscrption->points - Bidding::DEFAULT_DECREASE_VALUE
             ]);
 
             DB::commit();
