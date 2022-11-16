@@ -29,6 +29,11 @@ class Subscription extends Model
         return $this->belongsTo(\App\Models\SubscriptionType::class);
     }
 
+    public function scopeActive($query)
+    {
+        $query->where('status', self::ACTIVE_STATUS);
+    }
+
     public function client()
     {
         return $this->belongsTo(\App\Models\Client::class);
