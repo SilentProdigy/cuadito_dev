@@ -19,6 +19,11 @@ class Kernel extends ConsoleKernel
         $schedule->command('queue:work --stop-when-empty')
         ->everyMinute()
         ->withoutOverlapping();
+
+        $schedule->command('system:deactive-expired-subscription')
+        ->timezone('Asia/Manila')
+        ->dailyAt('09:00')
+        ->withoutOverlapping();
     }
 
     /**
