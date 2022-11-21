@@ -170,4 +170,9 @@ class Client extends Authenticatable
     {
         return $this->subscriptions()->where('status', \App\Models\Subscription::ACTIVE_STATUS)->first();
     }
+
+    public function getLatestSubscriptionAttribute()
+    {
+        return $this->subscriptions()->orderBy('id', 'desc')->first();
+    }
 }

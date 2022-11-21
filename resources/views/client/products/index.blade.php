@@ -8,7 +8,11 @@
             <div class="col-sm-4">
                 <h3>{{ $item->name }} - @money($item->amount)</h3>
                 <p>{{ $item->description }}</p>
-                <a href="{{ route('client.billings.create', $item) }}" class="btn btn-warning">Buy Now</a>
+                @if($latest_subscription && $latest_subscription->subscription_type_id == $item->id)
+                    <a href="{{ route('client.billings.create', $item) }}" class="btn btn-dark">Renew Subscription</a>
+                @else 
+                    <a href="{{ route('client.billings.create', $item) }}" class="btn btn-warning">Buy Now</a>
+                @endif
             </div>
         @endforeach
     </div>

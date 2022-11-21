@@ -12,7 +12,7 @@ class ProductController extends Controller
     public function index()
     {
         $products = SubscriptionType::get();
-
-        return view('client.products.index')->with(compact('products'));
+        $latest_subscription = auth('client')->user()->latest_subscription;
+        return view('client.products.index')->with(compact('products', 'latest_subscription'));
     }
 }
