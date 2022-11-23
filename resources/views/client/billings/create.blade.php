@@ -71,7 +71,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="my-5 text-center">
-                                <form id="checkout-form" action="{{ route('client.billings.checkout', $subscription_type) }}" method="POST">
+                                <form id="checkout-form" action="{{ route('client.subscriptions.subscribe', $subscription_type) }}" method="POST">
                                     @csrf
                                 </form>
                                 

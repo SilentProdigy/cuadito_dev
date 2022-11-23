@@ -21,38 +21,31 @@ class BillingController extends Controller
     {
         try
         {
-            DB::beginTransaction();
-
-            $subscription = auth('client')->user()->latest_subscription;
+            DB::beginTransaction();            
 
             $amount = $subscription_type->amount * 1;
             $vat = $amount * 0.12; 
             $total_amount = $vat + $amount;
 
+            // Create an inactive subscription
+            $subscription = auth('client')->user()->subscriptions()->create([
+                'subscription_type_id' => $subscription_type->id,
+                'status' => Subscription::INACTIVE_STATUS,
+            ]);
+
+            // call the DRAGONPAY API
+            // if the payment was successful from the dragonpay api return result
+
+            // activate subscription & save payment
             $expiration_date = new Carbon();
             $expiration_date = $expiration_date->addMonth();
 
-            // Check if the client is buying same product - renew subscription
-            if($subscription->subscription_type_id == $subscription_type->id) 
-            {
-                $subscription->update([
-                    'expiration_date' => $expiration_date,
-                    'status' => Subscription::ACTIVE_STATUS,
-                    'points' => $subscription->points + $subscription_type->points
-                ]);
-            }
-            else 
-            {
-                $subscription->update(['status' => Subscription::INACTIVE_STATUS]);
-
-                $subscription = auth('client')->user()->subscriptions()->create([
-                    'subscription_type_id' => $subscription_type->id,
-                    'expiration_date' => $expiration_date,
-                    'status' => Subscription::ACTIVE_STATUS,
-                    'points' => $subscription_type->points
-                ]);
-            }  
-                        
+            $subscription->update([
+                'status' => Subscription::ACTIVE_STATUS,
+                'points' => $subscription_type->points,
+                'expiration_date' => $expiration_date
+            ]);            
+            
             $payment = $subscription->payments()->create([
                 'amount' => $amount, // amount here comes from the api of dragon pay
                 'additional_vat' => $vat,
