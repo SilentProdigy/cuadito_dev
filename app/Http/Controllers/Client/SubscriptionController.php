@@ -3,14 +3,18 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Mail\Subscription\PaymentCreated;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
+use App\Traits\SendEmail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class SubscriptionController extends Controller
 {
+    use SendEmail;
+
     public function subscribe(SubscriptionType $subscription_type)
     {
         try
@@ -58,6 +62,13 @@ class SubscriptionController extends Controller
                 'details' => 'Lorem ipsum dulum'
             ]);
 
+            $subscription->client->notifications()->create([
+                'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} on {$payment->created_at->format('m-d-Y')}.",
+                'url' => route('client.products.index'), 
+            ]);
+
+            $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
+            
             DB::commit();
             
             return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
