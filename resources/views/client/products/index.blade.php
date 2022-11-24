@@ -1,15 +1,26 @@
 @extends('layouts.client-main-layout')
 
 @section('content')    
-    <h1 class="my-2">Our Products</h1>
-
-    <div class="row">    
+    <h1 class="my-2">Pricing</h1>
+    <div class="pricing-area">
+      <div class="container">
+        <div class="row">
         @foreach ($products as $item)
-            <div class="col-sm-4">
-                <h3>{{ $item->name }} - @money($item->amount)</h3>
-                <p>{{ $item->description }}</p>
-                <a href="{{ route('client.billings.create', $item) }}" class="btn btn-warning">Buy Now</a>
+          <div class="col-md-4 col-sm-6 col-xs-12">
+            <div class="single-price">
+              <div class="deal-top">
+                <h3>{{ $item->name }}</h3>
+                <h4> @money($item->amount)</h4> 
+              </div>
+              <div class="deal-bottom">
+                <div class="btn-area">
+                <a href="{{ route('client.billings.create', $item) }}">Subscribe Now</a>    
+                </div>
+              </div>
             </div>
-        @endforeach
+          </div>
+        @endforeach 
+        </div>
+      </div>
     </div>
 @endsection
