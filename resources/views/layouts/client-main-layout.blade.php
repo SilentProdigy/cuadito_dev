@@ -235,7 +235,7 @@
 
     <!--Main layout-->
     <!-- Modal -->
-    @include('panels.subscription_modal')
+    @include('client.includes.subscription_modal')
 
     
     <main style="margin-top: 58px;">

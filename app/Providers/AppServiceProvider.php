@@ -78,7 +78,7 @@ class AppServiceProvider extends ServiceProvider
             return "<span>&#8369;<?= $amount ?></span>";
         });
 
-        View::composer(['client.panels.subscription_modal'], function($view){
+        View::composer(['client.includes.subscription_modal'], function($view){
             $products = SubscriptionType::get();
 
             $view->with(compact('products'));
