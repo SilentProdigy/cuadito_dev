@@ -13,7 +13,8 @@ class SubscriptionType extends Model
         'name',
         'description',
         'amount',
-        'points'
+        'max_proposals_count',
+        'max_projects_count'
     ];
 
     public function subscriptions()
