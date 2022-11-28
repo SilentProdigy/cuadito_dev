@@ -78,5 +78,6 @@ class Kernel extends HttpKernel
         'client.validate.ensure_client_have_subscription' => \App\Http\Middleware\Client\EnsureClientHaveActiveSubscription::class,
         'client.validate.ensure_client_have_subscription_points' => \App\Http\Middleware\Client\EnsureClientHaveSubscriptionPoints::class,
         'client.validate.ensure_client_subscription_is_not_expire' => \App\Http\Middleware\Client\EnsureClientSubscriptionIsNotExpired::class,
+        'client.projects.ensure_client_projects_dit_not_reach_max_projects' => \App\Http\Middleware\Client\EnsureClientProjectsDidNotReachMaxProjects::class
     ];
 }

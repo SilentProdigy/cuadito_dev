@@ -31,6 +31,9 @@ class ProjectController extends Controller
     {
         $this->companyService = $companyService;
         $this->projectService = $projectService;
+
+        $this->middleware('client.projects.ensure_client_projects_dit_not_reach_max_projects')
+            ->only(['create', 'store']);
     }
 
     /**
