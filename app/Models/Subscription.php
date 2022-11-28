@@ -14,7 +14,8 @@ class Subscription extends Model
         'client_id',
         'expiration_date',
         'status',
-        'points'
+        'submitted_proposals_count',
+        'submitted_projects_count',
     ];
 
     public const ACTIVE_STATUS = "ACTIVE";

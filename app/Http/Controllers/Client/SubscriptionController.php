@@ -25,7 +25,7 @@ class SubscriptionController extends Controller
             $vat = $amount * 0.12; 
             $total_amount = $vat + $amount;
 
-            // dd(auth('client')->user()->active_subscription);
+
             $active_subscription = auth('client')->user()->active_subscription;
 
             if($active_subscription && $active_subscription?->subscription_type_id != $subscription_type->id) 
@@ -50,7 +50,9 @@ class SubscriptionController extends Controller
 
             $subscription->update([
                 'status' => Subscription::ACTIVE_STATUS,
-                'points' => $subscription_type->points,
+                // 'points' => $subscription_type->points,
+                'submitted_proposals_count' => 0,
+                'submitted_projects_count' => 0,
                 'expiration_date' => $expiration_date
             ]);            
             
