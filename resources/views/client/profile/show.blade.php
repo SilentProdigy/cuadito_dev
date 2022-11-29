@@ -17,6 +17,13 @@
 
     <div class="card mt-3">
         <div class="card-header d-flex justify-content-between align-items-center">
+            <h5>Subscription Plan</h5>
+            <a href="{{ route('client.products.index') }}" class="btn btn-sm btn-dark">{{ $client->active_subscription->subscription_type->name }}</a>
+        </div>
+    </div>
+
+    <div class="card mt-3">
+        <div class="card-header d-flex justify-content-between align-items-center">
             <h5>Security</h5>
             <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning">Change Password</a>
         </div>
@@ -63,6 +70,7 @@
                 <p class="fs-6 lh-lg" style="color: #222;">{{ $client->address }}</p>
             </div>
         </div>
+   
     </div>
     {{-- <div class="card mt-3">
         <div class="card-header">
@@ -80,5 +88,6 @@
             "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
         </div>
     </div> --}}
+
 </div>
 @endsection
