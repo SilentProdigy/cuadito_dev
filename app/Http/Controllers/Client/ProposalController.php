@@ -34,7 +34,7 @@ class ProposalController extends Controller
 
         $this->middleware([
             'client.validate.ensure_project_not_owned_by_client', 
-            // 'client.validate.ensure_client_have_subscription_points'
+            'client.proposals.ensure_client_projects_dit_not_reach_max_proposals'
         ])
         ->only(['create', 'store']);
     }
