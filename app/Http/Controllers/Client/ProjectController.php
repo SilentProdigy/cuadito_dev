@@ -16,13 +16,14 @@ use App\Models\Company;
 use App\Models\Project;
 use App\Services\CompanyService;
 use App\Services\ProjectService;
+use App\Traits\DecreaseProjectCountOnSubscription;
 use App\Traits\IncreaseProjectCountOnSubscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
 {   
-    use IncreaseProjectCountOnSubscription;
+    use IncreaseProjectCountOnSubscription, DecreaseProjectCountOnSubscription;
 
     private $companyService;
     private $projectService;
@@ -171,8 +172,8 @@ class ProjectController extends Controller
     {
         try 
         {
-            // TODO: Additional business logic here ...
             $project->delete();
+            $this->decreaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');  
         }
         catch(\Exception $e)
