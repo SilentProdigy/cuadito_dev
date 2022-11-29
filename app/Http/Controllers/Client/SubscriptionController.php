@@ -97,4 +97,30 @@ class SubscriptionController extends Controller
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
+
+    public function renew(Subscription $subscription)
+    {
+        DB::beginTransaction();
+
+        try
+        {
+            $expiration_date = new Carbon();
+            $expiration_date = $expiration_date->addMonth();
+
+            $active_subscription = auth('client')->user()->active_subscription;
+            $active_subscription->update([
+                'submitted_proposals_count' => 0,
+                'submitted_projects_count' => 0,
+                'expiration_date' => $expiration_date
+            ]); 
+
+            DB::commit();
+            return redirect(route('client.dashboard'))->with('success', 'You successfully renewed your plan!');
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);    
+        }
+    }
 }
