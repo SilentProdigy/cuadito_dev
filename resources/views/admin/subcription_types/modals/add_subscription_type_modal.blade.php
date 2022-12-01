@@ -35,9 +35,21 @@
 
                 <div class="row mb-3">
                     <div class="col-md-12">
-                        <input type="number" class="form-control @error('points') is-invalid @enderror" name="points" value="{{ old('points') }}" placeholder="Points" required>
+                        <input type="number" class="form-control @error('max_projects_count') is-invalid @enderror" name="max_projects_count" value="{{ old('max_projects_count') }}" placeholder="Max Project count" required>
 
-                        @error('points')
+                        @error('max_projects_count')
+                            <span class="invalid-feedback" role="alert">
+                                <strong>{{ $message }}</strong>
+                            </span>
+                        @enderror
+                    </div>
+                </div>
+
+                <div class="row mb-3">
+                    <div class="col-md-12">
+                        <input type="number" class="form-control @error('max_proposals_count') is-invalid @enderror" name="max_proposals_count" value="{{ old('max_proposals_count') }}" placeholder="Max Proposals count" required>
+
+                        @error('max_proposals_count')
                             <span class="invalid-feedback" role="alert">
                                 <strong>{{ $message }}</strong>
                             </span>

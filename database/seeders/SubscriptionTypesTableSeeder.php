@@ -18,7 +18,7 @@ class SubscriptionTypesTableSeeder extends Seeder
             [
                 'name' => 'Silver',
                 'amount' => 2000,
-                'max_proposals_count' => 10,
+                'max_proposals_count' => 1,
                 'max_projects_count' => 1,
             ], 
             [

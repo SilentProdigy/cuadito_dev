@@ -26,6 +26,8 @@ class UpdateSubscriptionTypeRequest extends FormRequest
         return [
             'name' => ['required','string','min:3'],
             'amount' => ['required', 'numeric', 'min:1000'],
+            'max_projects_count' => ['numeric','min:1'],
+            'max_proposals_count' => ['numeric','min:1'],
             'description' => ['nullable', 'string', 'min:10']
         ];
     }
