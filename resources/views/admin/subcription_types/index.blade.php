@@ -20,8 +20,8 @@
                     <th>SEQ</th>
                     <th>NAME</th>
                     <th>AMOUNT</th>
-                    <th>POINTS</th>
-                    <th>DESCRIPTION</th>
+                    <th>MAX PROJECTS COUNT</th>
+                    <th>MAX PROPOSALS COUNT</th>
                     <th>ACTIONS</th>
                 </thead>
                 <tbody>
@@ -30,8 +30,8 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
                             <td>@money($item->amount)</td>
-                            <td>{{ $item->points }}</td>
-                            <td>{{ $item->description }}</td>
+                            <td>{{ $item->max_projects_count }}</td>
+                            <td>{{ $item->max_proposals_count }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning btn-edit-product" data-product='@json($item)'>
                                     <i class="fa fa-pencil"></i>          
@@ -97,7 +97,9 @@
                 // document.querySelector('#category-name-txt').setAttribute("value", data.name);
                 $('#edit-name').val(data.name);
                 $('#edit-amount').val(data.amount);
-                $('#edit-points').val(data.points);
+                // $('#edit-points').val(data.points);
+                $('#edit-max-proposals-count').val(data.max_proposals_count);
+                $('#edit-max-projects-count').val(data.max_projects_count);
                 $('#edit-description').val(data.description);
             });
         });

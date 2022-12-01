@@ -30,8 +30,6 @@ class CreateProjectsTable extends Migration
             $table->timestamps();
             $table->softDeletes();
             $table->index(['title', 'status']);
-
-            // TODO: Field for expiration date of the project 
         });
     }
 
