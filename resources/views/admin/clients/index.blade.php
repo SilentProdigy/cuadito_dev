@@ -27,6 +27,7 @@
                     <th>COMPANIES</th>
                     <th>PROJECTS</th>
                     <th>BIDDINGS</th>
+                    <th>ACTIVE SUBSCRIPTION</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
@@ -52,6 +53,9 @@
                             </td>
                             <td>
                                 <span>{{ $client->biddings_count }}</span>
+                            </td>
+                            <td>
+                                <span>{{ $client->active_subscription?->subscription_type->name }}</span>
                             </td>
                             <td class="user-actions">
                                 <a href="{{ route('admin.clients.show', $client) }}" class="btn btn-sm btn-outline-info">
