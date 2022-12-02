@@ -44,5 +44,21 @@ class Subscription extends Model
     {
         return $this->hasMany(\App\Models\Payment::class);
     }
+
+    public function getRemainingProposalsAttribute()
+    {
+        if($this->status == self::INACTIVE_STATUS)
+            return 0;
+
+        return $this->subscription_type->max_proposals_count - $this->submitted_proposals_count;
+    }
+
+    public function getRemainingProjectsAttribute()
+    {
+        if($this->status == self::INACTIVE_STATUS)
+            return 0;
+
+        return $this->subscription_type->max_projects_count - $this->submitted_projects_count;
+    }
 }
 
