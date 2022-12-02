@@ -14,18 +14,29 @@
             </div>
         </div>
     </div>
-
-    <div class="card mt-3">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>Subscription Plan</h5>
-            <a href="{{ route('client.products.index') }}" class="btn btn-sm btn-dark">{{ $client->active_subscription->subscription_type->name }}</a>
+    
+    @if($client->have_subscription)
+        <div class="card mt-3">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h5>Subscription Plan</h5>
+                <a href="{{ route('client.products.index') }}" class="btn btn-sm btn-dark">{{ $client->active_subscription->subscription_type->name }}</a>
+            </div>
+            <div class="card-body">
+                <div class="my-1 py-1">
+                    <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">REMAINING PROJECT</h5>
+                    <p class="fs-6 lh-lg" style="color: #222;">{{ $client->active_subscription->remaining_projects }}</p>
+                </div>
+                <div class="my-1 py-1">
+                    <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">REMAINING PROPOSALS</h5>
+                    <p class="fs-6 lh-lg" style="color: #222;">{{ $client->active_subscription->remaining_proposals }}</p>
+                </div>
+            </div>
         </div>
-    </div>
-
+    @endif
     <div class="card mt-3">
         <div class="card-header d-flex justify-content-between align-items-center">
             <h5>Security</h5>
-            <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning">Change Password</a>
+            <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning">Change Password</a>            
         </div>
     </div>
 
