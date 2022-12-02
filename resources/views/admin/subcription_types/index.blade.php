@@ -22,6 +22,7 @@
                     <th>AMOUNT</th>
                     <th>MAX PROJECTS COUNT</th>
                     <th>MAX PROPOSALS COUNT</th>
+                    <th>ACTIVE SUBSCRIBERS</th>
                     <th>ACTIONS</th>
                 </thead>
                 <tbody>
@@ -32,6 +33,7 @@
                             <td>@money($item->amount)</td>
                             <td>{{ $item->max_projects_count }}</td>
                             <td>{{ $item->max_proposals_count }}</td>
+                            <td>{{ $item->active_subscriptions_count }}</td>
                             <td>
                                 <a href="#" class="btn btn-sm btn-warning btn-edit-product" data-product='@json($item)'>
                                     <i class="fa fa-pencil"></i>          
