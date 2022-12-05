@@ -14,7 +14,11 @@
               </div>
               <div class="deal-bottom">
                 <div class="btn-area">
-                <a href="{{ route('client.billings.create', $item) }}">Subscribe Now</a>    
+                  @if($latest_subscription && $latest_subscription->subscription_type_id == $item->id)
+                    <a href="{{ route('client.subscriptions.unsubscribe', $latest_subscription) }}" class="btn btn-danger">Unsubscribe</a>
+                  @else 
+                    <a href="{{ route('client.billings.create', $item) }}">Subscribe Now</a>    
+                  @endif
                 </div>
               </div>
             </div>
