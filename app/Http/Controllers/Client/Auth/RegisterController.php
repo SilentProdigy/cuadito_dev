@@ -9,24 +9,28 @@ use App\Models\Contact;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
+        $register_route = route('client.auth.register');
+
         if(request()->has('code'))
         {
-            $contact = Contact::where('id', request()->input('code'))->first();
+            $contact = Contact::where('id', request()->input('code'))->firstOrFail();
 
-            if(!$contact)
-                abort(404);
+            $register_route = route('client.auth.register', ['code' => $contact->id]);
         }
 
-        return view('client.auth.register');
+        return view('client.auth.register')->with(compact('register_route'));
     }
 
     public function register(RegisterFormRequest $request)
-    {        
+    {    
+        DB::beginTransaction();
+    
         try
         {
             $data = $request->only(['name', 'email']);
@@ -47,17 +51,18 @@ class RegisterController extends Controller
             }
     
             # Generate session + guard 
-            if( Auth::guard('client')->attempt($request->only(['email', 'password'])) )
+            if(Auth::guard('client')->attempt($request->only(['email', 'password'])))
             {
+                DB::commit();
                 $request->session()->regenerate();
                 return redirect(route('client.dashboard'));
             }
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-        # Redirect client to dashboard
         
     }
 }

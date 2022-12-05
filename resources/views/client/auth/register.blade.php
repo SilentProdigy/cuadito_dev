@@ -6,10 +6,8 @@
         <div class="col-md-5">
             <div class="card" style="border-radius: 20px;">
                 <div class="card-body">
-                    <form method="POST" action="{{ route('client.auth.register') }}">
+                    <form method="POST" action="{{ $register_route }}">
                         @csrf
-
-                        <input type="hidden" name="code" value="{{ request()->input('code') }}">
                         <h5 style="border-bottom: 1px solid #eeeeee" class="text-center">Welcome to CUADITO</h5>
                         <div class="row mb-3">
                             <div class="col-md-12">
