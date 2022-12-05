@@ -21,7 +21,7 @@ class EnsureClientProposalsDidNotReachMaxProposals
 
         if($subscription->submitted_proposals_count + 1 > $product->max_projects_count)
         {
-            return redirect()->back()->withErrors(["message" => "Operation Failed! You reached the max proposals for your plan!"]);
+            return redirect(route('client.products.index'))->withErrors(["message" => "Operation Failed! You reached the max proposals for your plan!"]);
         }
 
         return $next($request);

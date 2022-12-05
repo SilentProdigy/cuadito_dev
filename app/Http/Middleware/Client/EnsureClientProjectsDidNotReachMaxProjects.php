@@ -21,7 +21,8 @@ class EnsureClientProjectsDidNotReachMaxProjects
 
         if($subscription->submitted_projects_count + 1 > $product->max_projects_count)
         {
-            return redirect()->back()->withErrors(["message" => "Operation Failed! You reached the max projects for your plan!"]);
+            // return redirect()->back()->withErrors(["message" => "Operation Failed! You reached the max projects for your plan!"]);
+            return redirect(route('client.products.index'))->withErrors(["message" => "Operation Failed! You reached the max projects for your plan!"]);
         }
 
         return $next($request);
