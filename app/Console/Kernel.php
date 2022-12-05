@@ -16,8 +16,18 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         // $schedule->command('inspire')->hourly();
-        $schedule->command('queue:work --stop-when-empty')
+        $schedule->command('queue:work --stop-when-empty --tries=3')
         ->everyMinute()
+        ->withoutOverlapping();
+
+        $schedule->command('system:deactive-expired-subscription')
+        ->timezone('Asia/Manila')
+        ->dailyAt('09:00')
+        ->withoutOverlapping();
+
+        $schedule->command('system:notify-near-expiration-subscription')
+        ->timezone('Asia/Manila')
+        ->dailyAt('09:00')
         ->withoutOverlapping();
     }
 

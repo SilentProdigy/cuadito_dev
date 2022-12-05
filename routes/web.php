@@ -160,6 +160,9 @@ Route::name('client.')->group(function () {
         Route::post('products/{subscription_type}/checkout', [\App\Http\Controllers\Client\BillingController::class, 'store'])->name('billings.checkout');
         
         Route::get('invoice/{payment}', [\App\Http\Controllers\Client\InvoiceController::class, 'show'])->name('invoice.show');
+
+        Route::get('subscriptions/{subscription}/unsubcribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'unsubscribe'])->name('subscriptions.unsubscribe');
+        Route::post('subscriptions/{subscription_type}/subscribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'subscribe'])->name('subscriptions.subscribe');
     });
 
 });

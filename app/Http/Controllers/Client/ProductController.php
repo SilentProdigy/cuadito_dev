@@ -12,7 +12,8 @@ class ProductController extends Controller
     public function index()
     {
         $products = SubscriptionType::get();
+        $latest_subscription = auth('client')->user()->active_subscription;
 
-        return view('client.products.index')->with(compact('products'));
+        return view('client.products.index')->with(compact('products', 'latest_subscription'));
     }
 }

@@ -18,7 +18,9 @@ class CreateSubscriptionTypesTable extends Migration
             $table->string('name');
             $table->decimal('amount', 9, 2);
             $table->text('description')->nullable();
-            $table->unsignedBigInteger('points')->default(0);
+            // $table->unsignedBigInteger('points')->default(0);
+            $table->unsignedInteger('max_proposals_count')->default(0);
+            $table->unsignedInteger('max_projects_count')->default(0);
             $table->timestamps();
             $table->index('name');
         });

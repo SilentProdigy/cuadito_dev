@@ -16,11 +16,14 @@ use App\Models\Company;
 use App\Models\Project;
 use App\Services\CompanyService;
 use App\Services\ProjectService;
+use App\Traits\DecreaseProjectCountOnSubscription;
+use App\Traits\IncreaseProjectCountOnSubscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class ProjectController extends Controller
-{
+{   
+    use IncreaseProjectCountOnSubscription, DecreaseProjectCountOnSubscription;
 
     private $companyService;
     private $projectService;
@@ -29,6 +32,9 @@ class ProjectController extends Controller
     {
         $this->companyService = $companyService;
         $this->projectService = $projectService;
+
+        $this->middleware('client.projects.ensure_client_projects_dit_not_reach_max_projects')
+            ->only(['create', 'store']);
     }
 
     /**
@@ -65,11 +71,15 @@ class ProjectController extends Controller
         DB::beginTransaction();
 
         try 
-        {
+        {            
             $project_details = $request->except(['company_id', 'categories_ids']);
             $category_ids = $request->input('category_ids');
             $company = Company::find($request->input('company_id'));
             $project = $this->companyService->createProject($company, $project_details, $category_ids);
+            $this->increaseProjectCountOnSubscription(
+                auth('client')->user()->active_subscription
+            );
+
             DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
         }
@@ -162,8 +172,8 @@ class ProjectController extends Controller
     {
         try 
         {
-            // TODO: Additional business logic here ...
             $project->delete();
+            $this->decreaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');  
         }
         catch(\Exception $e)

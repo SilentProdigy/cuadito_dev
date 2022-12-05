@@ -7,6 +7,7 @@ use App\Models\Subscription;
 use App\Models\SubscriptionType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class BillingController extends Controller
 {
@@ -20,19 +21,30 @@ class BillingController extends Controller
     {
         try
         {
+            DB::beginTransaction();            
+
             $amount = $subscription_type->amount * 1;
             $vat = $amount * 0.12; 
             $total_amount = $vat + $amount;
 
+            // Create an inactive subscription
+            $subscription = auth('client')->user()->subscriptions()->create([
+                'subscription_type_id' => $subscription_type->id,
+                'status' => Subscription::INACTIVE_STATUS,
+            ]);
+
+            // call the DRAGONPAY API
+            // if the payment was successful from the dragonpay api return result
+
+            // activate subscription & save payment
             $expiration_date = new Carbon();
             $expiration_date = $expiration_date->addMonth();
 
-            $subscription = auth('client')->user()->subscriptions()->create([
-                'subscription_type_id' => $subscription_type->id,
-                'expiration_date' => $expiration_date,
+            $subscription->update([
                 'status' => Subscription::ACTIVE_STATUS,
-                'points' => $subscription_type->points
-            ]);
+                'points' => $subscription_type->points,
+                'expiration_date' => $expiration_date
+            ]);            
             
             $payment = $subscription->payments()->create([
                 'amount' => $amount, // amount here comes from the api of dragon pay
@@ -41,12 +53,16 @@ class BillingController extends Controller
                 'mode_of_payment' => 'GCASH',
                 'details' => 'Lorem ipsum dulum'
             ]);
+
+            DB::commit();
             
             return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
         }
         catch(\Exception $e)
         {
-            dd($e->getMessage());
+            DB::rollBack();
+
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
 }

@@ -14,7 +14,8 @@ class Subscription extends Model
         'client_id',
         'expiration_date',
         'status',
-        'points'
+        'submitted_proposals_count',
+        'submitted_projects_count',
     ];
 
     public const ACTIVE_STATUS = "ACTIVE";
@@ -27,6 +28,11 @@ class Subscription extends Model
     public function subscription_type()
     {
         return $this->belongsTo(\App\Models\SubscriptionType::class);
+    }
+
+    public function scopeActive($query)
+    {
+        $query->where('status', self::ACTIVE_STATUS);
     }
 
     public function client()

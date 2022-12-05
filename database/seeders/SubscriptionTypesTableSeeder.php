@@ -18,17 +18,20 @@ class SubscriptionTypesTableSeeder extends Seeder
             [
                 'name' => 'Silver',
                 'amount' => 2000,
-                'points' => 100
+                'max_proposals_count' => 10,
+                'max_projects_count' => 1,
             ], 
             [
                 'name' => 'Gold',
                 'amount' => 3000,
-                'points' => 200
+                'max_proposals_count' => 15,
+                'max_projects_count' => 10,
             ], 
             [
                 'name' => 'Platinum',
                 'amount' => 4000,
-                'points' => 300
+                'max_proposals_count' => 20,
+                'max_projects_count' => 15,
             ], 
         ])
         ->each(function($item) {

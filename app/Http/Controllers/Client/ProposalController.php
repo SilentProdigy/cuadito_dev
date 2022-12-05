@@ -13,6 +13,7 @@ use App\Services\CompanyService;
 use App\Services\ProposalService;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
+use App\Traits\IncreaseProposalCountOnSubscription;
 use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
@@ -21,7 +22,7 @@ use Illuminate\Support\Facades\DB;
 class ProposalController extends Controller
 {
     
-    use UploadFile;
+    use UploadFile, IncreaseProposalCountOnSubscription;
 
     private $companyService;
     private $proposalService;
@@ -33,7 +34,7 @@ class ProposalController extends Controller
 
         $this->middleware([
             'client.validate.ensure_project_not_owned_by_client', 
-            'client.validate.ensure_client_have_subscription_points'
+            'client.proposals.ensure_client_projects_dit_not_reach_max_proposals'
         ])
         ->only(['create', 'store']);
     }
@@ -116,9 +117,7 @@ class ProposalController extends Controller
 
             $active_subscrption = auth('client')->user()->active_subscription;
 
-            $active_subscrption->update([
-                'points' => $active_subscrption->points - Bidding::DEFAULT_DECREASE_VALUE
-            ]);
+            $this->increaseProposalCountOnSubscription($active_subscrption);
 
             DB::commit();
 
