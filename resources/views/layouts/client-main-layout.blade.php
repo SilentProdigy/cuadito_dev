@@ -45,7 +45,7 @@
 
 </head>
 
-<body>
+<body data-subscription="{{ json_encode(auth('client')->user()->active_subscription) }}">
     <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
@@ -258,8 +258,13 @@
     @yield('script')
     <script>
         $(document).ready(function(){
-        $("#subscriptionModal").modal('show');
-    });
+            
+            let subscription = $('body').data('subscription');
+
+            if(!subscription) {
+                $("#subscriptionModal").modal('show');
+            }
+        });
     </script>
 </body>
 

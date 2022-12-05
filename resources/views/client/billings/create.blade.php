@@ -94,7 +94,7 @@
                                 insurance) due today . once insurance finalizes their review refunds
                                 and/or balances will reconcile automatically.
                             </p>
-                            <form id="checkout-form" action="{{ route('client.billings.checkout', $subscription_type) }}" method="POST" class="pb-3">
+                            <form id="checkout-form" action="{{ route('client.subscriptions.subscribe', $subscription_type) }}" method="POST" class="pb-3">
                                 @csrf
                                 <div class="d-flex flex-row pb-3">
                                 <div class="d-flex align-items-center pe-2">
