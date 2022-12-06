@@ -12,8 +12,7 @@ class SubscriptionTypeController extends Controller
 {
     public function index()
     {
-        $subscription_types = SubscriptionType::paginate(10);
-
+        $subscription_types = SubscriptionType::withCount('active_subscriptions')->paginate(10);
         return view('admin.subcription_types.index')->with(compact('subscription_types'));
     }
 

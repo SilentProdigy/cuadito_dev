@@ -27,7 +27,7 @@
     <div class="col-lg-3 col-sm-6">
         <div class="card-box bg-green">
             <div class="inner">
-                <h3>0 </h3>
+                <h3>@money($payment_total)</h3>
                 <p> Total Sales </p>
             </div>
             <div class="icon">
