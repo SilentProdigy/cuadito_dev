@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Subscription\PaymentCreated;
+use App\Models\Payment;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
 use App\Traits\SendEmail;
@@ -62,7 +63,8 @@ class SubscriptionController extends Controller
                 'mode_of_payment' => 'GCASH',
                 'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',
                 'paid_at' => Carbon::now(),
-                'period' => '1 month'
+                'period' => '1 month',
+                'status' => Payment::PAID_STATUS,
             ]);
 
             $subscription->client->notifications()->create([

@@ -17,11 +17,24 @@ class Payment extends Model
         'mode_of_payment',
         'details',
         'paid_at',
-        'period'
+        'period',
+        'status'
     ];
+
+    public $casts = [
+        'paid_at' => 'datetime'
+    ];
+
+    const PAID_STATUS = "PAID";
+    const UNPAID_STATUS = "UNPAID";
 
     public function subscription()
     {
         return $this->belongsTo(\App\Models\Subscription::class);
+    }
+
+    public function getInvoiceIdAttribute()
+    {
+        return "CPH" . $this->id;
     }
 }

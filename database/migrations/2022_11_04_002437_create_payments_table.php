@@ -22,6 +22,7 @@ class CreatePaymentsTable extends Migration
             $table->string('mode_of_payment')->nullable();
             $table->text('details')->nullable();
             $table->dateTime('paid_at')->nullable();
+            $table->string('status')->default('PAID');
             $table->string('period')->nullable()->default('1 month')->comment('Defines the count of months paid');
             $table->timestamps();
 
