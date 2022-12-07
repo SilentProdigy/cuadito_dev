@@ -22,9 +22,8 @@ class SubscriptionController extends Controller
             DB::beginTransaction();            
 
             $amount = $subscription_type->amount * 1;
-            $vat = $amount * 0.12; 
+            $vat = $amount * 0; 
             $total_amount = $vat + $amount;
-
 
             $active_subscription = auth('client')->user()->active_subscription;
 
@@ -61,7 +60,9 @@ class SubscriptionController extends Controller
                 'additional_vat' => $vat,
                 'total_amount' => $total_amount,
                 'mode_of_payment' => 'GCASH',
-                'details' => 'Lorem ipsum dulum'
+                'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',
+                'paid_at' => Carbon::now(),
+                'period' => '1 month'
             ]);
 
             $subscription->client->notifications()->create([

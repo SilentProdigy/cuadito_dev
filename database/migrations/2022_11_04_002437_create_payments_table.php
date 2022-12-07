@@ -21,6 +21,8 @@ class CreatePaymentsTable extends Migration
             $table->decimal('total_amount', 9, 2)->nullable();
             $table->string('mode_of_payment')->nullable();
             $table->text('details')->nullable();
+            $table->dateTime('paid_at')->nullable();
+            $table->string('period')->nullable()->default('1 month')->comment('Defines the count of months paid');
             $table->timestamps();
 
             $table->index(['subscription_id','mode_of_payment']);

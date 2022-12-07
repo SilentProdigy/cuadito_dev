@@ -15,7 +15,9 @@ class Payment extends Model
         'additional_vat',
         'total_amount',
         'mode_of_payment',
-        'details'
+        'details',
+        'paid_at',
+        'period'
     ];
 
     public function subscription()
