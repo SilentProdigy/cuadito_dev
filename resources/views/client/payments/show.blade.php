@@ -13,7 +13,7 @@
                             </div>
 
                             <div>
-                                <a href="#" class="btn btn-dark">Print PDF</a>
+                                <a href="{{ route('client.payments.print', $payment) }}" class="btn btn-dark">Print PDF</a>
                             </div>
                         </div>
                         <div class="card-body">
