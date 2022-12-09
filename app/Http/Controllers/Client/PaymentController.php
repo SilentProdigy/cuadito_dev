@@ -14,4 +14,9 @@ class PaymentController extends Controller
 
         return view('client.payments.index')->with(compact('payments'));
     }
+
+    public function show(Payment $payment)
+    {
+        return view('client.payments.show')->with(compact('payment'));
+    }
 }
