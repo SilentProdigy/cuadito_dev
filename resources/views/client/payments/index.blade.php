@@ -2,14 +2,24 @@
 
 @section('content')    
 <div class="container-fluid mb-3">
-    <div class="d-flex flex-row d-align-items-center justify-content-center">
+    <div class="d-flex flex-row justify-content-between align-items-center">
         <div class="table-titles">Payment History</div>
-        <div class="col d-flex justify-content-end">
-        </div>
+        <form action="{{ route('client.payments.index') }}" method="get" class="d-flex justify-content-between align-items-center">
+            <div class="input-group input-group-lg">
+                <input type="text" class="form-control " placeholder="Search Payment ..." name="search" value="{{ request('search') }}">
+                <button class="btn btn-warning" type="submit">
+                    <span class="fa fa-search"></span>
+                </button>
+            </div>
+            <a href="{{ route('client.payments.index') }}" class="p-2">Clear</a>
+        </form>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
+
+        <h5>{{ request('search') ? 'We found ' . $payments->count() . ' results ...' : 'Your Payment Transactions'}}</h5>
+
         <table class="table table-borderless table-md user-listing-table">
             <thead>     
                 <th>SEQ</th>          
@@ -23,7 +33,7 @@
                 <th>ACTIONS</th>
             </thead>
             <tbody>            
-                @foreach($payments as $payment)
+                @forelse($payments as $payment)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $payment->invoice_id }}</td>
@@ -38,7 +48,11 @@
                             <a href="{{ route('client.payments.print', $payment) }}" class="btn btn-dark btn-sm">Print</a>
                         </td>
                     </tr>
-                @endforeach
+                @empty
+                    <tr>
+                        <td>No results found!</td>
+                    </tr>
+                @endforelse
             </tbody>
         </table>
 

@@ -11,7 +11,18 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = auth('client')->user()->payments()->paginate();
+        $payments = Payment::with(['subscription', 'subscription.subscription_type'])
+                    ->where('client_id', auth('client')->user()->id);
+
+        if(request()->input('search'))
+        {
+            $payments = $payments->where(function($query) {
+                $query->where('id', 'LIKE' , "%". request()->input('search') ."%")
+                ->orWhere('or_number', 'LIKE' , "%". request()->input('search') ."%");
+            });
+        }   
+
+        $payments = $payments->paginate();
 
         return view('client.payments.index')->with(compact('payments'));
     }

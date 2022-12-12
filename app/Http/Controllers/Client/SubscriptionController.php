@@ -65,6 +65,7 @@ class SubscriptionController extends Controller
                 'paid_at' => Carbon::now(),
                 'period' => '1 month',
                 'status' => Payment::PAID_STATUS,
+                'client_id' => auth('client')->user()->id,
             ]);
 
             $subscription->client->notifications()->create([
