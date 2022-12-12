@@ -69,7 +69,7 @@ class SubscriptionController extends Controller
 
             $subscription->client->notifications()->create([
                 'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} on {$payment->created_at->format('m-d-Y')}.",
-                'url' => route('client.products.index'), 
+                'url' => route('client.payments.show', $payment), 
             ]);
 
             $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
