@@ -22,19 +22,24 @@
                     <tr>
                         <td>
                             <span>
-                                <a href="{{ route('client.notifications.show', $notification) }}" class="{{ !$notification->opened ? 'fw-bold' : 'fw-normal' }}">
+                                <a href="{{ route('client.notifications.show', $notification) }}" 
+                                class="{{ !$notification->opened ? 'fw-bold' : 'fw-normal' }}">
                                     {{ $notification->content }}
                                 </a>
                             </span>
                         </td>
                         <td class="user-actions">
                             @if(!$notification->opened)
-                                <a href="{{ $notification->url }}" class="btn btn-sm btn-outline-info btn-open-operation" data-notification="{{ json_encode($notification) }}"
-                                    data-action="unread">
+                                <a href="{{ route('client.notifications.show', $notification) }}" 
+                                class="btn btn-sm btn-outline-info btn-open-operation" 
+                                data-notification="{{ json_encode($notification) }}"
+                                data-action="unread">
                                     <i class="fa fa-envelope"></i>         
                                 </a>
                             @else
-                                <a href="#" class="btn btn-sm btn-outline-success btn-open-operation" data-notification="{{ json_encode($notification) }}"
+                                <a href="{{ $notification->url }}" 
+                                class="btn btn-sm btn-outline-success btn-open-operation" 
+                                data-notification="{{ json_encode($notification) }}"
                                 data-action="read">
                                     <i class="fa fa-envelope-open"></i>          
                                 </a>
