@@ -66,6 +66,11 @@ class Client extends Authenticatable
         return $this->hasManyThrough(\App\Models\Project::class, \App\Models\Company::class);
     }
     
+    public function payments()
+    {
+        return $this->hasManyThrough(\App\Models\Payment::class, \App\Models\Subscription::class);
+    }
+
     public function biddings()
     {
         return $this->hasManyThrough(\App\Models\Bidding::class, \App\Models\Company::class);

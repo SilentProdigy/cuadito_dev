@@ -5,7 +5,7 @@
 
 Your payment of P{{ $payment->amount }} on {{ $payment->created_at->format('M-d-Y') }} 
 for {{ $subscription->subscription_type->name }} plan has been posted to your account.
-You may click here to visit <a href="#" target="_blank">Bills & Payment</a> section. <br>
+You may <a href="{{ route('client.payments.print', $payment) }}" target="_blank">click here</a> to view your payment invoice.<br>
 
 Thanks you <br>
 The {{ config('app.name') }} Team

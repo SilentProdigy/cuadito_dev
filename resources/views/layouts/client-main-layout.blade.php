@@ -138,6 +138,9 @@
                     <li>
                         <a class="dropdown-item" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
                     </li>
+                    <li>
+                        <a class="dropdown-item" href="{{ route('client.payments.index') }}">Payment History</a>
+                    </li>
                     {{-- <li>
                         <a class="dropdown-item" href="#">Settings</a>
                     </li> --}}
