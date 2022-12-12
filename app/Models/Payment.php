@@ -18,7 +18,9 @@ class Payment extends Model
         'details',
         'paid_at',
         'period',
-        'status'
+        'status',
+        'client_id',
+        'or_number'
     ];
 
     public $casts = [
@@ -31,6 +33,11 @@ class Payment extends Model
     public function subscription()
     {
         return $this->belongsTo(\App\Models\Subscription::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
     }
 
     public function getInvoiceIdAttribute()

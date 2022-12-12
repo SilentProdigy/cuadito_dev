@@ -14,6 +14,8 @@
             <thead>     
                 <th>SEQ</th>          
                 <th>INVOICE #</th>
+                <th>OR #</th>
+                <th>PLAN</th>
                 <th>STATUS</th>                
                 <th>CREATED AT</th>
                 <th>PAID AT</th>
@@ -25,6 +27,8 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $payment->invoice_id }}</td>
+                        <td>{{ $payment->or_number ?? "-" }}</td>
+                        <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
                         <td>{{ $payment->status }}</td>
                         <td>{{ $payment->created_at->format('Y-m-d') }}</td>
                         <td>{{ $payment->paid_at->format('Y-m-d') }}</td>
