@@ -81,6 +81,8 @@ class SubscriptionController extends Controller
         }
         catch(\Exception $e)
         {
+
+            return $e->getMessage();
             DB::rollBack();
 
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
