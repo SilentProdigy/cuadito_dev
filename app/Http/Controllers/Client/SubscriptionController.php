@@ -60,7 +60,7 @@ class SubscriptionController extends Controller
                 'amount' => $amount, // amount here comes from the api of dragon pay
                 'additional_vat' => $vat,
                 'total_amount' => $total_amount,
-                'mode_of_payment' => 'GCASH',
+                'mode_of_payment' => 'Mastercard',
                 'details' => 'Lorem ipsum dulum'
             ]);
 
@@ -77,6 +77,8 @@ class SubscriptionController extends Controller
         }
         catch(\Exception $e)
         {
+
+            return $e->getMessage();
             DB::rollBack();
 
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);

@@ -41,6 +41,24 @@
     <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/mdb.min.js') }}" defer></script>
 
+    <style>
+        .nav-icons i {
+        /* display: inline-block; */
+        border-radius: 60px;
+        box-shadow: 0 0 2px #888;
+        padding: 10px 10px;
+        background-color: #888;
+        color: #fff;
+        }
+        .nav-icons i:hover{
+            background-color: #777;
+            color: #fff;
+        }
+        .auth-nav div{
+            margin: 0 !important;
+        }
+    </style>
+
     @yield('style')
 
 </head>
@@ -49,7 +67,7 @@
     <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="YCC Logo" loading="lazy" />
+                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
             </a>
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-client" aria-controls="navbar-client" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,14 +114,14 @@
                     </a>
                 </li>
 
+
+                {{-- 
                 <li class="nav-item">
                     <a href="{{ route('client.inbox.index') }}" class="nav-link">
                         <!-- <i class="fas fa-list fa-fw me-3"></i> -->
                         <span>Messages</span>
                     </a>
                 </li>
-
-                {{-- 
                 <li class="nav-item">
                     <a href="#" class="nav-link">
                         <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
@@ -119,7 +137,7 @@
                     </a>
                 </li>
                 --}}
-                    <li class="nav-item">
+                    <!-- <li class="nav-item">
                         <a href="{{ route('client.notifications.index') }}" class="nav-link position-relative">Notifications
                             @if(auth('client')->user()->have_unread_notifications)
                                 <span class="position-absolute top-20 start-100 translate-middle badge rounded-pill bg-danger">
@@ -127,35 +145,56 @@
                                 </span>
                             @endif
                         </a>
-                    </li>
+                    </li> -->
             </ul>
-            <div class="d-flex dropdown">
-                <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ auth('client')->user()->profile_picture_url }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
-                    &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span>
-                </a>
-                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                    <li>
-                        <a class="dropdown-item" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
-                    </li>
-                    {{-- <li>
-                        <a class="dropdown-item" href="#">Settings</a>
-                    </li> --}}
-                    <li>
-                        <a class="dropdown-item" href="#">Help</a>
-                    </li>
-                    <li>
-                        <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
-                                    document.getElementById('logout-form').submit();">
-                            {{ __('Logout') }}
-                        </a>
-                        <form id="logout-form" action="{{ route('client.auth.logout') }}" method="POST" class="d-none">
-                            @csrf
-                        </form>
-                    </li>
-                </ul>
-                </div>
+            <div class="auth-nav d-flex flex-row-reverse">
+                <span class="dropdown">
+                    <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                        <img src="{{ auth('client')->user()->profile_picture_url }}" class="rounded-circle" height="40" alt="Avatar" loading="lazy" />
+                        <!-- &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span> -->
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                        <li>
+                            <a class="dropdown-item" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
+                        </li>
+                        {{-- <li>
+                            <a class="dropdown-item" href="#">Settings</a>
+                        </li> --}}
+                        <li>
+                            <a class="dropdown-item" href="#">Help</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
+                                        document.getElementById('logout-form').submit();">
+                                {{ __('Logout') }}
+                            </a>
+                            <form id="logout-form" action="{{ route('client.auth.logout') }}" method="POST" class="d-none">
+                                @csrf
+                            </form>
+                        </li>
+                    </ul>
+                </span>
+                
+                <span class="nav-icons">
+                    <a href="{{ route('client.notifications.index') }}" class="nav-link position-relative">
+                        <i class="fa-sharp fa-solid fa-bell"></i>
+                        @if(auth('client')->user()->have_unread_notifications)
+                            <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger">
+                                {{ auth('client')->user()->unread_notifications_count }}
+                            </span>
+                        @endif
+                    </a>
+                </span>
+                
+                <span class="nav-icons">
+                    <a href="{{ route('client.inbox.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <i class="fa-solid fa-comment"></i>
+                    </a>
+                </span>
+
             </div>
+            
         </div>
     </nav>
     <!-- Navbar -->
@@ -238,7 +277,7 @@
     @include('client.includes.subscription_modal')
 
     
-    <main style="margin-top: 58px;">
+    <main style="margin-top: 78px;">
         <div class="container pt-5">
             @include('panels.flash_messages')
             

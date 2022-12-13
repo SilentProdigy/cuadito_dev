@@ -106,7 +106,6 @@
                                     <i class="fab fa-cc-visa fa-lg text-black pe-2"></i>Visa Debit
                                     Card
                                     </p>
-                                    <div class="ms-auto">************3456</div>
                                 </div>
                                 </div>
 
@@ -120,7 +119,6 @@
                                         <i class="fab fa-cc-mastercard fa-lg text-dark pe-2"></i>Mastercard
                                         Office
                                         </p>
-                                        <div class="ms-auto">************1038</div>
                                     </div>
                                 </div>
 
@@ -133,7 +131,6 @@
                                         <p class="mb-0">
                                         <i class="fas fa-credit-card fa-lg text-dark pe-2"></i>Gcash Mastercard
                                         </p>
-                                        <div class="ms-auto">************7887</div>
                                     </div>
                                 </div>
                             </form>
