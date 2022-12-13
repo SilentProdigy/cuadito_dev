@@ -19,7 +19,7 @@ class ClientController extends Controller
                         ->orWhere('contact_number', 'LIKE', '%' . request('search') . '%');
                     })
                     ->withCount(['companies', 'projects', 'biddings'])
-                    ->paginate(Client::ITEMS_PER_PAGE);
+                    ->paginate(Client::ITEMS_PER_PAGE);    
 
         return view('admin.clients.index')->with(compact('clients'));
     }

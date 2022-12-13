@@ -17,8 +17,17 @@ class SubscriptionType extends Model
         'max_projects_count'
     ];
 
+    // protected $withCount = [
+    //     'active_subscriptions'
+    // ];
+
     public function subscriptions()
     {
         return $this->hasMany(\App\Models\Subscription::class);
+    }
+
+    public function active_subscriptions()
+    {
+        return $this->subscriptions()->where('status', Subscription::ACTIVE_STATUS);
     }
 }

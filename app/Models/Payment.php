@@ -15,11 +15,33 @@ class Payment extends Model
         'additional_vat',
         'total_amount',
         'mode_of_payment',
-        'details'
+        'details',
+        'paid_at',
+        'period',
+        'status',
+        'client_id',
+        'or_number'
     ];
+
+    public $casts = [
+        'paid_at' => 'datetime'
+    ];
+
+    const PAID_STATUS = "PAID";
+    const UNPAID_STATUS = "UNPAID";
 
     public function subscription()
     {
         return $this->belongsTo(\App\Models\Subscription::class);
+    }
+
+    public function client()
+    {
+        return $this->belongsTo(Client::class);
+    }
+
+    public function getInvoiceIdAttribute()
+    {
+        return "CPH" . $this->id;
     }
 }

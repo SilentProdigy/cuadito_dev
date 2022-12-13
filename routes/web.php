@@ -163,6 +163,10 @@ Route::name('client.')->group(function () {
 
         Route::get('subscriptions/{subscription}/unsubcribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'unsubscribe'])->name('subscriptions.unsubscribe');
         Route::post('subscriptions/{subscription_type}/subscribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'subscribe'])->name('subscriptions.subscribe');
+
+        Route::get('payments', [\App\Http\Controllers\Client\PaymentController::class, 'index'])->name('payments.index');
+        Route::get('payments/{payment}', [\App\Http\Controllers\Client\PaymentController::class, 'show'])->name('payments.show');
+        Route::get('payments/{payment}/print', [\App\Http\Controllers\Client\PaymentController::class, 'print'])->name('payments.print');
     });
 
 });

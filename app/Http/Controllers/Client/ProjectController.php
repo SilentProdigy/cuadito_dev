@@ -173,7 +173,7 @@ class ProjectController extends Controller
         try 
         {
             $project->delete();
-            $this->decreaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
+            // $this->dec`  reaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');  
         }
         catch(\Exception $e)

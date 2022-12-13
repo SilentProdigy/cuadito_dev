@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Mail\Subscription\PaymentCreated;
+use App\Models\Payment;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
 use App\Traits\SendEmail;
@@ -22,9 +23,8 @@ class SubscriptionController extends Controller
             DB::beginTransaction();            
 
             $amount = $subscription_type->amount * 1;
-            $vat = $amount * 0.12; 
+            $vat = $amount * 0; 
             $total_amount = $vat + $amount;
-
 
             $active_subscription = auth('client')->user()->active_subscription;
 
@@ -60,13 +60,17 @@ class SubscriptionController extends Controller
                 'amount' => $amount, // amount here comes from the api of dragon pay
                 'additional_vat' => $vat,
                 'total_amount' => $total_amount,
-                'mode_of_payment' => 'Mastercard',
-                'details' => 'Lorem ipsum dulum'
+                'mode_of_payment' => 'GCASH',
+                'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',
+                'paid_at' => Carbon::now(),
+                'period' => '1 month',
+                'status' => Payment::PAID_STATUS,
+                'client_id' => auth('client')->user()->id,
             ]);
 
             $subscription->client->notifications()->create([
                 'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} on {$payment->created_at->format('m-d-Y')}.",
-                'url' => route('client.products.index'), 
+                'url' => route('client.payments.show', $payment), 
             ]);
 
             $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
