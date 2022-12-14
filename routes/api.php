@@ -1,6 +1,8 @@
 <?php
 
+use Facade\FlareClient\Http\Exceptions\BadResponseCode;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -16,4 +18,10 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+
+Route::post('test-payment', function(Request $request) {
+    Log::info($request);
+    return response()->json(['result' => 'OK']);
 });
