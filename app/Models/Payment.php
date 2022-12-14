@@ -14,13 +14,14 @@ class Payment extends Model
         'amount',
         'additional_vat',
         'total_amount',
-        'mode_of_payment',
+        // 'mode_of_payment',
         'details',
         'paid_at',
         'period',
         'status',
         'client_id',
-        'or_number'
+        'or_number',
+        'payment_method',
     ];
 
     public $casts = [
