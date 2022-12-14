@@ -11,6 +11,7 @@ use App\Traits\SendEmail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class SubscriptionController extends Controller
 {
@@ -54,30 +55,45 @@ class SubscriptionController extends Controller
                 'submitted_proposals_count' => 0,
                 'submitted_projects_count' => 0,
                 'expiration_date' => $expiration_date
-            ]);            
-            
+            ]);  
+
             $payment = $subscription->payments()->create([
-                'amount' => $amount, // amount here comes from the api of dragon pay
-                'additional_vat' => $vat,
-                'total_amount' => $total_amount,
-                'mode_of_payment' => 'GCASH',
-                'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',
-                'paid_at' => Carbon::now(),
+                'amount' => 0, // amount here comes from the api of dragon pay
+                'total_amount' => 0,
+                'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',                
                 'period' => '1 month',
-                'status' => Payment::PAID_STATUS,
-                'client_id' => auth('client')->user()->id,
+                'status' => Payment::UNPAID_STATUS,
+                'client_id' => auth( 'client')->user()->id,
             ]);
 
-            $subscription->client->notifications()->create([
-                'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} on {$payment->created_at->format('m-d-Y')}.",
-                'url' => route('client.payments.show', $payment), 
-            ]);
+            // $subscription->client->notifications()->create([
+            //     'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} on {$payment->created_at->format('m-d-Y')}.",
+            //     'url' => route('client.payments.show', $payment), 
+            // ]);
 
-            $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
-            
+            // Request for payment
+            $response = Http::retry(3)->withBasicAuth(
+                            config('dragonpay.merchant_id'),
+                            config('dragonpay.password'),
+                        )
+                        ->withHeaders([
+                            'Content-Type' => 'application/json'
+                        ])
+                        ->post(config("dragonpay.base_url") . "/". $payment->id ."/post", [
+                                // 'name' => 'Steve',
+                                // 'role' => 'Network Administrator',
+                                'Amount' => $total_amount,
+                                'Currency' => config('dragonpay.currency'),
+                                'Description' => "Payment for {$subscription_type->name} Plan",
+                                'Email' => auth('client')->user()->email
+                            ],
+                        );
+
             DB::commit();
+            // Redirect to Submitted URL
+            return redirect($response['Url']);// $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
             
-            return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
+            // return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
         }
         catch(\Exception $e)
         {
