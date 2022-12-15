@@ -21,6 +21,7 @@ class Payment extends Model
         'status',
         'client_id',
         'or_number',
+        'reference_no',
         'payment_method',
     ];
 

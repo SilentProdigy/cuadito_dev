@@ -46,16 +46,16 @@ class SubscriptionController extends Controller
             // if the payment was successful from the dragonpay api return result
 
             // activate subscription & save payment
-            $expiration_date = new Carbon();
-            $expiration_date = $expiration_date->addMonth();
+            // $expiration_date = new Carbon();
+            // $expiration_date = $expiration_date->addMonth();
 
-            $subscription->update([
-                'status' => Subscription::ACTIVE_STATUS,
-                // 'points' => $subscription_type->points,
-                'submitted_proposals_count' => 0,
-                'submitted_projects_count' => 0,
-                'expiration_date' => $expiration_date
-            ]);  
+            // $subscription->update([
+            //     'status' => Subscription::ACTIVE_STATUS,
+            //     // 'points' => $subscription_type->points,
+            //     'submitted_proposals_count' => 0,
+            //     'submitted_projects_count' => 0,
+            //     'expiration_date' => $expiration_date
+            // ]);  
 
             $payment = $subscription->payments()->create([
                 'amount' => 0, // amount here comes from the api of dragon pay
@@ -90,17 +90,17 @@ class SubscriptionController extends Controller
                         );
 
             DB::commit();
+            
             // Redirect to Submitted URL
-            return redirect($response['Url']);// $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
+            return redirect($response['Url']);
+            // $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
             
             // return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
         }
         catch(\Exception $e)
         {
-
-            return $e->getMessage();
+            // return $e->getMessage();
             DB::rollBack();
-
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }

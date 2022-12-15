@@ -21,7 +21,9 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::post('test-payment', function(Request $request) {
-    Log::info($request);
-    return response()->json(['result' => 'OK']);
-});
+// Route::post('test-payment', function(Request $request) {
+//     Log::info($request);
+//     return response()->json(['result' => 'OK']);
+// });
+
+Route::post('payment', [\App\Http\Controllers\API\PaymentController::class, 'store'])->name('payment.store');
