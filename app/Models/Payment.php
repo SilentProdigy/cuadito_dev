@@ -29,8 +29,9 @@ class Payment extends Model
         'paid_at' => 'datetime'
     ];
 
-    const PAID_STATUS = "PAID";
-    const UNPAID_STATUS = "UNPAID";
+    const PAID_STATUS = "Success";
+    const PENDING_STATUS = "Pending";
+
 
     public function subscription()
     {

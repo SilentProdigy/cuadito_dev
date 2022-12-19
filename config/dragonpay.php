@@ -6,4 +6,14 @@ return [
     'base_url' => env('DRAGON_PAY_API_BASE_URL'),
     'currency' => 'PHP',
     'secret' => env('DRAGON_PAY_SHARED_SECRET'),
+    'status_codes' => [
+        'S' => 'Success',
+        'F' => 'Failure',
+        'P' => 'Pending',
+        'U' => 'Unknown',
+        'R' => 'Refund',
+        'K' => 'Chargeback',
+        'V' => 'Void',
+        'A' => 'Authorized'
+    ]
 ];

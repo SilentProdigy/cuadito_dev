@@ -18,27 +18,12 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
-        // $status_code = [
-        //     'S' => 'Success',
-        //     'F' => 'Failure',
-        //     'P' => 'Pending',
-        //     'U' => 'Unknown',
-        //     'R' => 'Refund',
-        //     'K' => 'Chargeback',
-        //     'V' => 'Void',
-        //     'A' => 'Authorized'
-        // ];
+        $dragon_pay_status_codes = config('dragonpay.status_codes');
 
         try
         {
             DB::beginTransaction();
-
-            if($request->input('status') != 'S')
-            {
-                Log::error('Payment unsuccessful');
-                return;
-            }
-    
+            
             $payment = Payment::findOrFail($request->input('txnid'));
     
             $payment->update([
@@ -46,34 +31,36 @@ class PaymentController extends Controller
                 'amount' => $request->input('amount'),
                 'total_amount' => $request->input('amount'),
                 'payment_method' => $request->input('procid'),
-                'status' => Payment::PAID_STATUS,
+                'status' => $dragon_pay_status_codes[$request->input('status')],
                 'paid_at' => Carbon::now()
             ]);
-    
-            $subscription = $payment->subscription;
 
-
-    
-            $expiration_date = new Carbon();
-            $expiration_date = $expiration_date->addMonth();
-    
-            $subscription->update([
-                'status' => Subscription::ACTIVE_STATUS,
-                // 'points' => $subscription_type->points,
-                'submitted_proposals_count' => 0,
-                'submitted_projects_count' => 0,
-                'expiration_date' => $expiration_date
-            ]);  
-
-            $subscription->client->notifications()->create([
-                'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} Plan on {$payment->created_at->format('m-d-Y')}.",
-                'url' => route('client.payments.show', $payment), 
-            ]);
-    
-            $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
+            if($request->input('status') == 'S')
+            {
+                $subscription = $payment->subscription;
             
-            DB::commit();
-            Log::info($payment);
+                $expiration_date = new Carbon();
+                $expiration_date = $expiration_date->addMonth();
+        
+                $subscription->update([
+                    'status' => Subscription::ACTIVE_STATUS,
+                    // 'points' => $subscription_type->points,
+                    'submitted_proposals_count' => 0,
+                    'submitted_projects_count' => 0,
+                    'expiration_date' => $expiration_date
+                ]);  
+    
+                $subscription->client->notifications()->create([
+                    'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} Plan on {$payment->created_at->format('m-d-Y')}.",
+                    'url' => route('client.payments.show', $payment), 
+                ]);
+        
+                $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
+                
+                DB::commit();
+                Log::info($payment);
+            }
+    
             return response()->json(['result' => 'OK']);
         }
         catch(\Exception $e)
