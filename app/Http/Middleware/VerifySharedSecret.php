@@ -4,6 +4,7 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpFoundation\Response;
 
 class VerifySharedSecret
@@ -21,6 +22,8 @@ class VerifySharedSecret
 
         if(!$request->has('param1') || $request->input('param1') !== $shared_secret)
         {
+            Log::warning('un_authorized_request_' . date('Y-m-d_H:i:s'), $request);
+            
             return response()->json(['error' => 'Unauthorized'], Response::HTTP_UNAUTHORIZED);
         }
 
