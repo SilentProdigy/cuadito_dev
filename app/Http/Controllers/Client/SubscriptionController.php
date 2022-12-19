@@ -42,34 +42,15 @@ class SubscriptionController extends Controller
                 'status' => Subscription::INACTIVE_STATUS,
             ]);
 
-            // call the DRAGONPAY API
-            // if the payment was successful from the dragonpay api return result
-
-            // activate subscription & save payment
-            // $expiration_date = new Carbon();
-            // $expiration_date = $expiration_date->addMonth();
-
-            // $subscription->update([
-            //     'status' => Subscription::ACTIVE_STATUS,
-            //     // 'points' => $subscription_type->points,
-            //     'submitted_proposals_count' => 0,
-            //     'submitted_projects_count' => 0,
-            //     'expiration_date' => $expiration_date
-            // ]);  
 
             $payment = $subscription->payments()->create([
                 'amount' => 0, // amount here comes from the api of dragon pay
                 'total_amount' => 0,
                 'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',                
                 'period' => '1 month',
-                'status' => Payment::UNPAID_STATUS,
+                'status' => Payment::PENDING_STATUS,
                 'client_id' => auth( 'client')->user()->id,
             ]);
-
-            // $subscription->client->notifications()->create([
-            //     'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} on {$payment->created_at->format('m-d-Y')}.",
-            //     'url' => route('client.payments.show', $payment), 
-            // ]);
 
             // Request for payment
             $response = Http::retry(3)->withBasicAuth(
@@ -80,12 +61,11 @@ class SubscriptionController extends Controller
                             'Content-Type' => 'application/json'
                         ])
                         ->post(config("dragonpay.base_url") . "/". $payment->id ."/post", [
-                                // 'name' => 'Steve',
-                                // 'role' => 'Network Administrator',
                                 'Amount' => $total_amount,
                                 'Currency' => config('dragonpay.currency'),
                                 'Description' => "Payment for {$subscription_type->name} Plan",
-                                'Email' => auth('client')->user()->email
+                                'Email' => auth('client')->user()->email,
+                                'Param1' => config('dragonpay.secret'),
                             ],
                         );
 
@@ -93,9 +73,6 @@ class SubscriptionController extends Controller
             
             // Redirect to Submitted URL
             return redirect($response['Url']);
-            // $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
-            
-            // return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
         }
         catch(\Exception $e)
         {
