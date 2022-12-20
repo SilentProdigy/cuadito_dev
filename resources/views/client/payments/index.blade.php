@@ -41,7 +41,7 @@
                         <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
                         <td>{{ $payment->status }}</td>
                         <td>{{ $payment->created_at->format('Y-m-d') }}</td>
-                        <td>{{ $payment->paid_at->format('Y-m-d') }}</td>
+                        <td>{{ $payment->paid_at?->format('Y-m-d') }}</td>
                         <td>@money( $payment->total_amount )</td>
                         <td>
                             <a href="{{ route('client.payments.show', $payment) }}" class="btn btn-primary btn-sm">View Details</a>
