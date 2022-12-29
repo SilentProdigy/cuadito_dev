@@ -14,21 +14,24 @@ class Payment extends Model
         'amount',
         'additional_vat',
         'total_amount',
-        'mode_of_payment',
+        // 'mode_of_payment',
         'details',
         'paid_at',
         'period',
         'status',
         'client_id',
-        'or_number'
+        'or_number',
+        'reference_no',
+        'payment_method',
     ];
 
     public $casts = [
         'paid_at' => 'datetime'
     ];
 
-    const PAID_STATUS = "PAID";
-    const UNPAID_STATUS = "UNPAID";
+    const PAID_STATUS = "Success";
+    const PENDING_STATUS = "Pending";
+
 
     public function subscription()
     {
