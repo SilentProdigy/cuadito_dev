@@ -237,6 +237,13 @@ body {
   vertical-align: middle !important;
 }
 
+.counters{
+    font-size: 55px;
+}
+.subscriptions h5{
+    font-size: 15px;
+}
+
 /* End of Profile Page Styles */
 
 .label {
@@ -261,7 +268,7 @@ body {
 }
 .user-profile .profile-header .card-header{
     height: 300px;
-    background-image: url('/images/banners/default-profile-banner.jpeg');
+    background-image: url('/images/banners/clients_profile_banner.jpg');
     background-size: cover;
 }
 .user-profile .profile-header .card-header img{
@@ -1130,6 +1137,9 @@ p.price span:before {
 .pricing-offers li {
     padding: 0 0 16px;
     line-height: 18px;
+}
+#subscriptionModal .subscription_btn{
+    padding: 10px 15px;
 }
 ul li {
     list-style-type: none;

@@ -11,6 +11,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Symfony\Component\HttpKernel\Profiler\Profile;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -34,10 +35,11 @@ class ProfileController extends Controller
 
             $data = $request->except('profile_pic');
             
-            $target_dir = "clients/profile_pics/" . $client->id;
+            $target_dir = "images/profile_pics";
 
             if($request->has('profile_pic')) {
-                $path = $this->uploadFile($target_dir, $request->file('profile_pic'));
+                // $path = $this->uploadFile($target_dir, $request->file('profile_pic'));
+                $path = Storage::putFile('images', $request->file('profile_pic'));
                 $data['profile_pic'] = $path;
             }
 

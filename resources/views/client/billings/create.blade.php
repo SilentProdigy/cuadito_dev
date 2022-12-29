@@ -53,13 +53,11 @@
                     <div class="card">
                     <div class="card-body">
                         <div class="row d-flex justify-content-center pb-5">
-                        <div class="col-md-7 col-xl-5 mb-4 mb-md-0">
+                        <div class="col-md-4 col-xl-4 mb-4 mb-md-0">
                             <div class="py-4 d-flex flex-row">
                                 <h5><span class="far fa-check-square pe-2"></span><b>DragonPay</b> |</h5>
                                 <span class="ps-2">Payment Gateway</span>
                             </div>
-                            <h4 class="text-success">@money($subscription_type->amount)</h4>
-                            <h4>{{ $subscription_type->name }}</h4>
                             <!-- <div class="d-flex pt-2">
                                 <div>
                                     <p>
@@ -82,18 +80,13 @@
                             </div> -->
                             <hr />
                             <div class="pt-2">
-                            <div class="d-flex pb-2">
+                            <!-- <div class="d-flex pb-2">
                                 <div class="ms-auto">
                                 <p class="text-primary">
                                     <i class="fas fa-plus-circle text-primary pe-1"></i>Add payment card
                                 </p>
                                 </div>
-                            </div>
-                            <p>
-                                This is an estimate for the portion of your order (not covered by
-                                insurance) due today . once insurance finalizes their review refunds
-                                and/or balances will reconcile automatically.
-                            </p>
+                            </div> -->
                             <form id="checkout-form" action="{{ route('client.subscriptions.subscribe', $subscription_type) }}" method="POST" class="pb-3">
                                 @csrf
                                 <div class="d-flex flex-row pb-3">
@@ -111,7 +104,7 @@
 
                                 <div class="d-flex flex-row pb-3">
                                     <div class="d-flex align-items-center pe-2">
-                                        <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel2"
+                                        <input class="form-check-input" type="radio" name="method_mastercard" id="method_mastercard"
                                         value="" aria-label="..." />
                                     </div>
                                     <div class="rounded border d-flex w-100 p-3 align-items-center">
@@ -124,7 +117,7 @@
 
                                 <div class="d-flex flex-row">
                                     <div class="d-flex align-items-center pe-2">
-                                        <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel3"
+                                        <input class="form-check-input" type="radio" name="method_gcash" id="method_gcash"
                                         value="" aria-label="..." />
                                     </div>
                                     <div class="rounded border d-flex w-100 p-3 align-items-center">
@@ -134,59 +127,35 @@
                                     </div>
                                 </div>
                             </form>
-                            <a href="javascript::void()" class="btn btn-orange btn-block btn-lg" onclick="document.getElementById('checkout-form').submit()">Proceed To Checkout</a>
                             <!-- <input type="button" value="Proceed to payment" class="btn btn-orange btn-block btn-lg" /> -->
                             </div>
                         </div>
 
-                        <div class="col-md-5 col-xl-4 offset-xl-1">
+                        <div class="col-md-8 col-xl-7 offset-xl-1">
                             <div class="py-4 d-flex justify-content-end">
-                            <h6><a href="{{ url()->previous() }}" class="text-orange">Cancel and return to website</a></h6>
+                                <h6><a href="{{ url()->previous() }}" class="text-orange">Cancel and return to website</a></h6>
                             </div>
                             <div class="rounded d-flex flex-column p-2" style="background-color: #f8f9fa;">
-                            <div class="p-2 me-3">
-                                <h4>Order Recap</h4>
+                                <div class="p-2 d-flex">
+                                    <div class=col-8><h4>{{ $subscription_type->name }} - 1 Month Plan</h4></div>
+                                    <div class="ms-auto"><h4>@money($subscription_type->amount)</h4></div>
+                                </div>
+                            
+                                <div class="border-top px-2 mx-2"></div>
+                                <div class="p-2 d-flex pt-3">
+                                    <div class="col-8"><b>Total</b></div>
+                                    <div class="ms-auto"><b class="text-success">@money($subscription_type->amount)</b></div>
+                                </div>
+
+                                <div class="p-2 d-flex pt-3">
+                                    <p>
+                                        This is an estimate for the portion of your order (not covered by
+                                        insurance) due today . once insurance finalizes their review refunds
+                                        and/or balances will reconcile automatically.
+                                    </p>
+                                </div>
                             </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                            <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                            <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                            <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="border-top px-2 mx-2"></div>
-                            <div class="p-2 d-flex pt-3">
-                            <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                            <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="border-top px-2 mx-2"></div>
-                            <div class="p-2 d-flex pt-3">
-                                <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="p-2 d-flex">
-                                <div class="col-8">Package Detail</div>
-                                <div class="ms-auto">@money(00.00)</div>
-                            </div>
-                            <div class="border-top px-2 mx-2"></div>
-                            <div class="p-2 d-flex pt-3">
-                                <div class="col-8"><b>Total</b></div>
-                                <div class="ms-auto"><b class="text-success">@money($subscription_type->amount)</b></div>
-                            </div>
-                            </div>
+                            <a href="javascript::void()" class="btn btn-orange btn-block btn-lg mt-5" onclick="document.getElementById('checkout-form').submit()">Proceed To Checkout</a>
                         </div>
                         </div>
                     </div>

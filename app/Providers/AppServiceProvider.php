@@ -80,8 +80,9 @@ class AppServiceProvider extends ServiceProvider
 
         View::composer(['client.includes.subscription_modal'], function($view){
             $products = SubscriptionType::get();
+            $latest_subscription = auth('client')->user()->active_subscription;
 
-            $view->with(compact('products'));
+            $view->with(compact('products', 'latest_subscription'));
         });
     }
 }

@@ -6,6 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
         <div class="modal-body p-5">
+        <button type="button" class="btn-close" style="float:right" data-bs-dismiss="modal" aria-label="Close"></button>
             <!-- <div class="pricing-area">
                 <div class="container">
                 <div class="row">
@@ -32,7 +33,6 @@
               <div class="container">
               <div class="row justify-content-md-center">
                 <div class="col-xl-5 col-lg-6 col-md-8">
-
                   <div class="section-title text-center title-ex1">
                     <h2>Get connected to other businesses around the Philippines</h2>
                   </div>
@@ -53,7 +53,12 @@
                       <li>Monthly Bandwidth</li>
                       <li>Powerful Admin Panel</li>
                     </ul>
-                    <a href="{{ route('client.billings.create', $item) }}" class="btn btn-primary btn-mid">Subscribe Now</a>
+                    @if($latest_subscription && $latest_subscription->subscription_type_id == $item->id)
+                      <a href="{{ route('client.subscriptions.unsubscribe', $latest_subscription) }}" class="subscription_btn btn btn-danger">Unsubscribe</a>
+                    @else 
+                      <a href="{{ route('client.billings.create', $item) }}" class="subscription_btn btn btn-orange">Subscribe Now</a>    
+                    @endif
+                    <!-- <a href="{{ route('client.billings.create', $item) }}" class="btn btn-primary btn-mid">Subscribe Now</a> -->
                   </div>
                 </div>
                 @endforeach

@@ -4,58 +4,26 @@
 <div class="container-fluid user-profile">
     <div class="card profile-header">
         <div class="card-header image d-flex flex-column px-5">
-            <img src="{{ asset($client->profile_pic) }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
+            <img src="{{ $client->profile_pic ? asset($client->profile_pic) : asset('images/avatar/12.png') }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
         </div>
         <div class="d-flex flex-row">
-            <div class="card-body mt-5 mx-3 d-flex flex-column">
-                <span class="name mt-3">{{ $client->name }}</span>
-                <span>{{ $client->tag_line }}</span>
-                <span>{{ $client->email }}</span>
-            </div>
-        </div>
-    </div>
-    
-    @if($client->have_subscription)
-        <div class="card mt-3">
-            <div class="card-header d-flex justify-content-between align-items-center">
-                <h5>Subscription Plan</h5>
-                <a href="{{ route('client.products.index') }}" class="btn btn-sm btn-dark">{{ $client->active_subscription->subscription_type->name }}</a>
-            </div>
-            <div class="card-body">
-                <div class="my-1 py-1">
-                    <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">REMAINING PROJECT</h5>
-                    <p class="fs-6 lh-lg" style="color: #222;">{{ $client->active_subscription->remaining_projects }}</p>
+            <div class="card-body mt-5 mx-3 row">
+                <div class="d-flex flex-column col-md-6">
+                    <span class="name mt-3">{{ $client->name }}</span>
+                    <span>{{ $client->tag_line }}</span>
+                    <span>{{ $client->email }}</span>
                 </div>
-                <div class="my-1 py-1">
-                    <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">REMAINING PROPOSALS</h5>
-                    <p class="fs-6 lh-lg" style="color: #222;">{{ $client->active_subscription->remaining_proposals }}</p>
+                <div class="col-md-6">
+                    <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning float-end">Change Password</a>
+                    <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-sm btn-info float-end mx-3">Edit Account Info</a>
                 </div>
             </div>
-        </div>
-    @endif
-    <div class="card mt-3">
-        <div class="card-header d-flex justify-content-between align-items-center">
-            <h5>Security</h5>
-            <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning">Change Password</a>            
         </div>
     </div>
 
-    <div class="card mt-3">
-        <div class="card-header d-flex justify-content-between align-items-center">
+    <div class="row mt-5 my-5">
+        <div class="col-md-8">
             <h5>About</h5>
-            <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-sm btn-info">Edit Account Info</a>
-        </div>
-        <div class="card-body">
-            <div class="my-1 py-1">
-                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">NAME</h5>
-                <p class="fs-6 lh-lg" style="color: #222;">{{ $client->name }}</p>
-            </div>
-
-            <div class="my-1 py-1">
-                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">EMAIL</h5>
-                <p class="fs-6 lh-lg" style="color: #222;">{{ $client->email }}</p>
-            </div>
-
             <div class="my-1 py-1">
                 <h5 class="text-uppercase text-secondary fw-bold fs-6 py-1">CONTACT NUMBER</h5>
                 <p class="fs-6 lh-lg" style="color: #222;">{{ $client->contact_number }}</p>
@@ -81,8 +49,32 @@
                 <p class="fs-6 lh-lg" style="color: #222;">{{ $client->address }}</p>
             </div>
         </div>
-   
+        <div class="col-md-4">
+            @if($client->have_subscription)
+                <div class="mt-3 subscriptions">
+                    <div class="d-flex justify-content-between align-items-center">
+                        <h4>Subscription Plan</h4>
+                        <!-- <a href="{{ route('client.products.index') }}" class="btn btn-sm btn-orange">{{ $client->active_subscription->subscription_type->name }}</a>
+                         -->
+                        <button type="button" class="btn btn-sm btn-orange" data-bs-toggle="modal" data-bs-target="#subscriptionModal">
+                            {{ $client->active_subscription->subscription_type->name }}
+                        </button>
+                    </div>
+                    <div>
+                        <div class="my-1 py-1">
+                            <p class="counters" style="color: #222;">{{ $client->active_subscription->remaining_projects }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold">REMAINING PROJECT</h5>
+                        </div>
+                        <div class="my-1 py-1">
+                            <p class="counters" style="color: #222;">{{ $client->active_subscription->remaining_proposals }}</p>
+                            <h5 class="text-uppercase text-secondary fw-bold">REMAINING PROPOSALS</h5>
+                        </div>
+                    </div>
+                </div>
+            @endif
+        </div>
     </div>
+    
     {{-- <div class="card mt-3">
         <div class="card-header">
             <h5>Product / Services</h5>
