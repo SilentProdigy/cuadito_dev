@@ -17,10 +17,14 @@ class SubscriptionController extends Controller
 {
     use SendEmail;
 
-    public function subscribe(SubscriptionType $subscription_type)
+    public function subscribe(Request $request,SubscriptionType $subscription_type)
     {
         try
         {
+            $request->validate([
+                'payment_channel' => 'required'
+            ]);
+
             DB::beginTransaction();            
 
             $amount = $subscription_type->amount * 1;
@@ -66,6 +70,7 @@ class SubscriptionController extends Controller
                                 'Description' => "Payment for {$subscription_type->name} Plan",
                                 'Email' => auth('client')->user()->email,
                                 'Param1' => config('dragonpay.secret'),
+                                'ProcId' => $request->input('payment_channel')
                             ],
                         );
 
