@@ -8,13 +8,35 @@ use App\Models\SubscriptionType;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Http;
 
 class BillingController extends Controller
 {
     public function create(SubscriptionType $subscription_type)
     {
-        $total_amount = $subscription_type->amount * 1;
-        return view('client.billings.create')->with(compact('subscription_type', 'total_amount'));
+        try
+        {
+            $total_amount = $subscription_type->amount * 1;
+
+            $response = Http::retry(3)->withBasicAuth(
+                config('dragonpay.merchant_id'),
+                config('dragonpay.password'),
+            )
+            ->get(config("dragonpay.base_url") . "/processors/available/".$total_amount);
+
+            $payment_channels = $response->collect();
+
+            $payment_channels = $payment_channels->filter(function($item) {
+                $procId = $item['procId'];
+                return in_array($procId, config('dragonpay.supported_payment_channels'));
+            });
+    
+            return view('client.billings.create')->with(compact('subscription_type', 'total_amount', 'payment_channels'));
+        }
+        catch(\Exception $e)
+        {
+            dd($e->getMessage());
+        }
     }
 
     public function store(SubscriptionType $subscription_type)
