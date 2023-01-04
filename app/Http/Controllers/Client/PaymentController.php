@@ -54,7 +54,7 @@ class PaymentController extends Controller
                         'total_amount', 'payment_method', 'status'));
         }
 
-        return redirect('client.payments.index')->withErrors([
+        return redirect(route('client.payments.index'))->withErrors([
             'message' => 'Unexpected Error Occured!',
         ]);
     }
