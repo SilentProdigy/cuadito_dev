@@ -274,7 +274,9 @@
 
     <!--Main layout-->
     <!-- Modal -->
-    @include('client.includes.subscription_modal')
+    @if(!request()->is('client.payments.result'))
+        @include('client.includes.subscription_modal')
+    @endif
 
     
     <main style="margin-top: 78px;">
@@ -295,16 +297,19 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     @yield('script')
-    <script>
-        $(document).ready(function(){
-            
-            let subscription = $('body').data('subscription');
 
-            if(!subscription) {
-                $("#subscriptionModal").modal('show');
-            }
-        });
-    </script>
+    {{-- @includeUnless(request()->is('client.payments.result'), 'view.name', []) --}}
+    @if(!request()->is('client.payments.result'))
+        <script>
+            $(document).ready(function(){
+                
+                let subscription = $('body').data('subscription');
+        
+                if(!subscription) {
+                    $("#subscriptionModal").modal('show');
+                }
+            });
+      </script>
+    @endif
 </body>
-
 </html>
