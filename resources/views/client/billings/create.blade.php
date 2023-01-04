@@ -58,26 +58,8 @@
                                 <h5><span class="far fa-check-square pe-2"></span><b>DragonPay</b> |</h5>
                                 <span class="ps-2">Payment Gateway</span>
                             </div>
-                            <!-- <div class="d-flex pt-2">
-                                <div>
-                                    <p>
-                                    <b>Insurance Responsibility <span class="text-success">$71.76</span></b>
-                                    </p>
-                                </div>
-                                <div class="ms-auto">
-                                    <p class="text-primary">
-                                    <i class="fas fa-plus-circle text-primary pe-1"></i>Add insurance card
-                                    </p>
-                                </div>
-                            </div> -->
-                            <!-- <p>
-                            Insurance claims and all necessary dependencies will be submitted to your
-                            insurer for the coverred portion of this order
-                            </p> -->
-                            <!-- <div class="rounded d-flex" style="background-color: #f8f9fa;">
-                            <div class="p-2">Aetna-Open Access</div>
-                            <div class="ms-auto p-2">OAP</div>
-                            </div> -->
+                            <h4 class="text-success">@money($subscription_type->amount)</h4>
+                            <h4>{{ $subscription_type->name }}</h4>
                             <hr />
                             <div class="pt-2">
                             <!-- <div class="d-flex pb-2">
@@ -89,44 +71,24 @@
                             </div> -->
                             <form id="checkout-form" action="{{ route('client.subscriptions.subscribe', $subscription_type) }}" method="POST" class="pb-3">
                                 @csrf
-                                <div class="d-flex flex-row pb-3">
-                                <div class="d-flex align-items-center pe-2">
-                                    <input class="form-check-input" type="radio" name="radioNoLabel" id="radioNoLabel1"
-                                    value="" aria-label="..." checked />
-                                </div>
-                                <div class="rounded border d-flex w-100 p-3 align-items-center">
-                                    <p class="mb-0">
-                                    <i class="fab fa-cc-visa fa-lg text-black pe-2"></i>Visa Debit
-                                    Card
-                                    </p>
-                                </div>
-                                </div>
-
-                                <div class="d-flex flex-row pb-3">
-                                    <div class="d-flex align-items-center pe-2">
-                                        <input class="form-check-input" type="radio" name="method_mastercard" id="method_mastercard"
-                                        value="" aria-label="..." />
-                                    </div>
-                                    <div class="rounded border d-flex w-100 p-3 align-items-center">
-                                        <p class="mb-0">
-                                        <i class="fab fa-cc-mastercard fa-lg text-dark pe-2"></i>Mastercard
-                                        Office
-                                        </p>
-                                    </div>
-                                </div>
-
-                                <div class="d-flex flex-row">
-                                    <div class="d-flex align-items-center pe-2">
-                                        <input class="form-check-input" type="radio" name="method_gcash" id="method_gcash"
-                                        value="" aria-label="..." />
-                                    </div>
-                                    <div class="rounded border d-flex w-100 p-3 align-items-center">
-                                        <p class="mb-0">
-                                        <i class="fas fa-credit-card fa-lg text-dark pe-2"></i>Gcash Mastercard
-                                        </p>
-                                    </div>
-                                </div>
+                                @foreach ($payment_channels as $channel)
+                                    <div class="d-flex flex-row pb-3">
+                                        <div class="d-flex align-items-center pe-2">
+                                            <input class="form-check-input" type="radio" name="payment_channel"
+                                            value="{{ $channel['procId'] }}"
+                                            required/>
+                                        </div>
+                                        <div class="rounded border d-flex w-100 p-3 align-items-center">
+                                            <p class="mb-0">
+                                                <img src="{{ $channel['logo'] }}" style="width: 100px; height: 50px;" alt="logo"> {{ $channel['longName'] }}
+                                            </p>
+                                        </div>
+                                    </div>    
+                                @endforeach    
+                                
                             </form>
+                            <a href="javascript::void()" class="btn btn-orange btn-block btn-lg" onclick="document.getElementById('checkout-form').submit()">Proceed To Checkout</a>
+                            
                             <!-- <input type="button" value="Proceed to payment" class="btn btn-orange btn-block btn-lg" /> -->
                             </div>
                         </div>

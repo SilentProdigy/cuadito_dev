@@ -15,5 +15,16 @@ return [
         'K' => 'Chargeback',
         'V' => 'Void',
         'A' => 'Authorized'
+    ],
+    'supported_payment_channels' => [
+        'BDO',
+        'BOG',
+        'BPIA',
+        'MBTC',
+        'CBCB',
+        'LBPA',
+        'UBP5',
+        'AAA',
+        'BITC',
     ]
 ];
