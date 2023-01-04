@@ -46,10 +46,18 @@
                         </div>
                         <div class="profile_details row mt-4">
                             <div class="col-12 mt-4"><i class="fa fa-briefcase fs-5"></i>Website Developer | 1MC Digital</div>
-                            <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
-                            <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
-                            <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
-                            <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
+                            @if($client->contact_number)
+                                <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
+                            @endif
+                            @if($client->address)
+                                <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
+                            @endif
+                            @if($client->birth_date)
+                                <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
+                            @endif
+                            @if($client->marital_status)
+                                <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
+                            @endif
                         </div>
                     </div>
                 </div>
