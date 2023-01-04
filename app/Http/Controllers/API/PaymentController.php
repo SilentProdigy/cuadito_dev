@@ -18,10 +18,9 @@ class PaymentController extends Controller
 
     public function store(Request $request)
     {
-        $dragon_pay_status_codes = config('dragonpay.status_codes');
-
         try
         {
+            $dragon_pay_status_codes = config('dragonpay.status_codes');
             DB::beginTransaction();
             
             $payment = Payment::findOrFail($request->input('txnid'));
@@ -32,7 +31,7 @@ class PaymentController extends Controller
                 'total_amount' => $request->input('amount'),
                 'payment_method' => $request->input('procid'),
                 'status' => $dragon_pay_status_codes[$request->input('status')],
-                'paid_at' => Carbon::now()
+                'paid_at' => $request->input('status') == 'S' ? Carbon::now() : null
             ]);
 
             if($request->input('status') == 'S')
@@ -58,14 +57,14 @@ class PaymentController extends Controller
                 $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
                 
                 DB::commit();
-                Log::info($payment);
+                Log::info("PAYMENT_RECEIVED:" . json_encode($payment));
             }
     
             return response()->json(['result' => 'OK']);
         }
         catch(\Exception $e)
         {
-            Log::error($e->getMessage());
+            Log::error("PAYMENT_ERROR:" . $e->getMessage());
         }
     }
 }
