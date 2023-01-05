@@ -37,9 +37,9 @@
                         
                         @if(auth('client')->user()->have_subscription && 
                             auth('client')->user()->active_subscription?->subscription_type_id == $item->id)
-                          <a href="{{ route('client.subscriptions.unsubscribe', auth('client')->user()->active_subscription) }}" class="subscription_btn btn btn-danger">Unsubscribe</a>
+                          <a href="{{ route('client.subscriptions.unsubscribe', auth('client')->user()->active_subscription) }}" class="subscription_btn btn btn-danger" style="padding: 10px 20px;">Unsubscribe</a>
                         @else 
-                          <a href="{{ route('client.billings.create', $item) }}" class="subscription_btn btn btn-orange">Subscribe Now</a>    
+                          <a href="{{ route('client.billings.create', $item) }}" class="subscription_btn btn btn-orange" style="padding:10px 20px;">Subscribe Now</a>    
                         @endif
                       </div>
                   </div>
