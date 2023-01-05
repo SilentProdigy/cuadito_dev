@@ -76,6 +76,11 @@ class SubscriptionController extends Controller
 
             DB::commit();
             
+            if($response['Status'] !== "S")
+            {
+                return redirect()->back()->withErrors(['message' => 'Operation Failed: ' . $response['Message']]);
+            }
+            
             // Redirect to Submitted URL
             return redirect($response['Url']);
         }
