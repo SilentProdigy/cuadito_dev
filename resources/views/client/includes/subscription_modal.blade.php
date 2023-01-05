@@ -9,28 +9,6 @@
           @isset($latest_subscription)
             <button type="button" class="btn-close" style="float:right" data-bs-dismiss="modal" aria-label="Close"></button>  
           @endisset
-            <!-- <div class="pricing-area">
-                <div class="container">
-                <div class="row">
-                @foreach ($products as $item)
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single-price">
-                        <div class="deal-top">
-                        <h3>{{ $item->name }}</h3>
-                        <h4> @money($item->amount)</h4> 
-                        </div>
-                        <div class="deal-bottom">
-
-                        <div class="btn-area">
-                        <a href="{{ route('client.billings.create', $item) }}">Subscribe Now</a>    
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                @endforeach 
-                </div>
-                </div>
-            </div> -->
             <section class="pricing-section">
               <div class="container">
               <div class="row justify-content-md-center">
@@ -43,35 +21,33 @@
               <!-- Pricing Table starts -->
               <div class="row">
                 @foreach ($products as $item)
-                <div class="col-md-4">
-                  <div class="price-card">
-                    <h2>{{ $item->name }}</h2>
-                    <p>The standard version</p>
-                    <p class="price"><span>{{$item->amount}}</span>/ mo.</p>
-                    <ul class="pricing-offers">
-                      <li>6 Domain Names</li>
-                      <li>8 E-Mail Address</li>
-                      <li>10GB Disk Space</li>
-                      <li>Monthly Bandwidth</li>
-                      <li>Powerful Admin Panel</li>
-                    </ul>
-                    @if($latest_subscription && $latest_subscription->subscription_type_id == $item->id)
-                      <a href="{{ route('client.subscriptions.unsubscribe', $latest_subscription) }}" class="subscription_btn btn btn-danger">Unsubscribe</a>
-                    @else 
-                      <a href="{{ route('client.billings.create', $item) }}" class="subscription_btn btn btn-orange">Subscribe Now</a>    
-                    @endif
-                    <!-- <a href="{{ route('client.billings.create', $item) }}" class="btn btn-primary btn-mid">Subscribe Now</a> -->
+                  <div class="col-md-4">
+                      <div class="price-card">
+                        <h2>{{ $item->name }}</h2>
+                        <p>The standard version</p>
+                        <p class="price"><span>{{$item->amount}}</span>/ mo.</p>
+                        
+                        <ul class="pricing-offers">
+                          <li>6 Domain Names</li>
+                          <li>8 E-Mail Address</li>
+                          <li>10GB Disk Space</li>
+                          <li>Monthly Bandwidth</li>
+                          <li>Powerful Admin Panel</li>
+                        </ul>
+                        
+                        @if(auth('client')->user()->have_subscription && 
+                            auth('client')->user()->active_subscription?->subscription_type_id == $item->id)
+                          <a href="{{ route('client.subscriptions.unsubscribe', auth('client')->user()->active_subscription) }}" class="subscription_btn btn btn-danger">Unsubscribe</a>
+                        @else 
+                          <a href="{{ route('client.billings.create', $item) }}" class="subscription_btn btn btn-orange">Subscribe Now</a>    
+                        @endif
+                      </div>
                   </div>
-                </div>
                 @endforeach
               </div>
             </div>
           </section>
         </div>
-        <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div> -->
       </div>
     </div>
   </div>
