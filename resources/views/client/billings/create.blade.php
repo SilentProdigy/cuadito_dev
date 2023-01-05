@@ -55,11 +55,9 @@
                         <div class="row d-flex justify-content-center pb-5">
                         <div class="col-md-4 col-xl-4 mb-4 mb-md-0">
                             <div class="py-4 d-flex flex-row">
-                                <h5><span class="far fa-check-square pe-2"></span><b>DragonPay</b> |</h5>
-                                <span class="ps-2">Payment Gateway</span>
+                                <h5><span class="far fa-check-square pe-2"></span><b>CUADITO</b> |</h5>
+                                <span class="ps-2">Payment Gateways Available</span>
                             </div>
-                            <h4 class="text-success">@money($subscription_type->amount)</h4>
-                            <h4>{{ $subscription_type->name }}</h4>
                             <hr />
                             <div class="pt-2">
                             <!-- <div class="d-flex pb-2">
@@ -80,14 +78,19 @@
                                         </div>
                                         <div class="rounded border d-flex w-100 p-3 align-items-center">
                                             <p class="mb-0">
-                                                <img src="{{ $channel['logo'] }}" style="width: 100px; height: 50px;" alt="logo"> {{ $channel['longName'] }}
+                                                @if($channel['logo'])
+                                                <img src="{{ $channel['logo'] }}" style="width: 100px; height: 50px;" alt="logo">
+                                                @else
+                                                    <i class="fa fa-building-columns fs-5"></i> &nbsp;
+                                                @endif
+                                                {{ $channel['longName'] }}
                                             </p>
                                         </div>
                                     </div>    
                                 @endforeach    
                                 
                             </form>
-                            <a href="javascript::void()" class="btn btn-orange btn-block btn-lg" onclick="document.getElementById('checkout-form').submit()">Proceed To Checkout</a>
+                            <!-- <a href="javascript::void()" class="btn btn-orange btn-block btn-lg" onclick="document.getElementById('checkout-form').submit()">Proceed To Checkout</a> -->
                             
                             <!-- <input type="button" value="Proceed to payment" class="btn btn-orange btn-block btn-lg" /> -->
                             </div>
