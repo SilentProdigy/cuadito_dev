@@ -45,18 +45,22 @@
                             <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-md"><i class="fa fa-pencil"></i>&ensp;Edit Profile</a>
                         </div>
                         <div class="profile_details row mt-4">
-                            <div class="col-12 mt-4"><i class="fa fa-briefcase fs-5"></i>Website Developer | 1MC Digital</div>
-                            @if($client->contact_number)
-                                <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
-                            @endif
-                            @if($client->address)
-                                <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
-                            @endif
-                            @if($client->birth_date)
-                                <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
-                            @endif
-                            @if($client->marital_status)
-                                <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
+                            @if($client->contact_number && $client->address && $client->birth_date && $client->marital_status)
+                                <!-- <div class="col-12 mt-4"><i class="fa fa-briefcase fs-5"></i>Website Developer | 1MC Digital</div> -->
+                                @if($client->contact_number)
+                                    <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
+                                @endif
+                                @if($client->address)
+                                    <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
+                                @endif
+                                @if($client->birth_date)
+                                    <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
+                                @endif
+                                @if($client->marital_status)
+                                    <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
+                                @endif
+                            @else
+                                <p class="text-center text-muter">No information available.</p>
                             @endif
                         </div>
                     </div>

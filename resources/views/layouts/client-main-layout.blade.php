@@ -149,20 +149,20 @@
             </ul>
             <div class="auth-nav d-flex flex-row-reverse">
                 <span class="dropdown">
-                    <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
+                    <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="accountDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
                         <img src="{{ auth('client')->user()->profile_picture_url }}" class="rounded-circle" height="40" alt="Avatar" loading="lazy" />
                         <!-- &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span> -->
                     </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
+                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                         <li>
                             <a class="dropdown-item" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
                         </li>
                         {{-- <li>
                             <a class="dropdown-item" href="#">Settings</a>
                         </li> --}}
-                        <li>
+                        {{--<li>
                             <a class="dropdown-item" href="#">Help</a>
-                        </li>
+                        </li> --}}
                         <li>
                             <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">

@@ -4,7 +4,7 @@
 
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Update Company Form</div>
+        <div class="table-titles"><a href="{{ route('client.companies.index')}}"><i class="fa fa-arrow-left text-muted"></i></a>&nbsp;Update Company Form</div>
         <div class="col d-flex justify-content-end">
         </div>
     </div>

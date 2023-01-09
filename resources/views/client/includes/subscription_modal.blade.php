@@ -6,9 +6,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
         <div class="modal-body p-5">
-        @if($latest_subscription)
           <button type="button" class="btn-close" style="float:right" data-bs-dismiss="modal" aria-label="Close"></button>
-        @endif
             <!-- <div class="pricing-area">
                 <div class="container">
                 <div class="row">
@@ -46,14 +44,12 @@
                 <div class="col-md-4">
                   <div class="price-card">
                     <h2>{{ $item->name }}</h2>
-                    <p>The standard version</p>
+                    <p>* All packages are billed annually.</p>
                     <p class="price"><span>{{$item->amount}}</span>/ mo.</p>
+                    <p>&#8369;&nbsp;{{number_format($item->amount * 12, 2, '.', ','); }}&nbsp;/ year</p>
                     <ul class="pricing-offers">
-                      <li>6 Domain Names</li>
-                      <li>8 E-Mail Address</li>
-                      <li>10GB Disk Space</li>
-                      <li>Monthly Bandwidth</li>
-                      <li>Powerful Admin Panel</li>
+                      <li>{{$item->max_proposals_count}} Proposals</li>
+                      <li>{{$item->max_projects_count}} Projects</li>
                     </ul>
                     @if($latest_subscription && $latest_subscription->subscription_type_id == $item->id)
                       <a href="{{ route('client.subscriptions.unsubscribe', $latest_subscription) }}" class="subscription_btn btn btn-danger">Unsubscribe</a>

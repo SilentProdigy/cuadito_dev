@@ -79,8 +79,6 @@ a {
     padding-left: 10px;
     padding-right: 10px;
 }
-
-
 .nav-link {
     white-space: nowrap;
 }
@@ -813,8 +811,13 @@ body {
   .modal-backdrop {
     /* background-color: rgba(0,0,0,.0001) !important; */
     margin-top: 100px;
-    z-index: 0;
+    z-index: 1;
 }
+
+#accountDropdown .dropdown-menu{
+    z-index: 2;
+}
+
 #subscriptionModal{
     margin-top: 100px;
 }
@@ -1096,7 +1099,7 @@ body{margin-top:20px;}
 .price-card .btn {
     font-size: 11px;
     border-radius: 100px;
-    padding: 0 25px;
+    /* padding: 0 25px; */
     border: 0;
     color: #fff;
     float: right;

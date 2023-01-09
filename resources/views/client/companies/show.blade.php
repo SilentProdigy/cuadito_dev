@@ -5,8 +5,8 @@
 <div class="container-fluid mb-3">
 <nav aria-label="breadcrumb">
     <ol class="breadcrumb">
-        <li class="breadcrumb-item"><a href="#">Home</a></li>
-        <li class="breadcrumb-item"><a href="#">Companies</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('client.dashboard') }}">Home</a></li>
+        <li class="breadcrumb-item"><a href="{{ route('client.companies.index')}}">Companies</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $company->name }}</li>
     </ol>
     </nav>

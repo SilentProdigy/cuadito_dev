@@ -44,5 +44,8 @@
                 </td>
             </tr>
         @endforeach
+        @if(!$company->requirements)
+            <p>No requirements submitted yet.</p>
+        @endif
     </tbody>
 </table>

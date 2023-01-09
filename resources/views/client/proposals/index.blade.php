@@ -59,7 +59,7 @@
                                 @elseif($proposal->project->status == 'CLOSED' && $proposal->project->winner_bidding_id != $proposal->id)
                                     <span class='badge rounded-pill bg-dark px-3 py-2'>LOSING BID</span>
                                 @else
-                                    -
+                                    <span class='badge rounded-pill bg-dark px-3 py-2'>PENDING</span>
                                 @endif
                             </span>
                         </td>

@@ -1,3 +1,4 @@
+@if($featured_projects)
 @foreach($featured_projects as $project)
     <div class="col-md-6 mb-2">
         <div class="card">
@@ -25,3 +26,6 @@
         </div>
     </div>
 @endforeach
+@else
+    <span>No featured projects yet.</span>
+@endif
