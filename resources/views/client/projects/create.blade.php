@@ -27,7 +27,7 @@
 
                 <div class="col-md-12 mt-3">
                     <label>Category</label>
-                    <select name="category_ids[]" id="" class="mt-1 form-control @error('category_ids') is-invalid @enderror" multiple>
+                    <select name="category_ids[]" id="" class="mt-1 form-control @error('category_ids') is-invalid @enderror">
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
