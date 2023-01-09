@@ -19,6 +19,8 @@ class CompanyRequirementController extends Controller
         {
             $company_requirement = CompanyRequirement::findOrFail($id);
 
+            $company = $company_requirement->company;
+
             $data = $request->all();
 
             if($data['status'] == CompanyRequirement::APPROVED_STATUS) 
@@ -26,11 +28,20 @@ class CompanyRequirementController extends Controller
 
             $company_requirement->update($data);
 
+            $have_unapproved_requirements = $company->requirements->where('file.status', '!=', CompanyRequirement::APPROVED_STATUS)->count() > 0;
+
+            if(!$have_unapproved_requirements) {
+                
+                $company->update(['validation_status' => Company::APPROVED_STATUS]);
+                return redirect()->back()->with('success', "Success in approving Company's application!");
+            }
+            
             return redirect()->back()->with('success', "Success in updating the status of the Client's requirement!");
         }
         catch(Exception $e)
         {   
-            dd($e->getMessage());
+            // dd($e->getMessage());
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
 
