@@ -6,7 +6,7 @@
         <th>ACTIONS</th>
     </thead>
     <tbody>
-        @foreach ($company->requirements as $item)
+        @forelse ($company->requirements as $item)
             <tr>
                 <td>
                     <div class="d-flex flex-column user-listing-details px-3">
@@ -43,9 +43,10 @@
                 
                 </td>
             </tr>
-        @endforeach
-        @if(!$company->requirements)
-            <p>No requirements submitted yet.</p>
-        @endif
+        @empty
+            <tr>
+                <td>No submissions yet!</td>
+            </tr>
+        @endforelse
     </tbody>
 </table>
