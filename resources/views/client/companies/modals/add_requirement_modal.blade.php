@@ -22,7 +22,7 @@
 
                         <div class="col-md-12 mt-3">
                             <label for="">File:</label><br>
-                            <input type="file" name="requirement" style="border-raduis: none !important;">
+                            <input type="file" name="requirement" style="border-radius: none !important;">
                         </div>
                     </div>
 

@@ -5,12 +5,11 @@
     <div class="my-3">
         <form action="{{ route('client.listing.index') }}" method="get">
             <div class="input-group input-group-lg mb-3">
-                <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
-                <button class="btn btn-warning" type="submit">
+                <input id="search-focus" type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+                <button class="btn border-orange btn-orange" type="submit">
                     SEARCH
                 </button>
             </div>
-            <a href="{{ route('client.listing.index') }}">Clear Search</a>
         </form>
     </div>
 

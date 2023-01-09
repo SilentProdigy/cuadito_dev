@@ -5,14 +5,16 @@
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row justify-content-between align-items-center">
         <div class="table-titles">Your Proposals</div>
-        <form action="{{ route('client.proposals.index') }}" method="get" class="d-flex justify-content-between align-items-center">
-            <div class="input-group input-group-lg">
-                <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
-                <button class="btn btn-warning" type="submit">
-                    <span class="fa fa-search"></span>
+        <form action="{{ route('client.contacts.index') }}" method="GET">
+            <div class="input-group">
+                <div class="form-outline">
+                    <input id="search-focus" type="search" id="form1" class="form-control" name="search" value="{{ request('search') }}"/>
+                    <label class="form-label" for="form1">Search</label>
+                </div>
+                <button type="submit" class="btn border-orange btn-orange">
+                    <i class="fas fa-search"></i>
                 </button>
             </div>
-            <a href="{{ route('client.proposals.index') }}" class="p-2">Clear</a>
         </form>
     </div>
 </div>
