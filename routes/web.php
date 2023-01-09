@@ -91,6 +91,7 @@ Route::name('client.')->group(function () {
             ->name('projects.create');
     
             Route::patch('projects/set-winner/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'setWinner'])->name('projects.set-winner');
+            Route::get('projects/{project}/proposals', [\App\Http\Controllers\Client\ProjectController::class, 'proposals'])->name('projects.proposals');
             Route::get('projects', [\App\Http\Controllers\Client\ProjectController::class, 'index'])->name('projects.index');
             Route::get('projects/{project}', [\App\Http\Controllers\Client\ProjectController::class, 'show'])->name('projects.show');
     
