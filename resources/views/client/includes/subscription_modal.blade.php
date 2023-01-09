@@ -36,11 +36,16 @@
                     @endif
                     <!-- <a href="{{ route('client.billings.create', $item) }}" class="btn btn-primary btn-mid">Subscribe Now</a> -->
                   </div>
+                </div>
                 @endforeach
               </div>
             </div>
           </section>
         </div>
+        <!-- <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div> -->
       </div>
     </div>
   </div>
