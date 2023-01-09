@@ -5,7 +5,7 @@
                 <div class="d-flex justify-content-between align-items-center">
                     <div class="d-flex align-items-center">
                         <img
-                        src="{{ asset($item->contact_profile_picture) ? asset($item->contact_profile_picture) : asset('images/avatar/12.png') }}"
+                        src="{{ $item->contact_profile_picture ? asset($item->contact_profile_picture) : asset('images/avatar/12.png') }}"
                         alt="profile picture"
                         style="width: 45px; height: 45px"
                         class="rounded-circle"
