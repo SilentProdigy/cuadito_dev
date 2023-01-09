@@ -19,7 +19,7 @@
                 <th>SEQ</th>
                 <th>COMPANY</th>
                 <th class="col-span-2">STATUS</th>
-                <th>SUBSCRIPTION</th>
+                {{-- <th>SUBSCRIPTION</th> --}}
                 <th>ACTIONS</th>
             </thead>
             <tbody>
@@ -35,9 +35,6 @@
                     </td>
                     <td class="">
                         <span>{{ $company->validation_status }}</span>
-                    </td>
-                    <td>
-                       <span>-</span>
                     </td>
                     <td class="user-actions">
                         <a href="{{ route('client.companies.show', $company) }}" class="btn btn-sm btn-outline-info">

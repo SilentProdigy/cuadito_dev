@@ -7,28 +7,6 @@
         </div> -->
         <div class="modal-body p-5">
           <button type="button" class="btn-close" style="float:right" data-bs-dismiss="modal" aria-label="Close"></button>
-            <!-- <div class="pricing-area">
-                <div class="container">
-                <div class="row">
-                @foreach ($products as $item)
-                    <div class="col-md-4 col-sm-6 col-xs-12">
-                    <div class="single-price">
-                        <div class="deal-top">
-                        <h3>{{ $item->name }}</h3>
-                        <h4> @money($item->amount)</h4> 
-                        </div>
-                        <div class="deal-bottom">
-
-                        <div class="btn-area">
-                        <a href="{{ route('client.billings.create', $item) }}">Subscribe Now</a>    
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                @endforeach 
-                </div>
-                </div>
-            </div> -->
             <section class="pricing-section">
               <div class="container">
               <div class="row justify-content-md-center">
@@ -58,16 +36,11 @@
                     @endif
                     <!-- <a href="{{ route('client.billings.create', $item) }}" class="btn btn-primary btn-mid">Subscribe Now</a> -->
                   </div>
-                </div>
                 @endforeach
               </div>
             </div>
           </section>
         </div>
-        <!-- <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="button" class="btn btn-primary">Understood</button>
-        </div> -->
       </div>
     </div>
   </div>

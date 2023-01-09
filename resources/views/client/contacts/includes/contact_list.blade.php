@@ -15,7 +15,9 @@
                             <p class="text-muted mb-0">{{ $item->contact_email }}</p>
                         </div>
                     </div>
-                    <span class="badge rounded-pill badge-success">Active</span>
+                    @if($item->is_existing_client)
+                        <span class="badge rounded-pill badge-success">Active</span>
+                    @endif
                 </div>
             </div>
             <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">

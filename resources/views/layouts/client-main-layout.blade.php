@@ -274,7 +274,7 @@
 
     <!--Main layout-->
     <!-- Modal -->
-    @if(!request()->is('client.payments.result'))
+    @if(!request()->routeIs('client.payments.result'))
         @include('client.includes.subscription_modal')
     @endif
 
@@ -298,8 +298,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     @yield('script')
 
-    {{-- @includeUnless(request()->is('client.payments.result'), 'view.name', []) --}}
-    @if(!request()->is('client.payments.result'))
+    @if(!request()->routeIs('client.payments.result'))
         <script>
             $(document).ready(function(){
                 

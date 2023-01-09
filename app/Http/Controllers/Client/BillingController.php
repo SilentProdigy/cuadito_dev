@@ -29,13 +29,16 @@ class BillingController extends Controller
             $payment_channels = $payment_channels->filter(function($item) {
                 $procId = $item['procId'];
                 return in_array($procId, config('dragonpay.supported_payment_channels'));
+            })
+            ->filter(function($item) use($total_amount){
+                return $total_amount >= $item['minAmount'] && $total_amount < $item['maxAmount'];
             });
     
             return view('client.billings.create')->with(compact('subscription_type', 'total_amount', 'payment_channels'));
         }
         catch(\Exception $e)
         {
-            dd($e->getMessage());
+            return \redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
 
