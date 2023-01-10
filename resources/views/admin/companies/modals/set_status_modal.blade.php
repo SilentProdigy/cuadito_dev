@@ -1,6 +1,6 @@
   <!-- Modal -->
   <div class="modal fade" id="set-company-status-modal" tabindex="-1" aria-labelledby="set-company-status-modal" aria-hidden="true">
-    <div class="modal-dialog">
+    <div class="modal-dialog modal-lg">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">Set Company Status</h5>
@@ -21,8 +21,14 @@
                         </div>
                     </div>
 
+                    <div class="row mb-3">
+                        <div class="col-md-12">
+                            <textarea style="display: none;" rows="5" name="remarks" class="form-control" id="remarks-text-area" placeholder="Enter remarks here ..."></textarea>
+                        </div>
+                    </div>
+
                     <div class="row mb-3 mx-0">
-                        <button type="submit" class="btn btn-primary">
+                        <button type="submit" class="btn btn-primary" id="btn-update-status">
                             {{ __('Update Status') }}
                         </button>
                     </div>

@@ -21,6 +21,7 @@ class CreateCompaniesTable extends Migration
             $table->string('contact_number')->nullable();
             $table->string('validation_status')->default('FOR APPROVAL');
             $table->foreignId('client_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
             $table->index(['name', 'email']);
