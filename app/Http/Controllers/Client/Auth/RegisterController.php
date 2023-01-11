@@ -39,14 +39,21 @@ class RegisterController extends Controller
             # Create a new client
             $client = Client::create($data);
     
+            // Process clients that are registered using an invitation link
             if($request->has('code'))
             {
                 $contact = Contact::where('id', $request->input('code'))->firstOrFail();
-    
+
+                // Update the connection between the invitor and invited client
                 $contact->update([
                     'contact_id' => $client->id,
                     'email' => "",
                     'name' => ""
+                ]);
+
+                // add the invitor as default contact or connection
+                $client->contacts()->create([
+                    'contact_id' => $contact->client_id
                 ]);
             }
     
