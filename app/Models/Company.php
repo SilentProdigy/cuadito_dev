@@ -21,7 +21,8 @@ class Company extends Model
         // 'password',
         'contact_number',
         'validation_status',
-        'client_id'
+        'client_id',
+        'remarks'
     ];
 
     public const COMPANY_STATES = [

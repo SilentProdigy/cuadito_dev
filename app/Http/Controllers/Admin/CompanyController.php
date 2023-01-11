@@ -28,6 +28,14 @@ class CompanyController extends Controller
         try
         {
             $company->update($request->all());
+
+            if($company->validation_status === Company::DISAPPROVED_STATUS) {
+                $company->client->notifications()->create([
+                    'content' => "Your company {$company->name} was disapproved by the Admin.",
+                    'url' => route('client.companies.show', $company), 
+                ]);
+            }
+
             return redirect()->back()->with('success', 'Company status was successfully set!');  
         }
         catch(Exception $e)
