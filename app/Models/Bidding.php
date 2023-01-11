@@ -36,4 +36,9 @@ class Bidding extends Model
     {
         return $this->morphMany(\App\Models\Attachment::class, 'attachmentable');
     }
+
+    public function getIsOwnedAttribute()
+    {
+        return $this->company->client_id == auth('client')->user()->id;
+    }
 }
