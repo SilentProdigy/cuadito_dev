@@ -48,9 +48,9 @@
                     <div class="card-header bg-dark text-white text-uppercase fw-bold">Rate</div>
                     <div class="card-body px-5">
                         <div class="input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="text" class="form-control @error('rate') is-invalid @enderror" aria-label="Amount (to the nearest dollar)" name="rate" value="{{ old('rate') }}">
-                            <span class="input-group-text">.00</span>
+                            <span class="input-group-text">PHP</span>
+                            <input type="number" class="form-control @error('rate') is-invalid @enderror" aria-label="Amount (to the nearest dollar)" name="rate" value="{{ old('rate') }}">
+                            {{-- <span class="input-group-text">.00</span> --}}
                         </div>
                     </div>
                 </div>

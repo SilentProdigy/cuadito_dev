@@ -24,7 +24,7 @@
             <thead>
                 <th>SEQ</th>
                 <th>PROJECT</th>
-                <th>COMPANY</th>
+                {{-- <th>COMPANY</th> --}}
                 <th class="col-span-2">PROJECT STATUS</th>
                 <th>SUBMITTED RATE</th>
                 <th>DATE OF PROPOSAL</th>
@@ -42,9 +42,9 @@
                         <td>
                             <span>{{ $proposal->project->title }}</span>
                         </td>
-                        <td>
+                        {{-- <td>
                             <span>{{ $proposal->project->company->name }}</span>
-                        </td>
+                        </td> --}}
                         <td class="">
                             <span>{!! $proposal->project->status_badge !!}</span>
                         </td>
@@ -69,6 +69,12 @@
                             <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i>         
                             </a>
+
+                            @if($proposal->project->status == 'ACTIVE')
+                                <button class="btn btn-sm btn-outline-danger btn-cancel-proposal" data-proposal='@json($proposal)'>
+                                    <i class="fa fa-close"></i> Cancel Proposal   
+                                </button>
+                            @endif
                         </td>
                     </tr>        
                 @empty
@@ -84,9 +90,31 @@
     </div>
 </div>
 
+@include('client.includes.confirm_cancel_proposal')
+
 @endsection
 
 @section('script')
     <script>
+        $(document).ready(function() {
+            const cancelProposalButtons = document.querySelectorAll('.btn-cancel-proposal');
+
+            if(!cancelProposalButtons) return;
+
+            cancelProposalButtons.forEach(button => {
+                $(button).on('click', () => {
+                    let data = $(button).attr('data-proposal');
+                    data = JSON.parse(data);
+
+                    let myModal = new bootstrap.Modal(document.getElementById('confirm-cancel-proposal-modal'), {keyboard: false})
+                    myModal.show()
+
+                    $('#project-name').text(data.project.title);
+
+                    let form = document.querySelector('#cancel-proposal-form');
+                    form.setAttribute('action', `/proposals/${ data.id }/cancel`);
+                })
+            })
+        });
     </script>
 @endsection
