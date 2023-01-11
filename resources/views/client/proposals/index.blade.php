@@ -5,7 +5,7 @@
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row justify-content-between align-items-center">
         <div class="table-titles">Your Proposals</div>
-        <form action="{{ route('client.contacts.index') }}" method="GET">
+        <form action="{{ route('client.proposals.index') }}" method="GET">
             <div class="input-group">
                 <div class="form-outline">
                     <input id="search-focus" type="search" id="form1" class="form-control" name="search" value="{{ request('search') }}"/>
