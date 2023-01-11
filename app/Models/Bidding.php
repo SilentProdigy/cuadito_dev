@@ -41,4 +41,10 @@ class Bidding extends Model
     {
         return $this->company->client_id == auth('client')->user()->id;
     }
+
+    static function getOwner(string $proposal_id)
+    {
+        $proposal = self::where(['id' => $proposal_id])->firstOrFail();
+        return $proposal->company->client;
+    }
 }

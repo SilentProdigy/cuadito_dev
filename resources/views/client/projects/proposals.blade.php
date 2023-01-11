@@ -83,7 +83,7 @@
 @endsection
 
 @section('script')
-{{-- <script>
+<script>
     $(document).ready(function() {
 
 
@@ -112,5 +112,5 @@
             });
         });
     });
-</script> --}}
+</script>
 @endsection

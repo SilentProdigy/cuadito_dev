@@ -202,12 +202,34 @@ class ProjectController extends Controller
     public function setWinner(SetProjectWinnerRequest $request, Project $project)
     {
         try 
-        {            
+        {   
+            DB::beginTransaction();            
             $this->projectService->setWinner($project, $request->validated());
+            
+            $project_owner = auth('client')->user();
+            
+            $winning_proposal_owner = Bidding::getOwner($request->input('winner_bidding_id'));
+
+            if(!$winning_proposal_owner || !$project_owner)
+            {
+                return redirect()->back()->withErrors(['message' => "Invalid Operation: Missing required data for ownership!"]);
+            }
+
+            // add the invitor as default contact or connection
+            $project_owner->contacts()->create([
+                'contact_id' => $winning_proposal_owner->id
+            ]);
+
+            $winning_proposal_owner->contacts()->create([
+                'contact_id' => $project_owner->id
+            ]);
+
+            DB::commit();
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
         }
         catch(\Exception $e)
         {
+            DB::rollBack();
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
