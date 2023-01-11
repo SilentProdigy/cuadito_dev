@@ -149,7 +149,7 @@ class ProposalController extends Controller
             $bidding->delete();
             $active_subscrption = auth('client')->user()->active_subscription;
 
-            $this->decreaseProposalCountOnSubscription($active_subscrption);
+            // $this->decreaseProposalCountOnSubscription($active_subscrption);
             DB::commit();
             return redirect(route('client.proposals.index'))->with('success', 'Proposal was successfully cancelled.');
         }
