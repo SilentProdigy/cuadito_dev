@@ -2,8 +2,10 @@
 
 namespace App\Models;
 
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class Subscription extends Model
 {
@@ -59,6 +61,24 @@ class Subscription extends Model
             return 0;
 
         return $this->subscription_type->max_projects_count - $this->submitted_projects_count;
+    }
+
+    public function resetCounterFields()
+    {
+        try
+        {
+            $this->update([
+                'submitted_proposals_count' => 0,
+                'submitted_projects_count' => 0
+            ]);
+
+            // Log::info('OPERATION:RESET_COUNT_FIELDS, STATUS:OK, SUBSCRIPTION_ID:' . $this->id);
+        }
+        catch(\Exception $e)
+        {
+            throw new \Exception($e->getMessage());
+            // Log::error('OPERATION:RESET_COUNT_FIELDS, STATUS:FAILED, SUBSCRIPTION_ID:' . $this->id . ',ERROR:' . $e->getMessage());
+        }
     }
 }
 
