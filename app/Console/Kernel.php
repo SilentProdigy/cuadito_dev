@@ -34,8 +34,8 @@ class Kernel extends ConsoleKernel
         // Run every last day of the month midnight
         $schedule->command('system:reset-active-subscriptions')
         ->timezone('Asia/Manila')
-        // ->lastDayOfMonth('24:00') 
-        ->everyMinute()
+        ->lastDayOfMonth('24:00') 
+        // ->everyMinute()
         ->withoutOverlapping();
     }
 
