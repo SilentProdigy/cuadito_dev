@@ -16,7 +16,8 @@ class BillingController extends Controller
     {
         try
         {
-            $total_amount = $subscription_type->amount * 1;
+            // Total Amount = Plan * Months (defaul is 12)
+            $total_amount = $subscription_type->amount * config('cuadito.payment.default_billable_months_count');
 
             $response = Http::retry(3)->withBasicAuth(
                 config('dragonpay.merchant_id'),

@@ -39,7 +39,9 @@ class PaymentController extends Controller
                 $subscription = $payment->subscription;
             
                 $expiration_date = new Carbon();
-                $expiration_date = $expiration_date->addMonth();
+
+                // $expiration_date = $expiration_date->addMonth();
+                $expiration_date = $expiration_date->addYear();
         
                 $subscription->update([
                     'status' => Subscription::ACTIVE_STATUS,
