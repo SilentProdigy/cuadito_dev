@@ -13,6 +13,7 @@ use App\Mail\Project\ProposalApproved;
 use App\Mail\Project\ProposalDisapproved;
 use App\Models\Bidding;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Project;
 use App\Services\CompanyService;
 use App\Services\ProjectService;
@@ -214,15 +215,8 @@ class ProjectController extends Controller
             {
                 return redirect()->back()->withErrors(['message' => "Invalid Operation: Missing required data for ownership!"]);
             }
-
-            // add the invitor as default contact or connection
-            $project_owner->contacts()->create([
-                'contact_id' => $winning_proposal_owner->id
-            ]);
-
-            $winning_proposal_owner->contacts()->create([
-                'contact_id' => $project_owner->id
-            ]);
+            
+            Contact::connectTwoClients($project_owner,$winning_proposal_owner);
 
             DB::commit();
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
