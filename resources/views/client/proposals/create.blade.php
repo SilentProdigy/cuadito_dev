@@ -18,10 +18,9 @@
             </div>            
 
             <div>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                @foreach ($project->categories as $category)
+                    <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                @endforeach
             </div>
 
             <div class="my-2 py-3 border-top">
