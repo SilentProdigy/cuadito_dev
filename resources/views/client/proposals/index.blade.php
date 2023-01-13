@@ -40,7 +40,9 @@
                             </div>
                         </td>
                         <td>
-                            <span>{{ $proposal->project->title }}</span>
+                            <a href="{{ route('client.projects.show', $proposal->project) }}" target="_blank">
+                                {{ $proposal->project->title }}
+                            </a>
                         </td>
                         {{-- <td>
                             <span>{{ $proposal->project->company->name }}</span>
