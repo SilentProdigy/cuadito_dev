@@ -4,14 +4,14 @@
 
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Post A New Project Form</div>
+        <div class="table-titles"><a href="{{ url()->previous() }}"><i class="fa fa-arrow-left text-muted"></i></a>&nbsp;Post A New Project Form</div>
         <div class="col d-flex justify-content-end">
         </div>
     </div>
 </div>
 <div class="card">
     <div class="card-body">
-        <form action="{{ route('client.projects.store') }}" method="POST">
+        <form action="{{ route('client.projects.store') }}" class="needs-validation" novalidate method="POST">
             @csrf
             <div class="row mb-3">
                 <div class="col-md-12">
@@ -42,7 +42,7 @@
 
                 <div class="col-md-6 mt-3">
                     <label>Company</label>
-                    <select name="company_id" id="" class="mt-1 form-control @error('company_id') is-invalid @enderror"">
+                    <select name="company_id" id="" class="mt-1 form-control @error('company_id') is-invalid @enderror" required>
                         <option value="">Select Company</option>
                         @foreach ($companies as $item)
                             <option value="{{ $item->id }}">{{ $item->name }}</option>
@@ -113,6 +113,7 @@
                         name="description" 
                         cols="30" 
                         rows="3" 
+                        required
                         class="mt-1 form-control @error('description') is-invalid @enderror">{{old('description')}}</textarea>
 
                     @error('description')
@@ -128,6 +129,7 @@
                         name="relevant_authorities" 
                         cols="30" 
                         rows="3" 
+                        required
                         class="mt-1 form-control @error('relevant_authorities') is-invalid @enderror">{{old('relevant_authorities')}}</textarea>
 
                     @error('relevant_authorities')
@@ -143,6 +145,7 @@
                         name="terms_and_conditions"
                         cols="30" 
                         rows="3" 
+                        required
                         class="mt-1 form-control @error('terms_and_conditions') is-invalid @enderror">{{old('terms_and_conditions')}}</textarea>
 
                     @error('terms_and_conditions')
@@ -154,12 +157,30 @@
 
               
             </div>
-            <input type="submit" value="Post Project" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">Post Project</button>
         </form>
     </div>
 </div>
 @endsection
 
 @section('script')
+<script>
+(() => {
+  'use strict';
 
+  // Fetch all the forms we want to apply custom Bootstrap validation styles to
+  const forms = document.querySelectorAll('.needs-validation');
+
+  // Loop over them and prevent submission
+  Array.prototype.slice.call(forms).forEach((form) => {
+    form.addEventListener('submit', (event) => {
+      if (!form.checkValidity()) {
+        event.preventDefault();
+        event.stopPropagation();
+      }
+      form.classList.add('was-validated');
+    }, false);
+  });
+})();
+</script>
 @endsection

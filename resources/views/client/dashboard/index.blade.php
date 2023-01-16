@@ -1,5 +1,13 @@
 @extends('layouts.client-main-layout')
 
+@section('style')
+<style>
+    .proposal-label{
+        font-size: 15px;
+    }
+</style>
+@endsection
+
 @section('content')
 <div class="container px-5">
     <div class="row">
@@ -59,10 +67,11 @@
                                 <div class="col">
                                     <h5>{{ $project->title }}</h5>
                                 </div>
-                                <div class="col d-flex justify-content-end">
-                                    <button type="button" class="btn btn-primary btn-sm">
-                                        Proposals <span class="badge bg-secondary">{{ $project->proposals_count }}</span>
-                                    </button>
+                                <div class="col d-flex justify-content-end proposal-label">
+                                    <span class="text-muted">Proposals:</span>&nbsp;
+                                    <span>
+                                        {{ $project->proposals_count }}
+                                    </span>
                                 </div>
                             </div>
                         </div>

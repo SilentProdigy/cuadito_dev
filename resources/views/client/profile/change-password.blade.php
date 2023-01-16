@@ -4,7 +4,7 @@
 
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Change Password Form</div>
+        <div class="table-titles"><a href="{{ url()->previous() }}"><i class="fa fa-arrow-left text-muted"></i></a>&nbsp;Change Password Form</div>
         <div class="col d-flex justify-content-end">
         </div>
     </div>
@@ -38,7 +38,7 @@
                 </div>  
 
             </div>
-            <input type="submit" value="Update Password" class="btn btn-warning">
+            <button type="submit" class="btn btn-warning">Update Password</button>
         </form>
     </div>
 </div>

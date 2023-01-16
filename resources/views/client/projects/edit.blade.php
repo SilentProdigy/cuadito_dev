@@ -4,7 +4,7 @@
 
 <div class="container-fluid mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Update Project Form</div>
+        <div class="table-titles"><a href="{{ url()->previous() }}"><i class="fa fa-arrow-left text-muted"></i></a>&nbsp;Update Project Form</div>
         <div class="col d-flex justify-content-end">
         </div>
     </div>
@@ -167,7 +167,7 @@
 
               
             </div>
-            <input type="submit" value="Update Project" class="btn btn-warning">
+            <button type="submit" class="btn btn-warning">Update Project</button>
         </form>
     </div>
 </div>
