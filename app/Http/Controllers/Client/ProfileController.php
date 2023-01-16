@@ -40,7 +40,7 @@ class ProfileController extends Controller
             if($request->has('profile_pic')) 
             {
                 $path = $this->uploadFile(
-                            "public/clients/profile_pics/{$client->id}", 
+                            "clients/profile_pics/{$client->id}", 
                             $request->file('profile_pic')
                         );
 

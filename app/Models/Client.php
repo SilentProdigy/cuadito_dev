@@ -156,7 +156,7 @@ class Client extends Authenticatable
 
     public function getProfilePictureUrlAttribute()
     {
-        return $this->profile_pic ? asset($this->profile_pic) : asset('images/avatar/12.png');
+        return $this->profile_pic ? asset("storage/".$this->profile_pic) : asset('images/avatar/12.png');
     }
 
     public function subscriptions()
