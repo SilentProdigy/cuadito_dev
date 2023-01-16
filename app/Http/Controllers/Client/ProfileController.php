@@ -37,9 +37,13 @@ class ProfileController extends Controller
             
             $target_dir = "images/profile_pics";
 
-            if($request->has('profile_pic')) {
-                // $path = $this->uploadFile($target_dir, $request->file('profile_pic'));
-                $path = Storage::putFile('images', $request->file('profile_pic'));
+            if($request->has('profile_pic')) 
+            {
+                $path = $this->uploadFile(
+                            "public/clients/profile_pics/{$client->id}", 
+                            $request->file('profile_pic')
+                        );
+
                 $data['profile_pic'] = $path;
             }
 
