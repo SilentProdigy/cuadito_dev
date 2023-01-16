@@ -23,6 +23,12 @@
                                 Choose Proposal
                             </button>   
                         @endif
+                        
+                        @if($bidding->is_owned && $bidding->project->status === 'ACTIVE')
+                            <button class="btn btn-sm btn-outline-danger btn-cancel-proposal" data-proposal='@json($bidding)'>
+                                <i class="fa fa-close"></i> Cancel Proposal   
+                            </button>   
+                        @endif
                     </div>
                     <div class="card-body">
                         <div class="my-2 py-2">
@@ -109,12 +115,31 @@
 
 </div>
 @include('client.projects.modals.choose_proposal_modal')
+@includeWhen($bidding->project->status == 'ACTIVE', 'client.includes.confirm_cancel_proposal')
 @endsection
 
 @section('script')
     <script>
         $(document).ready(function() {
 
+            const cancelProposalButtons = document.querySelectorAll('.btn-cancel-proposal');
+
+            if(!cancelProposalButtons) return;
+
+            cancelProposalButtons.forEach(button => {
+                $(button).on('click', () => {
+                    let data = $(button).attr('data-proposal');
+                    data = JSON.parse(data);
+
+                    let myModal = new bootstrap.Modal(document.getElementById('confirm-cancel-proposal-modal'), {keyboard: false})
+                    myModal.show()
+
+                    $('#project-name').text(data.project.title);
+
+                    let form = document.querySelector('#cancel-proposal-form');
+                    form.setAttribute('action', `/proposals/${ data.id }/cancel`);
+                })
+            })
 
             let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
 

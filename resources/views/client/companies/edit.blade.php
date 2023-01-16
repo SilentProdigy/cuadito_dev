@@ -17,7 +17,14 @@
             <div class="row mb-3">
                 <div class="col-md-12">
                     <label>Company Name</label>
-                    <input type="text" class="mt-1 form-control @error('name') is-invalid @enderror" name="name" value="{{ $company->name }}" placeholder="* Enter Company Name" required autocomplete="name" autofocus>
+                    <input type="text" 
+                    class="mt-1 form-control @error('name') is-invalid @enderror" 
+                    name="name" value="{{ $company->name }}" 
+                    placeholder="* Enter Company Name" 
+                    required 
+                    autocomplete="name" 
+                    disabled 
+                    autofocus>
 
                     @error('name')
                         <span class="invalid-feedback" role="alert">

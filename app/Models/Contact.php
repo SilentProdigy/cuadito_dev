@@ -59,4 +59,20 @@ class Contact extends Model
         return isset( $this->contact_id );
     }
 
+    static function connectTwoClients(Client $client_01, Client $client_02)
+    {   
+        if(!$client_01->contacts->where(['contact_id' => $client_02->id])->first())
+        {
+            $client_01->contacts()->create([
+                'contact_id' => $client_02->id
+            ]);
+        }
+
+        if(!$client_02->contacts->where(['contact_id' => $client_01->id])->first())
+        {
+            $client_02->contacts()->create([
+                'contact_id' => $client_01->id
+            ]);
+        }   
+    }
 }

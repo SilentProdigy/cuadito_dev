@@ -86,6 +86,16 @@ class Project extends Model
         return $this->belongsTo(\App\Models\Bidding::class, 'winner_bidding_id');
     }
 
+    public function getWinningClientAttribute()
+    {
+        return $this->winningBidding->company->client;
+    }
+
+    public function getIsWinnerAttribute()
+    {
+        return $this->getWinningClientAttribute()->id == auth('client')->user()->id;
+    }
+
     public function getStatusBadgeAttribute()
     {
         $badges = [
@@ -112,5 +122,8 @@ class Project extends Model
         return $query->where('status', self::ACTIVE_STATUS);
     }
 
-    
+    public function getIsOwnedAttribute()
+    {
+        return auth('client')->user()->id == $this->company->client_id;
+    }
 }

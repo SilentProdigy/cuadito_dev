@@ -105,11 +105,18 @@
                                     <div class=col-8><h4>{{ $subscription_type->name }} - 1 Month Plan</h4></div>
                                     <div class="ms-auto"><h4>@money($subscription_type->amount)</h4></div>
                                 </div>
+                                
+                                <div class="border-top px-2 mx-2"></div>
+                                
+                                <div class="p-2 d-flex">
+                                    <div class=col-8><h4>No. Months Billed</h4></div>
+                                    <div class="ms-auto"><h4>{{ config('client.max_subscription_months_count') }} Months</h4></div>
+                                </div>
                             
                                 <div class="border-top px-2 mx-2"></div>
                                 <div class="p-2 d-flex pt-3">
-                                    <div class="col-8"><b>Total</b></div>
-                                    <div class="ms-auto"><b class="text-success">@money($subscription_type->amount)</b></div>
+                                    <div class=col-8><h4>Total Amount</h4></div>
+                                    <div class="ms-auto"><h4 class="text-success">@money($total_amount)</h4></div>
                                 </div>
 
                                 <div class="p-2 d-flex pt-3">

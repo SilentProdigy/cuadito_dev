@@ -65,7 +65,7 @@ class CompanyController extends Controller
     {
         try 
         {
-            $company->update($request->validated());
+            $company->update($request->except('name'));
             return redirect(route('client.companies.index'))
                     ->with('success', 'Company was successfully updated.');  
         }

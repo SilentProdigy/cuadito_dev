@@ -109,6 +109,7 @@ Route::name('client.')->group(function () {
     
             Route::get('proposals', [\App\Http\Controllers\Client\ProposalController::class, 'index'])->name('proposals.index');
             Route::get('proposals/{bidding}', [\App\Http\Controllers\Client\ProposalController::class, 'show'])->name('proposals.show');
+            Route::delete('proposals/{bidding}/cancel', [\App\Http\Controllers\Client\ProposalController::class, 'cancel'])->name('proposals.cancel');
             Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
     
             Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');

@@ -24,7 +24,7 @@ class EditCompanyFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'name' => 'string|required|min:3',
+            // 'name' => 'string|required|min:3',
             'address' => 'string|required',
             'email' => 'string|required',
             'contact_number' => 'string|required'

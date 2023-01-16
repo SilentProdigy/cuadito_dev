@@ -18,10 +18,9 @@
             </div>            
 
             <div>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
-                <span class="badge rounded-pill bg-dark">Tag-01</span>
+                @foreach ($project->categories as $category)
+                    <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                @endforeach
             </div>
 
             <div class="my-2 py-3 border-top">
@@ -48,9 +47,9 @@
                     <div class="card-header bg-dark text-white text-uppercase fw-bold">Rate</div>
                     <div class="card-body px-5">
                         <div class="input-group mb-3">
-                            <span class="input-group-text">$</span>
-                            <input type="text" class="form-control @error('rate') is-invalid @enderror" aria-label="Amount (to the nearest dollar)" name="rate" value="{{ old('rate') }}">
-                            <span class="input-group-text">.00</span>
+                            <span class="input-group-text">PHP</span>
+                            <input type="number" class="form-control @error('rate') is-invalid @enderror" aria-label="Amount (to the nearest dollar)" name="rate" value="{{ old('rate') }}">
+                            {{-- <span class="input-group-text">.00</span> --}}
                         </div>
                     </div>
                 </div>

@@ -9,7 +9,22 @@
         <li class="breadcrumb-item"><a href="{{ route('client.companies.index')}}">Companies</a></li>
         <li class="breadcrumb-item active" aria-current="page">{{ $company->name }}</li>
     </ol>
-    </nav>
+</nav>
+
+@if($company->validation_status === 'DISAPPROVED')
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="alert alert-danger" role="alert">
+                <div class="alert-body">
+                    <h5>Your Company was disapproved with the following reasons:</h5>
+
+                    <p>- {{ $company->remarks }}</p>
+                </div    
+            </div>
+        </div>
+    </div>
+@endif
+
 <div class="card">
     <div class="card-header px-5 py-3">
         <div class="company_logo d-flex">

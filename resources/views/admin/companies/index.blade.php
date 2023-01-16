@@ -72,9 +72,38 @@
 
                 // console.log(data);
                 $('#validation_status').val(`${ data.validation_status }`);
-                // document.querySelector('#area-name').innerHTML = data.name;
+
+                if(data.validation_status === 'DISAPPROVED') {
+                    $('#remarks-text-area').show();
+                    $('#remarks-text-area').val(data.remarks);
+                }
+
+                $('#validation_status').on('change', function(e) {
+                    // console.log("validation_status: ", $(this).val());
+                    const selected_value = $(this).val();
+                    selected_value === "DISAPPROVED" ? $('#remarks-text-area').show() : $('#remarks-text-area').hide();
+                });
             });
         });
+
+        $('#btn-update-status').on('click', function(e) {
+            e.preventDefault();
+
+            const selected_value = $('#validation_status').val();
+
+            if(selected_value === "DISAPPROVED")
+            {
+                const remarks = $('#remarks-text-area').val();
+
+                if(!remarks) {
+                    alert("Remarks field is required!");
+                    return;
+                }
+            }
+
+            $('#set-company-status-form').submit();
+        });
+
     });
 </script>
 @endsection

@@ -13,6 +13,7 @@ use App\Services\CompanyService;
 use App\Services\ProposalService;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
+use App\Traits\DecreaseProposalCountOnSubscription;
 use App\Traits\IncreaseProposalCountOnSubscription;
 use App\Traits\UploadFile;
 use Exception;
@@ -22,7 +23,7 @@ use Illuminate\Support\Facades\DB;
 class ProposalController extends Controller
 {
     
-    use UploadFile, IncreaseProposalCountOnSubscription;
+    use UploadFile, IncreaseProposalCountOnSubscription, DecreaseProposalCountOnSubscription;
 
     private $companyService;
     private $proposalService;
@@ -132,5 +133,29 @@ class ProposalController extends Controller
             ]);
         }
 
+    }
+
+    public function cancel(Bidding $bidding)
+    {
+        try
+        {            
+            DB::beginTransaction();
+         
+            if($bidding->project->status !== Project::ACTIVE_STATUS)
+            {
+                return redirect()->back()->withErrors(['message' => "Invalid Operation: Cannot cancel proposal since the project was not active."]);
+            }
+
+            $bidding->delete();
+            $active_subscrption = auth('client')->user()->active_subscription;
+
+            // $this->decreaseProposalCountOnSubscription($active_subscrption);
+            DB::commit();
+            return redirect(route('client.proposals.index'))->with('success', 'Proposal was successfully cancelled.');
+        }
+        catch(\Exception $e)
+        {
+            return redirect()->back()->withErrors(['message' => "Operation Failed: {$e->getMessage()}"]);
+        }
     }
 }

@@ -27,8 +27,10 @@ class SubscriptionController extends Controller
 
             DB::beginTransaction();            
 
-            $amount = $subscription_type->amount * 1;
-            $vat = $amount * 0; 
+            $billed_months_count = config('cuadito.payment.default_billable_months_count');
+
+            $amount = $subscription_type->amount * $billed_months_count;
+            $vat = $amount * config('cuadito.payment.vat_percentage');
             $total_amount = $vat + $amount;
 
             $active_subscription = auth('client')->user()->active_subscription;
@@ -51,7 +53,7 @@ class SubscriptionController extends Controller
                 'amount' => 0, // amount here comes from the api of dragon pay
                 'total_amount' => 0,
                 'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',                
-                'period' => '1 month',
+                'period' =>  $billed_months_count. " months",
                 'status' => Payment::PENDING_STATUS,
                 'client_id' => auth( 'client')->user()->id,
             ]);

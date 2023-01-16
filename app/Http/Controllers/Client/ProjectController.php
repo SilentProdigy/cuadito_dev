@@ -13,6 +13,7 @@ use App\Mail\Project\ProposalApproved;
 use App\Mail\Project\ProposalDisapproved;
 use App\Models\Bidding;
 use App\Models\Company;
+use App\Models\Contact;
 use App\Models\Project;
 use App\Services\CompanyService;
 use App\Services\ProjectService;
@@ -202,12 +203,27 @@ class ProjectController extends Controller
     public function setWinner(SetProjectWinnerRequest $request, Project $project)
     {
         try 
-        {            
+        {   
+            DB::beginTransaction();            
             $this->projectService->setWinner($project, $request->validated());
+            
+            $project_owner = auth('client')->user();
+            
+            $winning_proposal_owner = Bidding::getOwner($request->input('winner_bidding_id'));
+
+            if(!$winning_proposal_owner || !$project_owner)
+            {
+                return redirect()->back()->withErrors(['message' => "Invalid Operation: Missing required data for ownership!"]);
+            }
+            
+            Contact::connectTwoClients($project_owner,$winning_proposal_owner);
+
+            DB::commit();
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
         }
         catch(\Exception $e)
         {
+            DB::rollBack();
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
@@ -216,7 +232,12 @@ class ProjectController extends Controller
 
     public function proposals(Project $project) 
     {
-        $proposals = $project->proposals();
+        if(!$project->is_owned && !$project->is_winner)
+        {
+            return redirect(route('client.proposals.index'))->withErrors(['message' => 'Unauthorized Access!']);
+        }
+
+        $proposals = $project->proposals();        
         
         if(request('search'))
         {

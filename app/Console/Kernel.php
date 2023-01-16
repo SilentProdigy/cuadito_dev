@@ -2,6 +2,7 @@
 
 namespace App\Console;
 
+use Carbon\Carbon;
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
@@ -28,6 +29,13 @@ class Kernel extends ConsoleKernel
         $schedule->command('system:notify-near-expiration-subscription')
         ->timezone('Asia/Manila')
         ->dailyAt('09:00')
+        ->withoutOverlapping();
+
+        // Run every last day of the month midnight
+        $schedule->command('system:reset-active-subscriptions')
+        ->timezone('Asia/Manila')
+        ->lastDayOfMonth('24:00') 
+        // ->everyMinute()
         ->withoutOverlapping();
     }
 
