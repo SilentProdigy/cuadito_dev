@@ -3,13 +3,14 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
-use App\Http\Requests\Admin\ChangePasswordFormRequest;
+use App\Http\Requests\Client\Profile\ChangePasswordRequest;
 use App\Http\Requests\Client\Profile\UpdateProfileRequest;
 use App\Models\Client;
 use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Support\Facades\Storage;
 
@@ -67,10 +68,18 @@ class ProfileController extends Controller
         return view('client.profile.change-password')->with(compact('client'));
     }
 
-    public function changePassword(ChangePasswordFormRequest $request, Client $client)
+    public function changePassword(ChangePasswordRequest $request, Client $client)
     {
         try 
         {
+
+            // dd(Hash::make($request->input('old_password')) ==  $client->password);
+
+            if(!Hash::check($request->input('old_password'), $client->password))
+            {
+                return redirect()->back()->withErrors(['message' => 'Entered old password is incorrect!']);
+            }
+
             $client->update([
                 'password' => bcrypt($request->input('password'))
             ]);

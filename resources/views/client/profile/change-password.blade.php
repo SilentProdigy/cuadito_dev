@@ -16,6 +16,17 @@
             @csrf
             <div class="row mb-3">
                 <div class="col-md-12 my-2">
+                    <label>Old Password</label>
+                    <input type="password" class="mt-1 form-control @error('old_password') is-invalid @enderror" name="old_password" placeholder="* Enter Old Password" required autocomplete="name" autofocus>
+        
+                    @error('old_password')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>  
+
+                <div class="col-md-12 my-2">
                     <label>New Password</label>
                     <input type="password" class="mt-1 form-control @error('password') is-invalid @enderror" name="password" placeholder="* Enter New Password" required autocomplete="name" autofocus>
         
