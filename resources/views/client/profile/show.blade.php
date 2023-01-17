@@ -20,7 +20,7 @@
 <div class="container-fluid user-profile">
     <div class="card profile-header">
         <div class="card-header image d-flex flex-column px-5">
-            <img src="{{ $client->profile_pic ? $client->profile_picture_url : asset('images/avatar/12.png') }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
+            <img src="{{ $client->profile_picture_url }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
         </div>
         <div class="d-flex flex-row">
             <div class="card-body mt-5 mx-3 row">

@@ -27,8 +27,11 @@
                 </div>  
 
                 <div class="col-md-6 my-2">
-                    <label>Current Profile Picture</label><br>
-                    <img src="{{ $client->profile_picture_url }}" width="80" height="80" /><br>
+
+                    @if($client->profile_pic)
+                        <label>Current Profile Picture</label><br>
+                        <img src="{{ $client->profile_picture_url }}" width="80" height="80" /><br>
+                    @endif
                     
                     <label>Profile Picture</label>
                     <input type="file" class="mt-1 form-control @error('profile_pic') is-invalid @enderror" name="profile_pic">
