@@ -47,8 +47,7 @@ class Contact extends Model
     {
         // return $this->contact_id ? $this->contact-> : $this->email;
         if($this->contact_id) {
-            return $this->contact->profile_pic !== "" ? 
-            $this->contact->profile_pic : "https://mdbootstrap.com/img/new/avatars/8.jpg";
+            return $this->contact->profile_picture_url;
         }
 
         return "https://mdbootstrap.com/img/new/avatars/8.jpg";
