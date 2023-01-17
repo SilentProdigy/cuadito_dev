@@ -48,9 +48,8 @@
                             <div class="fw-light pt-3">
                                 <a href="{{ route('client.companies.show', $project->company) }}" class="text-muted"><h6>{{ $project->company->name }}</h6></a>
                             </div>
-                            <div class="fw-normal fs-6 text-muted row">
-                                <div class="col"><i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }}</div>
-                                <div class="col d-flex justify-content-end">Open until {{ $project->max_active_date }}</div>
+                            <div class="fw-normal fs-6 text-muted">
+                                <i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }} - {{ $project->max_active_date }}
                             </div>
                         </div>
                         <div class="card-body px-3">
