@@ -27,10 +27,26 @@
                 </div>  
 
                 <div class="col-md-6 my-2">
+                    <label>Current Profile Picture</label><br>
+                    <img src="{{ $client->profile_picture_url }}" width="80" height="80" /><br>
+                    
                     <label>Profile Picture</label>
                     <input type="file" class="mt-1 form-control @error('profile_pic') is-invalid @enderror" name="profile_pic">
         
                     @error('profile_pic')
+                        <span class="invalid-feedback" role="alert">
+                            <strong>{{ $message }}</strong>
+                        </span>
+                    @enderror
+                </div>  
+
+                <div class="col-md-6 my-2"></div>
+
+                <div class="col-md-6 my-2">
+                    <label>Email</label>
+                    <input type="email" class="mt-1 form-control @error('email') is-invalid @enderror" name="email" value="{{ $client->email }}" placeholder="* Enter Email" required autocomplete="name" autofocus>
+        
+                    @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -42,17 +58,6 @@
                     <input type="text" class="mt-1 form-control @error('tag_line') is-invalid @enderror" name="tag_line" placeholder="* Enter your tagline">
         
                     @error('tag_line')
-                        <span class="invalid-feedback" role="alert">
-                            <strong>{{ $message }}</strong>
-                        </span>
-                    @enderror
-                </div>  
-                
-                <div class="col-md-6 my-2">
-                    <label>Email</label>
-                    <input type="email" class="mt-1 form-control @error('email') is-invalid @enderror" name="email" value="{{ $client->email }}" placeholder="* Enter Email" required autocomplete="name" autofocus>
-        
-                    @error('email')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
                         </span>
@@ -70,7 +75,7 @@
                     @enderror
                 </div>  
 
-                <div class="col-md-4 my-2">
+                <div class="col-md-6 my-2">
                     <label>Gender</label>
                     <div class="form-check">
                         <input class="form-check-input" type="radio" 
@@ -100,7 +105,7 @@
                     @enderror
                 </div>  
 
-                <div class="col-md-4 my-2">
+                <div class="col-md-6 my-2">
                     <label>Marital Status</label>
                     <select name="marital_status" id="" class="mt-1 form-control @error('marital_status') is-invalid @enderror"">
                         <option value="">Select Marital Status</option>
@@ -115,7 +120,7 @@
                     @enderror
                 </div>  
 
-                <div class="col-md-4 my-2">
+                <div class="col-md-6 my-2">
                     <label>Birth Date</label>
                     <input type="date" class="mt-1 form-control @error('birth_date') is-invalid @enderror" 
                           name="birth_date" 
