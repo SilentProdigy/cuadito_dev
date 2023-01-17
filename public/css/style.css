@@ -187,7 +187,14 @@ body {
 #search-customer-result .header {
     background-color: #eeeeee;
 }
+#search-focus:focus{
+    border-color: #ff5f00;
+}
+.form-control:focus{
+    border-color: #ff5f00 !important;
+    box-shadow: inset 0 0 0 1px #ff5f00 !important;
 
+}
 .procurement .header {
     background-color: #eeeeee;
     padding: 3em;

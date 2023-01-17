@@ -58,7 +58,7 @@
                     @enderror
                 </div>
             </div>
-            <input type="submit" value="Save New Company" class="btn btn-primary">
+            <button type="submit" class="btn btn-primary">Save New Company</button>
         </form>
     </div>
 </div>

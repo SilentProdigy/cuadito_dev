@@ -13,9 +13,9 @@
     <div class="my-3">
         <form action="{{ route('client.listing.index') }}" method="get">
             <div class="input-group input-group-lg mb-3">
-                <input id="search-focus" type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+                <input id="search-focus" type="text" class="form-control" placeholder="Search Project ..." name="search" value="{{ request('search') }}">
                 <button class="btn border-orange btn-orange" type="submit">
-                    SEARCH
+                    <i class="fas fa-search"></i>
                 </button>
             </div>
         </form>
@@ -23,13 +23,14 @@
 
     <section class="mt-4">
 
-        <h4>{{ request('search') ? 'We found ' . $projects->count() . ' results ...' : 'Projects you might like'}}</h4>
+        <h4>Projects in CUADITO</h4>
+        <p>Find the perfect projects for you.</p>
         
         <div class="row">
             @foreach ($projects as $project)
-                <div class="col-xs-12 col-md-6">
-                    <div class="card my-3">
-                        <div class="card-header py-3">
+                <div class="col-xs-12 col-md-6 gy-3">
+                    <div class="card h-100 py-3">
+                        <div class="card-header">
                             <div class="row">
                                 <div class="col">
                                     <h5>{{ $project->title }}</h5>
@@ -44,18 +45,20 @@
                             @foreach ($project->categories as $category)
                                 <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
                             @endforeach
+                            <div class="fw-light pt-3">
+                                <a href="{{ route('client.companies.show', $project->company) }}" class="text-muted"><h6>{{ $project->company->name }}</h6></a>
+                            </div>
+                            <div class="fw-normal fs-6 text-muted row">
+                                <div class="col"><i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }}</div>
+                                <div class="col d-flex justify-content-end">Open until {{ $project->max_active_date }}</div>
+                            </div>
                         </div>
                         <div class="card-body px-3">
-                            <p class="fw-bold fs-6 text-start">
-                                <a href="{{ route('client.companies.show', $project->company) }}" class="px-1">{{ $project->company->name }}</a> |
-                                <span class="px-1">Posted at {{ $project->created_at->format('M d,Y') }}|</span>
-                                <span class="px-1">Open till {{ $project->max_active_date }}</span>
-                            </ul>
                             <p class="card-text">
                                 {!! $project->description_text !!}
                             </p>
                             <div class="d-flex justify-content-end">
-                                <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-outline-success px-3">View</a>
+                                <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-orange px-3">View</a>
                             </div>
                         </div>
                     </div>
