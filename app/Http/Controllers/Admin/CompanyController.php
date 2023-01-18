@@ -27,6 +27,20 @@ class CompanyController extends Controller
     {
         try
         {
+
+            if($request->input('validation_status') == Company::APPROVED_STATUS) 
+            {
+                if($company->hasDisapprovedRequirements())
+                {
+                    return redirect()->back()->withErrors(['message' => "Invalid Operation! Cannot approve the company because it doesn't meet the requirements"]);
+                }
+
+                if(!$company->have_complete_requirements)
+                {
+                    return redirect()->back()->withErrors(['message' => "Invalid Operation! Cannot approve the company because it has incomplete requirements"]);
+                }
+            }
+            
             $company->update($request->all());
 
             if($company->validation_status === Company::DISAPPROVED_STATUS) {
@@ -38,9 +52,10 @@ class CompanyController extends Controller
 
             return redirect()->back()->with('success', 'Company status was successfully set!');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            // dd($e->getMessage());
+            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
     }
 }

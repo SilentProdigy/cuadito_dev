@@ -28,14 +28,16 @@ class CompanyRequirementController extends Controller
 
             $company_requirement->update($data);
 
-            $have_unapproved_requirements = $company->requirements->where('file.status', '!=', CompanyRequirement::APPROVED_STATUS)->count() > 0;
+            if($data['status'] == CompanyRequirement::DISAPPROVED_STATUS && $company->validation_status === Company::APPROVED_STATUS)
+            {   
+                $company->update(['validation_status' => Company::DISAPPROVED_STATUS, 'remarks' => 'Some of the requirements are disapproved!']);
+            }
 
-            if(!$have_unapproved_requirements) {
-                
+            if($company->have_complete_requirements && !$company->hasDisapprovedRequirements()) {   
                 $company->update(['validation_status' => Company::APPROVED_STATUS]);
                 return redirect()->back()->with('success', "Success in approving Company's application!");
             }
-            
+
             return redirect()->back()->with('success', "Success in updating the status of the Client's requirement!");
         }
         catch(Exception $e)
