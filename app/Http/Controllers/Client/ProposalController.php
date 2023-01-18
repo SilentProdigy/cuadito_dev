@@ -103,18 +103,8 @@ class ProposalController extends Controller
             // Attaching files to proposal
             foreach($paths as $path)
                 $proposal->attachments()->create(['url' => $path]);
- 
-            $proposing_company = Company::find(session('config.company'));
-
-            $proposal->company->client->notifications()->create([
-                'content' => "You submitted a proposal for Project: " . $project->title . " #" . $project->id,
-                'url' => route('client.proposals.show', $proposal),
-            ]);
             
-            $project->owner->notifications()->create([
-                'content' => $proposing_company->name . " submitted a proposal for your Project: " . $project->title . " #" . $project->id,
-                'url' => route('client.projects.show', $project),
-            ]);
+            Bidding::createNotificationsForProposal($proposal);
 
             $active_subscrption = auth('client')->user()->active_subscription;
 
@@ -146,8 +136,7 @@ class ProposalController extends Controller
                 return redirect()->back()->withErrors(['message' => "Invalid Operation: Cannot cancel proposal since the project was not active."]);
             }
 
-            $bidding->delete();
-            $active_subscrption = auth('client')->user()->active_subscription;
+            Bidding::cancelProposal($bidding);
 
             // $this->decreaseProposalCountOnSubscription($active_subscrption);
             DB::commit();

@@ -19,6 +19,8 @@ class CreateNotificationsTable extends Migration
             $table->text('content');
             $table->string('url')->nullable();
             $table->boolean('opened')->default(false);
+            $table->unsignedBigInteger('notifiable_id')->nullable();
+            $table->string('notifiable_type')->nullable();
             $table->timestamps();
         });
     }

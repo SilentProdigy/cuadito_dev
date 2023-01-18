@@ -42,9 +42,41 @@ class Bidding extends Model
         return $this->company->client_id == auth('client')->user()->id;
     }
 
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
+    }
+
     static function getOwner(string $proposal_id)
     {
         $proposal = self::where(['id' => $proposal_id])->firstOrFail();
         return $proposal->company->client;
+    }
+
+    static function createNotificationsForProposal(Bidding $proposal)
+    {
+        $project = $proposal->project;
+
+        $proposal->notifications()->create([
+            'client_id' => auth('client')->user()->id,
+            'content' => "You submitted a proposal for Project: " . $project->title . " #" . $project->id,
+            'url' => route('client.proposals.show', $proposal),
+        ]);
+    
+        $proposal->notifications()->create([
+            'client_id' => $project->owner->id,
+            'content' => $proposal->company->name . " submitted a proposal for your Project: " . $project->title . " #" . $project->id,
+            'url' => route('client.projects.show', $project),                
+        ]);
+    }
+
+    static function cancelProposal(Bidding $bidding)
+    {
+        # Delete notifications
+        $bidding->notifications()->each(function($item) {
+            $item->delete();
+        });
+
+        $bidding->delete();
     }
 }

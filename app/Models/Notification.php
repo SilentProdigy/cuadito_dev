@@ -13,11 +13,18 @@ class Notification extends Model
         'client_id',
         'content',
         'url',
-        'opened'
+        'opened',
+        'notifiable_id',
+        'notifiable_type'
     ];
 
     public function client()
     {
         return $this->belongsTo(\App\Models\Client::class);
+    }
+
+    public function notifiable()
+    {
+        return $this->morphTo();
     }
 }
