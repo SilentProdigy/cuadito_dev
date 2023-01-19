@@ -21,6 +21,7 @@ class CreateNotificationsTable extends Migration
             $table->boolean('opened')->default(false);
             $table->unsignedBigInteger('notifiable_id')->nullable();
             $table->string('notifiable_type')->nullable();
+            $table->string('type')->nullable();
             $table->timestamps();
         });
     }
