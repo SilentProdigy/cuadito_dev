@@ -8,6 +8,7 @@ use App\Mail\Message\NotifyReceiver;
 use App\Models\Client;
 use App\Models\Conversation;
 use App\Models\ConversationSubscription;
+use App\Models\Notification;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -34,6 +35,9 @@ class ConversationController extends Controller
             $conversation->unreadMessages->each(function($item) {
                 $item->update(['read' => true]);
             });
+
+            // Mark notification as read or open
+           $conversation->openNotifications();
         }
 
         $subscription = $conversation->subscriptions->where('client_id', auth('client')->user()->id)->first();
@@ -72,10 +76,20 @@ class ConversationController extends Controller
                 'sender_id' => auth('client')->user()->id,
                 'content' => $request->input('content')
             ]);
-    
-            $recipient->notifications()->create([
+            
+            /* 
+                $recipient->notifications()->create([
+                    'content' => auth('client')->user()->name . ' messaged you!',
+                    'url' => route('client.conversations.show', $conversation),    
+                    'type' => Notification::MESSAGE_NOTIFICATION_TYPE
+                ]);
+            */
+            
+            $conversation->notifications()->create([
+                'client_id' => $recipient->id,
                 'content' => auth('client')->user()->name . ' messaged you!',
                 'url' => route('client.conversations.show', $conversation),    
+                'type' => Notification::MESSAGE_NOTIFICATION_TYPE
             ]);
     
             $client = auth('client')->user();

@@ -115,12 +115,18 @@ class Client extends Authenticatable
 
     public function getHaveUnreadNotificationsAttribute()
     {
-        return $this->notifications()->where('opened', 0)->exists();
+        return $this->notifications()
+                ->where('opened', 0)
+                ->where('type', '!=' , Notification::MESSAGE_NOTIFICATION_TYPE)
+                ->exists();
     }
 
     public function getUnreadNotificationsCountAttribute()
     {
-        return $this->notifications()->where('opened', 0)->count();
+        return $this->notifications()
+                ->where('opened', 0)
+                ->where('type', '!=' , Notification::MESSAGE_NOTIFICATION_TYPE)
+                ->count();
     }
 
     public function conversationSubscriptions()
@@ -179,5 +185,15 @@ class Client extends Authenticatable
     public function getLatestSubscriptionAttribute()
     {
         return $this->subscriptions()->orderBy('id', 'desc')->first();
+    }
+
+    public function getHaveUnopenedMessagesCountAttribute()
+    {
+        return $this->notifications()->close()->messageType()->count(); 
+    }
+
+    public function getHaveUnopenedMessagesAttribute()
+    {
+        return $this->notifications()->close()->messageType()->count() > 0; 
     }
 }
