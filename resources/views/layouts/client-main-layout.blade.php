@@ -188,8 +188,12 @@
                 
                 <span class="nav-icons">
                     <a href="{{ route('client.inbox.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
                         <i class="fa-solid fa-comment"></i>
+                        @if(auth('client')->user()->have_unopened_messages)
+                            <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger">
+                                {{ auth('client')->user()->have_unopened_messages_count }}
+                            </span>
+                        @endif
                     </a>
                 </span>
 

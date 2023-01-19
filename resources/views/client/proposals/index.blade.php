@@ -80,7 +80,7 @@
 
                             @if($proposal->project->status == 'ACTIVE')
                                 <button class="btn btn-sm btn-outline-danger btn-cancel-proposal" data-proposal='@json($proposal)'>
-                                    <i class="fa fa-close"></i> Cancel Proposal   
+                                    <i class="fa fa-times"></i>
                                 </button>
                             @endif
                         </td>
