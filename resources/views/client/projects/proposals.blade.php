@@ -60,6 +60,12 @@
                                             <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                                 <i class="fa fa-eye"></i>         
                                             </a>
+
+                                            @if($project->winner_bidding_id == $proposal->id)
+                                                <a href="{{ route('client.conversations.create', ['email' => $project->winningBidding->company->client->email]) }}" class="btn btn-sm btn-outline-success">
+                                                    <i class="fa fa-message"></i>         
+                                                </a>
+                                            @endif
                                             
                                             @if($project->status !== 'CLOSED')
                                                 <button class="btn btn-sm btn-warning btn-choose-proposal" data-project="{{ json_encode($project) }}" data-proposal="{{ json_encode($proposal) }}">

@@ -73,6 +73,16 @@
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Winning Proposal</p>
                                 <h5 class="fw-bold"><span class="fa fa-trophy"></span> {{ $project->winningBidding->company->name }}</h5>
                                 
+                                <a href="{{ route('client.conversations.create', 
+                                    [
+                                        'email' => $project->is_owned ? 
+                                            $project->winningBidding->company->client->email : 
+                                            $project->owner->email
+                                    ]) }}"
+                                >
+                                    <span class="fa fa-message"></span> Send Message
+                                </a>
+
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Rate</p>
                                 <h5 class="fw-bold">@money($project->winningBidding->rate)</h5>
                                 <p class="fw-bold text-uppercase fs-6 text-secondary">Owner</p>

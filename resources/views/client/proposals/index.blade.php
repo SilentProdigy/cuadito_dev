@@ -72,6 +72,12 @@
                                 <i class="fa fa-eye"></i>         
                             </a>
 
+                            @if($proposal->project->winner_bidding_id == $proposal->id)
+                                <a href="{{ route('client.conversations.create', ['email' => $proposal->project->owner->email]) }}" class="btn btn-sm btn-outline-success">
+                                    <i class="fa fa-message"></i>         
+                                </a>
+                            @endif
+
                             @if($proposal->project->status == 'ACTIVE')
                                 <button class="btn btn-sm btn-outline-danger btn-cancel-proposal" data-proposal='@json($proposal)'>
                                     <i class="fa fa-close"></i> Cancel Proposal   
