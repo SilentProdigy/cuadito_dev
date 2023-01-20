@@ -40,7 +40,7 @@
             @if(auth('client')->user()->id == $company->client_id)
                 <div class="col-md-12 border-bottom">
                     <div class="col d-flex justify-content-end">
-                        @if($company->can_upload_requirements && !$company->have_complete_requirements && $missing_requirements->count() > 0)
+                        @if($company->can_upload_requirements && !$company->have_complete_requirements)
                             <button class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-requirement-modal">
                                 <i class="fa fa-plus"></i>&ensp;Add Requirement
                             </button>
@@ -52,9 +52,9 @@
                 </div>
                 <div class="col-md-12">
                     <h4 class="mt-3">ABOUT <span class="text-uppercase">{{ $company->name }}</span></h4>
-                    <div class="company_description">
+                    {{-- <div class="company_description">
                         {{ $company->description }}
-                    </div>
+                    </div> --}}
     
                     <div class="row mt-5">
                         <h4>FEATURED PROJECTS</h4>
@@ -68,7 +68,7 @@
                         @if($company->description)
                             <p>{{ $company->description }}</p>
                         @else
-                            <span>Please edit your company and add company description.</span>
+                            <span>No description yet.</span>
                         @endif
                     </div>
 

@@ -71,9 +71,19 @@ class Company extends Model
     {
         $requirements = $this->requirements;
 
+        if($requirements->count() < count(Requirement::REQUIREMENT_IDS))
+        {
+            return false;
+        }
+
         return count(
             array_diff( $requirements->pluck('id')->toArray(), Requirement::REQUIREMENT_IDS)
         ) == 0;
+    }
+
+    public function haveCompleteRequirements()
+    {
+
     }
 
     public function scopeApproved($query)

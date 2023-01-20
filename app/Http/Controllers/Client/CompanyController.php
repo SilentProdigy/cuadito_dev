@@ -28,8 +28,7 @@ class CompanyController extends Controller
     {  
         $client_submitted_requirements = $company->requirements->pluck('id')->toArray();
         $missing_requirements = Requirement::whereNotIn('id', $client_submitted_requirements)->get();
-        $featured_projects = $company->projects()->orderBy('id', 'desc')->take(5)->get();
-        
+        $featured_projects = $company->projects()->orderBy('id', 'desc')->take(5)->get();        
         return view('client.companies.show')->with(compact('company', 'client_submitted_requirements', 'missing_requirements', 'featured_projects'));
     }
 
