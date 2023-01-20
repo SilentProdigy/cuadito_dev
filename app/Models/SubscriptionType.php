@@ -14,7 +14,7 @@ class SubscriptionType extends Model
         'description',
         'amount',
         'max_proposals_count',
-        'max_projects_count'
+        // 'max_projects_count'
     ];
 
     // protected $withCount = [
