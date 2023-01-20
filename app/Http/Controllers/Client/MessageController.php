@@ -7,6 +7,7 @@ use App\Http\Requests\Client\Messages\CreateMessageFormRequest;
 use App\Mail\Message\NotifyReceiver;
 use App\Models\Company;
 use App\Models\Conversation;
+use App\Models\Notification;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -26,9 +27,13 @@ class MessageController extends Controller
             $conversation->subscriptions
             ->where('client_id', '!=', auth('client')->user()->id)
             ->each(function($item) use ($message) {
-                $item->client->notifications()->create([
+
+                $client = $item->client;
+                $message->conversation->notifications()->create([
+                    'client_id' => $client->id,
                     'content' => auth('client')->user()->name . ' messaged you!',
-                    'url' => route('client.conversations.show', $message->conversation),    
+                    'url' => route('client.conversations.show', $message->conversation),  
+                    'type' => Notification::MESSAGE_NOTIFICATION_TYPE
                 ]);
             });
             

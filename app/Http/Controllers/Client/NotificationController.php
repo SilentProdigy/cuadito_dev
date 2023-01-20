@@ -10,6 +10,7 @@ class NotificationController extends Controller
     public function index()
     {
         $notifications = auth('client')->user()->notifications()
+                        ->where('type', '!=', Notification::MESSAGE_NOTIFICATION_TYPE)
                         ->orderBy('id', 'desc')
                         ->paginate();
 

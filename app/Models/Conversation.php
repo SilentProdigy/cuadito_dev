@@ -20,6 +20,11 @@ class Conversation extends Model
         return $this->hasMany(\App\Models\Message::class);
     }
 
+    public function notifications()
+    {
+        return $this->morphMany(Notification::class, 'notifiable');
+    }
+
     public function subscriptions()
     {
         return $this->hasMany(\App\Models\ConversationSubscription::class);
@@ -56,5 +61,12 @@ class Conversation extends Model
     public function unreadMessages()
     {
         return $this->messages()->where('read',false);
+    }
+
+    public function openNotifications()
+    {
+        $this->notifications->each(function(Notification $notification) {
+            $notification->openNotification();
+        });
     }
 }
