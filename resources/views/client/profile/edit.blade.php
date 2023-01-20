@@ -58,7 +58,7 @@
 
                 <div class="col-md-6 my-2">
                     <label>Tagline</label>
-                    <input type="text" class="mt-1 form-control @error('tag_line') is-invalid @enderror" name="tag_line" placeholder="* Enter your tagline">
+                    <input type="text" class="mt-1 form-control @error('tag_line') is-invalid @enderror" name="tag_line" placeholder="Enter your tagline">
         
                     @error('tag_line')
                         <span class="invalid-feedback" role="alert">

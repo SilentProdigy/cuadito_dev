@@ -41,6 +41,12 @@
     <link href="{{ asset('css/mdb.min.css') }}" rel="stylesheet">
     <script src="{{ asset('js/mdb.min.js') }}" defer></script>
 
+    <!-- Croppie css -->
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.css">
+
+    <!-- Croppie js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/croppie/2.6.2/croppie.min.js"></script>
+
     <style>
         .nav-icons i {
         /* display: inline-block; */
@@ -155,16 +161,16 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                         <li>
-                            <a class="dropdown-item" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
+                            <a class="dropdown-item nav-link" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
                         </li>
-                        {{-- <li>
-                            <a class="dropdown-item" href="#">Settings</a>
-                        </li> --}}
-                        {{--<li>
-                            <a class="dropdown-item" href="#">Help</a>
-                        </li> --}}
                         <li>
-                            <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
+                            <a class="dropdown-item nav-link disabled" href="#">Terms & Privacy</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item nav-link disabled" href="#">Help & Support</a>
+                        </li>
+                        <li>
+                            <a class="dropdown-item nav-link" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
                                         document.getElementById('logout-form').submit();">
                                 {{ __('Logout') }}
                             </a>
@@ -197,78 +203,7 @@
             
         </div>
     </nav>
-    <!-- Navbar -->
-    <!-- <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top"> -->
-        <!-- <div class="container"> -->
-            <!-- Brand -->
-            <!-- <a class="navbar-brand" href="#">
-                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="YCC Logo" loading="lazy" />
-            </a> -->
-
-            <!-- Right links -->
-            <!-- <ul class="navbar-nav ms-auto flex-row"> -->
-                <!-- Avatar -->
-                <!-- <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle hidden-arrow d-flex align-items-center" href="#" id="navbarDropdownMenuLink" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                        <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="30" alt="Avatar" loading="lazy" />
-                        &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span>
-                    </a>
-                    <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdownMenuLink">
-                        <li>
-                            <a class="dropdown-item" href="#">My Profile</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="#">Settings</a>
-                        </li>
-                        <li>
-                            <a class="dropdown-item" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
-                                       document.getElementById('logout-form').submit();">
-                                {{ __('Logout') }}
-                            </a>
-                            <form id="logout-form" action="{{ route('client.auth.logout') }}" method="POST" class="d-none">
-                                @csrf
-                            </form>
-                        </li>
-                    </ul>
-                </li> -->
-            <!-- </ul> -->
-        <!-- </div> -->
-        <!-- Container wrapper -->
-    <!-- </nav> -->
-    <!-- Navbar -->
     <header>
-        <!-- Sidebar -->
-        <!-- <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
-            <div class="position-sticky">
-                <div class="list-group list-group-flush mx-3 mt-4">
-                    {{-- @includeIf('panels.admin_sidebar', [auth()->user()->role => 'admin']) --}}
-                    <a href="{{ route('client.dashboard') }}" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                        <i class="fas fa-home fa-fw me-3"></i><span>Home</span>
-                    </a>
-
-                    <a href="{{ route('client.companies.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-square fa-fw me-3"></i><span>Companies</span>
-                    </a>
-                    
-                    <a href="{{ route('client.projects.index') }}" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-highlighter fa-fw me-3"></i><span>Projects</span>
-                    </a>
-
-                    <a href="{{ route('client.listing.index') }}" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
-                        <i class="fas fa-list fa-fw me-3"></i><span>Listing</span>
-                    </a>
-
-                    <a href="{{ route('client.proposals.index') }}" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
-                        <i class="fas fa-flag fa-fw me-3"></i><span>Proposals</span>
-                    </a>
-                
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple sidebar-bottom">
-                        <i class="fas fa-circle-question fa-fw me-3"></i><span>Help</span>
-                    </a>
-                </div>
-            </div>
-        </nav> -->
-        <!-- Sidebar -->
     </header>
     <!--Main Navigation-->
 
@@ -287,6 +222,55 @@
         </div>
     </main>
     <!--Main layout-->
+
+    <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50 mt-5 text-center">
+        <div class="container">
+            <ul class="nav justify-content-center border-bottom pb-3 mb-4 nav-footer">
+                <li class="nav-item">
+                <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                    <a href="{{ route('client.dashboard') }}" class="nav-link" aria-current="page">
+                        <!-- <i class="fas fa-home fa-fw me-3"></i> -->
+                        <span>Home</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.companies.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-square fa-fw me-3"></i> -->
+                        <span>Companies</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.projects.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-highlighter fa-fw me-3"></i> -->
+                        <span>Projects</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.listing.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <span>Listing</span>
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a href="{{ route('client.proposals.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <span>Proposals</span>
+                    </a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="{{ route('client.contacts.index') }}" class="nav-link">
+                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                        <span>Contacts</span>
+                    </a>
+                </li>
+            </ul>
+            <a href="#" class="d-flex align-items-center justify-content-center my-4 link-dark text-decoration-none">
+                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
+            </a>
+            <p class="mb-0 text-muted">Powered by: <b>1MC Digital, Inc.</b></p>
+        </div>
+    </footer>
 
     <!-- MDB -->
     <script

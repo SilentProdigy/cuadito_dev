@@ -1,18 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
 
+
 body {
     font-family: "Montserrat", sans-serif;
     font-weight: 400;
 }
 
-footer {
-    background-color: #eeeeee;
-    padding: 0.5em;
-    text-align: center;
-    width: 100%;
-    position: relative;
+main{
+    min-height: calc(100vh - 300px);
 }
-
 b {
     font-weight: 700;
 }
@@ -270,6 +266,15 @@ body {
 #main-navbar{
     box-shadow: 0 4px 2px -2px gray;
     height: 100px;
+}
+
+.nav-footer li a{
+    font-size: 15px;
+    font-weight: normal;
+    color: #757575;
+}
+.nav-footer li a:hover{
+    color: #fff;
 }
 .user-profile .profile-header .card-header{
     height: 300px;

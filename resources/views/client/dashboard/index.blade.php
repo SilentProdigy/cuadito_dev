@@ -59,9 +59,9 @@
     </div>
     <div class="row">
         @foreach ($data['projects'] as $project)
-                <div class="col-xs-4 {{ $data['projects_count'] >=3 ? 'col-md-4' : 'col-md-12' }}">
-                    <div class="card my-3">
-                        <div class="card-header py-3">
+                <div class="col-xs-4 {{ $data['projects_count'] >=3 ? 'col-md-4' : 'col-md-12' }} gy-3">
+                <div class="card h-100 my-3">
+                        <div class="card-header">
                             <div class="row">
                                 <div class="col">
                                     <h5>{{ $project->title }}</h5>
@@ -73,17 +73,22 @@
                                     </span>
                                 </div>
                             </div>
+                            @foreach ($project->categories as $category)
+                                <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
+                            @endforeach
+                            <div class="fw-light pt-3">
+                                <a href="{{ route('client.companies.show', $project->company) }}" class="text-muted"><h6>{{ $project->company->name }}</h6></a>
+                            </div>
+                            <div class="fw-normal fs-6 text-muted">
+                                <i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }} - {{ $project->max_active_date }}
+                            </div>
                         </div>
                         <div class="card-body px-3">
-                            <p class="fw-bold fs-6 text-start">
-                                <span class="px-1">{{ $project->company->name }}</span><br>
-                                <span class="px-1">{{ $project->created_at->format('M d,Y') }} - {{ $project->max_active_date }}</span>
-                            </ul>
                             <p class="card-text">
                                 {!! $project->description_text !!}
                             </p>
                             <div class="d-flex justify-content-end">
-                                <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-outline-success px-3">View</a>
+                                <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-orange px-3">View</a>
                             </div>
                         </div>
                     </div>
