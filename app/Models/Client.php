@@ -196,4 +196,9 @@ class Client extends Authenticatable
     {
         return $this->notifications()->close()->messageType()->count() > 0; 
     }
+
+    public function isConnected(Client $client)
+    {
+        return $this->contacts()->where(['contact_id' => $client->id])->exists();
+    }
 }
