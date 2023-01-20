@@ -35,7 +35,7 @@
 
                             <div class="my-2 py-3">
                                 <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Payment Date</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->paid_at->format('M d,Y') }}</p>
+                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->paid_at?->format('M d,Y') }}</p>
                             </div>
                                 
                             <div class="my-2 py-3 border-top">

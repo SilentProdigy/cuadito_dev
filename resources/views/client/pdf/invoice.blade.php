@@ -96,7 +96,7 @@
         
         <header>
             <h1>{{ $payment->invoice_id }} / {{ $payment->created_at->format('Y-m-d') }}</h1>
-            <p>Invoice has been paid at {{ $payment->paid_at->format('Y-m-d') }}</p>
+            <p>Invoice has been paid at {{ $payment->paid_at?->format('Y-m-d') }}</p>
         </header>
 
     
