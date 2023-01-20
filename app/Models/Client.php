@@ -116,16 +116,16 @@ class Client extends Authenticatable
     public function getHaveUnreadNotificationsAttribute()
     {
         return $this->notifications()
-                ->where('opened', 0)
-                ->where('type', '!=' , Notification::MESSAGE_NOTIFICATION_TYPE)
+                ->where('opened', false)
+                ->whereNull('type')
                 ->exists();
     }
 
     public function getUnreadNotificationsCountAttribute()
     {
         return $this->notifications()
-                ->where('opened', 0)
-                ->where('type', '!=' , Notification::MESSAGE_NOTIFICATION_TYPE)
+                ->where('opened', false)
+                ->whereNull('type')
                 ->count();
     }
 
