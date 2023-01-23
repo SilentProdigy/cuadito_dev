@@ -2,8 +2,9 @@
 
 
 body {
-    font-family: "Montserrat", sans-serif;
+    font-family: "Raleway", sans-serif;
     font-weight: 400;
+    color: #0B0014 !important;
 }
 
 main{
@@ -373,7 +374,7 @@ body {
     background-color: #d9534f !important;
 }
 .text-orange{
-    color: #f39c12;
+    color: #F96B23;
 }
   /* END OF DASHBOARD CARDS */
 .dashboard-proj-img img{
@@ -722,7 +723,34 @@ body {
 #pricing_table .btn-gray{
     background-color: #3e3e3e;
 }
-	
+	.landing-page .navbar{
+        box-shadow: none;
+        color: #fff !important;
+    }
+    .landing-page .navbar .nav-link{
+        color: #fff !important;
+        font-family: Raleway, Raleway, sans-serif;
+        font-weight: bold;
+    }
+    .landing-page .view{
+        background-image: url('../images/banners/cuadito-buidling.jpg');
+        background-size: cover;
+        background-attachment: fixed;
+    }
+    .view .mask{
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow: hidden;
+        width: 100%;
+        height: 100%;
+        background-attachment: fixed;
+    }
+    .rgba-cuadito-dark{
+        background-color: rgba(249, 107, 35, 0.8);
+    }
   /* End of Landing Page Styles */
 
   /* Pricing table on Admin Panel */
