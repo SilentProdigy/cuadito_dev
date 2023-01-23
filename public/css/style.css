@@ -749,7 +749,54 @@ body {
         background-attachment: fixed;
     }
     .rgba-cuadito-dark{
-        background-color: rgba(249, 107, 35, 0.8);
+        background-color: rgba(119, 51, 68, 0.9);
+    }
+    .landing-page-btn{
+        color: #fff !important;
+        padding: 1rem 3.0rem 1rem !important;
+        border: 2px solid #F96B23 !important
+    }
+    .features-icons{
+        width: 100px;
+        margin-bottom: 3%;
+    }
+    #services-industries .nav-link{
+        color: #F96B23;
+    }
+    #services-industries .nav-link.active{
+        border-color: #F96B23;
+    }
+    .streak{
+        display: block;
+        position: relative;
+        overflow: hidden;
+        height: 250px;
+    }
+    .streak.streak-md{
+        height: 400px;
+    }
+    .streak.streak-photo{
+        background-repeat: no-repeat;
+        background-size: cover;
+        background-position: center;
+    }
+    @media(min-width: 1366px){
+        .streak.streak-photo{
+            background-attachment: fixed;
+        }
+    }
+    .center { 
+        height: 200px;
+        position: relative;
+    }
+    
+    .center div{
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
     }
   /* End of Landing Page Styles */
 

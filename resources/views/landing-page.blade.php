@@ -135,8 +135,7 @@
                   <hr class="hr-light my-4">
                   <h5 class="mb-4">An online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</h5>
                 </div>
-                <a href="#features" data-offset="100" class="btn bg-white btn-rounded mt-5"
-                  data-wow-delay="0.2s">Get Started</a>
+                <a href="#features" class="btn landing-page-btn btn-rounded mt-5">Get Started</a>
               </div>
             </div>
           </div>
@@ -163,7 +162,7 @@
 
               <!-- Grid column -->
               <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
-                <i class="fas fa-handshake text-orange fa-4x mb-4"></i>
+                <img src="{{asset('images/elements/collaboration-icon.png')}}" class="img-responsive features-icons"/>
                 <h5 class="font-weight-bold mb-4">Collaborations</h5>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam,
                   aperiam minima assumenda deleniti hic.</p>
@@ -172,7 +171,7 @@
 
               <!-- Grid column -->
               <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
-                <i class="fas fa-comment text-orange fa-4x mb-4"></i>
+                <img src="{{asset('images/elements/communication-icon.png')}}" class="img-responsive features-icons"/>
                 <h5 class="font-weight-bold mb-4">Communications</h5>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam,
                   aperiam minima assumenda deleniti hic.</p>
@@ -181,7 +180,7 @@
 
               <!-- Grid column -->
               <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
-                <i class="fas fa-shield text-orange fa-4x mb-4"></i>
+                <img src="{{asset('images/elements/collaboration-icon.png')}}" class="img-responsive features-icons"/>
                 <h5 class="font-weight-bold mb-4">Security</h5>
                 <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam,
                   aperiam minima assumenda deleniti hic.</p>
@@ -208,41 +207,87 @@
             voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
             assumenda deleniti.</p>
 
-            <!-- Tabs navs -->
-            <ul class="nav nav-tabs nav-fill mb-3" id="ex-with-icons" role="tablist">
-              <li class="nav-item" role="presentation">
-                <a class="nav-link active" id="ex-with-icons-tab-1" data-mdb-toggle="tab" href="#ex-with-icons-tabs-1" role="tab"
-                  aria-controls="ex-with-icons-tabs-1" aria-selected="true"><i class="fas fa-chart-pie fa-fw me-2"></i>Sales</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="nav-link" id="ex-with-icons-tab-2" data-mdb-toggle="tab" href="#ex-with-icons-tabs-2" role="tab"
-                  aria-controls="ex-with-icons-tabs-2" aria-selected="false"><i class="fas fa-chart-line fa-fw me-2"></i>Subscriptions</a>
-              </li>
-              <li class="nav-item" role="presentation">
-                <a class="nav-link" id="ex-with-icons-tab-3" data-mdb-toggle="tab" href="#ex-with-icons-tabs-3" role="tab"
-                  aria-controls="ex-with-icons-tabs-3" aria-selected="false"><i class="fas fa-cogs fa-fw me-2"></i>Settings</a>
-              </li>
-            </ul>
-            <!-- Tabs navs -->
+            <div class="row">
 
-            <!-- Tabs content -->
-            <div class="tab-content" id="ex-with-icons-content">
-              <div class="tab-pane fade show active" id="ex-with-icons-tabs-1" role="tabpanel" aria-labelledby="ex-with-icons-tab-1">
-                Tab 1 content
+              <!-- Grid column -->
+              <div class="col-lg-4 col-md-6 mb-5">
+                <div class="bg-image hover-zoom">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%281%29.jpg"
+                    class="img-fluid">
+                </div>
+                <h5 class="mt-4 text-center">Advertisement & Marketing</h5>
               </div>
-              <div class="tab-pane fade" id="ex-with-icons-tabs-2" role="tabpanel" aria-labelledby="ex-with-icons-tab-2">
-                Tab 2 content
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-lg-4 col-md-6 mb-5">
+                <div class="bg-image hover-zoom">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%282%29.jpg"
+                    class="img-fluid">
+                </div>
+
+                <h5 class="mt-4 text-center">Construction</h5>
+
               </div>
-              <div class="tab-pane fade" id="ex-with-icons-tabs-3" role="tabpanel" aria-labelledby="ex-with-icons-tab-3">
-                Tab 3 content
+              <!-- Grid column -->
+
+              <!-- Grid column -->
+              <div class="col-lg-4 col-md-6 mb-5">
+
+                <div class="bg-image hover-zoom">
+                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%283%29.jpg"
+                    class="img-fluid">
+                </div>
+
+                <h5 class="mt-4 text-center">Training & Coaching</h5>
+
               </div>
+              <!-- Grid column -->
+
             </div>
-            <!-- Tabs content -->
 
         </section>
         <!-- Section: Services -->
 
      </div>
+     
+
+     <div class="streak streak-photo streak-md"
+        style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/City/12-col/img%20%2822%29.jpg');">
+        <div class="flex-center mask rgba-cuadito-dark center">
+          <div class="text-center text-white">
+            <h2 class="h2-responsive mb-5"><i class="fas fa-quote-left" aria-hidden="true"></i> If you want to go fast, go alone;<br>if you want to go far, go together. <i class="fas fa-quote-right" aria-hidden="true"></i></h2>
+            <h5 class="text-center font-italic wow fadeIn" data-wow-delay="0.2s">~ African Proverb</h5>
+          </div>
+        </div>
+      </div>
+
+    <div class="container">
+
+      <!-- Section: Pricing -->
+      <section class="mt-4 mb-5">
+
+        <!-- Section heading -->
+        <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-5 wow fadeIn" data-wow-delay="0.2s">Our
+          pricing plans</h3>
+
+        <!-- Section description -->
+        <p class="text-center grey-text my-5 w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">Lorem ipsum dolor
+          sit amet, consectetur adipisicing elit. Laborum quas, eos officia maiores ipsam ipsum dolores reiciendis ad
+          voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
+          assumenda deleniti.</p>
+
+        <div class="row pt-4">
+          <!-- Grid column -->
+          <div class="col-lg-4 col-md-12 mt-1 mb-4">
+
+          </div>
+        </div>
+
+      </section>
+      <!-- Section: Pricing -->
+    </div>
+      
    </main>
 
    <!-- FOOTER -->
