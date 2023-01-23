@@ -96,7 +96,7 @@
                 </div>
             </div>
             <div class="justify-content-center text-center">
-                <span>Already a member?</span>&nbsp;<a href="{{ route('login') }}">Log in</a>
+                <span>Already a member?</span>&nbsp;<a href="{{ route('client.auth.show-login-form') }}">Log in</a>
             </div>
         </div>
     </div>

@@ -17,7 +17,7 @@ class AuthenticateClient
     public function handle(Request $request, Closure $next)
     {
         if(auth()->check())
-            return redirect(route('login'));
+            return redirect(route('admin.login'));
 
         if(!auth('client')->check())
             return redirect(route('client.auth.show-login-form'));

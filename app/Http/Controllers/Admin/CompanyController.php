@@ -32,12 +32,23 @@ class CompanyController extends Controller
             {
                 if($company->hasDisapprovedRequirements())
                 {
-                    return redirect()->back()->withErrors(['message' => "Invalid Operation! Cannot approve the company because it doesn't meet the requirements"]);
+                    return redirect()->back()->withErrors([
+                        'message' => "Invalid Operation! Cannot approve the company because it doesn't meet the requirements"
+                    ]);
                 }
 
                 if(!$company->have_complete_requirements)
                 {
-                    return redirect()->back()->withErrors(['message' => "Invalid Operation! Cannot approve the company because it has incomplete requirements"]);
+                    return redirect()->back()->withErrors([
+                        'message' => "Invalid Operation! Cannot approve the company because it has incomplete requirements"
+                    ]);
+                }
+
+                if(!$company->haveCompleteApprovedRequirements())
+                {
+                    return redirect()->back()->withErrors([
+                        'message' => "Invalid Operation! Cannot approve the company because not all requirements are approved!"
+                    ]);
                 }
             }
             
