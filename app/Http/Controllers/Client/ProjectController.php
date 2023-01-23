@@ -34,8 +34,8 @@ class ProjectController extends Controller
         $this->companyService = $companyService;
         $this->projectService = $projectService;
 
-        $this->middleware('client.projects.ensure_client_projects_dit_not_reach_max_projects')
-            ->only(['create', 'store']);
+        // $this->middleware('client.projects.ensure_client_projects_dit_not_reach_max_projects')
+        //     ->only(['create', 'store']);
     }
 
     /**
@@ -77,9 +77,10 @@ class ProjectController extends Controller
             $category_ids = $request->input('category_ids');
             $company = Company::find($request->input('company_id'));
             $project = $this->companyService->createProject($company, $project_details, $category_ids);
-            $this->increaseProjectCountOnSubscription(
-                auth('client')->user()->active_subscription
-            );
+            
+            // $this->increaseProjectCountOnSubscription(
+            //     auth('client')->user()->active_subscription
+            // );
 
             DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  

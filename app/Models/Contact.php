@@ -60,14 +60,14 @@ class Contact extends Model
 
     static function connectTwoClients(Client $client_01, Client $client_02)
     {   
-        if(!$client_01->contacts->where(['contact_id' => $client_02->id])->first())
+        if(!$client_01->isConnected($client_02))
         {
             $client_01->contacts()->create([
                 'contact_id' => $client_02->id
             ]);
         }
 
-        if(!$client_02->contacts->where(['contact_id' => $client_01->id])->first())
+        if(!$client_02->isConnected($client_01))
         {
             $client_02->contacts()->create([
                 'contact_id' => $client_01->id
