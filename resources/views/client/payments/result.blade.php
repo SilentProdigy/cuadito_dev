@@ -60,7 +60,7 @@
                             <div class="my-2 py-3">
                                 <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Total Payment</h5>
                                 <p class="fs-6 lh-lg" style="color: #222;">
-                                    @money($payment->subscription->subscription_type->amount)
+                                    @money($payment->total_amount)
                                 </p>
                             </div>
                                 

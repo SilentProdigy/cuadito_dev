@@ -81,11 +81,6 @@ class Company extends Model
         ) == 0;
     }
 
-    public function haveCompleteRequirements()
-    {
-
-    }
-
     public function scopeApproved($query)
     {
         return $query->where('validation_status', self::APPROVED_STATUS);
@@ -96,4 +91,23 @@ class Company extends Model
         return $this->requirements->where('file.status', Requirement::DISAPPROVED_STATUS)->count() > 0;
     }
 
+    private function checkIfAllRequirementsAreSubmitted()
+    {
+        return count(
+            array_diff( 
+                $this->requirements->pluck('id')->toArray(), 
+                Requirement::REQUIREMENT_IDS
+            )
+        ) == 0;
+
+    }
+
+    public function haveCompleteApprovedRequirements()
+    {
+        $approved_requirements = $this->requirements->where('file.status', Requirement::APPROVED_STATUS);                                        
+        
+        // all of the requirements are submitted and all of it are APPROVED!
+        return $this->checkIfAllRequirementsAreSubmitted() && 
+                $approved_requirements->count() == count(Requirement::REQUIREMENT_IDS);
+    }   
 }

@@ -18,7 +18,7 @@ class RestrictAccessIfInactive
     public function handle(Request $request, Closure $next)
     {
         if(auth()->user()->status === User::INACTIVE_STATUS)
-            return redirect(route('login'))->with('error', "Ooops! Your account is still pending for approval!");
+            return redirect(route('admin.login'))->with('error', "Ooops! Your account is still pending for approval!");
 
         return $next($request);
     }

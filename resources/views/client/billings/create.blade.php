@@ -48,6 +48,7 @@
 <body>
     <main style="margin-top: 58px;">
         <div class="container px-5">
+            @include('panels.flash_messages')
             <section>
                 <div class="container py-5">
                     <div class="card">
@@ -110,7 +111,7 @@
                                 
                                 <div class="p-2 d-flex">
                                     <div class=col-8><h4>No. Months Billed</h4></div>
-                                    <div class="ms-auto"><h4>{{ config('client.max_subscription_months_count') }} Months</h4></div>
+                                    <div class="ms-auto"><h4>{{ config('cuadito.payment.default_billable_months_count') }} Months</h4></div>
                                 </div>
                             
                                 <div class="border-top px-2 mx-2"></div>
