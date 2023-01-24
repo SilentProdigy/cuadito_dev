@@ -265,7 +265,7 @@
     <div class="container">
 
       <!-- Section: Pricing -->
-      <section class="mt-4 mb-5">
+      <section class="mt-4 mb-5 pb-5">
 
         <!-- Section heading -->
         <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-5 wow fadeIn" data-wow-delay="0.2s">Our
@@ -277,21 +277,300 @@
           voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
           assumenda deleniti.</p>
 
-        <div class="row pt-4">
-          <!-- Grid column -->
-          <div class="col-lg-4 col-md-12 mt-1 mb-4">
+        <!-- Pricing Table starts -->
+        <div class="row pt-4 landing-page-pricing">
+          <!-- Columns -->
+          <div class="col-xs-6 col-md-4">
+            <div class="price-card">
+              <h2>Silver</h2>
+              <p class="price"><span>2,000.00</span>/ mo.</p>
+              <ul class="pricing-offers">
+                <li>20 Bids per month</li>
+                <li>Unlimited Project Posting</li>
+              </ul>
+                <a href="{{ route('client.auth.show-register-form') }}" class="subscription_btn btn btn-orange">Subscribe Now</a>
+            </div>
+          </div>
 
+          <div class="col-xs-6 col-md-4 highlight">
+            <div class="price-card">
+              <h2>Platinum</h2>
+              <p class="price"><span>5,000.00</span>/ mo.</p>
+              <ul class="pricing-offers">
+                <li>20 Bids per month</li>
+                <li>Unlimited Project Posting</li>
+                <li>Company will be top-listed on bids.</li>
+              </ul>
+                <a href="{{ route('client.auth.show-register-form') }}" class="subscription_btn btn">Subscribe Now</a>
+            </div>
+          </div>
+
+          <div class="col-xs-6 col-md-4">
+            <div class="price-card">
+              <h2>Gold</h2>
+              <p class="price"><span>3,000.00</span>/ mo.</p>
+              <ul class="pricing-offers">
+                <li>30 Bids per month</li>
+                <li>Unlimited Project Posting</li>
+              </ul>
+                <a href="{{ route('client.auth.show-register-form') }}" class="subscription_btn btn btn-orange">Subscribe Now</a>
+            </div>
           </div>
         </div>
 
       </section>
       <!-- Section: Pricing -->
     </div>
+
+    <div class="container-fluid bg-light">
+
+      <div class="container">
+
+        <!-- Section: Testimonials v.1 -->
+        <section class="py-5">
+          <div class="row d-flex justify-content-center">
+            <div class="col-md-10 col-xl-8 text-center">
+              <h3 class="mb-4">Testimonials</h3>
+              <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
+                numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum
+                quisquam eum porro a pariatur veniam.
+              </p>
+            </div>
+          </div>
+        
+          <div class="row text-center d-flex align-items-stretch">
+            <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-stretch">
+              <div class="card testimonial-card">
+                <div class="card-up" style="background-color: #F96B23;"></div>
+                <div class="avatar mx-auto bg-white">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(1).webp"
+                    class="rounded-circle img-fluid" />
+                </div>
+                <div class="card-body">
+                  <h4 class="mb-4">Maria Smantha</h4>
+                  <hr />
+                  <p class="dark-grey-text mt-4">
+                    <i class="fas fa-quote-left pe-2"></i>Lorem ipsum dolor sit amet eos adipisci,
+                    consectetur adipisicing elit.
+                  </p>
+                  <ul class="list-unstyled d-flex justify-content-center mb-0">
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-5 mb-md-0 d-flex align-items-stretch">
+              <div class="card testimonial-card">
+                <div class="card-up" style="background-color: #FDDB2E;"></div>
+                <div class="avatar mx-auto bg-white">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(2).webp"
+                    class="rounded-circle img-fluid" />
+                </div>
+                <div class="card-body">
+                  <h4 class="mb-4">Lisa Cudrow</h4>
+                  <hr />
+                  <p class="dark-grey-text mt-4">
+                    <i class="fas fa-quote-left pe-2"></i>Neque cupiditate assumenda in maiores
+                    repudi mollitia architecto.
+                  </p>
+                  <ul class="list-unstyled d-flex justify-content-center mb-0">
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star-half-alt fa-sm text-warning"></i>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-4 mb-0 d-flex align-items-stretch">
+              <div class="card testimonial-card">
+                <div class="card-up" style="background-color: #773344;"></div>
+                <div class="avatar mx-auto bg-white">
+                  <img src="https://mdbcdn.b-cdn.net/img/Photos/Avatars/img%20(9).webp"
+                    class="rounded-circle img-fluid" />
+                </div>
+                <div class="card-body">
+                  <h4 class="mb-4">John Smith</h4>
+                  <hr />
+                  <p class="dark-grey-text mt-4">
+                    <i class="fas fa-quote-left pe-2"></i>Delectus impedit saepe officiis ab
+                    aliquam repellat rem unde ducimus.
+                  </p>
+                  <ul class="list-unstyled d-flex justify-content-center mb-0">
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star fa-sm text-warning"></i>
+                    </li>
+                    <li>
+                      <i class="fas fa-star-half-alt fa-sm text-warning"></i>
+                    </li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <!-- Section: Testimonials v.1 -->
+
+      </div>
+
+    </div>
+
+    <div class="container-fluid py-5 landing-contacts">
+      <div class="container">
+        <!-- Section heading -->
+        <h3 class="text-center text-uppercase font-weight-bold mb-5 wow fadeIn" data-wow-delay="0.2s">contact
+          us</h3>
+
+        <!-- Section description -->
+        <p class="text-center my-5 w-responsive mx-auto wow fadeIn fw-light text-white-50" data-wow-delay="0.2s">Lorem ipsum dolor
+          sit amet, consectetur adipisicing elit. Laborum quas, eos officia maiores ipsam ipsum dolores reiciendis ad
+          voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
+          assumenda deleniti.</p>
+
+        <div class="row">
+          <div class="col-md-6 offset-md-3">
+            <form>
+              <!-- Name input -->
+              <div class="form-outline mb-4">
+                <input type="text" id="landingpage-form-name" class="form-control" />
+                <label class="form-label" for="landingpage-form-name">Name</label>
+              </div>
+            
+              <!-- Email input -->
+              <div class="form-outline mb-4">
+                <input type="email" id="landingpage-form-email" class="form-control" />
+                <label class="form-label" for="landingpage-form-email">Email address</label>
+              </div>
+            
+              <!-- Message input -->
+              <div class="form-outline mb-4">
+                <textarea class="form-control" id="form4Example3" rows="4"></textarea>
+                <label class="form-label" for="form4Example3">Message</label>
+              </div>
+            
+              <!-- Submit button -->
+              <button type="submit" class="btn btn-white btn-block mb-4">Send</button>
+            </form>
+          </div>
+        </div>
+
+
+        <!-- Grid row -->
+        <div class="row text-center mt-4">
+
+          <!-- Grid column -->
+          <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
+            <i class="fa fa-phone-alt"></i>
+            <h5 class="fw-light mb-4 mt-2">+639473299876</h5>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
+            <i class="fa fa-paper-plane"></i>
+            <h5 class="fw-light mb-4 mt-2">inquiries@1mcdigital.com</h5>
+          </div>
+          <!-- Grid column -->
+
+          <!-- Grid column -->
+          <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
+            <i class="fa fa-globe"></i>
+            <h5 class="fw-light mb-4 mt-2">www.cuadito.com.ph</h5>
+          </div>
+          <!-- Grid column -->
+
+        </div>
+        <!-- Grid row -->
+      </div>
+    </div>
       
    </main>
 
    <!-- FOOTER -->
-   <footer></footer>
+   <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50 text-center">
+      <div class="container">
+          <div class="text-center mb-5 fs-5">
+            <!-- Icon -->
+            <a class="text-reset me-3" href="#">
+              <i class="fab fa-facebook-f"></i>
+            </a>
+
+            <a class="text-reset me-3" href="#">
+              <i class="fab fa-instagram"></i>
+            </a>
+            
+            <a class="text-reset me-3" href="#">
+              <i class="fab fa-twitter"></i>
+            </a>
+          </div>
+          <ul class="nav justify-content-center border-bottom pb-3 mb-4 nav-footer">
+              <li class="nav-item">
+              <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
+                  <a href="{{ route('client.dashboard') }}" class="nav-link" aria-current="page">
+                      <!-- <i class="fas fa-home fa-fw me-3"></i> -->
+                      <span>About</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('client.companies.index') }}" class="nav-link">
+                      <!-- <i class="fas fa-square fa-fw me-3"></i> -->
+                      <span>Projects</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('client.projects.index') }}" class="nav-link">
+                      <!-- <i class="fas fa-highlighter fa-fw me-3"></i> -->
+                      <span>Pricing</span>
+                  </a>
+              </li>
+              <li class="nav-item">
+                  <a href="{{ route('client.listing.index') }}" class="nav-link">
+                      <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                      <span>Contact</span>
+                  </a>
+              </li>
+          </ul>
+          <a href="#" class="d-flex align-items-center justify-content-center my-4 link-dark text-decoration-none">
+              <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
+          </a>
+          <p class="mb-0 text-muted">Powered by: <b>1MC Digital, Inc.</b></p>
+      </div>
+  </footer>
 
 
   <!-- Custom scripts -->

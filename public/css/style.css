@@ -1,6 +1,11 @@
 @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600;700&display=swap");
 
 
+html{
+    width: 100%;
+    max-width: 100%;
+}
+
 body {
     font-family: "Raleway", sans-serif;
     font-weight: 400;
@@ -798,6 +803,33 @@ body {
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
     }
+
+    .testimonial-card .card-up {
+        height: 120px;
+        overflow: hidden;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+      }
+      .testimonial-card .avatar {
+        width: 110px;
+        margin-top: -60px;
+        overflow: hidden;
+        border: 3px solid #fff;
+        border-radius: 50%;
+      }
+
+      .landing-contacts{
+          background-color: #773344;
+          color: #fff;
+      }
+
+      .landing-contacts .form-outline .form-control~.form-label{
+        color: rgba(230, 231, 231, 0.5);
+        font-size: 13px;
+      }
+      .landing-contacts .fa{
+          font-size: 25px;
+      }
   /* End of Landing Page Styles */
 
   /* Pricing table on Admin Panel */
@@ -1199,10 +1231,6 @@ body{margin-top:20px;}
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
     transition: 0.5s;
 }
-.price-card:hover .btn {
-    background: #FF5F00;
-    border-color: #FF5F00;
-}
 p.price span {
     display: inline-block;
     padding: 15px 15px 50px;
@@ -1237,5 +1265,47 @@ ul li {
     height: 40px;
     line-height: 40px;
     padding: 0 20px;
+}
+
+
+.highlight .price-card {
+    background: #F96B23;
+    padding: 40px 35px;
+    position: relative;
+    border-radius: 2px;
+    overflow: hidden;
+    color: #fff;
+    box-shadow: 0 .12rem .30rem rgba(0, 0, 0, 0.6);
+}
+.highlight .price-card:before {
+    position: absolute;
+    content: "";
+    top: 0;
+    right: -35px;
+    width: 88px;
+    height: 88px;
+    background: #E6E7E7;
+    opacity: 0.2;
+    border-radius: 8px;
+    transform: rotate(45deg);
+}
+.highlight .price-card:after {
+    position: absolute;
+    content: "";
+    top: 30px;
+    right: -35px;
+    width: 88px;
+    height: 88px;
+    background: #E6E7E7;
+    opacity: 0.2;
+    border-radius: 8px;
+    transform: rotate(45deg);
+}
+.highlight .price span{
+    color: #fff;
+}
+.highlight .price-card .btn{
+    color: #F96B23;
+    background-color: #fff;;
 }
 /* end of pricing table */
