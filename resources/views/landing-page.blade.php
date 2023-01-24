@@ -135,7 +135,7 @@
                   <hr class="hr-light my-4">
                   <h5 class="mb-4">An online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</h5>
                 </div>
-                <a href="#features" class="btn landing-page-btn btn-rounded mt-5">Get Started</a>
+                <a href="{{ route('client.auth.show-register-form') }}" class="btn landing-page-btn btn-rounded mt-5">Get Started</a>
               </div>
             </div>
           </div>
@@ -261,7 +261,7 @@
         <!-- Section heading -->
         <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-5 wow fadeIn" data-wow-delay="0.2s">Our
           pricing plans</h3>
-          <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+          <p class="mb-4 pb-2 mb-md-5 pb-md-0 text-center text-muted">
             Experience a whole new level of making a partners today!
           </p>
 
@@ -319,7 +319,7 @@
           <div class="row d-flex justify-content-center">
             <div class="col-md-10 col-xl-8 text-center">
               <h3 class="mb-4">Testimonials</h3>
-              <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+              <p class="mb-4 pb-2 mb-md-5 pb-md-0  text-muted">
                 Here's what our clients talk about us.
               </p>
             </div>
