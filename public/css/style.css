@@ -741,6 +741,7 @@ body {
         background-image: url('../images/banners/cuadito-buidling.jpg');
         background-size: cover;
         background-attachment: fixed;
+        max-width: 100%;
     }
     .view .mask{
         position: absolute;
@@ -829,6 +830,9 @@ body {
       }
       .landing-contacts .fa{
           font-size: 25px;
+      }
+      .bg-black-russian{
+          background-color: #0B0014;
       }
   /* End of Landing Page Styles */
 

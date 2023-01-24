@@ -152,10 +152,7 @@
           <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-4">We Bring You Your Right Partners</h3>
 
           <!-- Section description -->
-          <p class="text-center text-muted my-5 w-responsive mx-auto">Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Laborum quas, eos officia maiores ipsam ipsum dolores reiciendis ad
-            voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
-            assumenda deleniti.</p>
+          <p class="text-center text-muted my-5 w-responsive mx-auto">Our main goal is to provide solutions that empower our community to grow and achieve their goals through trust and reliability. </p>
 
             <!-- Grid row -->
             <div class="row text-center">
@@ -164,8 +161,7 @@
               <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
                 <img src="{{asset('images/elements/collaboration-icon.png')}}" class="img-responsive features-icons"/>
                 <h5 class="font-weight-bold mb-4">Collaborations</h5>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam,
-                  aperiam minima assumenda deleniti hic.</p>
+                <p class="text-muted">We help businesses connect with each other through an easy-to-use platform for posting and bidding on projects.</p>
               </div>
               <!-- Grid column -->
 
@@ -173,17 +169,15 @@
               <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
                 <img src="{{asset('images/elements/communication-icon.png')}}" class="img-responsive features-icons"/>
                 <h5 class="font-weight-bold mb-4">Communications</h5>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam,
-                  aperiam minima assumenda deleniti hic.</p>
+                <p class="text-muted">Entrepreneurs can communicate easily with each other within the platform through our messaging feature.</p>
               </div>
               <!-- Grid column -->
 
               <!-- Grid column -->
               <div class="col-md-4 mb-1 mt-1 wow fadeIn" data-wow-delay="0.4s">
-                <img src="{{asset('images/elements/collaboration-icon.png')}}" class="img-responsive features-icons"/>
+                <img src="{{asset('images/elements/security-icon.png')}}" class="img-responsive features-icons"/>
                 <h5 class="font-weight-bold mb-4">Security</h5>
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Reprehenderit maiores nam,
-                  aperiam minima assumenda deleniti hic.</p>
+                <p class="text-muted">Aside from the platform notifications, companies will also receive email notifications for their payment subscriptions, posted projects, received proposals, and messages.</p>
               </div>
               <!-- Grid column -->
 
@@ -202,10 +196,7 @@
           <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-4" data-wow-delay="0.2s">Industries We Serve</h3>
 
           <!-- Section description -->
-          <p class="text-center grey-text mt-5 w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">Lorem ipsum dolor
-            sit amet, consectetur adipisicing elit. Laborum quas, eos officia maiores ipsam ipsum dolores reiciendis ad
-            voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
-            assumenda deleniti.</p>
+          <p class="text-center text-muted mt-5 w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">Bringing together entrepreneurs from various industries on a single platform, enabling them to connect easily and do business efficiently as they grow with one another.</p>
 
             <div class="row">
 
@@ -270,12 +261,9 @@
         <!-- Section heading -->
         <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-5 wow fadeIn" data-wow-delay="0.2s">Our
           pricing plans</h3>
-
-        <!-- Section description -->
-        <p class="text-center grey-text my-5 w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">Lorem ipsum dolor
-          sit amet, consectetur adipisicing elit. Laborum quas, eos officia maiores ipsam ipsum dolores reiciendis ad
-          voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
-          assumenda deleniti.</p>
+          <p class="mb-4 pb-2 mb-md-5 pb-md-0">
+            Experience a whole new level of making a partners today!
+          </p>
 
         <!-- Pricing Table starts -->
         <div class="row pt-4 landing-page-pricing">
@@ -332,9 +320,7 @@
             <div class="col-md-10 col-xl-8 text-center">
               <h3 class="mb-4">Testimonials</h3>
               <p class="mb-4 pb-2 mb-md-5 pb-md-0">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit, error amet
-                numquam iure provident voluptate esse quasi, veritatis totam voluptas nostrum
-                quisquam eum porro a pariatur veniam.
+                Here's what our clients talk about us.
               </p>
             </div>
           </div>
@@ -457,10 +443,7 @@
           us</h3>
 
         <!-- Section description -->
-        <p class="text-center my-5 w-responsive mx-auto wow fadeIn fw-light text-white-50" data-wow-delay="0.2s">Lorem ipsum dolor
-          sit amet, consectetur adipisicing elit. Laborum quas, eos officia maiores ipsam ipsum dolores reiciendis ad
-          voluptas, animi obcaecati adipisci sapiente mollitia? Autem delectus quod accusamus tempora, aperiam minima
-          assumenda deleniti.</p>
+        <p class="text-center my-5 w-responsive mx-auto wow fadeIn fw-light text-white-50" data-wow-delay="0.2s">We'd love to assist you in any way. Looking forward to hearing from you. </p>
 
         <div class="row">
           <div class="col-md-6 offset-md-3">
@@ -522,7 +505,7 @@
    </main>
 
    <!-- FOOTER -->
-   <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-dark text-white-50 text-center">
+   <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-black-russian text-white-50 text-center">
       <div class="container">
           <div class="text-center mb-5 fs-5">
             <!-- Icon -->
