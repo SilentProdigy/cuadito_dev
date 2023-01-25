@@ -73,7 +73,7 @@ Route::name('client.')->group(function () {
     });
     
     // Route::middleware(['auth.client', 'preventBackHistory'])->group(function() {
-    Route::middleware(['auth.client'])->group(function() {
+    Route::middleware(['auth.client', 'client.validate.redirect_if_with_pending_transaction'])->group(function() {
         Route::post('logout', [\App\Http\Controllers\Client\Auth\LoginController::class, 'logout'])->name('auth.logout');
         Route::get('dashboard', [\App\Http\Controllers\Client\DashboardController::class, 'index'])->name('dashboard');
 

@@ -57,11 +57,11 @@ class PaymentController extends Controller
                 ]);
         
                 $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
-                
-                DB::commit();
-                Log::info("PAYMENT_RECEIVED:" . json_encode($payment));
             }
-    
+
+            Log::info("PAYMENT_DATA_RECEIVED:" . json_encode($payment));
+
+            DB::commit();
             return response()->json(['result' => 'OK']);
         }
         catch(\Exception $e)
