@@ -7,6 +7,7 @@ use App\Mail\Subscription\PaymentCreated;
 use App\Models\Payment;
 use App\Models\Subscription;
 use App\Models\SubscriptionType;
+use App\Traits\CreatePaymentSession;
 use App\Traits\SendEmail;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -15,7 +16,7 @@ use Illuminate\Support\Facades\Http;
 
 class SubscriptionController extends Controller
 {
-    use SendEmail;
+    use SendEmail, CreatePaymentSession;
 
     public function subscribe(Request $request,SubscriptionType $subscription_type)
     {
@@ -47,7 +48,6 @@ class SubscriptionController extends Controller
                 'subscription_type_id' => $subscription_type->id,
                 'status' => Subscription::INACTIVE_STATUS,
             ]);
-
 
             $payment = $subscription->payments()->create([
                 'amount' => 0, // amount here comes from the api of dragon pay
@@ -83,6 +83,8 @@ class SubscriptionController extends Controller
                 return redirect()->back()->withErrors(['message' => 'Operation Failed: ' . $response['Message']]);
             }
             
+            $this->createPaymentSession($payment, $response);
+
             // Redirect to Submitted URL
             return redirect($response['Url']);
         }

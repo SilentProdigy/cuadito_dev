@@ -80,6 +80,7 @@ class Kernel extends HttpKernel
         'client.validate.ensure_client_have_subscription_points' => \App\Http\Middleware\Client\EnsureClientHaveSubscriptionPoints::class,
         'client.validate.ensure_client_subscription_is_not_expire' => \App\Http\Middleware\Client\EnsureClientSubscriptionIsNotExpired::class,
         'client.projects.ensure_client_projects_dit_not_reach_max_projects' => \App\Http\Middleware\Client\EnsureClientProjectsDidNotReachMaxProjects::class,
-        'client.proposals.ensure_client_projects_dit_not_reach_max_proposals' => \App\Http\Middleware\Client\EnsureClientProposalsDidNotReachMaxProposals::class
+        'client.proposals.ensure_client_projects_dit_not_reach_max_proposals' => \App\Http\Middleware\Client\EnsureClientProposalsDidNotReachMaxProposals::class,
+        'client.validate.redirect_if_with_pending_transaction' => \App\Http\Middleware\Client\RedirectIfHavePendingTransaction::class
     ];
 }
