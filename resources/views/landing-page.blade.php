@@ -147,7 +147,9 @@
    <main>
      <div class="container" id="about">
        <!-- Features -->
-       <section id="features" class="mb-3 mt-5 pt-4 pb-3">
+       <section id="features" class="mb-3 mt-5 pt-4 pb-3 text-center">
+        <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
+        <p class="text-center text-muted my-5 w-responsive mx-auto">Cuadito is an online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</p>
           <!-- Section heading -->
           <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-4">We Bring You Your Right Partners</h3>
 
