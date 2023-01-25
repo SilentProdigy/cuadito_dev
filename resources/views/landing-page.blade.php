@@ -89,16 +89,16 @@
             <!-- Left links -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link" href="#">About</a>
+                <a class="nav-link" href="#about">About</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Projects</a>
+                <a class="nav-link" href="#projects">Projects</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Pricing</a>
+                <a class="nav-link" href="#pricing">Pricing</a>
               </li>
               <li class="nav-item">
-                <a class="nav-link" href="#">Contact</a>
+                <a class="nav-link" href="#contacts">Contact</a>
               </li>
             </ul>
             <!-- Left links -->
@@ -145,7 +145,7 @@
 
    <!-- MAIN -->
    <main>
-     <div class="container">
+     <div class="container" id="about">
        <!-- Features -->
        <section id="features" class="mb-3 mt-5 pt-4 pb-3">
           <!-- Section heading -->
@@ -190,7 +190,7 @@
        <hr class="my-5">
 
         <!-- Section: Services -->
-        <section id="services" class="pb-5 mb-5">
+        <section id="projects" class="pb-5 mb-5">
 
           <!-- Section heading -->
           <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-4" data-wow-delay="0.2s">Industries We Serve</h3>
@@ -253,7 +253,7 @@
         </div>
       </div>
 
-    <div class="container">
+    <div class="container" id="pricing">
 
       <!-- Section: Pricing -->
       <section class="mt-4 mb-5 pb-5">
@@ -436,7 +436,7 @@
 
     </div>
 
-    <div class="container-fluid py-5 landing-contacts">
+    <div class="container-fluid py-5 landing-contacts" id="contacts">
       <div class="container">
         <!-- Section heading -->
         <h3 class="text-center text-uppercase font-weight-bold mb-5 wow fadeIn" data-wow-delay="0.2s">contact
@@ -524,25 +524,25 @@
           <ul class="nav justify-content-center border-bottom pb-3 mb-4 nav-footer">
               <li class="nav-item">
               <!-- <a class="nav-link active" aria-current="page" href="#">Home</a> -->
-                  <a href="{{ route('client.dashboard') }}" class="nav-link" aria-current="page">
+                  <a href="#about" class="nav-link" aria-current="page">
                       <!-- <i class="fas fa-home fa-fw me-3"></i> -->
                       <span>About</span>
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="{{ route('client.companies.index') }}" class="nav-link">
+                  <a href="#projects" class="nav-link">
                       <!-- <i class="fas fa-square fa-fw me-3"></i> -->
                       <span>Projects</span>
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="{{ route('client.projects.index') }}" class="nav-link">
+                  <a href="#pricing" class="nav-link">
                       <!-- <i class="fas fa-highlighter fa-fw me-3"></i> -->
                       <span>Pricing</span>
                   </a>
               </li>
               <li class="nav-item">
-                  <a href="{{ route('client.listing.index') }}" class="nav-link">
+                  <a href="#contacts" class="nav-link">
                       <!-- <i class="fas fa-list fa-fw me-3"></i> -->
                       <span>Contact</span>
                   </a>
