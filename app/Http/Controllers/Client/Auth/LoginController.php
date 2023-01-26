@@ -9,8 +9,15 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginController extends Controller
 {
+ 
     public function showLoginForm() 
     {
+        // Check if user is loggedin
+        if(auth('client')->user())
+        {
+            return redirect(route('client.dashboard'));
+        }
+
         return view('client.auth.login');
     }
 

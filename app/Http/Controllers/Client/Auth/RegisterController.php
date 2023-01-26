@@ -15,6 +15,12 @@ class RegisterController extends Controller
 {
     public function showRegisterForm()
     {
+         // Check if user is loggedin
+         if(auth('client')->user())
+         {
+             return redirect(route('client.dashboard'));
+         }
+
         $register_route = route('client.auth.register');
 
         if(request()->has('code'))

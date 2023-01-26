@@ -20,10 +20,13 @@ use App\Http\Contorllers\Client\MessageController;
 |
 */
 
-Route::redirect('/', '/auth/login');
+// Route::redirect('/', '/auth/login');
+Route::redirect('/', '/landing-page');
+
 
 // Route::get('/login', [HomeController::class, 'index'])->middleware('auth');
-Route::redirect('/login', '/admin/login');
+// Route::redirect('/login', '/admin/login');
+Route::redirect('/login', '/auth/login');
 
 Route::get('/landing-page', function(){
     return view('landing-page');
