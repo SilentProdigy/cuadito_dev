@@ -2,10 +2,13 @@
 
 namespace App\Http\Requests\Client\Project;
 
+use App\Traits\CheckIfClientOwnedAProject;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateProjectRequest extends FormRequest
 {
+    use CheckIfClientOwnedAProject;
+
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -13,7 +16,7 @@ class UpdateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->checkIfClientOwnedAProject($this->project);
     }
 
     /**

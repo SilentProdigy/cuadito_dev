@@ -17,6 +17,7 @@ use App\Models\Contact;
 use App\Models\Project;
 use App\Services\CompanyService;
 use App\Services\ProjectService;
+use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\DecreaseProjectCountOnSubscription;
 use App\Traits\IncreaseProjectCountOnSubscription;
 use Illuminate\Support\Facades\DB;
@@ -25,6 +26,7 @@ use Illuminate\Support\Facades\Mail;
 class ProjectController extends Controller
 {   
     use IncreaseProjectCountOnSubscription, DecreaseProjectCountOnSubscription;
+    use CheckIfClientOwnedAProject;
 
     private $companyService;
     private $projectService;
@@ -128,6 +130,13 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
+        if(!$this->checkIfClientOwnedAProject($project))
+        {
+            return redirect(route('client.projects.index'))->withErrors([
+                'message' => "Error Unauthorized Access!"
+            ]);
+        }
+
         $companies = $this->companyService->getApprovedCompaniesOfClient();
 
         $selected_category_ids = $project->categories->pluck('id')->toArray();
@@ -174,6 +183,14 @@ class ProjectController extends Controller
     {
         try 
         {
+            
+            if(!$this->checkIfClientOwnedAProject($project))
+            {
+                return redirect(route('client.projects.index'))->withErrors([
+                    'message' => "Error Unauthorized Access!"
+                ]);
+            }
+
             $project->delete();
             // $this->dec`  reaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');  

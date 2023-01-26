@@ -130,6 +130,11 @@ class ProposalController extends Controller
         try
         {            
             DB::beginTransaction();
+
+            if(!$bidding->is_owned)
+            {
+                return redirect(route('client.proposals.index'))->withErrors(['message' => 'Unauthorized Access!']);
+            } 
          
             if($bidding->project->status !== Project::ACTIVE_STATUS)
             {
