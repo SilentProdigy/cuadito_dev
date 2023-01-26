@@ -18,6 +18,14 @@ class RedirectIfHavePendingTransaction
     {
         if(session()->has('dragonpay.payment'))
         {
+            // Came from the dragonpay api
+            if($request->has('txnid') && $request->has('status'))
+            {
+                // if paid , cancelled, 
+                session()->forget('dragonpay.payment');
+                return redirect(route('client.dashboard'));    
+            }
+
             $session = session('dragonpay.payment'); 
             $payment = \App\Models\Payment::find($session['payment']['id']);
             
@@ -28,7 +36,7 @@ class RedirectIfHavePendingTransaction
             
             // if paid , cancelled, 
             session()->forget('dragonpay.payment');
-            return redirect(route('client.products.index'));
+            return redirect(route('client.dashboard'));
         }
 
         return $next($request);
