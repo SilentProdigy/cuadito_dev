@@ -100,6 +100,10 @@
               <li class="nav-item">
                 <a class="nav-link" href="#contacts">Contact</a>
               </li>
+              <li class="nav-item">
+                <a class="nav-link" href="{{ route('client.auth.show-login-form') }}">Login</a>
+              </li>
+              
             </ul>
             <!-- Left links -->
           </div>
