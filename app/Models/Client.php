@@ -28,6 +28,10 @@ class Client extends Authenticatable
         'birth_date' => 'date'
     ];
 
+    protected $hidden = [
+        'password'
+    ];
+
     protected $appends = [
         'have_companies',
         'have_valid_companies',
