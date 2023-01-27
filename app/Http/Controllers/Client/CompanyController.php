@@ -39,6 +39,11 @@ class CompanyController extends Controller
 
     public function edit(Company $company)
     {
+        if(!$company->checkIfUserOwned())
+        {
+            return redirect(route('client.companies.index'))->withErrors(['message' => 'Unauthorized Access!']);
+        }
+
         return view('client.companies.edit')->with(compact('company'));
     }
 

@@ -110,4 +110,9 @@ class Company extends Model
         return $this->checkIfAllRequirementsAreSubmitted() && 
                 $approved_requirements->count() == count(Requirement::REQUIREMENT_IDS);
     }   
+
+    public function checkIfUserOwned()
+    {
+        return $this->client_id == auth('client')->user()->id;
+    }
 }
