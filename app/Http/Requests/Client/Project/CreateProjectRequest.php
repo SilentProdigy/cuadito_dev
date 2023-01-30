@@ -29,7 +29,7 @@ class CreateProjectRequest extends FormRequest
             'title' => 'required|string|min:3',
             'description' => 'required|string|min:3',
             'category_ids' => 'required',
-            'company_id' => 'required',
+            'company_id' => 'required|exists:App\Models\Company,id',
             'cost' => 'required|numeric',
             'scope_of_work' => 'nullable|string|min:3',
             'due_date' => 'required|date',
