@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests\Client\Project;
 
+use App\Models\Company;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CreateProjectRequest extends FormRequest
@@ -13,7 +14,8 @@ class CreateProjectRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        $company = Company::find($this->company_id);
+        return $company->checkIfUserOwned();
     }
 
     /**
