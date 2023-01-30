@@ -56,6 +56,7 @@
         height: 100%;
         min-height: 100%;
       }
+
   
     </style>
 </head>
@@ -64,7 +65,7 @@
    <header>
       <!-- Navbar -->
       <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar">
+      <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar bg-white">
         <!-- Container wrapper -->
         <div class="container">
           <!-- Toggle button -->
@@ -83,11 +84,16 @@
           <!-- Collapsible wrapper -->
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Navbar brand -->
-            <a class="navbar-brand mt-2 mt-lg-0" href="#">
-              <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
+            <a class="navbar-brand" href="#">
+              <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
             </a>
+          </div>
+          <!-- Collapsible wrapper -->
+
+          <!-- Right elements -->
+          <div class="d-flex align-items-center">
             <!-- Left links -->
-            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <ul class="navbar-nav d-flex">
               <li class="nav-item">
                 <a class="nav-link" href="#about">About</a>
               </li>
@@ -100,19 +106,14 @@
               <li class="nav-item">
                 <a class="nav-link" href="#contacts">Contact</a>
               </li>
-              <li class="nav-item">
-                <a class="nav-link" href="{{ route('client.auth.show-login-form') }}">Login</a>
+              <li class="px-3">
+                <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
               </li>
-              
             </ul>
             <!-- Left links -->
-          </div>
-          <!-- Collapsible wrapper -->
-
-          <!-- Right elements -->
-          <div class="d-flex align-items-center">
+            
             <!-- Icon -->
-            <a class="text-reset me-3" href="#">
+            <!-- <a class="text-reset me-3" href="#">
               <i class="fab fa-facebook-f"></i>
             </a>
 
@@ -122,24 +123,39 @@
             
             <a class="text-reset me-3" href="#">
               <i class="fab fa-twitter"></i>
-            </a>
+            </a> -->
           </div>
           <!-- Right elements -->
         </div>
         <!-- Container wrapper -->
       </nav>
 
-      <div id="home" class="view jarallax" data-jarallax='{"speed": 0.2}'>
-        <div class="mask rgba-cuadito-dark">
+      <div id="home">
+        <!-- <div class="row">
+          <div class="col-md-6 col-xs-12 col-lg-6">
+          </div>
+          <div class="col-md-6 col-xs-12 col-lg-6">
+            <h1 class="display-4 text-uppercase font-weight-bold mt-5 mt-xl-2">Find Your Next Deal!</h1>
+            <hr class="hr-light my-4">
+            <h5 class="mb-4">An online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</h5>
+          </div>
+        </div> -->
+        <div class="view mask">
           <div class="container h-100 d-flex justify-content-center align-items-center">
             <div class="row smooth-scroll">
-              <div class="col-md-12 text-center">
-                <div class="text-white wow fadeInDown">
-                  <h1 class="display-4 text-uppercase font-weight-bold mt-5 mt-xl-2">Find Your Next Deal!</h1>
+              <div class="col-md-6">
+                <div class="hover-zoom">
+                  <img src="{{ asset('images/banners/collaboration-vector.png') }}"
+                    class="img-fluid">
+                </div>
+              </div>
+              <div class="col-md-6 p-5">
+                <div class="wow fadeInDown">
+                  <h1 class="display-3 text-uppercase fw-bold font-weight-bold mt-5 mt-xl-2">Better Connections,<br>Better Deals</h1>
                   <hr class="hr-light my-4">
                   <h5 class="mb-4">An online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</h5>
                 </div>
-                <a href="{{ route('client.auth.show-register-form') }}" class="btn landing-page-btn btn-rounded mt-5">Get Started</a>
+                <a href="{{ route('client.auth.show-register-form') }}" class="btn landing-page-btn btn-rounded mt-5 fs-5">Get Started <i class="fa fa-angle-right"></i> </a>
               </div>
             </div>
           </div>
@@ -150,15 +166,98 @@
    <!-- MAIN -->
    <main>
      <div class="container" id="about">
+
+      <!-- Section: Services -->
+      <section id="projects" class="py-5 mb-5">
+
+        <h3 class="text-center text-uppercase font-weight-bold" data-wow-delay="0.2s">Industries We Serve</h3>
+
+        <!-- Section description -->
+        <p class="text-center text-muted w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">Bringing together entrepreneurs from various industries on a single platform, enabling them to connect easily and do business efficiently as they grow with one another.</p>
+
+        <div class="row g-2 py-5">
+          <div class="col-lg-4 col-md-4">
+            <div class="rounded-9 bg-dark text-white bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
+              <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%281%29.jpg" alt="Stony Beach" class="img-fluid"/>
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <h5 class="d-flex justify-content-center">Advertisement & Marketing</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4">
+            <div class="rounded-9 bg-dark text-white bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
+              <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%282%29.jpg" alt="Stony Beach" class="img-fluid"/>
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <h5 class="d-flex justify-content-center">Construction</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4">
+            <div class="rounded-9 bg-dark text-white bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
+              <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%283%29.jpg" alt="Stony Beach" class="img-fluid"/>
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <h5 class="d-flex justify-content-center">Training & Coaching</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4">
+            <div class="rounded-9 bg-dark text-white bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
+              <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(136).jpg" alt="Stony Beach" class="img-fluid"/>
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <h5 class="d-flex justify-content-center">IT Industry</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4">
+            <div class="rounded-9 bg-dark text-white bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
+              <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(132).jpg" alt="Stony Beach" class="img-fluid"/>
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <h5 class="d-flex justify-content-center">Food & Beverages</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-lg-4 col-md-4">
+            <div class="rounded-9 bg-dark text-white bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
+              <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(7).jpg" alt="Stony Beach" class="img-fluid"/>
+              <div class="mask" style="background-color: rgba(0, 0, 0, 0.7);">
+                <div class="d-flex justify-content-center align-items-center h-100">
+                  <h5 class="d-flex justify-content-center">Art & Entertainment</h5>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+        </div>
+
+      </section>
+      <!-- Section: Services -->
+
        <!-- Features -->
-       <section id="features" class="mb-3 mt-5 pt-4 pb-3 text-center">
-        <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
-        <p class="text-center text-muted my-5 w-responsive mx-auto">Cuadito is an online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</p>
+       <section id="features" class="mb-3 pb-3 text-center">
+        <!-- <img src="{{asset('images/logo/logo.png')}}" height="200" alt="Cuadito Logo" loading="lazy" />
+        <p class="text-center text-muted my-5 w-responsive mx-auto">Cuadito is an online project-bidding management system that helps companies to post projects, open biddings, submit proposals and connects with other companies within this application.</p> -->
+
           <!-- Section heading -->
-          <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-4">We Bring You Your Right Partners</h3>
+          <h3 class="text-center text-uppercase font-weight-bold mt-4">We Bring You The Right Connections</h3>
 
           <!-- Section description -->
-          <p class="text-center text-muted my-5 w-responsive mx-auto">Our main goal is to provide solutions that empower our community to grow and achieve their goals through trust and reliability. </p>
+          <p class="text-center text-muted mb-3 w-responsive mx-auto">Our main goal is to provide solutions that empower our community to grow and achieve their goals through trust and reliability. </p>
 
             <!-- Grid row -->
             <div class="row text-center">
@@ -193,58 +292,7 @@
 
        <!-- End Features -->
 
-       <hr class="my-5">
-
-        <!-- Section: Services -->
-        <section id="projects" class="pb-5 mb-5">
-
-          <!-- Section heading -->
-          <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-4" data-wow-delay="0.2s">Industries We Serve</h3>
-
-          <!-- Section description -->
-          <p class="text-center text-muted mt-5 w-responsive mx-auto wow fadeIn" data-wow-delay="0.2s">Bringing together entrepreneurs from various industries on a single platform, enabling them to connect easily and do business efficiently as they grow with one another.</p>
-
-            <div class="row">
-
-              <!-- Grid column -->
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="bg-image hover-zoom">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%281%29.jpg"
-                    class="img-fluid">
-                </div>
-                <h5 class="mt-4 text-center">Advertisement & Marketing</h5>
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-lg-4 col-md-6 mb-5">
-                <div class="bg-image hover-zoom">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%282%29.jpg"
-                    class="img-fluid">
-                </div>
-
-                <h5 class="mt-4 text-center">Construction</h5>
-
-              </div>
-              <!-- Grid column -->
-
-              <!-- Grid column -->
-              <div class="col-lg-4 col-md-6 mb-5">
-
-                <div class="bg-image hover-zoom">
-                  <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%283%29.jpg"
-                    class="img-fluid">
-                </div>
-
-                <h5 class="mt-4 text-center">Training & Coaching</h5>
-
-              </div>
-              <!-- Grid column -->
-
-            </div>
-
-        </section>
-        <!-- Section: Services -->
+       <!-- <hr class="my-5"> -->
 
      </div>
      
@@ -263,6 +311,22 @@
 
       <!-- Section: Pricing -->
       <section class="mt-4 mb-5 pb-5">
+
+        <h3 class="text-center text-uppercase font-weight-bold py-5">Join us with our Trusted Partners</h3>
+        <div class="row cuadito-logos">
+          <div class="col-lg-3 col-md-3 col-xs-12">
+            <img src="{{asset('images/company_logo/1mc-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          </div>
+          <div class="col-lg-3 col-md-3 col-xs-12">
+            <img src="{{asset('images/company_logo/amti-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          </div>
+          <div class="col-lg-3 col-md-3 col-xs-12">
+            <img src="{{asset('images/company_logo/amarantos-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          </div>
+          <div class="col-lg-3 col-md-3 col-xs-12">
+            <img src="{{asset('images/company_logo/rz-studios-logo.webp')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          </div>
+        </div>
 
         <!-- Section heading -->
         <h3 class="text-center text-uppercase font-weight-bold mb-5 mt-5 pt-5 wow fadeIn" data-wow-delay="0.2s">Our
@@ -511,7 +575,7 @@
    </main>
 
    <!-- FOOTER -->
-   <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-black-russian text-white-50 text-center">
+   <footer id="sticky-footer" class="flex-shrink-0 py-4 bg-white text-black-50 text-center">
       <div class="container">
           <div class="text-center mb-5 fs-5">
             <!-- Icon -->
@@ -555,7 +619,7 @@
               </li>
           </ul>
           <a href="#" class="d-flex align-items-center justify-content-center my-4 link-dark text-decoration-none">
-              <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
+              <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
           </a>
           <p class="mb-0 text-muted">Powered by: <b>1MC Digital, Inc.</b></p>
       </div>
@@ -570,10 +634,12 @@
     $(window).scroll(function(){
         var scroll = $(window).scrollTop();
         if(scroll < 300){
-            $('.fixed-top').css('background', 'transparent');
+            $('.fixed-top').css('background', 'white');
+            $('.fixed-top').css('box-shadow', 'none');
         } else{
-            $('.fixed-top').css('background', 'rgba(11, 0, 20, 1)');
+            $('.fixed-top').css('background', 'rgba(255, 255, 255, 1)');
             $('.fixed-top').css('transition', '0.5s');
+            $('.fixed-top').css('box-shadow', '0 .12rem .30rem rgba(0, 0, 0, 0.6)');
         }
     });
 

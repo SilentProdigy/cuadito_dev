@@ -26,8 +26,11 @@
                     <p class="price"><span>{{$item->amount}}</span>/ mo.</p>
                     <p>&#8369;&nbsp;{{number_format($item->amount * 12, 2, '.', ','); }}&nbsp;/ year</p>
                     <ul class="pricing-offers">
-                      <li>{{$item->max_proposals_count}} Proposals</li>
-                      <li>{{$item->max_projects_count}} Projects</li>
+                      <li>{{$item->max_proposals_count}} Bids / month</li>
+                      <li>Unlimited Project Posting</li>
+                      @if($item->name == "Platinum")
+                      <li>Company will be top-listed on biddings.</li>
+                      @endif
                     </ul>
                     @if($latest_subscription && $latest_subscription->subscription_type_id == $item->id)
                       <a href="{{ route('client.subscriptions.unsubscribe', $latest_subscription) }}" class="subscription_btn btn btn-danger">Unsubscribe</a>

@@ -81,12 +81,8 @@
                                 </div>
                                 <div>
                                     <div class="my-1 py-1">
-                                        <p class="counters fw-bold">{{ $client->active_subscription->remaining_projects }}</p>
-                                        <h5 class="text-uppercase text-muted">Remaining Projects</h5>
-                                    </div>
-                                    <div class="my-1 py-1">
-                                        <p class="counters fw-bold">{{ $client->active_subscription->remaining_proposals }}</p>
-                                        <h5 class="text-uppercase text-muted">Remaining Proposals</h5>
+                                        <span class="counters fw-bold">{{ $client->active_subscription->remaining_proposals }}</span>
+                                        <span class="text-uppercase text-muted">Remaining Bids</span>
                                     </div>
                                 </div>
                             </div>
