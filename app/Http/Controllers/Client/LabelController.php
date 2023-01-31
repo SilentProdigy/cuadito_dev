@@ -54,14 +54,21 @@ class LabelController extends Controller
         }
     }
 
-    public function destroy(Label $label, Request $request)
+    public function destroy(Label $label)
     {
+        DB::beginTransaction();
         try {
+            if (!$label->isOwned()) {
+                return redirect()->back()->withErrors(['message' => 'Error: Unauthorized Operation!']);
+            }
+
             $label->delete();
 
+            DB::commit();
             return redirect(route('client.labels.index'))->with('success', 'Label was deleted successfully!');
         } catch (Exception $e) {
-            dd($e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors(['message' => 'Error: ' . $e->getMessage()]);
         }
     }
 }

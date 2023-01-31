@@ -23,4 +23,9 @@ class Label extends Model
     {
         return $this->belongsToMany(\App\Models\ConversationSubscription::class, 'conversation_sub_label');
     }
+
+    public function isOwned()
+    {
+        return auth('client')->user()->id === $this->client_id;
+    }
 }

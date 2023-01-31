@@ -13,7 +13,7 @@ class UpdateLabelFormRequest extends FormRequest
      */
     public function authorize()
     {
-        return true;
+        return $this->label->isOwned();
     }
 
     /**
