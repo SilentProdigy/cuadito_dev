@@ -24,9 +24,9 @@ class CreateConversationFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject' => 'required|min:3|string',
-            'email' => 'required|email',
-            'content' => 'required|string|min:3'
+            'subject' => 'required|min:3|string|min:3|max:80',
+            'email' => 'required|email:rfc,dns',
+            'content' => 'required|string|min:3|max:255'
         ];
     }
 }
