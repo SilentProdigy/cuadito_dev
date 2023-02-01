@@ -163,9 +163,9 @@
             <div class="col-md-7 col-lg-7 col-xs-12 p-4">
               <div class="row g-2 py-5">
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%281%29.jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center p-2">
                         <h5 class="d-flex justify-content-center">Advertisement & Marketing</h5>
                       </div>
@@ -174,9 +174,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%282%29.jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">Construction</h5>
                       </div>
@@ -185,9 +185,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Horizontal/Architecture/4-col/img%20%283%29.jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">Training & Coaching</h5>
                       </div>
@@ -196,9 +196,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(136).jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">IT Industry</h5>
                       </div>
@@ -207,9 +207,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(132).jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">Food & Beverages</h5>
                       </div>
@@ -218,9 +218,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(7).jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">Art & Entertainment</h5>
                       </div>
@@ -229,9 +229,9 @@
                 </div>
 
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(136).jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">IT Industry</h5>
                       </div>
@@ -240,9 +240,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(132).jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">Food & Beverages</h5>
                       </div>
@@ -251,9 +251,9 @@
                 </div>
       
                 <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-dark bg-image hover-zoom ripple d-flex justify-content-center align-items-center" style="height: 100px;">
-                    <img src="https://mdbootstrap.com/img/Photos/Lightbox/Original/img%20(7).jpg" alt="Stony Beach" class="img-fluid"/>
-                    <div class="mask" style="background-color: rgba(255, 255, 255, 0.6);">
+                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                    
+                    <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
                         <h5 class="d-flex justify-content-center">Art & Entertainment</h5>
                       </div>
@@ -506,7 +506,7 @@
                 role="tabpanel"
                 aria-labelledby="v-tabs-publish-tab"
               >
-              <img src="{{ asset('images/elements/features-dashboard.gif') }}" class="img-fluid border rounded">
+              <img src="{{ asset('images/elements/features-companies.gif') }}" class="img-fluid border rounded">
               </div>
               <div
                 class="tab-pane fade"
@@ -514,7 +514,7 @@
                 role="tabpanel"
                 aria-labelledby="v-tabs-engage-tab"
               >
-              <img src="{{ asset('images/elements/features-dashboard.gif') }}" class="img-fluid border rounded">
+              <img src="{{ asset('images/elements/features-listings.gif') }}" class="img-fluid border rounded">
               </div>
               <div
                 class="tab-pane fade"
@@ -738,16 +738,16 @@
               
             <h3 class="display-6 text-center text-uppercase">Connect with us</h3>
               <!-- Icon -->
-              <a class="text-reset me-4" href="#">
+              <a class="text-reset me-4" href="https://www.facebook.com/1mcDigital">
                 <i class="fab fa-facebook-f"></i>
               </a>
   
-              <a class="text-reset me-4" href="#">
+              <a class="text-reset me-4" href="https://www.instagram.com/1mcdigital/">
                 <i class="fab fa-instagram"></i>
               </a>
               
-              <a class="text-reset me-4" href="#">
-                <i class="fab fa-twitter"></i>
+              <a class="text-reset me-4" href="https://www.linkedin.com/company/1mc-digital-inc/">
+                <i class="fab fa-linkedin"></i>
               </a>
             </div>
           </div>
