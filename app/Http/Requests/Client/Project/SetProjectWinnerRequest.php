@@ -13,7 +13,8 @@ class SetProjectWinnerRequest extends FormRequest
      */
     public function authorize()
     {
-        return $this->checkIfClientOwnedAProject($this->project);
+        // return $this->checkIfClientOwnedAProject($this->project);
+        return $this->project->is_owned;
     }
 
     /**

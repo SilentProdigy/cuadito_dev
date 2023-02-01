@@ -20,7 +20,6 @@
                     <th>SEQ</th>
                     <th>NAME</th>
                     <th>AMOUNT</th>
-                    <th>MAX PROJECTS COUNT</th>
                     <th>MAX PROPOSALS COUNT</th>
                     <th>ACTIVE SUBSCRIBERS</th>
                     <th>ACTIONS</th>
@@ -31,7 +30,6 @@
                             <td>{{ $loop->iteration }}</td>
                             <td>{{ $item->name }}</td>
                             <td>@money($item->amount)</td>
-                            <td>{{ $item->max_projects_count }}</td>
                             <td>{{ $item->max_proposals_count }}</td>
                             <td>{{ $item->active_subscriptions_count }}</td>
                             <td>
