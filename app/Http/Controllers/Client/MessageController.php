@@ -10,12 +10,15 @@ use App\Models\Conversation;
 use App\Models\Notification;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 
 class MessageController extends Controller
 {
     public function store(CreateMessageFormRequest $request, Conversation $conversation)
     {
+        DB::beginTransaction();
+        
         try {
             $data = [
                 'sender_id' => auth('client')->user()->id,
@@ -45,10 +48,14 @@ class MessageController extends Controller
                 $recipient, 
                 $conversation
             ));
+
+            DB::commit();
     
             return redirect()->back()->with('success', 'Message was successfully sent.');     
         } catch (Exception $e) {
-            dd($e->getMessage());
+            // dd($e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors(['message' => 'Operation Failed!']);     
         }
     }
 }

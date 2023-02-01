@@ -4,7 +4,7 @@ namespace App\Http\Requests\Client\Conversations;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateConversationFormRequest extends FormRequest
+class CreateLabelFormRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,9 +24,7 @@ class CreateConversationFormRequest extends FormRequest
     public function rules()
     {
         return [
-            'subject' => 'required|min:3|string|min:3|max:80',
-            'email' => 'required|email:rfc,dns',
-            'content' => 'required|string|min:3|max:255'
+            'name' => 'required|string|min:3|max:10',
         ];
     }
 }

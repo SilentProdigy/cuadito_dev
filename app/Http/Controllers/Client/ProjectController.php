@@ -22,9 +22,10 @@ use App\Traits\DecreaseProjectCountOnSubscription;
 use App\Traits\IncreaseProjectCountOnSubscription;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
+use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class ProjectController extends Controller
-{   
+{
     use IncreaseProjectCountOnSubscription, DecreaseProjectCountOnSubscription;
     use CheckIfClientOwnedAProject;
 
@@ -38,6 +39,8 @@ class ProjectController extends Controller
 
         // $this->middleware('client.projects.ensure_client_projects_dit_not_reach_max_projects')
         //     ->only(['create', 'store']);
+
+        $this->middleware(XssCleanInput::class)->only(['store', 'update', 'setStatus', 'setWinner']);
     }
 
     /**
@@ -46,7 +49,7 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function index()
-    {   
+    {
         $projects = auth('client')->user()->projects ?? [];
         $project_states = Project::PROJECT_STATES;
         return view('client.projects.index')->with(compact('projects', 'project_states'));
@@ -73,24 +76,17 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
 
-        try 
-        {            
+        try {
             $project_details = $request->except(['company_id', 'categories_ids']);
             $category_ids = $request->input('category_ids');
             $company = Company::find($request->input('company_id'));
             $project = $this->companyService->createProject($company, $project_details, $category_ids);
-            
-            // $this->increaseProjectCountOnSubscription(
-            //     auth('client')->user()->active_subscription
-            // );
 
             DB::commit();
-            return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');  
-        }
-        catch(\Exception $e)
-        {
+            return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');
+        } catch (\Exception $e) {
             DB::rollBack();
-            
+
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
@@ -104,17 +100,16 @@ class ProjectController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show(Project $project)
-    {        
+    {
         // $proposals = Bidding::where('project_id', $project->id);
         $proposals = $project->proposals();
-        
-        if(request('search'))
-        {
-            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')            
-            ->orWhereHas('company', function($query) {
-                $query->where('name', 'LIKE', '%' . request('search') . '%')
-                ->orWhere('email', 'LIKE', '%' . request('search') . '%');
-            });
+
+        if (request('search')) {
+            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')
+                ->orWhereHas('company', function ($query) {
+                    $query->where('name', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('email', 'LIKE', '%' . request('search') . '%');
+                });
         }
 
         $proposals = $proposals->paginate(10);
@@ -130,8 +125,7 @@ class ProjectController extends Controller
      */
     public function edit(Project $project)
     {
-        if(!$this->checkIfClientOwnedAProject($project))
-        {
+        if (!$this->checkIfClientOwnedAProject($project)) {
             return redirect(route('client.projects.index'))->withErrors([
                 'message' => "Error Unauthorized Access!"
             ]);
@@ -140,7 +134,7 @@ class ProjectController extends Controller
         $companies = $this->companyService->getApprovedCompaniesOfClient();
 
         $selected_category_ids = $project->categories->pluck('id')->toArray();
-        
+
         return view('client.projects.edit')->with(compact('project', 'companies', 'selected_category_ids'));
     }
     /**
@@ -153,20 +147,17 @@ class ProjectController extends Controller
     public function update(UpdateProjectRequest $request, Project $project)
     {
         DB::beginTransaction();
-        try 
-        {
+        try {
             // TODO: Additional business logic here
             $project_details = $request->except(['company_id', 'category_ids']);
             $category_ids = $request->input('category_ids');
             $this->projectService->updateProject($project, $project_details, $category_ids);
 
             DB::commit();
-            return redirect(route('client.projects.index'))->with('success', 'Project was successfully updated.');  
-        }
-        catch(\Exception $e)
-        {
+            return redirect(route('client.projects.index'))->with('success', 'Project was successfully updated.');
+        } catch (\Exception $e) {
             DB::rollBack();
-            
+
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
@@ -181,11 +172,9 @@ class ProjectController extends Controller
      */
     public function destroy(Project $project)
     {
-        try 
-        {
-            
-            if(!$this->checkIfClientOwnedAProject($project))
-            {
+        try {
+
+            if (!$this->checkIfClientOwnedAProject($project)) {
                 return redirect(route('client.projects.index'))->withErrors([
                     'message' => "Error Unauthorized Access!"
                 ]);
@@ -193,10 +182,8 @@ class ProjectController extends Controller
 
             $project->delete();
             // $this->dec`  reaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
-            return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');  
-        }
-        catch(\Exception $e)
-        {
+            return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
@@ -205,13 +192,10 @@ class ProjectController extends Controller
 
     public function setStatus(UpdateProjectStatusRequest $request, Project $project)
     {
-        try 
-        {
+        try {
             $project->update($request->validated());
-            return redirect(route('client.projects.index'))->with('success', 'Project status was successfully set.');  
-        }
-        catch(\Exception $e)
-        {
+            return redirect(route('client.projects.index'))->with('success', 'Project status was successfully set.');
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
@@ -220,27 +204,23 @@ class ProjectController extends Controller
 
     public function setWinner(SetProjectWinnerRequest $request, Project $project)
     {
-        try 
-        {   
-            DB::beginTransaction();            
+        try {
+            DB::beginTransaction();
             $this->projectService->setWinner($project, $request->validated());
-            
+
             $project_owner = auth('client')->user();
-            
+
             $winning_proposal_owner = Bidding::getOwner($request->input('winner_bidding_id'));
 
-            if(!$winning_proposal_owner || !$project_owner)
-            {
+            if (!$winning_proposal_owner || !$project_owner) {
                 return redirect()->back()->withErrors(['message' => "Invalid Operation: Missing required data for ownership!"]);
             }
-            
-            Contact::connectTwoClients($project_owner,$winning_proposal_owner);
+
+            Contact::connectTwoClients($project_owner, $winning_proposal_owner);
 
             DB::commit();
-            return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");  
-        }
-        catch(\Exception $e)
-        {
+            return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
@@ -248,36 +228,32 @@ class ProjectController extends Controller
         }
     }
 
-    public function proposals(Project $project) 
+    public function proposals(Project $project)
     {
-        if(!$project->is_owned && !$project->is_winner)
-        {
+        if (!$project->is_owned && !$project->is_winner) {
             return redirect(route('client.proposals.index'))->withErrors(['message' => 'Unauthorized Access!']);
         }
 
-        $proposals = $project->proposals();        
-        
-        if(request('search'))
-        {
-            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')            
-            ->orWhereHas('company', function($query) {
-                $query->where('name', 'LIKE', '%' . request('search') . '%')
-                ->orWhere('email', 'LIKE', '%' . request('search') . '%');
-            });
+        $proposals = $project->proposals();
+
+        if (request('search')) {
+            $proposals->where('rate', 'LIKE', '%' . request('search') . '%')
+                ->orWhereHas('company', function ($query) {
+                    $query->where('name', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('email', 'LIKE', '%' . request('search') . '%');
+                });
         }
 
-        if(request('min_rate') && request('max_rate'))
-        {
-            $proposals->whereBetween('rate', [ request('min_rate'), request('max_rate') ]);
+        if (request('min_rate') && request('max_rate')) {
+            $proposals->whereBetween('rate', [request('min_rate'), request('max_rate')]);
         }
 
-        if(request('min_date') && request('max_date'))
-        {
-            $proposals->whereBetween('created_at', [ request('min_date'), request('max_date') ]);
+        if (request('min_date') && request('max_date')) {
+            $proposals->whereBetween('created_at', [request('min_date'), request('max_date')]);
         }
 
         $proposals = $proposals->paginate(10);
-        
+
         return view('client.projects.proposals')->with(compact('proposals', 'project'));
     }
 }

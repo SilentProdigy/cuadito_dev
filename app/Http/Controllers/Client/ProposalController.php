@@ -19,10 +19,11 @@ use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class ProposalController extends Controller
 {
-    
+
     use UploadFile, IncreaseProposalCountOnSubscription, DecreaseProposalCountOnSubscription;
 
     private $companyService;
@@ -34,32 +35,33 @@ class ProposalController extends Controller
         $this->proposalService = $proposalService;
 
         $this->middleware([
-            'client.validate.ensure_project_not_owned_by_client', 
+            'client.validate.ensure_project_not_owned_by_client',
             'client.proposals.ensure_client_projects_dit_not_reach_max_proposals'
         ])
-        ->only(['create', 'store']);
+            ->only(['create', 'store']);
+
+        $this->middleware(XssCleanInput::class)->only('store');
     }
 
     public function index()
     {
         $client_companies = $this->companyService->getClientApprovedCompaniesIds();
-                           
-        $proposals = Bidding::with('project')->whereIn('company_id',$client_companies );
-        
-        if(request('search'))
-        {
+
+        $proposals = Bidding::with('project')->whereIn('company_id', $client_companies);
+
+        if (request('search')) {
             $proposals
-            ->where(function($query) {
-                $query->where('rate', 'LIKE', '%' . request('search') . '%')
-                ->orWhereDate('created_at', 'LIKE', '%' . request('search') . '%'); // TODO: Make this format to M d,Y
-            })
-            ->orWhereHas('company', function($query) {
-                $query->where('name', 'LIKE', '%' . request('search') . '%');
-            })
-            ->orWhereHas('project', function($query) {
-                $query->where('title', 'LIKE', '%' . request('search') . '%')
-                    ->orWhere('status', 'LIKE', '%' . request('search') . '%');
-            });
+                ->where(function ($query) {
+                    $query->where('rate', 'LIKE', '%' . request('search') . '%')
+                        ->orWhereDate('created_at', 'LIKE', '%' . request('search') . '%'); // TODO: Make this format to M d,Y
+                })
+                ->orWhereHas('company', function ($query) {
+                    $query->where('name', 'LIKE', '%' . request('search') . '%');
+                })
+                ->orWhereHas('project', function ($query) {
+                    $query->where('title', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('status', 'LIKE', '%' . request('search') . '%');
+                });
         }
 
         $proposals = $proposals->paginate(10);
@@ -71,7 +73,7 @@ class ProposalController extends Controller
     {
         return view('client.proposals.show')->with(compact('bidding'));
     }
-    
+
     public function create(Project $project)
     {
         return view('client.proposals.create')->with(compact('project'));
@@ -81,29 +83,28 @@ class ProposalController extends Controller
     {
         DB::beginTransaction();
 
-        try 
-        {
+        try {
             $paths = collect();
 
-            if($request->has('attachments')) 
-            {
+            if ($request->has('attachments')) {
                 $paths = $this->proposalService->uploadProposalAttachments(
                     $project,
                     $request->file('attachments')
                 );
             }
 
-            $proposal = $this->proposalService->createProposal($project, 
+            $proposal = $this->proposalService->createProposal(
+                $project,
                 array_merge(
                     $request->only('rate', 'cover_letter'),
-                    ['company_id' => session('config.company') ]
+                    ['company_id' => session('config.company')]
                 )
             );
 
             // Attaching files to proposal
-            foreach($paths as $path)
+            foreach ($paths as $path)
                 $proposal->attachments()->create(['url' => $path]);
-            
+
             Bidding::createNotificationsForProposal($proposal);
 
             $active_subscrption = auth('client')->user()->active_subscription;
@@ -113,31 +114,25 @@ class ProposalController extends Controller
             DB::commit();
 
             return redirect(route('client.listing.index'))
-                    ->with('success', 'Proposal was successfully posted.');
-        }
-        catch(\Exception $e)
-        {
+                ->with('success', 'Proposal was successfully posted.');
+        } catch (\Exception $e) {
             DB::rollBack();
             return redirect()->back()->withErrors([
                 'Operation Failed!' => $e->getMessage()
             ]);
         }
-
     }
 
     public function cancel(Bidding $bidding)
     {
-        try
-        {            
+        try {
             DB::beginTransaction();
 
-            if(!$bidding->is_owned)
-            {
+            if (!$bidding->is_owned) {
                 return redirect(route('client.proposals.index'))->withErrors(['message' => 'Unauthorized Access!']);
-            } 
-         
-            if($bidding->project->status !== Project::ACTIVE_STATUS)
-            {
+            }
+
+            if ($bidding->project->status !== Project::ACTIVE_STATUS) {
                 return redirect()->back()->withErrors(['message' => "Invalid Operation: Cannot cancel proposal since the project was not active."]);
             }
 
@@ -146,9 +141,7 @@ class ProposalController extends Controller
             // $this->decreaseProposalCountOnSubscription($active_subscrption);
             DB::commit();
             return redirect(route('client.proposals.index'))->with('success', 'Proposal was successfully cancelled.');
-        }
-        catch(\Exception $e)
-        {
+        } catch (\Exception $e) {
             return redirect()->back()->withErrors(['message' => "Operation Failed: {$e->getMessage()}"]);
         }
     }
