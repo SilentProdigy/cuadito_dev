@@ -514,7 +514,7 @@
                 role="tabpanel"
                 aria-labelledby="v-tabs-engage-tab"
               >
-              <img src="{{ asset('images/elements/features-listings.gif') }}" class="img-fluid border rounded">
+              <img src="{{ asset('images/elements/features-engage.gif') }}" class="img-fluid border rounded">
               </div>
               <div
                 class="tab-pane fade"
@@ -522,7 +522,7 @@
                 role="tabpanel"
                 aria-labelledby="v-tabs-connect-tab"
               >
-              <img src="{{ asset('images/elements/features-dashboard.gif') }}" class="img-fluid border rounded">
+              <img src="{{ asset('images/elements/features-connect.gif') }}" class="img-fluid border rounded">
               </div>
             </div>
           </div>
