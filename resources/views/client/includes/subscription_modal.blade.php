@@ -6,7 +6,11 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div> -->
         <div class="modal-body p-5">
+          @if($latest_subscription)
           <button type="button" class="btn-close" style="float:right" data-bs-dismiss="modal" aria-label="Close"></button>
+          @else
+          <button type="button" class="btn btn-transparent" style="float:right"><i class="fa fa-sign-out"></i></button>
+          @endif
             <section class="pricing-section">
               <div class="container">
               <div class="row justify-content-md-center">

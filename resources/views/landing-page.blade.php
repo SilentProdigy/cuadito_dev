@@ -233,7 +233,7 @@
                     
                     <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">IT Industry</h5>
+                        <h5 class="d-flex justify-content-center">Events & Business Services</h5>
                       </div>
                     </div>
                   </div>
@@ -244,7 +244,7 @@
                     
                     <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Food & Beverages</h5>
+                        <h5 class="d-flex justify-content-center">Finance & Insurance</h5>
                       </div>
                     </div>
                   </div>
@@ -255,7 +255,7 @@
                     
                     <div>
                       <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Art & Entertainment</h5>
+                        <h5 class="d-flex justify-content-center">Real Estate Service</h5>
                       </div>
                     </div>
                   </div>
