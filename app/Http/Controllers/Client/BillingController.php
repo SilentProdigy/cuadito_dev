@@ -43,7 +43,7 @@ class BillingController extends Controller
         }
     }
 
-    public function store(SubscriptionType $subscription_type)
+    /* public function store(SubscriptionType $subscription_type)
     {
         try
         {
@@ -90,5 +90,5 @@ class BillingController extends Controller
 
             return redirect()->back()->withErrors(['message' => $e->getMessage()]);
         }
-    }
+    } */
 }

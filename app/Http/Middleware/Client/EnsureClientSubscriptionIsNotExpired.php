@@ -21,6 +21,12 @@ class EnsureClientSubscriptionIsNotExpired
 
         if($subscription) 
         {
+            // Have lifetime-subscription
+            if($subscription->expiration_date == null)
+            {
+                return $next($request);
+            }
+
             $expiration_date = $subscription->expiration_date;
             $today = Carbon::now();
 

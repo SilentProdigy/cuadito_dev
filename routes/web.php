@@ -63,6 +63,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
 
         Route::resource('subscription-types', \App\Http\Controllers\Admin\SubscriptionTypeController::class);
+
+        Route::post('subscribe/life-time-plan', [\App\Http\Controllers\Admin\SubscribeToLifeTimePlanController::class, 'store'])->name('subscribe.life-time-plan');
     });
 });
 
