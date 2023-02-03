@@ -38,7 +38,10 @@ class Client extends Authenticatable
         'projects_count',
         'companies_count',
         'have_unread_notifications',
-        'profile_picture_url'
+        'profile_picture_url',
+        'active_subscription',
+        'have_subscription',
+
     ];
 
     public const ITEMS_PER_PAGE = 5;
