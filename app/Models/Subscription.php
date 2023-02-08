@@ -80,5 +80,10 @@ class Subscription extends Model
             // Log::error('OPERATION:RESET_COUNT_FIELDS, STATUS:FAILED, SUBSCRIPTION_ID:' . $this->id . ',ERROR:' . $e->getMessage());
         }
     }
+
+    public function getIsLifeTimeSubscriptionAttribute()
+    {
+        return $this->expiration_date == null;
+    }
 }
 

@@ -16,27 +16,29 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule)
     {
-        // $schedule->command('inspire')->hourly();
         $schedule->command('queue:work --stop-when-empty --tries=3')
         ->everyMinute()
-        ->withoutOverlapping();
+        ->withoutOverlapping()
+        ->sendOutputTo(storage_path('logs/workers/workers-' . time() . ".log"));
 
         $schedule->command('system:deactive-expired-subscription')
         ->timezone('Asia/Manila')
-        ->dailyAt('09:00')
-        ->withoutOverlapping();
+        ->dailyAt('9:00')
+        ->withoutOverlapping()
+        ->sendOutputTo(storage_path('logs/system/deactive-subs-' . time() . ".log"));
 
         $schedule->command('system:notify-near-expiration-subscription')
         ->timezone('Asia/Manila')
-        ->dailyAt('09:00')
-        ->withoutOverlapping();
+        ->dailyAt('9:00')
+        ->withoutOverlapping()
+        ->sendOutputTo(storage_path('logs/system/notify-near-subs-' . time() . ".log"));
 
         // Run every last day of the month midnight
         $schedule->command('system:reset-active-subscriptions')
         ->timezone('Asia/Manila')
-        ->lastDayOfMonth('24:00') 
-        // ->everyMinute()
-        ->withoutOverlapping();
+        ->monthlyOn(1)
+        ->withoutOverlapping()
+        ->sendOutputTo(storage_path('logs/system/reset-counters-' . time() . ".log"));
     }
 
     /**
