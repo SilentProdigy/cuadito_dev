@@ -8,15 +8,19 @@ use App\Mail\Contact\SignupInvitation;
 use App\Models\Client;
 use App\Models\Contact;
 use App\Services\ContactService;
+use App\Traits\SendEmail;
 use App\Traits\SendSignupInvitationEmail;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class ContactController extends Controller
 {
-    use SendSignupInvitationEmail;
+    // use SendSignupInvitationEmail;
+    use SendEmail;
 
     private $contactService;
 
@@ -25,7 +29,8 @@ class ContactController extends Controller
         $this->contactService = $contactService;
         $this->middleware([
             'client.validate.ensure_email_dont_exist_on_contacts', 
-            'client.validate.ensure_email_dont_exist_on_system'
+            'client.validate.ensure_email_dont_exist_on_system',
+            XssCleanInput::class
         ])
         ->only('store');
     }
@@ -78,20 +83,23 @@ class ContactController extends Controller
 
         try 
         {
-            
             // Will store non existing client. 
             $data = $request->all();
             $contact = auth('client')->user()->contacts()->create($data);
-            $this->sendSignupInvitationEmail($contact);
+            // $this->sendSignupInvitationEmail($contact);
+            $this->sendEmail([$contact->email], new SignupInvitation($contact));
             DB::commit();
+
+
             return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
         }
         catch(\Exception $e)
         {
             DB::rollBack();
 
+            Log::error('CONTACT_CREATE_FAILED: ' . $e->getMessage());
             return redirect()->back()->withErrors([
-                'message' => $e->getMessage()
+                'Something went wrong!' => 'An unexpected error occured'
             ]);
         }
     }
@@ -126,8 +134,9 @@ class ContactController extends Controller
         {
             DB::rollBack();
 
+            Log::error('DELETE_CONTACT_FAILED: ' . $e->getMessage());
             return redirect()->back()->withErrors([
-                'message' => $e->getMessage()
+                'Something went wrong!' => 'An unexpected error occured'
             ]);
         }
     }
@@ -136,13 +145,15 @@ class ContactController extends Controller
     {   
         try 
         {
-            $this->sendSignupInvitationEmail($contact);
+            // $this->sendSignupInvitationEmail($contact);
+            $this->sendEmail([$contact->email], new SignupInvitation($contact));
             return redirect(route('client.contacts.index'))->with('success', 'Invitation was successfully sent!');
         }
         catch(\Exception $e)
         {
+            Log::error('SEND_INVITATION_FAILED: ' . $e->getMessage());
             return redirect()->back()->withErrors([
-                'message' => $e->getMessage()
+                'Something went wrong!' => 'An unexpected error occured'
             ]);
         }
     }
