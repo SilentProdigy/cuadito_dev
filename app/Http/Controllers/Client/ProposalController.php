@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Proposal\SubmitProposalRequest;
+use App\Mail\Project\ProposalSubmitted;
 use App\Models\Attachment;
 use App\Models\Bidding;
 use App\Models\Company;
@@ -15,16 +16,19 @@ use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
 use App\Traits\DecreaseProposalCountOnSubscription;
 use App\Traits\IncreaseProposalCountOnSubscription;
+use App\Traits\SendEmail;
 use App\Traits\UploadFile;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class ProposalController extends Controller
 {
 
     use UploadFile, IncreaseProposalCountOnSubscription, DecreaseProposalCountOnSubscription;
+    use SendEmail;
 
     private $companyService;
     private $proposalService;
@@ -83,7 +87,8 @@ class ProposalController extends Controller
     {
         DB::beginTransaction();
 
-        try {
+        try 
+        {
             $paths = collect();
 
             if ($request->has('attachments')) {
@@ -107,18 +112,22 @@ class ProposalController extends Controller
 
             Bidding::createNotificationsForProposal($proposal);
 
+            $this->sendEmail([$project->company->email], new ProposalSubmitted($proposal));
+
             $active_subscrption = auth('client')->user()->active_subscription;
 
             $this->increaseProposalCountOnSubscription($active_subscrption);
 
             DB::commit();
 
-            return redirect(route('client.listing.index'))
-                ->with('success', 'Proposal was successfully posted.');
+            return redirect(route('client.listing.index'))->with('success', 'Proposal was successfully posted.');
         } catch (\Exception $e) {
             DB::rollBack();
+            
+            Log::error('PROPOSAL_CREATE_FAILED: ' . $e->getMessage());
+
             return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
+                'Something went wrong!' => 'An unexpected error occured'
             ]);
         }
     }
