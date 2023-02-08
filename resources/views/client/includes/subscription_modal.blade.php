@@ -9,7 +9,10 @@
           @if($latest_subscription)
           <button type="button" class="btn-close" style="float:right" data-bs-dismiss="modal" aria-label="Close"></button>
           @else
-          <button type="button" class="btn btn-transparent" style="float:right"><i class="fa fa-sign-out"></i></button>
+          <a href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">
+              {{ __('Logout') }}
+          </a>
           @endif
             <section class="pricing-section">
               <div class="container">
