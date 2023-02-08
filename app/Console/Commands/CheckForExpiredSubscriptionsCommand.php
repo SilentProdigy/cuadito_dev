@@ -62,12 +62,13 @@ class CheckForExpiredSubscriptionsCommand extends Command
     
                 $this->sendEmail($subscriber->email,new SubscriptionExpired());
                 
-                Log::info('SUB #ID:' . $item->id . ' SUBSCRIBER:' . $subscriber->id);
+                // Log::info('SUB #ID:' . $item->id . ' SUBSCRIBER:' . $subscriber->id);
             });
         }
         catch(\Exception $e)
         {
-            Log::error('Error: Operation Failed!, Message: ' . $e->getMessage());
+            // Log::error('Error: Operation Failed!, Message: ' . $e->getMessage());
+            Log::error('CHECK_FOR_EXPIRED_SUBS_CMD_FAILED: ' . $e->getMessage());
         }
        
         return 0;

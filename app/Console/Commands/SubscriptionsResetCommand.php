@@ -44,12 +44,12 @@ class SubscriptionsResetCommand extends Command
             Subscription::active()->get()
             ->each(function($item) {
                 $item->resetCounterFields();
-                Log::info('OPERATION:RESET_COUNT_FIELDS, STATUS:OK, SUBSCRIPTION_ID:' . $item->id);
+                // Log::info('OPERATION:RESET_COUNT_FIELDS, STATUS:OK, SUBSCRIPTION_ID:' . $item->id);
             });
         }
         catch(\Exception $e)
         {
-            Log::error('OPERATION:RESET_COUNT_FIELDS, STATUS:FAILED, ERROR:' . $e->getMessage());
+            Log::error('RESET_COUNT_FIELDS_FAILED:' . $e->getMessage());
         }
 
         return 0;
