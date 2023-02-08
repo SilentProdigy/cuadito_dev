@@ -9,14 +9,18 @@ use App\Models\Client;
 use App\Models\Conversation;
 use App\Models\ConversationSubscription;
 use App\Models\Notification;
+use App\Traits\SendEmail;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class ConversationController extends Controller
 {
+    use SendEmail;
+
     public function __construct()
     {
         $this->middleware(XssCleanInput::class)->only(['store']);
@@ -94,21 +98,24 @@ class ConversationController extends Controller
 
             $client = auth('client')->user();
 
-            // NotifyReceiver::dispatch(auth('client')->user(), $recipient, $conversation);
-            Mail::to($recipient->email)
-                ->queue(new NotifyReceiver(
+            $this->sendEmail(
+                [$recipient->email], 
+                new NotifyReceiver(
                     $client,
                     $recipient,
                     $conversation
-                ));
+                )
+            );
 
             DB::commit();
 
-            return redirect(route('client.inbox.index'))->with('success', 'Successfuly sen t a message!');
+            return redirect(route('client.inbox.index'))->with('success', 'Successfuly sent a message!');
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect(route('client.inbox.index'))->withErrors([
-                'message' => 'Error: ' . $e->getMessage()
+            Log::error('CONVERSATION_CREATE_FAILED: ' . $e->getMessage());
+
+            return redirect()->back()->withErrors([
+                'Something went wrong!' => 'An unexpected error occured'
             ]);
         }
     }
