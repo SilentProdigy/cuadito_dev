@@ -29,7 +29,6 @@ class Project extends Model
         'title',
         'description',
         'status',
-        'due_date',
         'cost',
         'scope_of_work',
         'terms_and_conditions',
@@ -40,7 +39,7 @@ class Project extends Model
     ];
 
     protected $cast = [
-        'due_date' => 'date'
+        // 'due_date' => 'date'
     ];
 
     protected $with = ['company'];
@@ -66,10 +65,10 @@ class Project extends Model
         return $this->hasMany(\App\Models\Bidding::class);
     }
 
-    public function getMaxActiveDateAttribute()
-    {
-        return Carbon::parse($this->due_date)->format('M d,Y');
-    }
+    // public function getMaxActiveDateAttribute()
+    // {
+    //     return Carbon::parse($this->due_date)->format('M d,Y');
+    // }
 
     public function getDescriptionTextAttribute()
     {
