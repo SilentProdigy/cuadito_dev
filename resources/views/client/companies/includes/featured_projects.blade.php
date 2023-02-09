@@ -21,7 +21,7 @@
                     <br>
                     Cost: <span class="card-project-cost fw-bold">@money($project->cost)</span>
                     <br>
-                    Due Date: <span class="card-project-due fw-bold">{{ $project->max_active_date }}</span>
+                    {{-- Due Date: <span class="card-project-due fw-bold">{{ $project->max_active_date }}</span> --}}
                 </div>
             </div>
         </div>
