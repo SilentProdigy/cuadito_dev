@@ -47,7 +47,7 @@ class Project extends Model
     protected $withCount = ['proposals'];
 
     protected $appends = [
-        'max_active_date'
+        // 'max_active_date'
     ];
 
     public function company()
