@@ -25,7 +25,7 @@ class CreateCompanyFormRequest extends FormRequest
     {
         return [
             'name' => 'string|required|min:3',
-            'address' => 'string|required',
+            'address' => 'string|required|min:5|max:255',
             'email' => 'string|required',
             'contact_number' => 'string|required'
         ];
