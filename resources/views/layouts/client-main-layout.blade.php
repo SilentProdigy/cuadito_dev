@@ -73,7 +73,7 @@
     <nav id="main-navbar" class="navbar navbar-expand-md navbar-light bg-white fixed-top">
         <div class="container">
             <a class="navbar-brand" href="#">
-                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
+                <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
             </a>
             <!-- <a class="navbar-brand" href="#">Navbar</a> -->
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar-client" aria-controls="navbar-client" aria-expanded="false" aria-label="Toggle navigation">
@@ -224,6 +224,7 @@
             
             @yield('content')
         </div>
+        @include('client.includes.beta_test_popup')
     </main>
     <!--Main layout-->
 
@@ -270,17 +271,13 @@
                 </li>
             </ul>
             <a href="#" class="d-flex align-items-center justify-content-center my-4 link-dark text-decoration-none">
-                <img src="{{asset('images/logo/logo.png')}}" height="50" alt="Cuadito Logo" loading="lazy" />
+                <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
             </a>
             <p class="mb-0 text-muted">Powered by: <b>1MC Digital, Inc.</b></p>
         </div>
     </footer>
 
-    <!-- MDB -->
-    <script
-    type="text/javascript"
-    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"
-    ></script>
+    
 
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
@@ -298,5 +295,10 @@
             });
       </script>
     @endif
+    <!-- MDB -->
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.js"
+    ></script>
 </body>
 </html>

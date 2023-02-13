@@ -61,12 +61,68 @@
 <body class="landing-page">
   <!-- HEADER -->
    <header>
+    <div class="offcanvas offcanvas-end w-50" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="offcanvas-header">
+        <!-- <h5 class="offcanvas-title" id="offcanvasExampleLabel">Menu</h5> -->
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <ul class="nav navbar-nav ms-auto text-center">
+          <li class="nav-item border-bottom">
+            <a class="nav-link text-black" href="#about">About</a>
+          </li>
+          <li class="nav-item border-bottom">
+            <a class="nav-link text-black" href="#projects">Projects</a>
+          </li>
+          <li class="nav-item border-bottom">
+            <a class="nav-link text-black" href="#pricing">Pricing</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link text-black" href="#contacts">Contact</a>
+          </li>
+          <li class="py-3">
+            <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+    <nav class="navbar navbar-dark navbar-expand-md bg-white justify-content-center fixed-top scrolling-navbar">
+      <div class="container">
+        <a class="navbar-brand d-flex w-50 me-auto" href="#">
+          <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
+        </a>
+          <button class="navbar-toggler mobile-toggler" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+            <i class="fa fa-bars"></i>
+          </button>
+          <div class="navbar-collapse collapse" id="collapsingNavbar3">
+              <ul class="nav navbar-nav ms-auto justify-content-end">
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#pricing">Pricing</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#contacts">Contact</a>
+                </li>
+                <li class="px-3">
+                  <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
+                </li>
+              </ul>
+          </div>
+      </div>
+    </nav>
       <!-- Navbar -->
-      <!-- Navbar -->
-      <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar bg-white">
-        <!-- Container wrapper -->
+      <!-- <nav class="navbar navbar-expand-lg navbar-dark fixed-top scrolling-navbar bg-white">
         <div class="container">
-          <!-- Toggle button -->
+          
+          <a class="navbar-brand" href="#">
+            <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
+          </a>
+          
           <button
             class="navbar-toggler"
             type="button"
@@ -78,57 +134,38 @@
           >
             <i class="fas fa-bars"></i>
           </button>
+          
 
-          <!-- Collapsible wrapper -->
+          
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <!-- Navbar brand -->
-            <a class="navbar-brand" href="#">
-              <img src="{{asset('images/logo/logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy" />
-            </a>
-          </div>
-          <!-- Collapsible wrapper -->
-
-          <!-- Right elements -->
-          <div class="d-flex align-items-center">
-            <!-- Left links -->
-            <ul class="navbar-nav d-flex">
-              <li class="nav-item">
-                <a class="nav-link" href="#about">About</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#projects">Projects</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#pricing">Pricing</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#contacts">Contact</a>
-              </li>
-              <li class="px-3">
-                <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
-              </li>
-            </ul>
-            <!-- Left links -->
             
-            <!-- Icon -->
-            <!-- <a class="text-reset me-3" href="#">
-              <i class="fab fa-facebook-f"></i>
-            </a>
-
-            <a class="text-reset me-3" href="#">
-              <i class="fab fa-instagram"></i>
-            </a>
-            
-            <a class="text-reset me-3" href="#">
-              <i class="fab fa-twitter"></i>
-            </a> -->
+            <div class="d-flex align-items-center">
+              
+              <ul class="navbar-nav d-flex">
+                <li class="nav-item">
+                  <a class="nav-link" href="#about">About</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#projects">Projects</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#pricing">Pricing</a>
+                </li>
+                <li class="nav-item">
+                  <a class="nav-link" href="#contacts">Contact</a>
+                </li>
+                <li class="px-3">
+                  <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
+                </li>
+              </ul>
+              
+            </div>
           </div>
-          <!-- Right elements -->
         </div>
-        <!-- Container wrapper -->
-      </nav>
+      </nav> -->
 
       <div id="home">
+        
         <!-- <div class="row">
           <div class="col-md-6 col-xs-12 col-lg-6">
           </div>
@@ -156,114 +193,118 @@
               </div>
             </div>
           </div>
+          
           <div class="container pt-5 d-flex justify-content-center align-items-center">
-            <div class="col-md-5 col-lg-5 col-xs-12">
-              <h3 class="display-6 fw-bold" data-wow-delay="0.2s">Cuadito is your one-stop platform tailored for any industry</h3>
-            </div>
-            <div class="col-md-7 col-lg-7 col-xs-12 p-4">
-              <div class="row g-2 py-5">
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center p-2">
-                        <h5 class="d-flex justify-content-center">Advertisement & Marketing</h5>
+            <div class="row">
+              <div class="col-12 col-md-5 col-lg-5 d-flex justify-content-center align-items-center">
+                <h3 class="display-6 fw-bold" data-wow-delay="0.2s">Cuadito is your one-stop platform tailored for any industry</h3>
+              </div>
+              <div class="col-12 col-md-7 col-lg-7 p-4">
+                <div class="row g-2 py-5">
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center p-2">
+                          <h5 class="d-flex justify-content-center">Advertisement & Marketing</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Construction</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Construction</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Training & Coaching</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Training & Coaching</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">IT Industry</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">IT Industry</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Food & Beverages</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Food & Beverages</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Art & Entertainment</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Art & Entertainment</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Events & Business Services</h5>
+  
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Events & Business Services</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Finance & Insurance</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Finance & Insurance</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
-                </div>
-      
-                <div class="col-lg-4 col-md-4">
-                  <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
-                    
-                    <div>
-                      <div class="d-flex justify-content-center align-items-center h-100 text-center">
-                        <h5 class="d-flex justify-content-center">Real Estate Service</h5>
+        
+                  <div class="col-lg-4 col-md-4">
+                    <div class="rounded-9 bg-white d-flex justify-content-center align-items-center" style="height: 100px;">
+                      
+                      <div>
+                        <div class="d-flex justify-content-center align-items-center h-100 text-center">
+                          <h5 class="d-flex justify-content-center">Real Estate Service</h5>
+                        </div>
                       </div>
                     </div>
                   </div>
+        
+        
                 </div>
-      
-      
               </div>
             </div>
+            
               
               <!-- <hr class="hr-light my-4"> -->
             
@@ -339,22 +380,22 @@
 
     </div>
 
-    <div class="container-fluid py-5 bg-light">
+    <div class="container-fluid py-5 bg-light connection-section">
       <div class="container">
 
         <h3 class="display-6 text-center text-uppercase font-weight-bold mt-4">Make meaningful connections - join our trusted partners today!</h3>
         <div class="row pt-4 cuadito-logos">
-          <div class="col-lg-3 col-md-3 col-xs-12">
-            <img src="{{asset('images/company_logo/1mc-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          <div class="col-lg-3 col-md-3 col-6">
+            <img class="img-fluid mx-auto d-block" src="{{asset('images/company_logo/1mc-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
           </div>
-          <div class="col-lg-3 col-md-3 col-xs-12">
-            <img src="{{asset('images/company_logo/amti-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          <div class="col-lg-3 col-md-3 col-6">
+            <img class="img-fluid mx-auto d-block" src="{{asset('images/company_logo/amti-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
           </div>
-          <div class="col-lg-3 col-md-3 col-xs-12">
-            <img src="{{asset('images/company_logo/amarantos-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          <div class="col-lg-3 col-md-3 col-6">
+            <img class="img-fluid mx-auto d-block" src="{{asset('images/company_logo/amarantos-logo.png')}}" height="100" alt="Cuadito Logo" loading="lazy">
           </div>
-          <div class="col-lg-3 col-md-3 col-xs-12">
-            <img src="{{asset('images/company_logo/rz-studios-logo.webp')}}" height="100" alt="Cuadito Logo" loading="lazy">
+          <div class="col-lg-3 col-md-3 col-6">
+            <img class="img-fluid mx-auto d-block" src="{{asset('images/company_logo/rz-studios-logo.webp')}}" height="100" alt="Cuadito Logo" loading="lazy">
           </div>
         </div>
       </div>
@@ -580,9 +621,8 @@
       </div>
     </div>
 
-    <div
-        style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/City/12-col/img%20%2822%29.jpg'); background-size: cover;">
-        <div class="flex-center rgba-cuadito-dark center">
+    <div class="row" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/City/12-col/img%20%2822%29.jpg'); background-size: cover;">
+        <div class="flex-center rgba-cuadito-dark center py-4">
           <div class="text-center text-white">
             <h2 class="h2-responsive mb-5"><i class="fas fa-quote-left" aria-hidden="true"></i>&nbsp;Everything you’ve ever wanted is on the other side of fear.&nbsp;<i class="fas fa-quote-right" aria-hidden="true"></i></h2>
             <h5 class="text-center font-italic wow fadeIn" data-wow-delay="0.2s">~ George Addair</h5>

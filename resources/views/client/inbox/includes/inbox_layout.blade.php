@@ -34,6 +34,8 @@
         </div>
     </div>
 
+    
+
     <div style="display:none" data-labels="{{ json_encode( auth('client')->user()->labels ) }}" id="user-labels-div"></div>
 
     <form action="{{ route('client.conversation-subs.unread') }}" method="post" id="unread-form">
@@ -65,7 +67,6 @@
         <input type="hidden" name="subscription_ids" id="delete-conversation-ids">
     </form>
     
-    @include('client.includes.set_company_modal')
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.create_conversation_modal')
     @include('client.conversations.includes.confirm_archived_modal')
