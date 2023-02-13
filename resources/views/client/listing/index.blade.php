@@ -18,6 +18,7 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
+            <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal">Show Search Options</a>
         </form>
     </div>
 
@@ -85,6 +86,76 @@
     </section>
 </div>
 
+<!-- Modal -->
+<div class="modal fade" id="advance-search-modal" tabindex="-1" aria-labelledby="advance-search-modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">Advance Search</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body mx-3">
+                <form method="GET" action="{{ route('client.listing.index') }}">
+                    {{-- @csrf --}}
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Filter By:</label>
+                            <select class="form-control" name="filter_col">
+                                <option value="title">Title</option>
+                                {{-- <option value="status">Status</option> --}}
+                                <option value="scope_of_work">Scope of Work</option>
+                                <option value="cost">Cost</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Having Value of:</label>
+                            <input type="text" name="filter_val" class="form-control">
+                        </div>
+                    </div>
+
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Sort By:</label>
+                            <select class="form-control" name="sort_col">
+                                <option value="title">Title</option>
+                                {{-- <option value="status">Status</option> --}}
+                                <option value="scope_of_work">Scope of Work</option>
+                                <option value="cost">Cost</option>
+                                <option value="created_at">Date Posted</option>
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Ascending / Descending:</label>
+                            <select class="form-control" name="sort_val">
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="adv_search" value="1">
+
+                    {{-- <div class="row mb-4">
+                        <div class="col-md-12">
+                            <label for="" class="fw-bold">Search</label>
+                            <input type="text" name="adv_search" class="form-control" placeholder="* search value here">
+                        </div>
+                    </div> --}}
+
+                    <div class="row mb-4 mx-0">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Search') }}
+                        </button>
+                    </div>
+
+                    <hr>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 
 @endsection
 
