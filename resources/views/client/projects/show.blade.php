@@ -26,7 +26,7 @@
                     <div class="card-body">
                         <div class="my-2">
                             <p class="text-secondary fs-6">Posted at {{ $project->created_at->format('M d,Y') }}</p>
-                            <p class="text-danger fs-6">Open till {{ $project->max_active_date }}</p>
+                            {{-- <p class="text-danger fs-6">Open till {{ $project->max_active_date }}</p> --}}
                         </div>
 
                         <div class="my-2 py-3 border-top">

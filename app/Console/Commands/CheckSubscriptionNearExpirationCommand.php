@@ -62,13 +62,12 @@ class CheckSubscriptionNearExpirationCommand extends Command
                 ]);
     
                 $this->sendEmail($subscriber->email,new NearExpiration($item));
-                
-                Log::info('OPERATION: CHK_UPCOMING_EXPIRATION | SUB #ID:' . $item->id . '| SUBSCRIBER:' . $subscriber->id);
+                // Log::info('OPERATION: CHK_UPCOMING_EXPIRATION | SUB #ID:' . $item->id . '| SUBSCRIBER:' . $subscriber->id);
             });
         }
         catch(\Exception $e)
         {
-            Log::error('Error: Operation Failed!, Message: ' . $e->getMessage());
+            Log::error('CHECK_SUBSCRIPION_NEAR_EXPIRATION_CMD_FAILED: ' . $e->getMessage());
         }
 
         return 0;

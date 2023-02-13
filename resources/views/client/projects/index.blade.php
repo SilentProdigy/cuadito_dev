@@ -26,7 +26,6 @@
                 <th>COMPANY</th>
                 <th class="col-span-2">STATUS</th>
                 <th>DATE POSTED</th>
-                <th>DUE DATE</th>
                 <th>PROPOSALS</th>
                 <th>ACTIONS</th>
             </thead>
@@ -45,9 +44,6 @@
                         </td>
                         <td>
                             <span>{{ $project->created_at->format('M d,Y') }}</span>
-                        </td>
-                        <td>
-                            <span>{{ $project->max_active_date }}</span>
                         </td>
                         <td>
                             <span>{{ $project->proposals_count }}</span>

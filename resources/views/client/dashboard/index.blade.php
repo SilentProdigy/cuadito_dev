@@ -80,7 +80,7 @@
                                 <a href="{{ route('client.companies.show', $project->company) }}" class="text-muted"><h6>{{ $project->company->name }}</h6></a>
                             </div>
                             <div class="fw-normal fs-6 text-muted">
-                                <i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }} - {{ $project->max_active_date }}
+                                <i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }}
                             </div>
                         </div>
                         <div class="card-body px-3">
