@@ -35,6 +35,10 @@ a {
     text-align: center;
 }
 
+.mobile-toggler{
+    color: #000 !important;
+}
+
 .product-thumb {
     width: 100%;
     height: 150px;
@@ -499,7 +503,6 @@ body {
     list-style: none;
     margin: 15px -15px 0 -15px;
     padding: 15px 15px 0 15px;
-    border-top: 1px solid #d1d4d7
 }
 
 .inbox ul.messages-list li {
@@ -764,6 +767,11 @@ body {
         background-color: #F96B23 !important;
     }
     #home .banner-cuadito{padding-top: 10%;}
+    @media only screen and (max-width: 600px){
+        #home .banner-cuadito{
+            margin-top: 20%;
+        }
+    }
     .features-icons{
         width: 100px;
         margin-bottom: 3%;
@@ -840,6 +848,10 @@ body {
       .features-tabs .active{
           background-color: #f96b23 !important;
           color: #fff !important;
+      }
+      .connection-section img{
+          height: 100px;
+          width: auto;
       }
   /* End of Landing Page Styles */
 
@@ -1320,3 +1332,6 @@ ul li {
     background-color: #fff;;
 }
 /* end of pricing table */
+
+/* Inbox Page */
+/* End of Inbox Page */
