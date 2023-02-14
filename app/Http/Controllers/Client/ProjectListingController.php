@@ -49,11 +49,24 @@ class ProjectListingController extends Controller
         {
             $projects = $projects->orderBy('created_at', 'desc');
         }
-        
 
         $projects = $projects->paginate(5);
 
-        return view('client.listing.index')->with(compact('projects'));
+        $search_options = [
+            'filter_cols' => [
+                ['label' => 'Title', 'value' => 'title'],
+                ['label' => 'Scope of Work','value' => 'scope_of_work'], 
+                ['label' => 'Cost', 'value' => 'cost']
+            ], 
+            'sort_by_cols' => [
+                ['label' => 'Title', 'value' => 'title'],
+                ['label' => 'Scope of Work','value' => 'scope_of_work'], 
+                ['label' => 'Cost', 'value' => 'cost'],
+                ['label' => 'Date Posted', 'value' => 'created_at']
+            ]
+        ];
+
+        return view('client.listing.index')->with(compact('projects', 'search_options'));
     }
 
     public function show(Project $project)

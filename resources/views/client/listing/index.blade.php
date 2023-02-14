@@ -18,7 +18,11 @@
                     <i class="fas fa-search"></i>
                 </button>
             </div>
-            <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal">Show Search Options</a>
+            <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a>
+
+            @if(request()->has('search') || request()->has('adv_search'))
+                <a href="{{ route('client.listing.index') }}">Clear Search Results</a>
+            @endif
         </form>
     </div>
 
@@ -27,6 +31,10 @@
         <h4>Projects in CUADITO</h4>
         <p>Find the perfect projects for you.</p>
         
+        @if(request()->has('search') || request()->has('adv_search'))
+            <h5>Found {{ $projects->count() }} search results ... </h5>
+        @endif
+
         <div class="row">
             @foreach ($projects as $project)
                 <div class="col-xs-12 col-md-6 gy-3">
@@ -96,33 +104,33 @@
             </div>
             <div class="modal-body mx-3">
                 <form method="GET" action="{{ route('client.listing.index') }}">
-                    {{-- @csrf --}}
+                    @csrf
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="" class="fw-bold">Filter By:</label>
                             <select class="form-control" name="filter_col">
-                                <option value="title">Title</option>
-                                {{-- <option value="status">Status</option> --}}
-                                <option value="scope_of_work">Scope of Work</option>
-                                <option value="cost">Cost</option>
+                                <option value="">-- Please seelct an option</option>
+                               @foreach ($search_options['filter_cols'] as $col)
+                                   <option value="{{ $col['value'] }}" {{ $col['value'] == request('filter_col') ? 'selected' : '' }}>
+                                        {{ $col['label'] }}
+                                    </option>
+                               @endforeach
                             </select>
                         </div>
 
                         <div class="col-md-6">
                             <label for="" class="fw-bold">Having Value of:</label>
-                            <input type="text" name="filter_val" class="form-control">
+                            <input type="text" name="filter_val" class="form-control" value="{{ request()->input('filter_val') }}">
                         </div>
                     </div>
-
                     <div class="row mb-4">
                         <div class="col-md-6">
                             <label for="" class="fw-bold">Sort By:</label>
                             <select class="form-control" name="sort_col">
-                                <option value="title">Title</option>
-                                {{-- <option value="status">Status</option> --}}
-                                <option value="scope_of_work">Scope of Work</option>
-                                <option value="cost">Cost</option>
-                                <option value="created_at">Date Posted</option>
+                                <option value="">-- Please seelct an option</option>
+                                @foreach ($search_options['sort_by_cols'] as $col)
+                                   <option value="{{ $col['value'] }}" {{ $col['value'] == request('sort_col') ? 'selected' : '' }}>{{ $col['label'] }}</option>
+                               @endforeach
                             </select>
                         </div>
 
