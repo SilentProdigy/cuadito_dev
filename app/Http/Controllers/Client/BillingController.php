@@ -16,7 +16,22 @@ class BillingController extends Controller
     {
         try
         {
-            // Total Amount = Plan * Months (defaul is 12)
+            // Check if client wants to buy a new subscription
+            if(auth('client')->user()->have_subscription)
+            {
+                $active_subsription = auth('client')->user()->active_subscription;
+                $subscription_date = $active_subsription->created_at;
+                $min_date = (new Carbon())->subDays(3);
+
+                if($subscription_date->isBetween($min_date, new Carbon()))
+                {
+                    return redirect()->back()->withErrors([
+                        'message' => "Operation failed! You need to wait atleast 3 days to change your current subscription!"
+                    ]);
+                }
+            }
+
+            // Total Amount = Plan * Months (default is 12)
             $total_amount = $subscription_type->amount * config('cuadito.payment.default_billable_months_count');
 
             $response = Http::retry(3)->withBasicAuth(
@@ -43,52 +58,54 @@ class BillingController extends Controller
         }
     }
 
-    /* public function store(SubscriptionType $subscription_type)
-    {
-        try
+    /* 
+        public function store(SubscriptionType $subscription_type)
         {
-            DB::beginTransaction();            
+            try
+            {
+                DB::beginTransaction();            
 
-            $amount = $subscription_type->amount * 1;
-            $vat = $amount * 0.12; 
-            $total_amount = $vat + $amount;
+                $amount = $subscription_type->amount * 1;
+                $vat = $amount * 0.12; 
+                $total_amount = $vat + $amount;
 
-            // Create an inactive subscription
-            $subscription = auth('client')->user()->subscriptions()->create([
-                'subscription_type_id' => $subscription_type->id,
-                'status' => Subscription::INACTIVE_STATUS,
-            ]);
+                // Create an inactive subscription
+                $subscription = auth('client')->user()->subscriptions()->create([
+                    'subscription_type_id' => $subscription_type->id,
+                    'status' => Subscription::INACTIVE_STATUS,
+                ]);
 
-            // call the DRAGONPAY API
-            // if the payment was successful from the dragonpay api return result
+                // call the DRAGONPAY API
+                // if the payment was successful from the dragonpay api return result
 
-            // activate subscription & save payment
-            $expiration_date = new Carbon();
-            $expiration_date = $expiration_date->addMonth();
+                // activate subscription & save payment
+                $expiration_date = new Carbon();
+                $expiration_date = $expiration_date->addMonth();
 
-            $subscription->update([
-                'status' => Subscription::ACTIVE_STATUS,
-                'points' => $subscription_type->points,
-                'expiration_date' => $expiration_date
-            ]);            
-            
-            $payment = $subscription->payments()->create([
-                'amount' => $amount, // amount here comes from the api of dragon pay
-                'additional_vat' => $vat,
-                'total_amount' => $total_amount,
-                'mode_of_payment' => 'GCASH',
-                'details' => 'Lorem ipsum dulum'
-            ]);
+                $subscription->update([
+                    'status' => Subscription::ACTIVE_STATUS,
+                    'points' => $subscription_type->points,
+                    'expiration_date' => $expiration_date
+                ]);            
+                
+                $payment = $subscription->payments()->create([
+                    'amount' => $amount, // amount here comes from the api of dragon pay
+                    'additional_vat' => $vat,
+                    'total_amount' => $total_amount,
+                    'mode_of_payment' => 'GCASH',
+                    'details' => 'Lorem ipsum dulum'
+                ]);
 
-            DB::commit();
-            
-            return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
-        }
-        catch(\Exception $e)
-        {
-            DB::rollBack();
+                DB::commit();
+                
+                return redirect(route('client.invoice.show', $payment))->with('success', 'You are now successfully subscribed!');
+            }
+            catch(\Exception $e)
+            {
+                DB::rollBack();
 
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
-        }
-    } */
+                return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+            }
+        } 
+    */
 }

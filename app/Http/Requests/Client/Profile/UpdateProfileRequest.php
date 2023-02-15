@@ -34,7 +34,7 @@ class UpdateProfileRequest extends FormRequest
             'marital_status' => 'nullable|string',
             'email' => 'required|email',
             'contact_number' => 'nullable|string|min:11',
-            'tag_line' => 'nullable|string|min:2',
+            'tag_line' => 'nullable|string|min:2|max:100',
             'profile_pic' => 'nullable|image|mimes:jpg,png,jpeg,gif,svg|max:2048|dimensions:min_width=100,min_height=100',
             'birth_date' => 'required|date|before:' . $dt->subYears(13)->format('Y-m-d')
         ];

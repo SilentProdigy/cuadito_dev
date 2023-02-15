@@ -30,7 +30,7 @@ class CreateProjectRequest extends FormRequest
 
         return [
             'title' => 'required|string|min:3',
-            'description' => 'required|string|min:3',
+            'description' => 'required|string|min:3|max:255',
             'category_ids' => 'required',
             'company_id' => 'required|exists:App\Models\Company,id',
             'cost' => 'required|numeric',

@@ -25,7 +25,7 @@ class EditCompanyFormRequest extends FormRequest
     {
         return [
             // 'name' => 'string|required|min:3',
-            'address' => 'string|required',
+            'address' => 'string|required|max:100',
             'email' => 'email:rfc,dns|required',
             'contact_number' => 'string|required|min:11|max:11'
         ];
