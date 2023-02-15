@@ -20,7 +20,11 @@ class ProfileController extends Controller
 
     public function show(Client $client)
     {
-        return view('client.profile.show')->with(compact('client'));
+        $data = [
+            'projects_count' => auth('client')->user()->projects()->count(),
+            'projects' => auth('client')->user()->projects,
+        ];
+        return view('client.profile.show')->with(compact('client', 'data'));
     }
 
     public function edit(Client $client)
