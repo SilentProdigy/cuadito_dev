@@ -22,23 +22,13 @@ class ProjectListingController extends Controller
         if(request()->has('search'))
         {
             $projects = $projects->when(request('search'), function($query) {
-                $query->where('title', 'LIKE',  request('search') . '%');
-                // ->orWhere('description', 'LIKE', request('search') . '%');
+                $query->where('title', 'LIKE',  '%'. request('search') . '%');
             });
         }
         elseif(request()->has('adv_search'))
         {
-            /* 
-                $projects = $projects->where(function($query) {
-                            return $query->where('title', 'LIKE', '%' . request('search') . '%')
-                            ->orWhere('description', 'LIKE', '%' . request('search') . '%');
-                        })
-                        ->orWhere(request('filter_col'), 'LIKE', '%' . request('filter_val') . '%')
-                        ->orderBy(request()->input('sort_col'), request()->input('sort_val'));
-            */  
-            
             $projects = $projects
-                        ->where(request('filter_col'), 'LIKE', request('filter_val') . '%')
+                        ->where(request('filter_col'), 'LIKE', '%'.request('filter_val') . '%')
                         ->orderBy(request()->input('sort_col'), request()->input('sort_val'));
         }
 
