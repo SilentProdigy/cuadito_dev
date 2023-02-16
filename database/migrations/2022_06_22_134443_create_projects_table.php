@@ -28,7 +28,7 @@ class CreateProjectsTable extends Migration
             
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['title', 'status']);
+            $table->index(['title', 'status', 'cost', 'scope_of_work']);
         });
     }
 

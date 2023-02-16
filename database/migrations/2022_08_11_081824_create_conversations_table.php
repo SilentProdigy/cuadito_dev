@@ -17,6 +17,8 @@ class CreateConversationsTable extends Migration
             $table->id();
             $table->string('subject')->nullable();
             $table->timestamps();
+
+            $table->index('subject');
         });
     }
 

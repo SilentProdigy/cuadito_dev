@@ -20,6 +20,8 @@ class CreateCompanyRequirementTable extends Migration
             $table->string('url')->nullable();
             $table->string('status')->default('FOR APPROVAL');
             $table->text('remarks')->nullable();
+
+            $table->index(['status']);
             $table->timestamps();
         });
     }

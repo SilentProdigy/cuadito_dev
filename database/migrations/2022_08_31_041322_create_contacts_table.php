@@ -20,6 +20,8 @@ class CreateContactsTable extends Migration
             $table->foreignId('client_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('contact_id')->nullable()->constrained('clients')->onDelete('cascade')->onUpdate('cascade');
             $table->timestamps();
+
+            $table->index(['name', 'email']);
         });
     }
 

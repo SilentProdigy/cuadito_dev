@@ -24,7 +24,7 @@ class CreateCompaniesTable extends Migration
             $table->text('remarks')->nullable();
             $table->timestamps();
             $table->softDeletes();
-            $table->index(['name', 'email']);
+            $table->index(['name', 'email', 'validation_status']);
         });
     }
 
