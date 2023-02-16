@@ -22,8 +22,8 @@ class ProjectListingController extends Controller
         if(request()->has('search'))
         {
             $projects = $projects->when(request('search'), function($query) {
-                $query->where('title', 'LIKE', '%' . request('search') . '%')
-                ->orWhere('description', 'LIKE', '%' . request('search') . '%');
+                $query->where('title', 'LIKE',  request('search') . '%');
+                // ->orWhere('description', 'LIKE', request('search') . '%');
             });
         }
         elseif(request()->has('adv_search'))
@@ -38,14 +38,14 @@ class ProjectListingController extends Controller
             */  
             
             $projects = $projects
-                        ->where(request('filter_col'), 'LIKE', '%' . request('filter_val') . '%')
+                        ->where(request('filter_col'), 'LIKE', request('filter_val') . '%')
                         ->orderBy(request()->input('sort_col'), request()->input('sort_val'));
         }
 
         $projects = $projects->with('categories')
                     ->where('status', Project::ACTIVE_STATUS);
         
-        if(!request()->has('sort_col'))
+        if(!request()->has('sort_col') && request()->input('sort_col') != "")
         {
             $projects = $projects->orderBy('created_at', 'desc');
         }
