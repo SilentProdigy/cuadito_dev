@@ -37,46 +37,54 @@
                 <div class="d-flex flex-column col-md-6">
                     <span class="name mt-3">{{ $client->name }}</span>
                     <span>{{ $client->tag_line }}</span>
+                    @if( auth('client')->user()->id == $client->id )
                     <span>{{ $client->email }}</span>
+                    @endif
                 </div>
                 <div class="col-md-6">
+                    @if( auth('client')->user()->id == $client->id )
                     <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning float-end shadow-none"><i class="fa fa-lock"></i>&ensp;Change Password</a>
+                    @endif
                 </div>
             </div>
         </div>
     </div>
     <div class="mx-auto mt-5 my-5">
         <div class="row">
-            <div class="col-md-8">
+            <div class="{{ auth('client')->user()->id == $client->id ? 'col-md-8' : 'col-md-12' }}">
                 <div class="card profile_info">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
                             <h4 class="fw-bold">About</h4>
+                            @if( auth('client')->user()->id == $client->id )
                             <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-md"><i class="fa fa-pencil"></i>&ensp;Edit Information</a>
+                            @endif
                         </div>
                         <div class="profile_details row mt-4">
                             <div class="company_description">
                                 <p>Cuadito is an online platform designed to help companies streamline their proposal and quotation process. It allows users to submit proposals, send quotations to other companies on the platform, and build stronger connections.
                                 </p>
                             </div>
-                            <h4 class="fw-bold">Personal Information</h4>
-                            @if($client->contact_number && $client->address && $client->birth_date && $client->marital_status)
-                                <!-- <div class="col-12 mt-4"><i class="fa fa-briefcase fs-5"></i>Website Developer | 1MC Digital</div> -->
-                                
-                                @if($client->contact_number)
-                                    <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
+                            @if( auth('client')->user()->id == $client->id )
+                                <h4 class="fw-bold">Personal Information</h4>
+                                @if($client->contact_number && $client->address && $client->birth_date && $client->marital_status)
+                                    <!-- <div class="col-12 mt-4"><i class="fa fa-briefcase fs-5"></i>Website Developer | 1MC Digital</div> -->
+                                    
+                                    @if($client->contact_number)
+                                        <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
+                                    @endif
+                                    @if($client->address)
+                                        <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
+                                    @endif
+                                    @if($client->birth_date)
+                                        <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
+                                    @endif
+                                    @if($client->marital_status)
+                                        <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
+                                    @endif
+                                @else
+                                    <p class="text-center text-muter">No information available.</p>
                                 @endif
-                                @if($client->address)
-                                    <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
-                                @endif
-                                @if($client->birth_date)
-                                    <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
-                                @endif
-                                @if($client->marital_status)
-                                    <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
-                                @endif
-                            @else
-                                <p class="text-center text-muter">No information available.</p>
                             @endif
                         </div>
                     </div>
@@ -127,6 +135,7 @@
                     </div>
                 </div>
             </div>
+            @if( auth('client')->user()->id == $client->id )
             <div class="col-md-4">
                 <div class="card">
                     <div class="card-body">
@@ -150,8 +159,8 @@
                 <div class="card mt-4">
                     <div class="card-header">
                         <div class="d-flex justify-content-between align-items-center">
-                            <div class="card-subtitle">Billing History</div>
-                            <a href="javascript:void(0);" class="fw-normal text-orange">View All</a>
+                            <div class="card-subtitle">Payment History</div>
+                            <a href="{{ route('client.payments.index') }}" class="fw-normal text-orange">View All</a>
                         </div>
                         
                     </div>
@@ -159,44 +168,33 @@
                         <div class="table-responsive">
                             <table id="billing_history_table" class="table table-striped display nowrap" width="100%">
                                 <thead class="table-dark">
-                                    <tr>
-                                        <th>Transaction No.</th>
-                                        <th>Activity</th>
-                                        <th>Date</th>
-                                        <th>Amount</th>
-                                    </tr>
+                                    <th>Transaction No.</th>
+                                    <th>Activity</th>
+                                    <th>Satus</th>
+                                    <th>Date</th>
+                                    <th>Amount</th>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>0320230001</td>
-                                        <td>Subscription (Platinum)</td>
-                                        <td>2011-04-25</td>
-                                        <td>&#8369;320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0320230002</td>
-                                        <td>Subscription (Platinum)</td>
-                                        <td>2011-04-25</td>
-                                        <td>&#8369;320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0320230003</td>
-                                        <td>Subscription (Platinum)</td>
-                                        <td>2011-04-25</td>
-                                        <td>&#8369;320,800</td>
-                                    </tr>
-                                    <tr>
-                                        <td>0320230004</td>
-                                        <td>Subscription (Platinum)</td>
-                                        <td>2011-04-25</td>
-                                        <td>&#8369;320,800</td>
-                                    </tr>
+                                    @forelse($payments as $payment)
+                                        <tr>
+                                            <td><a href="{{ route('client.payments.show', $payment) }}">{{ $payment->invoice_id }}</a></td>
+                                            <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
+                                            <td>{{ $payment->status }}</td>
+                                            <td>{{ $payment->created_at->format('Y-m-d') }}</td>
+                                            <td>@money( $payment->total_amount )</td>
+                                        </tr>
+                                    @empty
+                                        <tr>
+                                            <td>No results found!</td>
+                                        </tr>
+                                    @endforelse
                                 </tbody>
                             </table>
                         </div>
                     </div>
                 </div>
             </div>
+            @endif
         </div>
     </div>
 </div>
