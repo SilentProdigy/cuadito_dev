@@ -20,7 +20,7 @@
 
         <h5>{{ request('search') ? 'We found ' . $payments->count() . ' results ...' : 'Your Payment Transactions'}}</h5>
 
-        <table class="table table-borderless table-md user-listing-table">
+        <table class="table table-borderless table-md user-listing-table" id="payment-history-table">
             <thead>     
                 <th>SEQ</th>          
                 <th>INVOICE #</th>
@@ -59,4 +59,14 @@
         <div class="d-flex justify-content-center">{{ $payments->links() }}</div>
     </div>
 </div>
+@endsection
+
+@section('script')
+<script>
+    $(document).ready(function () {
+        $('#payment-history-table').DataTable();
+    });
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection

@@ -7,6 +7,7 @@ use App\Http\Requests\Client\Profile\ChangePasswordRequest;
 use App\Http\Requests\Client\Profile\UpdateProfileRequest;
 use App\Models\Client;
 use App\Traits\UploadFile;
+use App\Models\Payment;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -14,17 +15,23 @@ use Illuminate\Support\Facades\Hash;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Support\Facades\Storage;
 
+
 class ProfileController extends Controller
 {
     use UploadFile;
 
     public function show(Client $client)
     {
+        $payments = Payment::with(['subscription', 'subscription.subscription_type'])
+                    ->where('client_id', auth('client')->user()->id);
+
         $data = [
             'projects_count' => auth('client')->user()->projects()->count(),
             'projects' => auth('client')->user()->projects,
         ];
-        return view('client.profile.show')->with(compact('client', 'data'));
+
+        $payments = $payments->paginate();
+        return view('client.profile.show')->with(compact('client', 'data', 'payments'));
     }
 
     public function edit(Client $client)
