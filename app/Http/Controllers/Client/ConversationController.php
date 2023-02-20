@@ -108,12 +108,10 @@ class ConversationController extends Controller
             );
 
             DB::commit();
-
             return redirect(route('client.inbox.index'))->with('success', 'Successfuly sent a message!');
         } catch (Exception $e) {
             DB::rollBack();
-            Log::error('CONVERSATION_CREATE_FAILED: ' . $e->getMessage());
-
+            Log::error('ACTION: CONVERSATION_CREATE_FAILED, ERROR: ' . $e->getMessage());
             return redirect()->back()->withErrors([
                 'Something went wrong!' => 'An unexpected error occured'
             ]);

@@ -52,16 +52,11 @@ class MessageController extends Controller
             );
 
             DB::commit();
-    
             return redirect()->back()->with('success', 'Message was successfully sent.');     
-        } catch (Exception $e) {
-            // dd($e->getMessage());
+        } catch (\Exception $e) {
             DB::rollBack();
-            
-            Log::error('MESSAGE_CREATE_FAILED: ' . $e->getMessage());
-            return redirect()->back()->withErrors([
-                'Something went wrong!' => 'An unexpected error occured'
-            ]);
+            Log::error("ACTION: MESSAGE_CREATE_FAILED, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 }

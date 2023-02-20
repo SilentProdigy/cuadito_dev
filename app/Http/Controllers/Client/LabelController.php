@@ -9,6 +9,7 @@ use App\Models\Label;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class LabelController extends Controller
@@ -31,13 +32,13 @@ class LabelController extends Controller
         DB::beginTransaction();
 
         try {
-            // Label::create($request->all());
             auth('client')->user()->labels()->create($request->validated());
             DB::commit();
             return redirect()->back()->with('success', 'Label was successfully created.');
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['message' => 'Error: ' . $e->getMessage()]);
+            Log::error("ACTION: LABEL_CREATE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -50,7 +51,8 @@ class LabelController extends Controller
             return redirect()->back()->with('success', 'Label was successfully updated.');
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['message' => 'Error: ' . $e->getMessage()]);
+            Log::error("ACTION: LABEL_UPDATE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -61,14 +63,13 @@ class LabelController extends Controller
             if (!$label->isOwned()) {
                 return redirect()->back()->withErrors(['message' => 'Error: Unauthorized Operation!']);
             }
-
             $label->delete();
-
             DB::commit();
             return redirect(route('client.labels.index'))->with('success', 'Label was deleted successfully!');
         } catch (Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors(['message' => 'Error: ' . $e->getMessage()]);
+            Log::error("ACTION: LABEL_DELETE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 }

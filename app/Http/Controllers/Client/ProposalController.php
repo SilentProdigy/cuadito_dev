@@ -123,12 +123,8 @@ class ProposalController extends Controller
             return redirect(route('client.listing.index'))->with('success', 'Proposal was successfully posted.');
         } catch (\Exception $e) {
             DB::rollBack();
-            
-            Log::error('PROPOSAL_CREATE_FAILED: ' . $e->getMessage());
-
-            return redirect()->back()->withErrors([
-                'Something went wrong!' => 'An unexpected error occured'
-            ]);
+            Log::error("ACTION: CREATE_PROPOSAL, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -151,7 +147,9 @@ class ProposalController extends Controller
             DB::commit();
             return redirect(route('client.proposals.index'))->with('success', 'Proposal was successfully cancelled.');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors(['message' => "Operation Failed: {$e->getMessage()}"]);
+            DB::rollBack();
+            Log::error("ACTION: CANCEL_PROPOSAL, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 }

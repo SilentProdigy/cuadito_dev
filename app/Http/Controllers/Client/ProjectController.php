@@ -21,6 +21,7 @@ use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\DecreaseProjectCountOnSubscription;
 use App\Traits\IncreaseProjectCountOnSubscription;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
@@ -86,10 +87,8 @@ class ProjectController extends Controller
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');
         } catch (\Exception $e) {
             DB::rollBack();
-
-            return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            Log::error("ACTION: PROJECT_CREATE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -157,10 +156,8 @@ class ProjectController extends Controller
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully updated.');
         } catch (\Exception $e) {
             DB::rollBack();
-
-            return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            Log::error("ACTION: PROJECT_UPDATE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -184,21 +181,23 @@ class ProjectController extends Controller
             // $this->dec`  reaseProjectCountOnSubscription(auth('client')->user()->active_subscription);
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully deleted.');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            DB::rollBack();
+            Log::error("ACTION: PROJECT_DELETE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
     public function setStatus(UpdateProjectStatusRequest $request, Project $project)
-    {
+    {   
+        DB::beginTransaction();
         try {
             $project->update($request->validated());
+            DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project status was successfully set.');
         } catch (\Exception $e) {
-            return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            DB::rollBack();
+            Log::error("ACTION: PROJECT_SET_STATUS, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -222,9 +221,8 @@ class ProjectController extends Controller
             return redirect(route('client.projects.index'))->with('success', "Project's winner was successfuly set & closed");
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            Log::error("ACTION: PROJECT_SET_WINNER, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 

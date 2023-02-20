@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Traits\UploadFile;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class CompanyRequirementController extends Controller
@@ -40,9 +41,10 @@ class CompanyRequirementController extends Controller
         } catch (\Exception $e) {
 
             DB::rollBack();
+            Log::error("ACTION: UPLOAD_REQUIREMENT, ERROR:" . $e->getMessage());
 
             return redirect(route('client.companies.show', $company))->withErrors([
-                'Operation Failed!' => $e->getMessage()
+                'Operation Failed!' => "Something went wrong; We are working on it."
             ]);
         }
     }
@@ -55,7 +57,10 @@ class CompanyRequirementController extends Controller
                 Storage::disk('public')->delete($url);
             }
         } catch (\Exception $e) {
-            return redirect()->back()->with('errors', $e->getMessage());
+            Log::error("ACTION: DELETE_REQUIREMENT, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 
@@ -70,9 +75,10 @@ class CompanyRequirementController extends Controller
                 "Company requirement not found!"
             ]);
         } catch (\Exception $e) {
+            Log::error("ACTION: DOWNLOAD_REQUIREMENT, ERROR:" . $e->getMessage());
             return redirect(route('client.companies.show', $company))
                 ->withErrors([
-                    'Operation Failed!' => $e->getMessage()
+                    'Operation Failed!' => "Something went wrong; We are working on it."
                 ]);
         }
     }
@@ -97,10 +103,11 @@ class CompanyRequirementController extends Controller
             ]);
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error("ACTION: DESTROY_REQUIREMENT, ERROR:" . $e->getMessage());
 
             return redirect(route('client.companies.show', $company))
                 ->withErrors([
-                    'Operation Failed!' => $e->getMessage()
+                    'Operation Failed!' => "Something went wrong; We are working on it."
                 ]);
         }
     }

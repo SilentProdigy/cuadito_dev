@@ -13,6 +13,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 
 class SubscriptionController extends Controller
 {
@@ -90,24 +91,27 @@ class SubscriptionController extends Controller
         }
         catch(\Exception $e)
         {
-            // return $e->getMessage();
             DB::rollBack();
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+            Log::error("ACTION: SUBSCRIBE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
     public function unsubscribe(Subscription $subscription)
     {
+        DB::beginTransaction();
         try
         {
             $subscription->update(['status' => Subscription::INACTIVE_STATUS]);
-            
+            DB::commit();
             // cancel recurring payments option on dragon pay
             return redirect(route('client.dashboard'))->with('success', 'You are now successfully unsubscribed!');
         }
         catch(\Exception $e)
         {
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+            DB::rollBack();
+            Log::error("ACTION: UNSUBSCRIBE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -133,7 +137,8 @@ class SubscriptionController extends Controller
         catch(\Exception $e)
         {
             DB::rollBack();
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);    
+            Log::error("ACTION: RENEW_SUBSCRIPTION, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]); 
         }
     }
 }
