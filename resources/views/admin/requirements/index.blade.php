@@ -61,6 +61,10 @@
         </div>
     </div>
 
+    <section class="mt-3 d-flex justify-content-center">
+        {{ $requirements->links() }}
+    </section>
+
     @include('admin.requirements.modals.confirm_delete_modal')
     @include('admin.requirements.modals.add_requirement_modal')
     @include('admin.requirements.modals.edit_requirement_modal')

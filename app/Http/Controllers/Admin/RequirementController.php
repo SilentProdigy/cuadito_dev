@@ -18,7 +18,7 @@ class RequirementController extends Controller
 
     public function index()
     {
-        $requirements = Requirement::get();
+        $requirements = Requirement::paginate(Requirement::ITEMS_PER_PAGE);
         return view('admin.requirements.index')->with(compact('requirements'));   
     }
 
