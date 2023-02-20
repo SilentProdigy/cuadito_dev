@@ -20,6 +20,8 @@ class User extends Authenticatable
     public const ADMIN_ROLE = "admin";
     public const ROLES = [self::USER_ROLE, self::ADMIN_ROLE];
 
+    public const ITEMS_PER_PAGE = 10;
+
 
 
     /**
