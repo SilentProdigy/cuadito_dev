@@ -17,16 +17,36 @@
             </div>
         </div>
     </div>
-
+    
     <div class="container-fluid mb-3">
         <div class="d-flex flex-row d-align-items-center justify-content-center">
-            <div class="table-titles">System Users</div>
             <div class="col d-flex justify-content-end">
                 <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#addUserModal">
                     <i class="fa fa-plus"></i>&ensp;Add user
                 </button>
             </div>
         </div>
+    </div>
+
+    <div class="container-fluid mb-3">
+        <div class="d-flex flex-row d-align-items-center justify-content-center">
+            <div class="table-titles">System Users</div>
+            <div class="col d-flex justify-content-end">
+                <form action="{{ route('admin.users.index') }}" method="get" class="d-flex justify-content-between align-items-center">
+                    <div class="input-group input-group-lg">
+                        <input type="text" class="form-control " placeholder="Search User ..." name="search" value="{{ request('search') }}">
+                        <button class="btn btn-warning" type="submit">
+                            <span class="fa fa-search"></span>
+                        </button>
+                    </div>
+                    <a href="{{ route('admin.users.index') }}" class="p-2">Clear</a>
+                </form>
+            </div>
+        </div>
+
+        @if(request('search'))
+            <h5>Found {{ $users->count() }} results ...</h5>
+        @endif
     </div>
     <div class="card">
         <div class="card-body">
@@ -81,6 +101,10 @@
             </table>
         </div>
     </div>
+
+    <section class="mt-3 d-flex justify-content-center">
+        {{ $users->links() }}
+    </section>
 
     @include('admin.users.modals.add_user_modal')
     @include('admin.users.modals.set_status_modal')
