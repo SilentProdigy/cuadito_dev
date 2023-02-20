@@ -14,6 +14,8 @@ class Company extends Model
     public const APPROVED_STATUS = "APPROVED";
     public const DISAPPROVED_STATUS = "DISAPPROVED";
 
+    public const ITEMS_PER_PAGE = 10;
+
     protected $fillable = [
         'name',
         'address',
