@@ -1,7 +1,6 @@
 @extends('layouts.dashboard-layout')
 
 @section('content')
-
     <div class="container-fluid mb-3">
         <div class="d-flex flex-row justify-content-between align-items-center">
             <div class="table-titles">Clients</div>
@@ -15,7 +14,11 @@
                 <a href="{{ route('admin.clients.index') }}" class="p-2">Clear</a>
             </form>
         </div>
+        @if(request('search'))
+            <h5>Found {{ $clients->count() }} results ...</h5>
+        @endif
     </div>
+
     <div class="card">
         <div class="card-body">
             <table class="table table-borderless table-md user-listing-table">
