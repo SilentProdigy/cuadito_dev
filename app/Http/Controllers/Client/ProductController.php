@@ -11,7 +11,7 @@ class ProductController extends Controller
 {
     public function index()
     {
-        $products = SubscriptionType::get();
+        $products = SubscriptionType::paginate(Subscription::ITEMS_PER_PAGE);
         $latest_subscription = auth('client')->user()->active_subscription;
 
         return view('client.products.index')->with(compact('products', 'latest_subscription'));

@@ -32,9 +32,11 @@ class SubscribeToLifeTimePlanController extends Controller
         }        
         catch(\Exception $e)
         {
+            Log::error("ACTION: ADMIN_ACTIVATE_LIFE_TIME_SUB, ERROR:" . $e->getMessage());
             DB::rollBack();
-            Log::error("ERROR_OCCURED:". json_encode($e));
-            return redirect()->back()->withErrors(['message' => 'Something went wrong!']);
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 }
