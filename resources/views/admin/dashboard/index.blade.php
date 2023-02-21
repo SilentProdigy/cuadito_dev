@@ -163,7 +163,7 @@
   chart_data = JSON.parse(chart_data);
 
 
-  const labelsBarChart = chart_data.map(item => item.month);
+  const labelsBarChart = chart_data.map(item => item.month_str);
 
   const data = chart_data.map(item => item.data);
 

@@ -130,17 +130,6 @@ class Project extends Model
 
     public static function getProjectsOverviewPerMonth($year = '2023')
     {
-        return self::select(DB::raw("
-                count(id) as data, 
-                MIN(DATE_FORMAT(created_at, '%m-%Y')) as new_date, 
-                YEAR(created_at) year, 
-                monthname(created_at) month
-            ")
-        )
-        ->groupBy('year')
-        ->groupBy('month')
-        ->orderBy('year', 'asc')
-        ->orderBy('month', 'asc')
-        ->get();
+        
     }
 }
