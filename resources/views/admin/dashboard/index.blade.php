@@ -33,7 +33,7 @@
             <div class="icon">
                 <i class="fa fa-money" aria-hidden="true"></i>
             </div>
-            <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.payments.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
@@ -45,7 +45,7 @@
             <div class="icon">
                 <i class="fa fa-handshake" aria-hidden="true"></i>
             </div>
-            <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.proposals.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">

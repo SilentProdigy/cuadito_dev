@@ -56,6 +56,14 @@
     <i class="fas fa-th-large fa-fw me-3"></i><span>Products</span>
 </a>
 
+<a href="{{ route('admin.proposals.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+    <i class="fas fa-thumbs-up fa-fw me-3"></i><span>Proposals</span>
+</a>
+
+<a href="{{ route('admin.payments.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+    <i class="fas fa-dollar fa-fw me-3"></i><span>Payments</span>
+</a>
+
 {{-- 
     <a href="{{ route('admin.dashboard') }}" target="_blank" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-store fa-fw me-3"></i><span>Go to Platform&nbsp;<i class="fa fa-external-link fa-fw"></i></span>

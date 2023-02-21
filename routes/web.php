@@ -52,7 +52,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('clients', \App\Http\Controllers\Admin\ClientController::class);
         Route::patch('projects/set-status/{project}', [\App\Http\Controllers\Admin\ProjectListingController::class, 'setStatus']);
         Route::resource('projects', \App\Http\Controllers\Admin\ProjectListingController::class);
-    
+        
+        Route::get('proposals', [\App\Http\Controllers\Admin\ProposalController::class, 'index'])->name('proposals.index');
         Route::get('proposals/{bidding}', [\App\Http\Controllers\Admin\ProposalController::class, 'show'])->name('proposals.show');
         Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Admin\AttachmentController::class, 'download'])->name('attachments.download');
     
@@ -63,8 +64,10 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
 
         Route::resource('subscription-types', \App\Http\Controllers\Admin\SubscriptionTypeController::class);
-
+        
         Route::post('subscribe/life-time-plan', [\App\Http\Controllers\Admin\SubscribeToLifeTimePlanController::class, 'store'])->name('subscribe.life-time-plan');
+
+        Route::get('payments', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payments.index');
     });
 });
 
