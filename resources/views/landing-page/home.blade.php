@@ -109,7 +109,7 @@
                   <a class="nav-link" href="#contacts">Contact</a>
                 </li>
                 <li class="px-3">
-                  <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
+                  <a href="{{ route($data['auth_url']) }}" class="btn btn-orange btn-rounded">{{$data['auth_text']}}</a>
                 </li>
               </ul>
           </div>
@@ -401,11 +401,9 @@
       </div>
     </div>
 
-    <div class="container-fluid">
+    <!-- <div class="container-fluid">
 
       <div class="container">
-
-        <!-- Section: Testimonials v.1 -->
         <section class="py-5">
           <div class="row d-flex justify-content-center">
             <div class="col-md-10 col-xl-8 text-center">
@@ -521,13 +519,12 @@
             </div>
           </div>
         </section>
-        <!-- Section: Testimonials v.1 -->
 
       </div>
 
-    </div>
+    </div> -->
 
-    <div class="container-fluid py-5 bg-light">
+    <div class="container-fluid py-5 bg-white">
       <div class="container">
         <h3 class="display-6 text-center text-uppercase font-weight-bold">Explore our features</h3>
         <div class="row py-4">
@@ -622,7 +619,7 @@
     </div>
 
     <div class="row" style="background-image: url('https://mdbootstrap.com/img/Photos/Horizontal/City/12-col/img%20%2822%29.jpg'); background-size: cover;">
-        <div class="flex-center rgba-cuadito-dark center py-4">
+        <div class="flex-center center py-4" style="background-color: rgba(0, 166, 90, 0.9)">
           <div class="text-center text-white">
             <h2 class="h2-responsive mb-5"><i class="fas fa-quote-left" aria-hidden="true"></i>&nbsp;Everything you’ve ever wanted is on the other side of fear.&nbsp;<i class="fas fa-quote-right" aria-hidden="true"></i></h2>
             <h5 class="text-center font-italic wow fadeIn" data-wow-delay="0.2s">~ George Addair</h5>

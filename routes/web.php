@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Contorllers\Client\MessageController;
+use App\Http\Controllers\LandingPageController;
 
 /*
 |--------------------------------------------------------------------------
@@ -28,9 +29,7 @@ Route::redirect('/', '/landing-page');
 // Route::redirect('/login', '/admin/login');
 Route::redirect('/login', '/auth/login');
 
-Route::get('/landing-page', function(){
-    return view('landing-page');
-});
+Route::get('landing-page', [\App\Http\Controllers\LandingPageController::class, 'index']);
 
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
