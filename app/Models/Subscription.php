@@ -23,6 +23,8 @@ class Subscription extends Model
     public const ACTIVE_STATUS = "ACTIVE";
     public const INACTIVE_STATUS = "INACTIVE";
 
+    public const ITEMS_PER_PAGE = 10;
+
     protected $casts = [
         'expiration_date' => 'datetime',
     ];

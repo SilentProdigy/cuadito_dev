@@ -11,11 +11,14 @@
                     <button class="btn btn-warning" type="submit">
                         SEARCH
                     </button>
-                    <a href="{{ route('admin.projects.index') }}">Clear Search</a>
+                    <a href="{{ route('admin.projects.index') }}">Clear</a>
                 </div>
             </form>
         </div>
     </div>
+    @if(request('search'))
+        <h5>Found {{ $projects->count() }} results ...</h5>
+    @endif
 </div>
 
 <div class="card">
@@ -85,20 +88,6 @@
 </div>
 
 <section class="mt-3 d-flex justify-content-center">
-    {{-- <nav aria-label="Page navigation example">
-        <ul class="pagination justify-content-center">
-          <li class="page-item disabled">
-            <a class="page-link">Previous</a>
-          </li>
-          <li class="page-item"><a class="page-link" href="#">1</a></li>
-          <li class="page-item"><a class="page-link" href="#">2</a></li>
-          <li class="page-item"><a class="page-link" href="#">3</a></li>
-          <li class="page-item">
-            <a class="page-link" href="#">Next</a>
-          </li>
-        </ul>
-    </nav> --}}
-     
     {{ $projects->links() }}
 </section>
 

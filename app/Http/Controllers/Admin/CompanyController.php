@@ -7,12 +7,22 @@ use App\Http\Requests\Admin\Company\UpdateCompanyRequest;
 use App\Models\Company;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CompanyController extends Controller
 {
     public function index()
     {
-        $companies = Company::with('client')->get();
+        $companies = Company::query()
+                    ->when(request('search'), function($query) {
+                        $query->where('name', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('email', 'LIKE', '%' . request('search') . '%')
+                        ->orWhere('contact_number', 'LIKE', '%' . request('search') . '%');
+                    })
+                    ->with('client')
+                    ->paginate(Company::ITEMS_PER_PAGE); 
+
         $company_states = Company::COMPANY_STATES;
         return view('admin.companies.index')->with(compact('companies', 'company_states'));
     }
@@ -25,6 +35,7 @@ class CompanyController extends Controller
 
     public function update(UpdateCompanyRequest $request, Company $company)
     {
+        DB::beginTransaction();
         try
         {
 
@@ -61,12 +72,16 @@ class CompanyController extends Controller
                 ]);
             }
 
+            DB::commit();
             return redirect()->back()->with('success', 'Company status was successfully set!');  
         }
         catch(\Exception $e)
-        {
-            // dd($e->getMessage());
-            return redirect()->back()->withErrors(['message' => $e->getMessage()]);
+        {   
+            Log::error("ACTION: ADMIN_UPDATE_COMPANY, ERROR:" . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 }

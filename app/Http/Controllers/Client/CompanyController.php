@@ -8,6 +8,8 @@ use App\Http\Requests\Client\Company\EditCompanyFormRequest;
 use App\Models\Company;
 use App\Models\Requirement;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 
 class CompanyController extends Controller
@@ -50,44 +52,57 @@ class CompanyController extends Controller
 
     public function store(CreateCompanyFormRequest $request)
     {
-        try {
+        DB::beginTransaction();
+        try 
+        {
             // Company::create($request->all());
             auth('client')->user()->companies()->create($request->validated());
-
+            DB::commit();
             return redirect(route('client.companies.index'))
                 ->with('success', 'Company was successfully created.');
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) {
+            Log::error("ACTION: STORE_COMPANY, ERROR:" . $e->getMessage());
+            DB::rollBack();
             return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
+                'Operation Failed!' => "Something went wrong; We are working on it."
             ]);
         }
     }
 
     public function update(EditCompanyFormRequest $request, Company $company)
     {
+        DB::beginTransaction();
         try {
             $company->update($request->validated());
+            DB::commit();
             return redirect(route('client.companies.index'))
                 ->with('success', 'Company was successfully updated.');
         } catch (\Exception $e) {
+            Log::error("ACTION: UPDATE_COMPANY, ERROR:" . $e->getMessage());
+            DB::rollBack();
             return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
+                'Operation Failed!' => "Something went wrong; We are working on it."
             ]);
         }
     }
 
     public function destroy(Company $company)
     {
+        DB::beginTransaction();
         try {
             if (!$company->checkIfUserOwned()) {
                 return redirect(route('client.companies.index'))->withErrors(['message' => 'Unauthorized Access!']);
             }
 
             $company->delete();
+            DB::commit();
             return redirect(route('client.companies.index'))->with('success', 'Company was successfully deleted.');
         } catch (\Exception $e) {
-            return redirect(route('client.companies.index'))->withErrors([
-                'Operation Failed!' => $e->getMessage()
+            Log::error("ACTION: DESTROY_COMPANY, ERROR:" . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
             ]);
         }
     }

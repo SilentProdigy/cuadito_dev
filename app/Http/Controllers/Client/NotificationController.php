@@ -4,6 +4,8 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Notification;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class NotificationController extends Controller
 {
@@ -30,17 +32,19 @@ class NotificationController extends Controller
      */
     public function destroy(Notification $notification)
     {
+        DB::beginTransaction();
         try 
         {
             // TODO: Additional business logic here ...
             $notification->delete();
+            DB::commit();
             return redirect(route('client.notifications.index'))->with('success', 'Notification was successfully removed.');  
         }
         catch(\Exception $e)
         {
-            return redirect(route('client.notifications.index'))->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            DB::rollBack();
+            Log::error("ACTION: NOTIFICATION_DELETE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 }

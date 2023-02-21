@@ -8,6 +8,8 @@ use App\Models\Bidding;
 use App\Models\Project;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class ProjectListingController extends Controller
 {
@@ -47,15 +49,21 @@ class ProjectListingController extends Controller
 
     public function setStatus(UpdateProjectStatusRequest $request, Project $project)
     {
+        DB::beginTransaction();
         try 
         {
             // TODO: Additional business logic here ...
             $project->update($request->all());
+            DB::commit();
             return redirect(route('admin.projects.index'))->with('success', 'Project status was successfully set.');  
         }
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            Log::error("ACTION: ADMIN_PROJECT_SET_STATUS, ERROR:" . $e->getMessage());
+            DB::rollBack();
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 }

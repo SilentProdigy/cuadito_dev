@@ -89,15 +89,13 @@ class ContactController extends Controller
             // $this->sendSignupInvitationEmail($contact);
             $this->sendEmail([$contact->email], new SignupInvitation($contact));
             DB::commit();
-
-
             return redirect(route('client.contacts.index'))->with('success', 'Contact was added successfully!');
         }
         catch(\Exception $e)
         {
             DB::rollBack();
 
-            Log::error('CONTACT_CREATE_FAILED: ' . $e->getMessage());
+            Log::error('ACTION: CONTACT_CREATE_FAILED, ERROR:' . $e->getMessage());
             return redirect()->back()->withErrors([
                 'Something went wrong!' => 'An unexpected error occured'
             ]);
@@ -133,8 +131,7 @@ class ContactController extends Controller
         catch(\Exception $e)
         {
             DB::rollBack();
-
-            Log::error('DELETE_CONTACT_FAILED: ' . $e->getMessage());
+            Log::error('ACTION:DELETE_CONTACT_FAILED, ERROR: ' . $e->getMessage());
             return redirect()->back()->withErrors([
                 'Something went wrong!' => 'An unexpected error occured'
             ]);
@@ -151,7 +148,7 @@ class ContactController extends Controller
         }
         catch(\Exception $e)
         {
-            Log::error('SEND_INVITATION_FAILED: ' . $e->getMessage());
+            Log::error('ACTION:SEND_INVITE, ERROR:' . $e->getMessage());
             return redirect()->back()->withErrors([
                 'Something went wrong!' => 'An unexpected error occured'
             ]);

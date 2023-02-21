@@ -12,6 +12,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Symfony\Component\HttpKernel\Profiler\Profile;
 use Illuminate\Support\Facades\Storage;
 
@@ -68,9 +69,8 @@ class ProfileController extends Controller
         catch(\Exception $e)
         {
             DB::rollBack();
-            return redirect()->back()->withErrors([
-                'Operation Failed!' => $e->getMessage()
-            ]);
+            Log::error("ACTION: PROFILE_UPDATE, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 
@@ -81,11 +81,9 @@ class ProfileController extends Controller
 
     public function changePassword(ChangePasswordRequest $request, Client $client)
     {
+        DB::beginTransaction();
         try 
         {
-
-            // dd(Hash::make($request->input('old_password')) ==  $client->password);
-
             if(!Hash::check($request->input('old_password'), $client->password))
             {
                 return redirect()->back()->withErrors(['message' => 'Entered old password is incorrect!']);
@@ -94,12 +92,14 @@ class ProfileController extends Controller
             $client->update([
                 'password' => bcrypt($request->input('password'))
             ]);
-
+            DB::commit();
             return redirect(route('client.profile.show', $client));
         }   
-        catch(Exception $e)
+        catch(\Exception $e)
         {
-            dd($e->getMessage());
+            DB::rollBack();
+            Log::error("ACTION: CHANGE_PASSWORD, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
 }

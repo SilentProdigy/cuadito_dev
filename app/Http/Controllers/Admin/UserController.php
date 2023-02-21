@@ -9,6 +9,8 @@ use App\Http\Requests\Admin\UpdateUserFormRequest;
 use App\Models\User;
 use Exception;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class UserController extends Controller
 {   
@@ -24,20 +26,17 @@ class UserController extends Controller
      */
     public function index()
     {
-        $users = User::where('id', '!=', auth()->user()->id)->get();
+        $users = User::query()->when(request('search'), function($query) {
+                    $query->where('name', 'LIKE', '%' . request('search') . '%')
+                    ->orWhere('email', 'LIKE', '%' . request('search') . '%')
+                    ->orWhere('role', 'LIKE', '%' . request('search') . '%');
+                })
+                ->where('id', '!=', auth()->user()->id)
+                ->paginate(User::ITEMS_PER_PAGE);
+        
         $roles = User::ROLES;
 
         return view('admin.users.index')->with(compact('users', 'roles'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -48,39 +47,24 @@ class UserController extends Controller
      */
     public function store(CreateUserFormRequest $request)
     {
+        DB::beginTransaction();
         try 
         {
             $data = $request->all();
             $data['password'] = bcrypt($request->input('password'));
 
             User::create($data);
+            DB::commit();
             return redirect()->route('admin.users.index')->with('success', 'User was successfully created.');  
         }
-        catch(Exception $e) {
-            dd($e->getMessage());
+        catch(\Exception $e) 
+        {
+            DB::rollBack();
+            Log::error("ACTION: ADMIN_CREATE_USER, ERROR:" . $e->getMessage());   
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
-    {
-        //
     }
 
     /**
@@ -92,40 +76,61 @@ class UserController extends Controller
      */
     public function update(UpdateUserFormRequest $request, User $user)
     {
+        DB::beginTransaction();
         try 
         {
             // TODO: Extract this to a class or a trait
             $user->update($request->all());
+            DB::commit();
             return redirect()->route('admin.users.index')->with('success', 'User was successfully updated.');  
         }
-        catch(Exception $e) {
-            dd($e->getMessage());
+        catch(\Exception $e) 
+        {
+            DB::rollBack();
+            Log::error("ACTION: ADMIN_UPDATE_USER, ERROR:" . $e->getMessage());   
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 
     public function setStatus(Request $request, User $user) 
     {
+        DB::beginTransaction();
         try 
         {
             // TODO: Extract this to a class or a trait
             $user->update($request->all());
+            DB::commit();
             return redirect()->route('admin.users.index')->with('success', 'User status was successfully updated.');  
         }
-        catch(Exception $e) {
-            dd($e->getMessage());
+        catch(\Exception $e) 
+        {
+            DB::rollBack();
+            Log::error("ACTION: ADMIN_SET_STATUS_USER, ERROR:" . $e->getMessage());   
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 
     public function changePassword(ChangePasswordFormRequest $request, User $user) 
     {   
+        DB::beginTransaction();
         try 
         {
             // TODO: Extract this to a class or a trait
             $user->update(['password' => bcrypt($request->input('password'))]);
+            DB::commit();
             return redirect()->route('admin.users.index')->with('success', 'Password was successfully updated.');  
         }
-        catch(Exception $e) {
-            dd($e->getMessage());
+        catch(\Exception $e) 
+        {
+            DB::rollBack();
+            Log::error("ACTION: ADMIN_SET_STATUS_USER, ERROR:" . $e->getMessage());   
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);
         }
     }
 
@@ -137,13 +142,20 @@ class UserController extends Controller
      */
     public function destroy(User $user)
     {
+        DB::beginTransaction();
         try 
         {
             $user->delete();
+            DB::commit();
             return redirect()->route('admin.users.index')->with('success', 'User was successfully deleted.');  
         }
-        catch(Exception $e) {
-            dd($e->getMessage());
+        catch(\Exception $e) 
+        {
+            DB::rollBack();
+            Log::error("ACTION: ADMIN_DELETE_USER, ERROR:" . $e->getMessage());   
+            return redirect()->back()->withErrors([
+                'Operation Failed!' => "Something went wrong; We are working on it."
+            ]);    
         }
     }
 }
