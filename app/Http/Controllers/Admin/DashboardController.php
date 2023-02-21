@@ -8,6 +8,7 @@ use App\Models\Client;
 use App\Models\Payment;
 use App\Models\Project;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
@@ -24,13 +25,15 @@ class DashboardController extends Controller
 
         $payment_total = Payment::get()->sum('total_amount');
 
+        $chart_data = Project::getProjectsOverviewPerMonth();        
         return view('admin.dashboard.index')->with(
             compact(
                 'projects_count', 
                 'clients_count', 
                 'projects', 
                 'biddings_count',
-                'payment_total'
+                'payment_total',
+                'chart_data'
             )
         );
     }

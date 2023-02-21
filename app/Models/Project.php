@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Project extends Model
 {
@@ -35,7 +36,8 @@ class Project extends Model
         'relevant_authorities',
         'remarks',
         'winner_bidding_id',
-        'company_id'
+        'company_id',
+        'created_at'
     ];
 
     protected $cast = [
@@ -124,5 +126,21 @@ class Project extends Model
     public function getIsOwnedAttribute()
     {
         return auth('client')->user()->id == $this->company->client_id;
+    }
+
+    public static function getProjectsOverviewPerMonth($year = '2023')
+    {
+        return self::select(DB::raw("
+                count(id) as data, 
+                MIN(DATE_FORMAT(created_at, '%m-%Y')) as new_date, 
+                YEAR(created_at) year, 
+                monthname(created_at) month
+            ")
+        )
+        ->groupBy('year')
+        ->groupBy('month')
+        ->orderBy('year', 'asc')
+        ->orderBy('month', 'asc')
+        ->get();
     }
 }
