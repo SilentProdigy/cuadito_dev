@@ -68,6 +68,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::post('subscribe/life-time-plan', [\App\Http\Controllers\Admin\SubscribeToLifeTimePlanController::class, 'store'])->name('subscribe.life-time-plan');
 
         Route::get('payments', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payments.index');
+        Route::get('payments/{payment}', [\App\Http\Controllers\Admin\PaymentController::class, 'show'])->name('payments.show');
     });
 });
 

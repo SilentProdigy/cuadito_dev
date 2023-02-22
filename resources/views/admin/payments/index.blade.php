@@ -46,7 +46,7 @@
                         <td>{{ $payment->paid_at?->format('Y-m-d') }}</td>
                         <td>@money( $payment->total_amount )</td>
                         <td>
-                            <a href="{{ route('client.payments.show', $payment) }}" class="btn btn-primary btn-sm">View Details</a>
+                            <a href="{{ route('admin.payments.show', $payment) }}" class="btn btn-primary btn-sm">View Details</a>
                             {{-- <a href="{{ route('client.payments.print', $payment) }}" class="btn btn-dark btn-sm">Print</a> --}}
                         </td>
                     </tr>
