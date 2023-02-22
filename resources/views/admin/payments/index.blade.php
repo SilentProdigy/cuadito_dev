@@ -20,7 +20,7 @@
 
 <div class="card">
     <div class="card-body">
-        <h5>{{ request('search') ? 'We found ' . $payments->count() . ' results ...' : 'Your Payment Transactions'}}</h5>
+        <h5>{{ request('search') ? 'We found ' . $payments->count() . ' results ...' : 'Payment Transactions'}}</h5>
 
         <table class="table table-borderless table-md user-listing-table" id="payment-history-table">
             <thead>     
