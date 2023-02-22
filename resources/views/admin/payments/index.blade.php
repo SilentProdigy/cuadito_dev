@@ -2,19 +2,20 @@
 
 @section('content')
 <div class="container-fluid mb-3">
-    <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">System Payments</div>
-        <div class="col d-flex justify-content-end">
-            <form action="{{ route('admin.payments.index') }}" method="get">
-                <div class="input-group input-group-lg mb-3">
-                    <input type="text" class="form-control " placeholder="Search Payments ..." name="search" value="{{ request('search') }}">
-                    <button class="btn btn-warning" type="submit">
-                        SEARCH
-                    </button>
-                    <a href="{{ route('admin.payments.index') }}">Clear</a>
-                </div>
-            </form>
-        </div>
+    <div class="my-3">
+        <form action="{{ route('admin.payments.index') }}" method="get">
+            <div class="input-group input-group-lg mb-3">
+                <input id="search-focus" type="text" class="form-control" placeholder="Search Payment ..." name="search" value="{{ request('search') }}">
+                <button class="btn border-orange btn-orange" type="submit">
+                    <i class="fas fa-search"></i>
+                </button>
+            </div>
+            {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
+
+            @if(request()->has('search') || request()->has('adv_search'))
+                <a href="{{ route('admin.payments.index') }}">Clear Search Results</a>
+            @endif
+        </form>
     </div>
 </div>
 
@@ -38,7 +39,7 @@
                 @forelse($payments as $payment)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
-                        <td>{{ $payment->invoice_id }}</td>
+                        <td><a href="{{ route('admin.payments.show', $payment) }}">{{ $payment->id }}</a></td>
                         <td>{{ $payment->or_number ?? "-" }}</td>
                         <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
                         <td>{{ $payment->status }}</td>

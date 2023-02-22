@@ -15,8 +15,9 @@ class PaymentController extends Controller
         if(request()->input('search'))
         {
             $payments = $payments->where(function($query) {
-                $query->where('id', 'LIKE' , "%". request()->input('search') ."%")
-                ->orWhere('or_number', 'LIKE' , "%". request()->input('search') ."%");
+                $query->where('id', 'LIKE' , request()->input('search') ."%")
+                ->orWhere('or_number', 'LIKE' , "%". request()->input('search') ."%")
+                ->orWhere('status', 'LIKE' , "%". request()->input('search') ."%");
             });
         }   
 
