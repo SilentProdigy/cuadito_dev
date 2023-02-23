@@ -89,12 +89,16 @@ class Project extends Model
 
     public function getWinningClientAttribute()
     {
-        return $this->winningBidding->company->client;
+        return $this->winningBidding?->company?->client;
     }
 
     public function getIsWinnerAttribute()
     {
-        return $this->getWinningClientAttribute()->id == auth('client')->user()->id;
+        $winningBidding = $this->winningBidding;
+
+        if(!$winningBidding) return false;
+
+        return $winningBidding?->id == auth('client')->user()->id;
     }
 
     public function getStatusBadgeAttribute()
