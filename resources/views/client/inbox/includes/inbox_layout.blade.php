@@ -153,10 +153,10 @@
 
             if(unstar_button)
             {
-                console.log('here');
+                // console.log('here');
 
                 unstar_button.addEventListener('click' , () => {
-                    console.log('here');
+                    // console.log('here');
 
                     if(checkedItems.length == 0)
                         return;
