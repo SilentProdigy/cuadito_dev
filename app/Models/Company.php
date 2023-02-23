@@ -117,4 +117,16 @@ class Company extends Model
     {
         return $this->client_id == auth('client')->user()->id;
     }
+
+    public function getStatusBadgeAttribute()
+    {
+        $badges = [
+            self::FOR_APPROVAL_STATUS => "<span class='badge rounded-pill bg-dark px-3 py-2'>PENDING</span>",
+            self::APPROVED_STATUS => "<span class='badge rounded-pill bg-success px-3 py-2'>APPROVED</span>",
+            self::DISAPPROVED_STATUS => "<span class='badge rounded-pill bg-danger px-3 py-2'>DISAPPROVED</span>",
+        ];
+    
+        return $badges[$this->validation_status];
+    }
+
 }
