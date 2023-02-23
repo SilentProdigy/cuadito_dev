@@ -21,13 +21,14 @@
 
 <div class="my-3">
     <form action="{{ route('client.projects.index') }}" method="get">
-        <div class="input-group input-group-lg mb-3">
+        <div class="input-group input-group-lg mb-4">
             <input id="search-focus" type="text" class="form-control" placeholder="Search Project ..." name="search" value="{{ request('search') }}">
             <button class="btn border-orange btn-orange" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </div>
-        <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a>
+        
+        {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
 
         @if(request()->has('search') || request()->has('adv_search'))
             <a href="{{ route('client.projects.index') }}">Clear Search Results</a>
