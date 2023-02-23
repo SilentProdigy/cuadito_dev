@@ -64,7 +64,7 @@
                             <span>{{ $project->company->name }}</span>
                         </td>
                         <td class="">
-                            <span>{{ $project->status }}</span>
+                            {!! $project->status_badge !!}
                         </td>
                         <td>
                             <span>{{ $project->created_at->format('M d,Y') }}</span>
