@@ -15,30 +15,35 @@ class Kernel extends ConsoleKernel
      * @return void
      */
     protected function schedule(Schedule $schedule)
-    {
+    {           
+        // $schedule->command('inspire')
+        // ->everyMinute()
+        // ->withoutOverlapping()
+        // ->sendOutputTo(storage_path('logs/inspire' . time() . ".log"));
+
         $schedule->command('queue:work --stop-when-empty --tries=3')
         ->everyMinute()
         ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/workers/workers-' . time() . ".log"));
+        ->sendOutputTo(storage_path('logs/workers.log'));
 
         $schedule->command('system:deactive-expired-subscription')
         ->timezone('Asia/Manila')
         ->dailyAt('9:00')
         ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/system/deactive-subs-' . time() . ".log"));
+        ->sendOutputTo(storage_path('logs/deactive-subs.log'));
 
         $schedule->command('system:notify-near-expiration-subscription')
         ->timezone('Asia/Manila')
         ->dailyAt('9:00')
         ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/system/notify-near-subs-' . time() . ".log"));
+        ->sendOutputTo(storage_path('logs/notify-near-subs.log'));
 
         // Run every last day of the month midnight
         $schedule->command('system:reset-active-subscriptions')
         ->timezone('Asia/Manila')
         ->monthlyOn(1)
         ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/system/reset-counters-' . time() . ".log"));
+        ->sendOutputTo(storage_path('logs/reset-counters.log'));
     }
 
     /**
