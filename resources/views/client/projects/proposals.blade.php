@@ -5,11 +5,31 @@
     <section class="mt-4">
         <div class="row">
             <div class="col-xs-12">
+                <form action="{{ route('client.projects.proposals', $project) }}" method="get">
+                    <div class="input-group input-group-lg mb-4">
+                        <input id="search-focus" type="text" class="form-control" placeholder="Search Proposal ..." name="search" value="{{ request('search') }}">
+                        <button class="btn border-orange btn-orange" type="submit">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                    
+                    @if(request()->has('search') || request()->has('adv_search'))
+                        <a href="{{ route('client.projects.proposals', $project) }}">Clear Search Results</a>
+                    @endif
+                </form>
+            
+                @if(request()->has('search') || request()->has('adv_search'))
+                    <div style="margin-top: 10px;">
+                        <h5>Found {{ $proposals->count() }} search results ... </h5>
+                    </div>
+                @endif
+            </div>
+            <div class="col-xs-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
-                        <h3 class="fw-bold py-1">{{ $project->title }}'s Proposals</h3>
+                        <h5 class="fw-bold py-1">{{ $project->title }}'s Proposals</h5>
                         
-                        <form action="{{ route('client.projects.proposals', $project) }}" method="get">
+                        {{-- <form action="{{ route('client.projects.proposals', $project) }}" method="get">
                             <div class="input-group input-group-lg mb-3">
                                 <input type="text" class="form-control " placeholder="Search Project ..." name="search" value="{{ request('search') }}">
                                 <button class="btn btn-warning" type="submit">
@@ -25,11 +45,11 @@
                             <label>Date Filter</label>
                             <input type="date" name="min_date" placeholder="* Min Date" value="{{ request('min_date') }}"/>
                             <input type="date" name="max_date" placeholder="* Max Date" value="{{ request('max_date') }}"/>
-                        </form>
+                        </form> --}}                    
                     </div>
                     <div class="card-body">
 
-                        <h5>{{ request('search') ? 'We found ' . $proposals->count() . ' results ...' : 'Current Proposals'}}</h5>
+                        {{-- <h5>{{ request('search') ? 'We found ' . $proposals->count() . ' results ...' : 'Current Proposals'}}</h5> --}}
 
                         <table class="table table-borderless table-md user-listing-table">
                             <thead>
@@ -41,7 +61,7 @@
                                 <th>ACTIONS</th>
                             </thead>
                             <tbody>
-                                @foreach ($proposals as $proposal)
+                                @forelse ($proposals as $proposal)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -74,7 +94,11 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @endforeach
+                                @empty
+                                    <tr>
+                                        <td>No proposals yet!</td>
+                                    </tr>
+                                @endforelse 
                             </tbody>
                         </table>
 
@@ -86,6 +110,73 @@
     </section>
 </div>
 @include('client.projects.modals.choose_proposal_modal')
+
+<!-- Modal -->
+{{-- <div class="modal fade" id="advance-search-modal" tabindex="-1" aria-labelledby="advance-search-modal" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title w-100 font-weight-bold" id="exampleModalLabel">Advance Search</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body mx-3">
+                <form method="GET" action="{{ route('client.listing.index') }}">
+                    @csrf
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Filter By:</label>
+                            <select class="form-control" name="filter_col">
+                                <option value="">-- Please select an option</option>
+                               @foreach ($search_options['filter_cols'] as $col)
+                                   <option value="{{ $col['value'] }}" {{ $col['value'] == request('filter_col') ? 'selected' : '' }}>
+                                        {{ $col['label'] }}
+                                    </option>
+                               @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Having Value of:</label>
+                            <input type="text" name="filter_val" class="form-control" value="{{ request()->input('filter_val') }}">
+                        </div>
+                    </div>
+                    <div class="row mb-4">
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Sort By:</label>
+                            <select class="form-control" name="sort_col">
+                                <option value="">-- Please select an option</option>
+                                @foreach ($search_options['sort_by_cols'] as $col)
+                                   <option value="{{ $col['value'] }}" {{ $col['value'] == request('sort_col') ? 'selected' : '' }}>
+                                    {{ $col['label'] }}
+                                    </option>
+                                @endforeach
+                            </select>
+                        </div>
+
+                        <div class="col-md-6">
+                            <label for="" class="fw-bold">Ascending / Descending:</label>
+                            <select class="form-control" name="sort_val">
+                                <option value="asc">Ascending</option>
+                                <option value="desc">Descending</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <input type="hidden" name="adv_search" value="1">
+
+                    <div class="row mb-4 mx-0">
+                        <button type="submit" class="btn btn-primary">
+                            {{ __('Search') }}
+                        </button>
+                    </div>
+
+                    <hr>
+                </form>
+            </div>
+        </div>
+    </div>
+</div> --}}
+
 @endsection
 
 @section('script')
