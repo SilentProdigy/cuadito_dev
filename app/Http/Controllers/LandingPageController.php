@@ -40,7 +40,7 @@ class LandingPageController extends Controller
     public function pricing()
     {   
         $products = SubscriptionType::get();
-        $latest_subscription = auth('client')->user()->active_subscription;
+        $latest_subscription = auth('client')->user()?->active_subscription;
 
         return view('landing-page/pricing')->with(compact('products', 'latest_subscription'));
     }
