@@ -1,23 +1,45 @@
 @extends('layouts.client-main-layout')
 
 @section('content')    
-
 <div class="container-fluid mb-3">
-    <div class="d-flex flex-row justify-content-between align-items-center">
+    <div class="d-flex flex-row d-align-items-center justify-content-center">
         <div class="table-titles">Your Proposals</div>
-        <form action="{{ route('client.proposals.index') }}" method="GET">
-            <div class="input-group">
-                <div class="form-outline">
-                    <input id="search-focus" type="search" id="form1" class="form-control" name="search" value="{{ request('search') }}"/>
-                    <label class="form-label" for="form1">Search</label>
-                </div>
-                <button type="submit" class="btn border-orange btn-orange">
-                    <i class="fas fa-search"></i>
+        <div class="col d-flex justify-content-end">
+            {{-- @if(auth('client')->user()->have_valid_companies)
+                <a href="{{ route('client.projects.create') }}" class="btn btn-primary header-btn">
+                    <i class="fa fa-plus"></i>&ensp;Add Project
+                </a>
+            @else
+                <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#no-valid-company-modal">
+                    <i class="fa fa-plus"></i>&ensp;Add Project
                 </button>
-            </div>
-        </form>
+            @endif --}}
+        </div>
     </div>
 </div>
+
+<div class="my-3">
+    <form action="{{ route('client.proposals.index') }}" method="get">
+        <div class="input-group input-group-lg mb-4">
+            <input id="search-focus" type="text" class="form-control" placeholder="Search Proposals ..." name="search" value="{{ request('search') }}">
+            <button class="btn border-orange btn-orange" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
+
+        @if(request()->has('search') || request()->has('adv_search'))
+            <a href="{{ route('client.proposals.index') }}">Clear Search Results</a>
+        @endif
+    </form>
+
+    @if(request()->has('search') || request()->has('adv_search'))
+        <div style="margin-top: 10px;">
+            <h5>Found {{ $proposals->count() }} search results ... </h5>
+        </div>
+    @endif
+</div>
+
 <div class="card">
     <div class="card-body">
         <table class="table table-borderless table-md user-listing-table">

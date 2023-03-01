@@ -6,6 +6,7 @@ use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
+use Illuminate\Support\Facades\DB;
 
 class Project extends Model
 {
@@ -35,7 +36,8 @@ class Project extends Model
         'relevant_authorities',
         'remarks',
         'winner_bidding_id',
-        'company_id'
+        'company_id',
+        'created_at'
     ];
 
     protected $cast = [
@@ -87,12 +89,16 @@ class Project extends Model
 
     public function getWinningClientAttribute()
     {
-        return $this->winningBidding->company->client;
+        return $this->winningBidding?->company?->client;
     }
 
     public function getIsWinnerAttribute()
     {
-        return $this->getWinningClientAttribute()->id == auth('client')->user()->id;
+        $winningBidding = $this->winningBidding;
+
+        if(!$winningBidding) return false;
+
+        return $winningBidding?->id == auth('client')->user()->id;
     }
 
     public function getStatusBadgeAttribute()
@@ -124,5 +130,10 @@ class Project extends Model
     public function getIsOwnedAttribute()
     {
         return auth('client')->user()->id == $this->company->client_id;
+    }
+
+    public static function getProjectsOverviewPerMonth($year = '2023')
+    {
+        
     }
 }

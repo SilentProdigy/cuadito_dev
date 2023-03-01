@@ -1,7 +1,7 @@
 @extends('layouts.dashboard-layout')
 
 @section('content')
-<div class="container px-5">
+<div class="container px-5" id="data-container" data-chart-info='@json($chart_data)'>
   <div class="row">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -20,7 +20,7 @@
             <div class="icon">
                 <i class="fa fa-clipboard-list" aria-hidden="true"></i>
             </div>
-            <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.projects.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
 
@@ -33,7 +33,7 @@
             <div class="icon">
                 <i class="fa fa-money" aria-hidden="true"></i>
             </div>
-            <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.payments.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
@@ -45,7 +45,7 @@
             <div class="icon">
                 <i class="fa fa-handshake" aria-hidden="true"></i>
             </div>
-            <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.proposals.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
     <div class="col-lg-3 col-sm-6">
@@ -57,7 +57,7 @@
             <div class="icon">
                 <i class="fa fa-users"></i>
             </div>
-            <a href="#" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
+            <a href="{{ route('admin.clients.index') }}" class="card-box-footer">View More <i class="fa fa-arrow-circle-right"></i></a>
         </div>
     </div>
   </div>
@@ -68,9 +68,9 @@
           <div class="d-flex flex-row d-align-items-center justify-content-center">
             <span class="table-titles">List of Projects</span>
             <div class="col d-flex justify-content-end">
-                <button type="button" class="btn">
+                <a href="{{ route('admin.projects.index') }}" class="btn">
                     <i class="fa fa-arrow-right"></i>
-                </button>
+                </a>
             </div>  
           </div>
           
@@ -157,22 +157,24 @@
 </script>
 <!-- Label bar -->
 <script>
-  const labelsBarChart = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-  ];
+
+  let chart_data = document.getElementById('data-container');
+  chart_data = chart_data.getAttribute('data-chart-info');   
+  chart_data = JSON.parse(chart_data);
+
+
+  const labelsBarChart = chart_data.map(item => item.month_str);
+
+  const data = chart_data.map(item => item.data);
+
   const dataBarChart = {
     labels: labelsBarChart,
     datasets: [
       {
-        label: "My First dataset",
+        label: "Projects",
         backgroundColor: "#f96b23",
         borderColor: "hsl(252, 82.9%, 67.8%)",
-        data: [0, 10, 5, 2, 20, 30, 45],
+        data,
       },
     ],
   };

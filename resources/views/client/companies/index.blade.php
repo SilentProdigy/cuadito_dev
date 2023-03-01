@@ -34,7 +34,7 @@
                         <span>{{ $company->name }}</span>
                     </td>
                     <td class="">
-                        <span>{{ $company->validation_status }}</span>
+                        <span>{!! $company->status_badge !!}</span>
                     </td>
                     <td class="user-actions">
                         <a href="{{ route('client.companies.show', $company) }}" class="btn btn-sm btn-outline-info">

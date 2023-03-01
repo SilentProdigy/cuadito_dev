@@ -18,6 +18,30 @@
         </div>
     </div>
 </div>
+
+<div class="my-3">
+    <form action="{{ route('client.projects.index') }}" method="get">
+        <div class="input-group input-group-lg mb-4">
+            <input id="search-focus" type="text" class="form-control" placeholder="Search Project ..." name="search" value="{{ request('search') }}">
+            <button class="btn border-orange btn-orange" type="submit">
+                <i class="fas fa-search"></i>
+            </button>
+        </div>
+        
+        {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
+
+        @if(request()->has('search') || request()->has('adv_search'))
+            <a href="{{ route('client.projects.index') }}">Clear Search Results</a>
+        @endif
+    </form>
+
+    @if(request()->has('search') || request()->has('adv_search'))
+        <div style="margin-top: 10px;">
+            <h5>Found {{ $projects->count() }} search results ... </h5>
+        </div>
+    @endif
+</div>
+
 <div class="card">
     <div class="card-body">
         <table class="table table-borderless table-sm">
@@ -40,7 +64,7 @@
                             <span>{{ $project->company->name }}</span>
                         </td>
                         <td class="">
-                            <span>{{ $project->status }}</span>
+                            {!! $project->status_badge !!}
                         </td>
                         <td>
                             <span>{{ $project->created_at->format('M d,Y') }}</span>
@@ -62,50 +86,16 @@
                                 <i class="fa fa-check"></i>
                             </a>
                         </td>
-                        <!-- <td class="user-actions">
-                            <div class="dropdown">
-                                <button
-                                    class="btn btn-primary dropdown-toggle"
-                                    type="button"
-                                    id="userActionsDropdown"
-                                    data-mdb-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    Actions
-                                </button>
-                                <ul class="dropdown-menu" aria-labelledby="userActionsDropdown">
-                                    <li class="p-2">
-                                        <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info dropdown-item">
-                                            <i class="fa fa-eye"></i> View   
-                                        </a>
-                                    </li>
-                                    <li class="p-2">
-                                        <a href="{{ route('client.projects.edit', $project) }}" class="btn btn-sm btn-warning dropdown-item">
-                                            <i class="fa fa-pencil"></i> Edit
-                                        </a>
-                                    </li>
-                                    <li class="p-2">
-                                        <a href="#" class="btn btn-sm btn-danger btn-delete-project dropdown-item" data-project="{{ json_encode($project) }}">
-                                            <i class="fa fa-trash"></i> Delete
-                                        </a>
-                                    </li>
-                                    <li class="p-2">
-                                        <a href="#" class="btn btn-sm btn-dark btn-set-project-status dropdown-item" data-project="{{ json_encode($project) }}">
-                                            <i class="fa fa-check"></i> Status
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </td> -->
                     </tr>        
                 @empty
                     <tr>
                         <td>No Projects Yet!</td>
                     </tr>
                 @endforelse
-            
             </tbody>
         </table>
+
+        <div class="d-flex justify-content-center">{{ $projects->links() }}</div>
     </div>
 </div>
 @include('client.projects.modals.confirm_delete_modal')
