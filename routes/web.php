@@ -29,7 +29,11 @@ Route::redirect('/', '/landing-page');
 // Route::redirect('/login', '/admin/login');
 Route::redirect('/login', '/auth/login');
 
-Route::get('landing-page', [\App\Http\Controllers\LandingPageController::class, 'index']);
+Route::get('landing-page', [\App\Http\Controllers\LandingPageController::class, 'index'])->name('home');
+Route::get('guest/about', [\App\Http\Controllers\LandingPageController::class, 'about'])->name('guest.about');
+Route::get('guest/projects', [\App\Http\Controllers\LandingPageController::class, 'projects'])->name('guest.projects');
+Route::get('guest/pricing', [\App\Http\Controllers\LandingPageController::class, 'pricing'])->name('guest.pricing');
+Route::get('guest/contact', [\App\Http\Controllers\LandingPageController::class, 'contact'])->name('guest.contact');
 
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {

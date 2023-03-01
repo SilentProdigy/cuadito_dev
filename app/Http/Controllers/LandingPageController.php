@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\SubscriptionType;
 
 class LandingPageController extends Controller
 {
@@ -27,6 +28,25 @@ class LandingPageController extends Controller
         }
 
         return view('landing-page/home')->with(compact('data'));
+    }
+    public function about()
+    {   
+        return view('landing-page/about');
+    }
+    public function projects()
+    {   
+        return view('landing-page/projects');
+    }
+    public function pricing()
+    {   
+        $products = SubscriptionType::get();
+        $latest_subscription = auth('client')->user()->active_subscription;
+
+        return view('landing-page/pricing')->with(compact('products', 'latest_subscription'));
+    }
+    public function contact()
+    {   
+        return view('landing-page/contact');
     }
 
     /**

@@ -8,6 +8,7 @@
         "php": "^7.3|^8.0",
         "barryvdh/laravel-dompdf": "^2.0",
         "fruitcake/laravel-cors": "^2.0",
+        "google/apiclient": "*",
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.75",
         "laravel/sanctum": "^2.11",
@@ -15,6 +16,7 @@
         "laravel/ui": "^3.4",
         "nicolaslopezj/searchable": "^1.13",
         "protonemedia/laravel-xss-protection": "^1.2",
+        "revolution/laravel-google-sheets": "*",
         "symfony/http-client": "^6.1",
         "symfony/mailgun-mailer": "^6.1"
     },

@@ -10,6 +10,7 @@ use App\Models\Cart;
 use App\Models\CartItem;
 use Illuminate\Support\Facades\Blade;
 use App\Models\SubscriptionType;
+use Illuminate\Support\Facades\Auth;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -83,6 +84,21 @@ class AppServiceProvider extends ServiceProvider
             $latest_subscription = auth('client')->user()->active_subscription;
 
             $view->with(compact('products', 'latest_subscription'));
+        });
+
+        View::composer(['landing-page.landing-page-layout'], function($view){
+            if (auth('client')->user()) {
+                $data = [
+                    'auth_text' => 'Dashboard',
+                    'auth_url' => "client.dashboard",
+                ];
+            }else{
+                $data = [
+                    'auth_text' => 'Login',
+                    'auth_url' => "client.auth.show-login-form",
+                ];
+            }
+            $view->with(compact('data'));
         });
     }
 }
