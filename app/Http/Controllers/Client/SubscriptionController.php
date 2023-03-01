@@ -84,7 +84,7 @@ class SubscriptionController extends Controller
                 return redirect()->back()->withErrors(['message' => 'Operation Failed: ' . $response['Message']]);
             }
             
-            $this->createPaymentSession($payment, $response);
+            // $this->createPaymentSession($payment, $response);
 
             // Redirect to Submitted URL
             return redirect($response['Url']);
