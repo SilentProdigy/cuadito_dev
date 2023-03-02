@@ -63,12 +63,12 @@
                         </div>
 
                         <!-- Company Segment input -->
-                        <select class="form-select mb-4" aria-label="Segment" required>
+                        <!-- <select class="form-select mb-4" aria-label="Segment" required>
                             <option selected>Select your segment</option>
                             <option value="1">Enterprise</option>
                             <option value="2">Jumpstart</option>
                             <option value="3">Emerge</option>
-                        </select>
+                        </select> -->
                       
                         <!-- Message input -->
                         <div class="form-outline mb-4">
