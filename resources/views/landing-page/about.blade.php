@@ -72,16 +72,15 @@
             </div>
 
             <div class="col-md-6 about-text-wrapper">
-                <h1 class="text-orange display-3">OUR MISSION</h1>
-                <h5 class="fw-normal">Bringing together entrepreneurs from various industries on a single platform, enabling them to connect easily and do business efficiently as they grow with one another.</h5>
-                <h1 class="mt-4 text-orange display-3">OUR VISION</h1>
+                <h1 class="text-orange display-3">Why Choose Cuadito</h1>
+                <h5 class="fw-normal">We bring together entrepreneurs from various industries on a single platform, enabling them to connect easily and do business efficiently as they grow with one another.</h5>
                 <h5 class="fw-normal">To be the leading B2B platform that provides collaboration and matches relevant products and services to every businessmen by being the perfect marketplace for them to get the perfect partnerships from other businesses.</h5>
             </div>
         </div>
 
         <div class="row">
             <div class="col-md-6 p-4 about-text-wrapper">
-                <h1 class="text-orange display-3">OUR CORE VALUES</h1>
+                <h1 class="text-orange display-3">What Sets Us Apart</h1>
                 <h5 class="fw-normal">Cuadito is committed to providing solutions that empower our community to grow and achieve their goals through trust and reliability.</h5>
             </div>
             
@@ -97,7 +96,8 @@
     <div class="container py-5 how-to-section">
         <div class="row">
             <h1 class="text-orange display-3 text-center">GET TO KNOW CUADITO</h1>
-            <p class="fw-normal text-center">Are you still scratching your head, trying to figure out what Cuadito is all about? We've got just the thing for you! We've created a short video animation explaining everything you need to know about Cuadito and what it can bring.</p>
+            <p class="fw-normal text-center">Are you still scratching your head, trying to figure out what Cuadito is all about? We've got just the thing for you!</p>
+            <p class="fw-normal text-center">We've created a short video animation explaining everything you need to know about Cuadito and what it can bring.</p>
             <p class="fw-normal text-center">At Cuadito, we believe that finding the right partner for your project should be simple and stress-free. Check out our video animation and start exploring everything Cuadito offers!</p>
         </div>
         
@@ -165,12 +165,12 @@
                         </div>
 
                         <!-- Company Segment input -->
-                        <select class="form-select mb-4" aria-label="Segment" required>
+                        <!-- <select class="form-select mb-4" aria-label="Segment" required>
                             <option selected>Select your segment</option>
                             <option value="1">Enterprise</option>
                             <option value="2">Jumpstart</option>
                             <option value="3">Emerge</option>
-                        </select>
+                        </select> -->
                       
                         <!-- Message input -->
                         <div class="form-outline mb-4">

@@ -34,6 +34,7 @@ Route::get('guest/about', [\App\Http\Controllers\LandingPageController::class, '
 Route::get('guest/projects', [\App\Http\Controllers\LandingPageController::class, 'projects'])->name('guest.projects');
 Route::get('guest/pricing', [\App\Http\Controllers\LandingPageController::class, 'pricing'])->name('guest.pricing');
 Route::get('guest/contact', [\App\Http\Controllers\LandingPageController::class, 'contact'])->name('guest.contact');
+Route::post('store-data', [\App\Http\Controllers\LandingPageController::class, 'store'])->name('store-data');
 
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {

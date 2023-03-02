@@ -18,15 +18,15 @@
     <div class="container-fluid d-flex justify-content-center align-items-center banner-cuadito">
         <div class="row smooth-scroll">
           <div class="col-md-6">
-            &nbsp;
+            <img class="img-fluid w-100" src="{{ asset('images/elements/communication.png') }}">
           </div>
-          <div class="col-md-6 p-5">
+          <div class="col-md-6 p-5 d-flex justify-content-center align-items-center ">
             <div class="wow fadeInDown">
-                <h1 class="display-3 text-uppercase fw-bold">Get Started</h1>
-                <h5 class="mb-4 fw-normal">Contact us with to get started.</h5>
+                <h1 class="display-3 text-uppercase fw-bold">Contact us</h1>
+                
                 <h5 class="fw-normal">We are gladly answer any of your questions with regards to our platform and how to get started.</h5>
             </div>
-            <a href="{{ route('client.auth.show-register-form') }}" class="btn landing-page-btn btn-rounded mt-5 fs-5">Get Started <i class="fa fa-angle-right"></i> </a>
+            <!-- <a href="{{ route('client.auth.show-register-form') }}" class="btn landing-page-btn btn-rounded mt-5 fs-5">Get Started <i class="fa fa-angle-right"></i> </a> -->
           </div>
         </div>
     </div>
@@ -35,31 +35,33 @@
         <div class="row">
             <div class="col-md-6 col-xl-6 mt-5 p-5">
                 <h1 class="text-center display-3">GET STARTED</h1>
-                <h5 class="fw-normal text-center">Sign up now to get started with our new and amazing platform.</h5>
+                <!-- <h5 class="fw-normal text-center">Sign up now to get started with our new and amazing platform.</h5> -->
+                <h5 class="fw-normal text-center">Our sales representative will reach you out and schedule you to get started.</h5>
                 <div class="contact-form p-5">
-                    <form>
+                    <form name="lead_form" id="lead_form" method="POST" action="javascript:void(0)">
+                        @csrf
                         <!-- Name input -->
                         <div class="form-outline mb-4">
-                          <input type="text" id="contact-name" class="form-control" />
-                          <label class="form-label" for="contact-name">Name</label>
+                          <input type="text" name="name" id="name" class="form-control" />
+                          <label class="form-label" for="name">Name</label>
                         </div>
                       
                         <!-- Email input -->
                         <div class="form-outline mb-4">
-                          <input type="email" id="contact-email" class="form-control" />
-                          <label class="form-label" for="contact-email">Email address</label>
+                          <input type="email" id="email" name="email" class="form-control" />
+                          <label class="form-label" for="email">Email address</label>
                         </div>
 
                         <!-- Phone Number input -->
                         <div class="form-outline mb-4">
-                            <input type="tel" id="contact-number" class="form-control" />
-                            <label class="form-label" for="contact-number">Phone Number</label>
-                          </div>
+                            <input type="tel" id="number" name="number" class="form-control" />
+                            <label class="form-label" for="number">Phone Number</label>
+                        </div>
 
                         <!-- Company Name input -->
                         <div class="form-outline mb-4">
-                            <input type="text" id="contact-company-name" class="form-control" />
-                            <label class="form-label" for="contact-company-name">Company Name</label>
+                            <input type="text" id="company" name="company" class="form-control" />
+                            <label class="form-label" for="company">Company Name</label>
                         </div>
 
                         <!-- Company Segment input -->
@@ -72,8 +74,8 @@
                       
                         <!-- Message input -->
                         <div class="form-outline mb-4">
-                          <textarea class="form-control" id="contact-message" rows="4"></textarea>
-                          <label class="form-label" for="contact-message">Message</label>
+                          <textarea class="form-control" name="message" id="message" rows="4"></textarea>
+                          <label class="form-label" for="message">Message</label>
                         </div>
                       
                         <!-- Checkbox -->
@@ -85,7 +87,7 @@
                         </div>
 
                         <!-- Channel -->
-                        <input type="hidden" id="contact-channel" value="Cuadito Website" name="Channel" />
+                        <input type="hidden" id="channel" value="Cuadito Website" name="channel" />
                       
                         <!-- Submit button -->
                         <button type="submit" class="btn btn-orange btn-block mb-4">Send</button>
@@ -93,7 +95,7 @@
                 </div>
             </div>
             <div class="col-md-6 col-xl-6 d-flex align-items-center justify-content-center">
-                <img src="{{ asset('images/elements/communication.png') }}"
+                <img src="{{ asset('images/elements/form.png') }}"
                       class="img-fluid">
             </div>
         </div>
@@ -122,4 +124,61 @@
 </div>
 @endsection
 @section('scripts')
+<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script>
+    if ($("#lead_form").length > 0) {
+        $("#lead_form").validate({
+            rules: {
+                name: {
+                    required: true,
+                    maxlength: 50
+                },
+                email: {
+                    required: true,
+                    maxlength: 50,
+                    email: true,
+                },  
+                company: {
+                    required: true,
+                    maxlength: 50
+                },   
+            },
+            messages: {
+                name: {
+                    required: "Please enter name",
+                    maxlength: "Your name max length should be 50 characters long."
+                    },
+                email: {
+                    required: "Please enter valid email",
+                    email: "Please enter valid email",
+                    maxlength: "The email name should less than or equal to 50 characters",
+                },   
+                company: {
+                    required: "Please enter company name",
+                    maxlength: "Your company name max length should be 50 characters long."
+                },
+            },
+            submitHandler: function(form) {
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+                $('#submit').html('Please Wait...');
+                $("#submit").attr("disabled", true);
+                $.ajax({
+                    url: "{{route('store-data')}}",
+                    type: "POST",
+                    data: $('#lead_form').serialize(),
+                    success: function( response ) {
+                        $('#submit').html('Submit');
+                        $("#submit"). attr("disabled", false);
+                        alert('Ajax form has been submitted successfully');
+                        document.getElementById("lead_form").reset(); 
+                    }
+                });
+            }
+        })
+    }
+    </script>
 @endsection

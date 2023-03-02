@@ -197,7 +197,7 @@
             </div>
             <!-- Grid row -->
 
-            <a href="{{ route('client.auth.show-register-form') }}" style="color: #F96B23" class="btn bg-light border-0 px-4 py-3 btn-rounded mt-5 fs-5 fw-normal">Find out more </a>
+            <a href="{{ route('guest.about') }}" style="color: #F96B23" class="btn bg-light border-0 px-4 py-3 btn-rounded mt-5 fs-5 fw-normal">Find out more </a>
        </section>
 
        <!-- End Features -->

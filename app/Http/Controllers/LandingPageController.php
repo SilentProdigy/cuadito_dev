@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\SubscriptionType;
+use Revolution\Google\Sheets\Facades\Sheets;
 
 class LandingPageController extends Controller
 {
@@ -48,7 +49,7 @@ class LandingPageController extends Controller
     {   
         return view('landing-page/contact');
     }
-
+    
     /**
      * Show the form for creating a new resource.
      *
@@ -67,7 +68,20 @@ class LandingPageController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|unique:contacts|max:255',
+            'company' => 'required'
+        ]);
+          
+        $name = $request->name;
+        $company = $request->company;
+        $date = now()->toDateTimeString();
+
+        Sheets::sheet('Sheet1')->append([[$name, $company, $date]]);
+
+        return redirect('form')->with('status', 'Ajax Form Data Has Been validated and stored');
     }
 
     /**
