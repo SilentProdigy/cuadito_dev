@@ -23,7 +23,7 @@ return [
     'scopes' => [\Google\Service\Sheets::DRIVE, \Google\Service\Sheets::SPREADSHEETS],
     'access_type' => 'online',
     'approval_prompt' => 'auto',
-    'google_credentials_json_file' => storage_path('credentials.json'),
+    'google_credentials_json_file' => storage_path('credentials/google.json'),
 
     /*
     |----------------------------------------------------------------------------
@@ -55,7 +55,7 @@ return [
          * Path to service account json file. You can also pass the credentials as an array
          * instead of a file path.
          */
-        'file' => storage_path('credentials.json'),
+        'file' => storage_path('credentials/google.json'),
     ],
 
     /*
