@@ -39,8 +39,7 @@
                         <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
                             class="fw-bold">Creation Date: </span>Jun 23,2021</li>
                         <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
-                            class="me-1 fw-bold">Status:</span><span class="badge bg-success text-white fw-bold">
-                            Paid</span></li>
+                            class="me-1 fw-bold">Status:</span>{{ $status }}</li>
                         </ul>
                     </div>
                     </div>
