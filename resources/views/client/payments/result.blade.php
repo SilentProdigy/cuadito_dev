@@ -34,12 +34,22 @@
                     <div class="col-xl-4">
                         <p class="text-muted">Invoice</p>
                         <ul class="list-unstyled">
-                        <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
-                            class="fw-bold">ID:</span>#{{ $payment->invoice_id }}</li>
-                        <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
-                            class="fw-bold">Creation Date: </span>Jun 23,2021</li>
-                        <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
-                            class="me-1 fw-bold">Status:</span>{{ $status }}</li>
+                            <li class="text-muted">
+                                <i class="fas fa-circle text-orange"></i> 
+                                <span class="fw-bold">ID:</span>#{{ $payment->invoice_id }}
+                            </li>
+                            <li class="text-muted">
+                                <i class="fas fa-circle text-orange"></i> 
+                                <span class="fw-bold">REFERENCE NO.</span>#{{ $reference_no }}
+                            </li>
+                            <li class="text-muted">
+                                <i class="fas fa-circle text-orange"></i> 
+                                <span class="fw-bold">Creation Date: </span>Jun 23,2021
+                            </li>
+                            <li class="text-muted">
+                                <i class="fas fa-circle text-orange"></i> 
+                                <span class="me-1 fw-bold">Status:</span>{{ $status }}
+                            </li>
                         </ul>
                     </div>
                     </div>
