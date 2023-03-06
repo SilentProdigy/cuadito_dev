@@ -54,12 +54,25 @@ class GoogleSheetController extends Controller
             ->sheet(config('sheets.sheet_id'))
             ->append([
                 [
+                    now()->format('d-M-Y'),
                     $request->input('name'),
-                    $request->input('email'),
-                    $request->input('number'),
                     $request->input('company'),
+                    "", // title
+                    "", // industry
+                    "", // address
+                    $request->input('number'),
+                    $request->input('email'),
+                    "", // linkedin
+                    "", // channel
+                    "", // segment
+                    "", // sales_rep
+                    "", // status
+                    now()->format('d-M-Y'),
+                    "", // client response
+                    "", // sale date
+                    "", // sales amount
                     $request->input('message'), 
-                    now()->toDateString()
+                    
                 ]
             ]);
             
