@@ -124,7 +124,7 @@
 </div>
 @endsection
 @section('scripts')
-<script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
+<script src="https://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
 <script>
     if ($("#lead_form").length > 0) {
         $("#lead_form").validate({
@@ -164,8 +164,10 @@
                         'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                     }
                 });
+
                 $('#submit').html('Please Wait...');
                 $("#submit").attr("disabled", true);
+                
                 $.ajax({
                     url: "{{route('store-data')}}",
                     type: "POST",

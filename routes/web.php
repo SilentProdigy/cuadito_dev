@@ -9,6 +9,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Contorllers\Client\MessageController;
 use App\Http\Controllers\LandingPageController;
+use Revolution\Google\Sheets\Facades\Sheets;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,12 +30,18 @@ Route::redirect('/', '/landing-page');
 // Route::redirect('/login', '/admin/login');
 Route::redirect('/login', '/auth/login');
 
+Route::get('test-sheet', function() {
+    Sheets::spreadsheet(config('sheets.spreadsheet_id'))
+    ->sheet('Sheet1')
+    ->append([["John Doe", "ACME Company", now()->toDateString()]]);
+});
+
 Route::get('landing-page', [\App\Http\Controllers\LandingPageController::class, 'index'])->name('home');
 Route::get('guest/about', [\App\Http\Controllers\LandingPageController::class, 'about'])->name('guest.about');
 Route::get('guest/projects', [\App\Http\Controllers\LandingPageController::class, 'projects'])->name('guest.projects');
 Route::get('guest/pricing', [\App\Http\Controllers\LandingPageController::class, 'pricing'])->name('guest.pricing');
 Route::get('guest/contact', [\App\Http\Controllers\LandingPageController::class, 'contact'])->name('guest.contact');
-Route::post('store-data', [\App\Http\Controllers\LandingPageController::class, 'store'])->name('store-data');
+Route::post('store-data', [\App\Http\Controllers\GoogleSheetController::class, 'submitForm'])->name('store-data');
 
 // Route::middleware(['auth','inactive', 'preventBackHistory'])->prefix('admin')->name('admin.')->group(function () {
 Route::prefix('admin')->name('admin.')->group(function () {
