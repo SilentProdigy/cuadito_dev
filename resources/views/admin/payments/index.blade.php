@@ -3,30 +3,20 @@
 @section('content')
 <div class="container-fluid mb-3">
     <div class="my-3">
-        <form action="{{ route('admin.payments.index') }}" method="get">
-            <div class="input-group input-group-lg mb-3">
-                <input id="search-focus" type="text" class="form-control" placeholder="Search Payment ..." name="search" value="{{ request('search') }}">
-                <button class="btn border-orange btn-orange" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
-            </div>
-            {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
-
-            @if(request()->has('search') || request()->has('adv_search'))
-                <a href="{{ route('admin.payments.index') }}">Clear Search Results</a>
-            @endif
-        </form>
+        <div class="d-flex flex-row d-align-items-center justify-content-center">
+            <div class="table-titles">Payment Transactions</div>
+        </div>
     </div>
 </div>
 
 <div class="card">
-    <div class="card-body">
-        <h5>{{ request('search') ? 'We found ' . $payments->count() . ' results ...' : 'Payment Transactions'}}</h5>
+    <div class="card-body">        
 
         <table class="table table-borderless table-md user-listing-table" id="payment-history-table">
             <thead>     
                 <th>SEQ</th>          
                 <th>INVOICE #</th>
+                <th>REF. NO.</th>
                 <th>OR #</th>
                 <th>PLAN</th>
                 <th>STATUS</th>                
@@ -40,6 +30,7 @@
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td><a href="{{ route('admin.payments.show', $payment) }}">{{ $payment->id }}</a></td>
+                        <td>{{ $payment->reference_no ?? "-" }}</td>
                         <td>{{ $payment->or_number ?? "-" }}</td>
                         <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
                         <td>{{ $payment->status }}</td>
@@ -58,8 +49,6 @@
                 @endforelse
             </tbody>
         </table>
-
-        <div class="d-flex justify-content-center">{{ $payments->links() }}</div>
     </div>
 </div>
 
@@ -67,5 +56,11 @@
 @endsection
 
 @section('script')
-
+<script>
+    $(document).ready(function () {
+        $('#payment-history-table').DataTable();
+    });
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection

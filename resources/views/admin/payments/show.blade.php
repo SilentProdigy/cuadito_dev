@@ -34,8 +34,14 @@
                 <div class="col-xl-4">
                     <p class="text-muted">Invoice</p>
                     <ul class="list-unstyled">
-                    <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
-                        class="fw-bold">ID:</span>#{{ $payment->invoice_id }}</li>
+                    <li class="text-muted">
+                        <i class="fas fa-circle text-orange"></i> 
+                        <span class="fw-bold">ID:</span>#{{ $payment->invoice_id }}
+                    </li>
+                    <li class="text-muted">
+                        <i class="fas fa-circle text-orange"></i> 
+                        <span class="fw-bold">REFERENCE NO.</span>#{{ $payment->reference_no }}
+                    </li>
                     <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
                         class="fw-bold">Creation Date: </span>{{ $payment->created_at->format('M d,Y') }}</li>
                     <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
