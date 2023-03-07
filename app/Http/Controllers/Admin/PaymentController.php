@@ -21,8 +21,7 @@ class PaymentController extends Controller
             });
         }   
 
-        $payments = $payments->paginate();
-
+        $payments = $payments->get();
         return view('admin.payments.index')->with(compact('payments'));
     }
     
