@@ -114,9 +114,8 @@ class ProposalController extends Controller
 
             $this->sendEmail([$project->company->email], new ProposalSubmitted($proposal));
 
-            $active_subscrption = auth('client')->user()->active_subscription;
-
-            $this->increaseProposalCountOnSubscription($active_subscrption);
+            // $active_subscrption = auth('client')->user()->active_subscription;
+            // $this->increaseProposalCountOnSubscription($active_subscrption);
 
             DB::commit();
 
