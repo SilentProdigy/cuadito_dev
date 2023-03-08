@@ -79,12 +79,12 @@ class AppServiceProvider extends ServiceProvider
             return "<span>&#8369;<?= $amount ?></span>";
         });
 
-        View::composer(['client.includes.subscription_modal'], function($view){
-            $products = SubscriptionType::get();
-            $latest_subscription = auth('client')->user()->active_subscription;
+        // View::composer(['client.includes.subscription_modal'], function($view){
+        //     $products = SubscriptionType::get();
+        //     $latest_subscription = auth('client')->user()->active_subscription;
 
-            $view->with(compact('products', 'latest_subscription'));
-        });
+        //     $view->with(compact('products', 'latest_subscription'));
+        // });
 
         View::composer(['landing-page.landing-page-layout'], function($view){
             if (auth('client')->user()) {

@@ -175,7 +175,7 @@
                                     <th>Amount</th>
                                 </thead>
                                 <tbody>
-                                    @forelse($payments as $payment)
+                                    {{-- @forelse($payments as $payment)
                                         <tr>
                                             <td><a href="{{ route('client.payments.show', $payment) }}">{{ $payment->invoice_id }}</a></td>
                                             <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
@@ -187,7 +187,7 @@
                                         <tr>
                                             <td>No results found!</td>
                                         </tr>
-                                    @endforelse
+                                    @endforelse --}}
                                 </tbody>
                             </table>
                         </div>

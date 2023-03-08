@@ -246,14 +246,14 @@ Route::name('client.')->group(function () {
         Route::get('profile/{client}/change-password', [\App\Http\Controllers\Client\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
         Route::patch('profile/{client}/change-password', [\App\Http\Controllers\Client\ProfileController::class, 'changePassword'])->name('profile.change-password');
 
-        Route::get('products', [\App\Http\Controllers\Client\ProductController::class, 'index'])->name('products.index');
-        Route::get('products/{subscription_type}/billing', [\App\Http\Controllers\Client\BillingController::class, 'create'])->name('billings.create');
-        Route::post('products/{subscription_type}/checkout', [\App\Http\Controllers\Client\BillingController::class, 'store'])->name('billings.checkout');
+        // Route::get('products', [\App\Http\Controllers\Client\ProductController::class, 'index'])->name('products.index');
+        // Route::get('products/{subscription_type}/billing', [\App\Http\Controllers\Client\BillingController::class, 'create'])->name('billings.create');
+        // Route::post('products/{subscription_type}/checkout', [\App\Http\Controllers\Client\BillingController::class, 'store'])->name('billings.checkout');
         
         Route::get('invoice/{payment}', [\App\Http\Controllers\Client\InvoiceController::class, 'show'])->name('invoice.show');
 
-        Route::get('subscriptions/{subscription}/unsubcribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'unsubscribe'])->name('subscriptions.unsubscribe');
-        Route::post('subscriptions/{subscription_type}/subscribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'subscribe'])->name('subscriptions.subscribe');
+        // Route::get('subscriptions/{subscription}/unsubcribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'unsubscribe'])->name('subscriptions.unsubscribe');
+        // Route::post('subscriptions/{subscription_type}/subscribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'subscribe'])->name('subscriptions.subscribe');
 
         Route::get('payments/result', [\App\Http\Controllers\Client\PaymentController::class, 'result'])->name('payments.result');
         Route::get('payments', [\App\Http\Controllers\Client\PaymentController::class, 'index'])->name('payments.index');

@@ -212,9 +212,9 @@
 
     <!--Main layout-->
     <!-- Modal -->
-    @if(!request()->routeIs('client.payments.result'))
+    {{-- @if(!request()->routeIs('client.payments.result'))
         @include('client.includes.subscription_modal')
-    @endif
+    @endif --}}
 
     
     <main style="margin-top: 78px;">
