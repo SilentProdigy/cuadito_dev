@@ -39,8 +39,8 @@ class Client extends Authenticatable
         'companies_count',
         'have_unread_notifications',
         'profile_picture_url',
-        'active_subscription',
-        'have_subscription',
+        // 'active_subscription',
+        // 'have_subscription',
 
     ];
 
@@ -172,27 +172,27 @@ class Client extends Authenticatable
         return $this->profile_pic ? asset("storage/".$this->profile_pic) : asset('images/avatar/12.png');
     }
 
-    public function subscriptions()
-    {
-        return $this->hasMany(\App\Models\Subscription::class);
-    }
+    // public function subscriptions()
+    // {
+    //     return $this->hasMany(\App\Models\Subscription::class);
+    // }
 
-    public function getHaveSubscriptionAttribute()
-    {
-        return $this->subscriptions()
-                    ->where('status', \App\Models\Subscription::ACTIVE_STATUS)
-                    ->exists();
-    }
+    // public function getHaveSubscriptionAttribute()
+    // {
+    //     return $this->subscriptions()
+    //                 ->where('status', \App\Models\Subscription::ACTIVE_STATUS)
+    //                 ->exists();
+    // }
 
-    public function getActiveSubscriptionAttribute()
-    {
-        return $this->subscriptions()->where('status', \App\Models\Subscription::ACTIVE_STATUS)->first();
-    }
+    // public function getActiveSubscriptionAttribute()
+    // {
+    //     return $this->subscriptions()->where('status', \App\Models\Subscription::ACTIVE_STATUS)->first();
+    // }
 
-    public function getLatestSubscriptionAttribute()
-    {
-        return $this->subscriptions()->orderBy('id', 'desc')->first();
-    }
+    // public function getLatestSubscriptionAttribute()
+    // {
+    //     return $this->subscriptions()->orderBy('id', 'desc')->first();
+    // }
 
     public function getHaveUnopenedMessagesCountAttribute()
     {
