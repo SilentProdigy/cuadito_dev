@@ -14,8 +14,6 @@ use App\Services\CompanyService;
 use App\Services\ProposalService;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
-use App\Traits\DecreaseProposalCountOnSubscription;
-use App\Traits\IncreaseProposalCountOnSubscription;
 use App\Traits\SendEmail;
 use App\Traits\UploadFile;
 use Exception;
@@ -27,7 +25,7 @@ use ProtoneMedia\LaravelXssProtection\Middleware\XssCleanInput;
 class ProposalController extends Controller
 {
 
-    use UploadFile, IncreaseProposalCountOnSubscription, DecreaseProposalCountOnSubscription;
+    use UploadFile;
     use SendEmail;
 
     private $companyService;
@@ -38,12 +36,7 @@ class ProposalController extends Controller
         $this->companyService = $companyService;
         $this->proposalService = $proposalService;
 
-        $this->middleware([
-            'client.validate.ensure_project_not_owned_by_client',
-            'client.proposals.ensure_client_projects_did_not_reach_max_proposals'
-        ])
-            ->only(['create', 'store']);
-
+        $this->middleware(['client.validate.ensure_project_not_owned_by_client'])->only(['create', 'store']);
         $this->middleware(XssCleanInput::class)->only('store');
     }
 
