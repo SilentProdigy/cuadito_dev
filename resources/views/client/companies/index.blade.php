@@ -14,12 +14,11 @@
 </div>
 <div class="card">
     <div class="card-body">
-        <table class="table table-borderless table-md user-listing-table">
+        <table class="table table-borderless table-md user-listing-table" id="companies-table">
             <thead>
                 <th>SEQ</th>
                 <th>COMPANY</th>
                 <th class="col-span-2">STATUS</th>
-                {{-- <th>SUBSCRIPTION</th> --}}
                 <th>ACTIONS</th>
             </thead>
             <tbody>
@@ -43,12 +42,6 @@
                         <a href="{{ route('client.companies.edit', $company) }}" class="btn btn-sm btn-warning">
                             <i class="fa fa-pencil"></i>          
                         </a>
-                        {{-- 
-                           
-                            <a href="#" class="btn btn-sm btn-danger btn-delete" data-company="{{ json_encode($company) }}">
-                                <i class="fa fa-trash"></i>
-                            </a> 
-                        --}}
                     </td>
                 </tr>
                 @endforeach
@@ -83,4 +76,13 @@
             });
         });
     </script>
+
+    <script>
+        $(document).ready(function () {
+            $('#companies-table').DataTable();
+        });
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection
+
