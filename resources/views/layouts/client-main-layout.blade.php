@@ -113,35 +113,34 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('client.contacts.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
-                        <span>Contacts</span>
-                    </a>
-                </li>
-
-
                 {{-- 
-                <li class="nav-item">
-                    <a href="{{ route('client.inbox.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
-                        <span>Messages</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
-                        <span>Help</span>
-                    </a>
-                </li>
-                --}}
-                {{-- 
-                <li class="nav-item">
-                    <a href="{{ route('client.notifications.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
-                        <span>Notifications</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('client.contacts.index') }}" class="nav-link">
+                            <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                            <span>Contacts</span>
+                        </a>
+                    </li> 
+                
+                    <li class="nav-item">
+                        <a href="{{ route('client.inbox.index') }}" class="nav-link">
+                            <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
+                            <span>Help</span>
+                        </a>
+                    </li>
+                    --}}
+                    {{-- 
+                    <li class="nav-item">
+                        <a href="{{ route('client.notifications.index') }}" class="nav-link">
+                            <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                            <span>Notifications</span>
+                        </a>
+                    </li>
                 --}}
                     <!-- <li class="nav-item">
                         <a href="{{ route('client.notifications.index') }}" class="nav-link position-relative">Notifications
