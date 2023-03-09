@@ -26,24 +26,24 @@ class Kernel extends ConsoleKernel
         ->withoutOverlapping()
         ->sendOutputTo(storage_path('logs/workers.log'));
 
-        $schedule->command('system:deactive-expired-subscription')
-        ->timezone('Asia/Manila')
-        ->dailyAt('9:00')
-        ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/deactive-subs.log'));
+        // $schedule->command('system:deactive-expired-subscription')
+        // ->timezone('Asia/Manila')
+        // ->dailyAt('9:00')
+        // ->withoutOverlapping()
+        // ->sendOutputTo(storage_path('logs/deactive-subs.log'));
 
-        $schedule->command('system:notify-near-expiration-subscription')
-        ->timezone('Asia/Manila')
-        ->dailyAt('9:00')
-        ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/notify-near-subs.log'));
+        // $schedule->command('system:notify-near-expiration-subscription')
+        // ->timezone('Asia/Manila')
+        // ->dailyAt('9:00')
+        // ->withoutOverlapping()
+        // ->sendOutputTo(storage_path('logs/notify-near-subs.log'));
 
-        // Run every last day of the month midnight
-        $schedule->command('system:reset-active-subscriptions')
-        ->timezone('Asia/Manila')
-        ->monthlyOn(1)
-        ->withoutOverlapping()
-        ->sendOutputTo(storage_path('logs/reset-counters.log'));
+        // // Run every last day of the month midnight
+        // $schedule->command('system:reset-active-subscriptions')
+        // ->timezone('Asia/Manila')
+        // ->monthlyOn(1)
+        // ->withoutOverlapping()
+        // ->sendOutputTo(storage_path('logs/reset-counters.log'));
     }
 
     /**

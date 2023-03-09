@@ -14,12 +14,12 @@
         <div class="card-body">
            <div class="row">
             <div class="col-xs-12">
-                <table class="table table-borderless table-md user-listing-table">
+                <table class="table table-borderless table-md user-listing-table" id="companies-table">
                     <thead>
                         <th>SEQ</th>
                         <th>COMPANY</th>
                         <th class="col-span-2">STATUS</th>
-                        <th>SUBSCRIPTION</th>
+                        {{-- <th>SUBSCRIPTION</th> --}}
                         <th>ACTIONS</th>
                     </thead>
                     <tbody>
@@ -36,9 +36,9 @@
                                 <td class="">
                                     <span>{{ $company->validation_status }}</span>
                                 </td>
-                                <td>
+                                {{-- <td>
                                 <span>-</span>
-                                </td>
+                                </td> --}}
                                 <td class="user-actions">
                                     <a href="{{ route('client.companies.show', $company) }}" class="btn btn-sm btn-outline-info">
                                         <i class="fa fa-eye"></i>         
@@ -64,8 +64,9 @@
         <div class="card-body">
            <div class="row">
             <div class="col-xs-12">
-                <table class="table table-borderless table-md user-listing-table">
+                <table class="table table-borderless table-md user-listing-table" id="projects-table">
                     <thead>
+                        <th>SEQ</th>
                         <th>PROJECT</th>
                         <th>COMPANY</th>
                         <th class="col-span-2">STATUS</th>
@@ -77,6 +78,9 @@
                     <tbody>
                         @forelse ($client->projects as $project)
                             <tr>
+                                <td>
+                                    <span>{{ $loop->iteration }}</span>
+                                </td>
                                 <td>
                                     <span>{{ $project->title }}</span>
                                 </td>
@@ -120,7 +124,7 @@
         <div class="card-body">
            <div class="row">
             <div class="col-xs-12">
-                <table class="table table-borderless table-md user-listing-table">
+                <table class="table table-borderless table-md user-listing-table" id="proposals-table">
                     <thead>
                         <th>SEQ</th>
                         <th>PROJECT</th>
@@ -187,5 +191,12 @@
 
 @section('script')
 <script>
+    $(document).ready(function () {
+        $('#companies-table').DataTable();
+        $('#projects-table').DataTable();
+        $('#proposals-table').DataTable();
+    });
 </script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection

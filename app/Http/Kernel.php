@@ -77,11 +77,11 @@ class Kernel extends HttpKernel
         'client.validate.ensure_company_dont_have_proposal' => \App\Http\Middleware\Client\EnsureCompanyDontHaveProposal::class,
         'client.validate.ensure_email_dont_exist_on_contacts' => \App\Http\Middleware\Client\EnsureEmailIsNotOnContactList::class,
         'client.validate.ensure_email_dont_exist_on_system' => \App\Http\Middleware\Client\EnsureEmailIsNotOnTheSystem::class,
-        'client.validate.ensure_client_have_subscription' => \App\Http\Middleware\Client\EnsureClientHaveActiveSubscription::class,
-        'client.validate.ensure_client_have_subscription_points' => \App\Http\Middleware\Client\EnsureClientHaveSubscriptionPoints::class,
-        'client.validate.ensure_client_subscription_is_not_expire' => \App\Http\Middleware\Client\EnsureClientSubscriptionIsNotExpired::class,
-        'client.projects.ensure_client_projects_dit_not_reach_max_projects' => \App\Http\Middleware\Client\EnsureClientProjectsDidNotReachMaxProjects::class,
-        'client.proposals.ensure_client_projects_did_not_reach_max_proposals' => \App\Http\Middleware\Client\EnsureClientProposalsDidNotReachMaxProposals::class,
+        // 'client.validate.ensure_client_have_subscription' => \App\Http\Middleware\Client\EnsureClientHaveActiveSubscription::class,
+        // 'client.validate.ensure_client_have_subscription_points' => \App\Http\Middleware\Client\EnsureClientHaveSubscriptionPoints::class,
+        // 'client.validate.ensure_client_subscription_is_not_expire' => \App\Http\Middleware\Client\EnsureClientSubscriptionIsNotExpired::class,
+        // 'client.projects.ensure_client_projects_dit_not_reach_max_projects' => \App\Http\Middleware\Client\EnsureClientProjectsDidNotReachMaxProjects::class,
+        // 'client.proposals.ensure_client_projects_did_not_reach_max_proposals' => \App\Http\Middleware\Client\EnsureClientProposalsDidNotReachMaxProposals::class,
         'client.validate.redirect_if_with_pending_transaction' => \App\Http\Middleware\Client\RedirectIfHavePendingTransaction::class
     ];
 }

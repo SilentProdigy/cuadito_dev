@@ -113,35 +113,34 @@
                     </a>
                 </li>
 
-                <li class="nav-item">
-                    <a href="{{ route('client.contacts.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
-                        <span>Contacts</span>
-                    </a>
-                </li>
-
-
                 {{-- 
-                <li class="nav-item">
-                    <a href="{{ route('client.inbox.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
-                        <span>Messages</span>
-                    </a>
-                </li>
-                <li class="nav-item">
-                    <a href="#" class="nav-link">
-                        <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
-                        <span>Help</span>
-                    </a>
-                </li>
-                --}}
-                {{-- 
-                <li class="nav-item">
-                    <a href="{{ route('client.notifications.index') }}" class="nav-link">
-                        <!-- <i class="fas fa-list fa-fw me-3"></i> -->
-                        <span>Notifications</span>
-                    </a>
-                </li>
+                    <li class="nav-item">
+                        <a href="{{ route('client.contacts.index') }}" class="nav-link">
+                            <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                            <span>Contacts</span>
+                        </a>
+                    </li> 
+                
+                    <li class="nav-item">
+                        <a href="{{ route('client.inbox.index') }}" class="nav-link">
+                            <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                            <span>Messages</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#" class="nav-link">
+                            <!-- <i class="fas fa-circle-question fa-fw me-3"></i> -->
+                            <span>Help</span>
+                        </a>
+                    </li>
+                    --}}
+                    {{-- 
+                    <li class="nav-item">
+                        <a href="{{ route('client.notifications.index') }}" class="nav-link">
+                            <!-- <i class="fas fa-list fa-fw me-3"></i> -->
+                            <span>Notifications</span>
+                        </a>
+                    </li>
                 --}}
                     <!-- <li class="nav-item">
                         <a href="{{ route('client.notifications.index') }}" class="nav-link position-relative">Notifications
@@ -213,9 +212,9 @@
 
     <!--Main layout-->
     <!-- Modal -->
-    @if(!request()->routeIs('client.payments.result'))
+    {{-- @if(!request()->routeIs('client.payments.result'))
         @include('client.includes.subscription_modal')
-    @endif
+    @endif --}}
 
     
     <main style="margin-top: 78px;">
@@ -283,7 +282,7 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     @yield('script')
 
-    @if(!request()->routeIs('client.payments.result'))
+    {{-- @if(!request()->routeIs('client.payments.result'))
         <script>
             $(document).ready(function(){
                 
@@ -294,7 +293,7 @@
                 }
             });
       </script>
-    @endif
+    @endif --}}
     <!-- MDB -->
     <script
     type="text/javascript"
