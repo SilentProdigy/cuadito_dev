@@ -61,7 +61,8 @@ class ProposalController extends Controller
                 });
         }
 
-        $proposals = $proposals->paginate(10);
+        // $proposals = $proposals->paginate(10);
+        $proposals = $proposals->get();
 
         return view('client.proposals.index')->with(compact('proposals'));
     }

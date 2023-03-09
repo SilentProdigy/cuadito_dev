@@ -19,19 +19,18 @@
 </div>
 
 <div class="my-3">
-    <form action="{{ route('client.proposals.index') }}" method="get">
+    {{-- <form action="{{ route('client.proposals.index') }}" method="get">
         <div class="input-group input-group-lg mb-4">
             <input id="search-focus" type="text" class="form-control" placeholder="Search Proposals ..." name="search" value="{{ request('search') }}">
             <button class="btn border-orange btn-orange" type="submit">
                 <i class="fas fa-search"></i>
             </button>
         </div>
-        {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
 
         @if(request()->has('search') || request()->has('adv_search'))
             <a href="{{ route('client.proposals.index') }}">Clear Search Results</a>
         @endif
-    </form>
+    </form> --}}
 
     @if(request()->has('search') || request()->has('adv_search'))
         <div style="margin-top: 10px;">
@@ -42,7 +41,7 @@
 
 <div class="card">
     <div class="card-body">
-        <table class="table table-borderless table-md user-listing-table">
+        <table class="table table-borderless table-md user-listing-table" id="proposals-table">
             <thead>
                 <th>SEQ</th>
                 <th>PROJECT</th>
@@ -116,7 +115,7 @@
             </tbody>
         </table>
 
-        <div class="d-flex justify-content-center">{{ $proposals->links() }}</div>
+        {{-- <div class="d-flex justify-content-center">{{ $proposals->links() }}</div> --}}
     </div>
 </div>
 
@@ -125,6 +124,12 @@
 @endsection
 
 @section('script')
+    <script>
+        $(document).ready(function () {
+            $('#proposals-table').DataTable();
+        });
+    </script>
+
     <script>
         $(document).ready(function() {
             const cancelProposalButtons = document.querySelectorAll('.btn-cancel-proposal');
@@ -147,4 +152,6 @@
             })
         });
     </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection
