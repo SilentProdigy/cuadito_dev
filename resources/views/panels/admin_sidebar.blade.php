@@ -52,9 +52,9 @@
     <i class="fas fa-chart-area fa-fw me-3"></i><span>Reports</span>
 </a>
 
-<a href="{{ route('admin.subscription-types.index') }}" class="list-group-item list-group-item-action py-2 ripple">
+{{-- <a href="{{ route('admin.subscription-types.index') }}" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-th-large fa-fw me-3"></i><span>Products</span>
-</a>
+</a> --}}
 
 <a href="{{ route('admin.proposals.index') }}" class="list-group-item list-group-item-action py-2 ripple">
     <i class="fas fa-thumbs-up fa-fw me-3"></i><span>Proposals</span>

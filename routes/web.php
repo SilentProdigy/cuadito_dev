@@ -74,8 +74,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::get('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'editPassword'])->name('profile.change-password.form');
         Route::patch('profile/{user}/change-password', [\App\Http\Controllers\Admin\ProfileController::class, 'changePassword'])->name('profile.change-password');
 
-        Route::resource('subscription-types', \App\Http\Controllers\Admin\SubscriptionTypeController::class);
-        
+        // Route::resource('subscription-types', \App\Http\Controllers\Admin\SubscriptionTypeController::class);
         Route::post('subscribe/life-time-plan', [\App\Http\Controllers\Admin\SubscribeToLifeTimePlanController::class, 'store'])->name('subscribe.life-time-plan');
 
         Route::get('payments', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payments.index');
