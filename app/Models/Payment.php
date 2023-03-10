@@ -10,7 +10,7 @@ class Payment extends Model
     use HasFactory;
 
     public $fillable = [
-        'subscription_id',
+        // 'subscription_id',
         'amount',
         'additional_vat',
         'total_amount',
