@@ -36,27 +36,32 @@ class PaymentController extends Controller
 
             if($request->input('status') == 'S')
             {
-                $subscription = $payment->subscription;
-            
-                $expiration_date = new Carbon();
+                /*
+                    // Subscription related payment
+                    $subscription = $payment->subscription;
+                
+                    $expiration_date = new Carbon();
 
-                // $expiration_date = $expiration_date->addMonth();
-                $expiration_date = $expiration_date->addYear();
+                    // $expiration_date = $expiration_date->addMonth();
+                    $expiration_date = $expiration_date->addYear();
+            
+                    $subscription->update([
+                        'status' => Subscription::ACTIVE_STATUS,
+                        // 'points' => $subscription_type->points,
+                        'submitted_proposals_count' => 0,
+                        'submitted_projects_count' => 0,
+                        'expiration_date' => $expiration_date
+                    ]);  
         
-                $subscription->update([
-                    'status' => Subscription::ACTIVE_STATUS,
-                    // 'points' => $subscription_type->points,
-                    'submitted_proposals_count' => 0,
-                    'submitted_projects_count' => 0,
-                    'expiration_date' => $expiration_date
-                ]);  
-    
-                $subscription->client->notifications()->create([
-                    'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} Plan on {$payment->created_at->format('m-d-Y')}.",
-                    'url' => route('client.payments.show', $payment), 
-                ]);
-        
-                $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
+                    $subscription->client->notifications()->create([
+                        'content' => "You have paid P{$payment->amount} to purchase {$subscription->subscription_type->name} Plan on {$payment->created_at->format('m-d-Y')}.",
+                        'url' => route('client.payments.show', $payment), 
+                    ]);
+            
+                    $this->sendEmail($subscription->client->email, new PaymentCreated($payment,$subscription));
+                */
+
+                
             }
 
             Log::info("PAYMENT_DATA_RECEIVED:" . json_encode($payment));
