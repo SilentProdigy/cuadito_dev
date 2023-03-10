@@ -68,7 +68,7 @@
                                 </p>
                                 </div>
                             </div> -->
-                            <form id="checkout-form" action="{{ route('client.subscriptions.subscribe', $subscription_type) }}" method="POST" class="pb-3">
+                            <form id="checkout-form" action="#" method="POST" class="pb-3">
                                 @csrf
                                 @foreach ($payment_channels as $channel)
                                     <div class="d-flex flex-row pb-3">
@@ -103,17 +103,11 @@
                             </div>
                             <div class="rounded d-flex flex-column p-2" style="background-color: #f8f9fa;">
                                 <div class="p-2 d-flex">
-                                    <div class=col-8><h4>{{ $subscription_type->name }} - 1 Month Plan</h4></div>
-                                    <div class="ms-auto"><h4>@money($subscription_type->amount)</h4></div>
+                                    <div class=col-8><h4>{{ $payment_type->name }}</h4></div>
+                                    <div class="ms-auto"><h4>@money($payment_type->amount)</h4></div>
                                 </div>
                                 
-                                <div class="border-top px-2 mx-2"></div>
                                 
-                                <div class="p-2 d-flex">
-                                    <div class=col-8><h4>No. Months Billed</h4></div>
-                                    <div class="ms-auto"><h4>{{ config('cuadito.payment.default_billable_months_count') }} Months</h4></div>
-                                </div>
-                            
                                 <div class="border-top px-2 mx-2"></div>
                                 <div class="p-2 d-flex pt-3">
                                     <div class=col-8><h4>Total Amount</h4></div>

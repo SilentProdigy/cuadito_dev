@@ -10,11 +10,10 @@ class Payment extends Model
     use HasFactory;
 
     public $fillable = [
-        'subscription_id',
+        'payment_type_id',
         'amount',
         'additional_vat',
         'total_amount',
-        // 'mode_of_payment',
         'details',
         'paid_at',
         'period',
@@ -33,9 +32,9 @@ class Payment extends Model
     const PENDING_STATUS = "Pending";
 
 
-    public function subscription()
+    public function paymentType()
     {
-        return $this->belongsTo(\App\Models\Subscription::class);
+        return $this->belongsTo(PaymentType::class);
     }
 
     public function client()

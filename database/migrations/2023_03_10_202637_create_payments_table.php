@@ -15,7 +15,7 @@ class CreatePaymentsTable extends Migration
     {
         Schema::create('payments', function (Blueprint $table) {
             $table->id()->from(10000);
-            $table->foreignId('subscription_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
+            $table->foreignId('payment_type_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->foreignId('client_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->decimal('amount', 9, 2)->nullable();
             $table->decimal('additional_vat', 9, 2)->nullable();
@@ -26,10 +26,10 @@ class CreatePaymentsTable extends Migration
             $table->string('or_number')->nullable();
             $table->string('reference_no')->nullable();
             $table->string('payment_method')->nullable();
-            $table->string('period')->nullable()->default('1 month')->comment('Defines the count of months paid');
+            // $table->string('period')->nullable()->default('1 month')->comment('Defines the count of months paid');
             $table->timestamps();
 
-            $table->index(['subscription_id','reference_no', 'payment_method']);
+            $table->index(['reference_no', 'payment_method']);
         });
     }
 

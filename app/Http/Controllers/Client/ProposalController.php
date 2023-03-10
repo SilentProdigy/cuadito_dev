@@ -104,16 +104,17 @@ class ProposalController extends Controller
             foreach ($paths as $path)
                 $proposal->attachments()->create(['url' => $path]);
 
-            Bidding::createNotificationsForProposal($proposal);
+            // Bidding::createNotificationsForProposal($proposal);
 
-            $this->sendEmail([$project->company->email], new ProposalSubmitted($proposal));
+            // $this->sendEmail([$project->company->email], new ProposalSubmitted($proposal));
 
             // $active_subscrption = auth('client')->user()->active_subscription;
             // $this->increaseProposalCountOnSubscription($active_subscrption);
 
             DB::commit();
-
-            return redirect(route('client.listing.index'))->with('success', 'Proposal was successfully posted.');
+            return redirect(route('client.payments.proposal.create', $proposal))
+                    ->with('success', 'Proposal was successfully created. You may now pay us the fee first for it to be posted.');
+                    
         } catch (\Exception $e) {
             DB::rollBack();
             Log::error("ACTION: CREATE_PROPOSAL, ERROR:" . $e->getMessage());

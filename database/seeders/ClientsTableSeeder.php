@@ -41,27 +41,27 @@ class ClientsTableSeeder extends Seeder
         {
             $newly_created_client = Client::create($client);
 
-            $plan = SubscriptionType::first();
+            // $plan = SubscriptionType::first();
 
-            $expiration_date = new Carbon();
-            $expiration_date = $expiration_date->addYear();
+            // $expiration_date = new Carbon();
+            // $expiration_date = $expiration_date->addYear();
 
-            $subscription = $newly_created_client->subscriptions()->create([
-                'subscription_type_id' => $plan->id,
-                'status' => Subscription::ACTIVE_STATUS,
-                'submitted_proposals_count' => 0,
-                'submitted_projects_count' => 0,
-                'expiration_date' => $expiration_date
-            ]);
+            // $subscription = $newly_created_client->subscriptions()->create([
+            //     'subscription_type_id' => $plan->id,
+            //     'status' => Subscription::ACTIVE_STATUS,
+            //     'submitted_proposals_count' => 0,
+            //     'submitted_projects_count' => 0,
+            //     'expiration_date' => $expiration_date
+            // ]);
 
-            $payment = $subscription->payments()->create([
-                'amount' => 0, // amount here comes from the api of dragon pay
-                'total_amount' => 0,
-                'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',                
-                'period' =>  "12 months",
-                'status' => Payment::PAID_STATUS,
-                'client_id' => $newly_created_client->id
-            ]);
+            // $payment = $subscription->payments()->create([
+            //     'amount' => 0, // amount here comes from the api of dragon pay
+            //     'total_amount' => 0,
+            //     'details' => 'Payment for ' . $subscription->subscription_type->name . ' plan',                
+            //     'period' =>  "12 months",
+            //     'status' => Payment::PAID_STATUS,
+            //     'client_id' => $newly_created_client->id
+            // ]);
 
         }
     }
