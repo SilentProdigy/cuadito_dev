@@ -18,7 +18,7 @@
         </div>
     </div>
 </div>
-
+{{-- 
 <div class="my-3">
     <form action="{{ route('client.projects.index') }}" method="get">
         <div class="input-group input-group-lg mb-4">
@@ -28,8 +28,6 @@
             </button>
         </div>
         
-        {{-- <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a> --}}
-
         @if(request()->has('search') || request()->has('adv_search'))
             <a href="{{ route('client.projects.index') }}">Clear Search Results</a>
         @endif
@@ -40,11 +38,11 @@
             <h5>Found {{ $projects->count() }} search results ... </h5>
         </div>
     @endif
-</div>
+</div> --}}
 
 <div class="card">
     <div class="card-body">
-        <table class="table table-borderless table-sm">
+        <table class="table table-borderless table-sm" id="projects-table">
             <thead>
                 <th>PROJECT</th>
                 <th>COMPANY</th>
@@ -54,8 +52,7 @@
                 <th>ACTIONS</th>
             </thead>
             <tbody>
-
-                @forelse ($projects as $project)
+                @foreach($projects as $project)
                     <tr>
                         <td>
                             <span>{{ $project->title }}</span>
@@ -86,16 +83,12 @@
                                 <i class="fa fa-check"></i>
                             </a>
                         </td>
-                    </tr>        
-                @empty
-                    <tr>
-                        <td>No Projects Yet!</td>
-                    </tr>
-                @endforelse
+                    </tr>      
+                @endforeach  
             </tbody>
         </table>
 
-        <div class="d-flex justify-content-center">{{ $projects->links() }}</div>
+        {{-- <div class="d-flex justify-content-center">{{ $projects->links() }}</div> --}}
     </div>
 </div>
 @include('client.projects.modals.confirm_delete_modal')
@@ -104,44 +97,52 @@
 @endsection
 
 @section('script')
-    <script>
-        $(document).ready(function() {
-            let delete_buttons = document.querySelectorAll('.btn-delete-project');
+<script>
+    $(document).ready(function() {
+        let delete_buttons = document.querySelectorAll('.btn-delete-project');
 
-            delete_buttons.forEach(button => {
-                button.addEventListener('click', function(e) {  
-                    e.preventDefault;
-                    let data = button.getAttribute('data-project');   
-                    data = JSON.parse(data);
+        delete_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-project');   
+                data = JSON.parse(data);
 
-                    let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
-                    myModal.show()
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
+                myModal.show()
 
-                    document.querySelector('#project-name').innerHTML = data.title;
+                document.querySelector('#project-name').innerHTML = data.title;
 
-                    let form = document.querySelector('#delete-project-form');
-                    form.setAttribute('action', `/projects/${ data.id }`);
+                let form = document.querySelector('#delete-project-form');
+                form.setAttribute('action', `/projects/${ data.id }`);
 
-                });
             });
-
-            let set_status_buttons = document.querySelectorAll('.btn-set-project-status');
-
-            set_status_buttons.forEach(button => {
-                button.addEventListener('click', function(e) {  
-                    e.preventDefault;
-                    let data = button.getAttribute('data-project');   
-                    data = JSON.parse(data);
-    
-                    let myModal = new bootstrap.Modal(document.getElementById('set-project-status-modal'), {keyboard: false})
-                    myModal.show()
-
-                    let form = document.querySelector('#set-project-status-form');
-                    form.setAttribute('action', `/projects/set-status/${ data.id }`);
-
-                    $('#project-status').val(`${ data.status }`);
-                });
-            });        
         });
-    </script>
+
+        let set_status_buttons = document.querySelectorAll('.btn-set-project-status');
+
+        set_status_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {  
+                e.preventDefault;
+                let data = button.getAttribute('data-project');   
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('set-project-status-modal'), {keyboard: false})
+                myModal.show()
+
+                let form = document.querySelector('#set-project-status-form');
+                form.setAttribute('action', `/projects/set-status/${ data.id }`);
+
+                $('#project-status').val(`${ data.status }`);
+            });
+        });        
+    });
+</script>
+
+<script>
+    $(document).ready(function () {
+        $('#projects-table').DataTable();
+    });
+</script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection
