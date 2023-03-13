@@ -10,7 +10,7 @@ class Payment extends Model
     use HasFactory;
 
     public $fillable = [
-        'payment_type_id',
+        // 'payment_type_id',
         'amount',
         'additional_vat',
         'total_amount',
@@ -22,6 +22,8 @@ class Payment extends Model
         'or_number',
         'reference_no',
         'payment_method',
+        'paymentable_id',
+        'paymentable_type',
     ];
 
     public $casts = [
@@ -32,9 +34,14 @@ class Payment extends Model
     const PENDING_STATUS = "Pending";
 
 
-    public function paymentType()
+    // public function paymentType()
+    // {
+    //     return $this->belongsTo(PaymentType::class);
+    // }
+
+    public function paymentable()
     {
-        return $this->belongsTo(PaymentType::class);
+        return $this->morphTo();
     }
 
     public function client()

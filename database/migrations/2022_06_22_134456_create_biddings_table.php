@@ -20,6 +20,9 @@ class CreateBiddingsTable extends Migration
             // $table->string('quotation_url');
             $table->text('cover_letter');
             $table->decimal('rate', 9, 2);
+            $table->boolean('is_paid')->default(false);
+            // $table->string('payment_reference_no')->nullable();
+            // $table->string('payment_date')->nullable();
             $table->timestamps();
             $table->softDeletes();
         });

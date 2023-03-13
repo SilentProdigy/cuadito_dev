@@ -16,12 +16,12 @@ class PaymentTypesTableSeeder extends Seeder
     {
         collect([
             [
-                'amount' => '1000',
+                'amount' => '5000',
                 'name' => 'Proposal fee',
                 'description' => 'Payment for submitting a proposal'
             ],
             [
-                'amount' => '1001',
+                'amount' => '10000',
                 'name' => 'Viewing of proposals fee',
                 'description' => "Payment for viewing of project's a proposal"
             ]

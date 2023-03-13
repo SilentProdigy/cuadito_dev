@@ -64,7 +64,12 @@ class Project extends Model
 
     public function proposals()
     {
-        return $this->hasMany(\App\Models\Bidding::class);
+        return $this->hasMany(\App\Models\Bidding::class)->where('is_paid', true);
+    }
+
+    public function payment()
+    {
+        return $this->morphOne(Payment::class, 'paymentable');
     }
 
     // public function getMaxActiveDateAttribute()
