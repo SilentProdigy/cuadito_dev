@@ -68,7 +68,7 @@
                                 </p>
                                 </div>
                             </div> -->
-                            <form id="checkout-form" action="#" method="POST" class="pb-3">
+                            <form id="checkout-form" action="{{ route('client.payments.proposal.store', $bidding) }}" method="POST" class="pb-3">
                                 @csrf
                                 @foreach ($payment_channels as $channel)
                                     <div class="d-flex flex-row pb-3">
@@ -102,17 +102,17 @@
                                 <h6><a href="{{ url()->previous() }}" class="text-orange">Cancel and return to website</a></h6>
                             </div>
                             <div class="rounded d-flex flex-column p-2" style="background-color: #f8f9fa;">
-                                <div class="p-2 d-flex">
+                                {{-- <div class="p-2 d-flex">
                                     <div class=col-8><h4>{{ $payment_type->name }}</h4></div>
                                     <div class="ms-auto"><h4>@money($payment_type->amount)</h4></div>
                                 </div>
-                                
+                                 --}}
                                 
                                 <div class="border-top px-2 mx-2"></div>
                                 <div class="p-2 d-flex pt-3">
                                     <div class=col-8><h4>Total Amount</h4></div>
                                     <div class="ms-auto"><h4 class="text-success">@money($total_amount)</h4></div>
-                                </div>
+                                </div>store
 
                                 <div class="p-2 d-flex pt-3">
                                     <p>
