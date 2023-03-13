@@ -51,7 +51,7 @@
     </div>
     <div class="mx-auto mt-5 my-5">
         <div class="row">
-            <div class="{{ auth('client')->user()->id == $client->id ? 'col-md-8' : 'col-md-12' }}">
+            <div class="col-md-12">
                 <div class="card profile_info">
                     <div class="card-body">
                         <div class="d-flex justify-content-between align-items-center">
@@ -67,7 +67,7 @@
                             </div>
                             @if( auth('client')->user()->id == $client->id )
                                 <h4 class="fw-bold">Personal Information</h4>
-                                @if($client->contact_number && $client->address && $client->birth_date && $client->marital_status)
+                                @if($client->contact_number || $client->address || $client->birth_date || $client->marital_status)
                                     <!-- <div class="col-12 mt-4"><i class="fa fa-briefcase fs-5"></i>Website Developer | 1MC Digital</div> -->
                                     
                                     @if($client->contact_number)
@@ -98,7 +98,7 @@
                     </div>
                     <div class="row">
                         @foreach ($data['projects'] as $project)
-                            <div class="col-xs-4 {{ $data['projects_count'] >=3 ? 'col-md-4' : 'col-md-12' }} gy-3">
+                            <div class="col-xs-12 col-md-4 gy-3">
                                 <div class="card h-100 my-3">
                                     <div class="card-header">
                                         <div class="row">
@@ -124,7 +124,7 @@
                                 </div>
                             </div>
                         @endforeach
-                        <div class="col-xs-4 col-md-4 gy-3">
+                        <div class="col-xs-12 col-md-4 gy-3">
                             <div class="card add-project-card h-100 my-3">
                                 <div class="card-body d-flex justify-content-center align-items-center">
                                     <i class="fa fa-plus"></i>
@@ -135,6 +135,7 @@
                     </div>
                 </div>
             </div>
+            {{-- 
             @if( auth('client')->user()->id == $client->id )
             <div class="col-md-4">
                 <div class="card">
@@ -195,6 +196,7 @@
                 </div>
             </div>
             @endif
+            --}}
         </div>
     </div>
 </div>

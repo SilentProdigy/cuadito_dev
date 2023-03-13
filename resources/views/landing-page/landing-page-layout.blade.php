@@ -74,9 +74,9 @@
             <!-- <li class="nav-item border-bottom">
               <a class="nav-link text-black" href="{{ route('guest.projects') }}">Projects</a>
             </li> -->
-            <li class="nav-item border-bottom">
+            {{-- <li class="nav-item border-bottom">
               <a class="nav-link text-black" href="{{ route('guest.pricing') }}">Pricing</a>
-            </li>
+            </li> --}}
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('guest.contact') }}">Contact</a>
             </li>
@@ -102,9 +102,9 @@
                   <!-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('guest.projects') }}">Projects</a>
                   </li> -->
-                  <li class="nav-item">
+                  {{-- <li class="nav-item">
                     <a class="nav-link" href="{{ route('guest.pricing') }}">Pricing</a>
-                  </li>
+                  </li> --}}
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('guest.contact') }}">Contact</a>
                   </li>

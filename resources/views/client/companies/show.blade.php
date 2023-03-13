@@ -19,7 +19,7 @@
                     <h5>Your Company was disapproved with the following reasons:</h5>
 
                     <p>- {{ $company->remarks }}</p>
-                </div    
+                </div>    
             </div>
         </div>
     </div>
@@ -38,7 +38,7 @@
     <div class="card-body">
         <div class="row">
             @if(auth('client')->user()->id == $company->client_id)
-                <div class="col-md-12 border-bottom">
+                {{-- <div class="col-md-12 border-bottom">
                     <div class="col d-flex justify-content-end">
                         @if($company->can_upload_requirements && !$company->have_complete_requirements)
                             <button class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#add-requirement-modal">
@@ -49,6 +49,34 @@
                     <div class="col">
                         @include('client.companies.includes.requirements_table')
                     </div>
+                </div> --}}
+                <div class="col-md-12">
+                    <table id="requirements-table" class="table table-md user-listing-table">
+                        <thead>
+                            <tr>
+                                <th>REQUIREMENT</th>
+                                <th>FILE</th>
+                                <th>STATUS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Business Permit</td>
+                                <td><input class="form-control form-control-sm" type="file" id="formFile"></td>
+                                <td><span class='badge rounded-pill bg-success px-3 py-2'>APPROVED</span></td>
+                            </tr>
+                            <tr>
+                                <td>Business Registration</td>
+                                <td><input class="form-control form-control-sm" type="file" id="formFile"></td>
+                                <td><span class='badge rounded-pill bg-warning px-3 py-2'>FOR APPROVAL</span></td>
+                            </tr>
+                            <tr>
+                                <td>SEC Certificate</td>
+                                <td><input class="form-control form-control-sm" type="file" id="formFile"></td>
+                                <td><span class='badge rounded-pill bg-danger px-3 py-2'>EMPTY</span></td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
                 <div class="col-md-12">
                     <h4 class="mt-3">ABOUT <span class="text-uppercase">{{ $company->name }}</span></h4>
@@ -86,6 +114,7 @@
 @endsection
 
 @section('script')
+
 <script>
 
     $(document).ready(function() {
