@@ -5,26 +5,6 @@
     <section class="mt-4">
         <div class="row">
             <div class="col-xs-12">
-                <form action="{{ route('client.projects.proposals', $project) }}" method="get">
-                    <div class="input-group input-group-lg mb-4">
-                        <input id="search-focus" type="text" class="form-control" placeholder="Search Proposal ..." name="search" value="{{ request('search') }}">
-                        <button class="btn border-orange btn-orange" type="submit">
-                            <i class="fas fa-search"></i>
-                        </button>
-                    </div>
-                    
-                    @if(request()->has('search') || request()->has('adv_search'))
-                        <a href="{{ route('client.projects.proposals', $project) }}">Clear Search Results</a>
-                    @endif
-                </form>
-            
-                @if(request()->has('search') || request()->has('adv_search'))
-                    <div style="margin-top: 10px;">
-                        <h5>Found {{ $proposals->count() }} search results ... </h5>
-                    </div>
-                @endif
-            </div>
-            <div class="col-xs-12">
                 <div class="card">
                     <div class="card-header d-flex justify-content-between">
                         <h5 class="fw-bold py-1">{{ $project->title }}'s Proposals</h5>
@@ -51,7 +31,7 @@
 
                         {{-- <h5>{{ request('search') ? 'We found ' . $proposals->count() . ' results ...' : 'Current Proposals'}}</h5> --}}
 
-                        <table class="table table-borderless table-md user-listing-table">
+                        <table class="table table-borderless table-md user-listing-table" id="project-proposals-table">
                             <thead>
                                 <th>SEQ</th>
                                 <th>COMPANY</th>
@@ -61,7 +41,7 @@
                                 <th>ACTIONS</th>
                             </thead>
                             <tbody>
-                                @forelse ($proposals as $proposal)
+                                @foreach($proposals as $proposal)
                                     <tr>
                                         <td>{{ $loop->iteration }}</td>
                                         <td>
@@ -94,15 +74,11 @@
                                             @endif
                                         </td>
                                     </tr>
-                                @empty
-                                    <tr>
-                                        <td>No proposals yet!</td>
-                                    </tr>
-                                @endforelse 
+                               @endforeach
                             </tbody>
                         </table>
 
-                        <div class="d-flex justify-content-center">{{ $proposals->links() }}</div>
+                        {{-- <div class="d-flex justify-content-center">{{ $proposals->links() }}</div> --}}
                     </div>
                 </div>
             </div>
@@ -180,34 +156,37 @@
 @endsection
 
 @section('script')
-<script>
-    $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
+            $('#project-proposals-table').DataTable();
 
+            let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
 
-        let choose_proposal_buttons = document.querySelectorAll('.btn-choose-proposal');
+            choose_proposal_buttons.forEach(button => {
+                button.addEventListener('click', function(e) {  
+                    e.preventDefault;
+                    let data = button.getAttribute('data-proposal');   
+                    data = JSON.parse(data);
 
-        choose_proposal_buttons.forEach(button => {
-            button.addEventListener('click', function(e) {  
-                e.preventDefault;
-                let data = button.getAttribute('data-proposal');   
-                data = JSON.parse(data);
+                    let project = button.getAttribute('data-project');
+                    project = JSON.parse(project);
 
-                let project = button.getAttribute('data-project');
-                project = JSON.parse(project);
+                    document.querySelector('#company-name').innerHTML = data.company.name;
+                    document.querySelector('#proposal-id').innerHTML = data.id;
+                    document.querySelector('#winner_bidding_id').value = data.id;
 
-                document.querySelector('#company-name').innerHTML = data.company.name;
-                document.querySelector('#proposal-id').innerHTML = data.id;
-                document.querySelector('#winner_bidding_id').value = data.id;
+                    let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
+                    myModal.show()
 
-                let myModal = new bootstrap.Modal(document.getElementById('set-project-winner-modal'), {keyboard: false})
-                myModal.show()
+                    let form = document.querySelector('#set-project-winner-form');
+                    form.setAttribute('action', `/projects/set-winner/${ project.id }`);
 
-                let form = document.querySelector('#set-project-winner-form');
-                form.setAttribute('action', `/projects/set-winner/${ project.id }`);
-
-                // document.querySelector('#area-name').innerHTML = data.name;
+                    // document.querySelector('#area-name').innerHTML = data.name;
+                });
             });
         });
-    });
-</script>
+    </script>
+
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection

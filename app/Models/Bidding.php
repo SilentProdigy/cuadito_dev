@@ -20,7 +20,13 @@ class Bidding extends Model
         // 'quotation_url',
         'cover_letter',
         'rate',
+        'is_paid'
     ];
+
+    public function payment()
+    {
+        return $this->morphOne(Payment::class, 'paymentable');
+    }
 
     public function project()
     {
@@ -78,5 +84,10 @@ class Bidding extends Model
         });
 
         $bidding->delete();
+    }
+
+    public function markAsPaid()
+    {
+        self::update(['is_paid' => true]);
     }
 }

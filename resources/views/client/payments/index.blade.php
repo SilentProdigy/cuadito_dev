@@ -1,7 +1,7 @@
 @extends('layouts.client-main-layout')
 
 @section('content')    
-<div class="container-fluid mb-3">
+{{-- <div class="container-fluid mb-3">
     <div class="d-flex flex-row justify-content-between align-items-center">
         <div class="table-titles">Payment History</div>
         <form action="{{ route('client.payments.index') }}" method="get" class="d-flex justify-content-between align-items-center">
@@ -14,11 +14,11 @@
             <a href="{{ route('client.payments.index') }}" class="p-2">Clear</a>
         </form>
     </div>
-</div>
+</div> --}}
 <div class="card">
     <div class="card-body">
 
-        <h5>{{ request('search') ? 'We found ' . $payments->count() . ' results ...' : 'Your Payment Transactions'}}</h5>
+        <h5>Your Payment Transactions</h5>
 
         <table class="table table-borderless table-md user-listing-table" id="payment-history-table">
             <thead>     
@@ -33,7 +33,7 @@
                 <th>ACTIONS</th>
             </thead>
             <tbody>            
-                @forelse($payments as $payment)
+                @foreach($payments as $payment)
                     <tr>
                         <td>{{ $loop->iteration }}</td>
                         <td>{{ $payment->invoice_id }}</td>
@@ -48,15 +48,11 @@
                             <a href="{{ route('client.payments.print', $payment) }}" class="btn btn-dark btn-sm">Print</a>
                         </td>
                     </tr>
-                @empty
-                    <tr>
-                        <td>No results found!</td>
-                    </tr>
-                @endforelse
+                @endforeach
             </tbody>
         </table>
 
-        <div class="d-flex justify-content-center">{{ $payments->links() }}</div>
+        {{-- <div class="d-flex justify-content-center">{{ $payments->links() }}</div> --}}
     </div>
 </div>
 @endsection

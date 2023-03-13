@@ -50,10 +50,11 @@
                 <th>SUBMITTED RATE</th>
                 <th>DATE OF PROPOSAL</th>
                 <th>PROPOSAL STATUS</th>
+                <th>PAYMENT STATUS</th>
                 <th>ACTIONS</th>
             </thead>
             <tbody>
-                @forelse ($proposals as $proposal)
+                @foreach ($proposals as $proposal)
                     <tr>
                         <td class="d-flex flex-row">
                             <div class="d-flex flex-column user-listing-details px-3">
@@ -88,6 +89,9 @@
                                 @endif
                             </span>
                         </td>
+                        <td>
+                            <span class="{{ $proposal->is_paid ?  "text-success" : 'text-danger'}} fw-bold">{{ $proposal->is_paid ? "PAID" : "NOT PAID" }}</span>
+                        </td>
                         <td class="user-actions">
                             <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i>         
@@ -106,12 +110,7 @@
                             @endif
                         </td>
                     </tr>        
-                @empty
-                    <tr>
-                        <td>No Proposals Yet!</td>
-                    </tr>
-                @endforelse
-            
+                @endforeach
             </tbody>
         </table>
 
