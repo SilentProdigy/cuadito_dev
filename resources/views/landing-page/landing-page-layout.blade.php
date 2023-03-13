@@ -80,9 +80,11 @@
             <li class="nav-item">
               <a class="nav-link text-black" href="{{ route('guest.contact') }}">Contact</a>
             </li>
+            {{-- 
             <li class="py-3">
               <a href="{{ route('client.auth.show-login-form') }}" class="btn btn-orange btn-rounded">Login</a>
             </li>
+            --}}
           </ul>
         </div>
       </div>
@@ -108,9 +110,11 @@
                   <li class="nav-item">
                     <a class="nav-link" href="{{ route('guest.contact') }}">Contact</a>
                   </li>
+                  {{-- 
                   <li class="px-3">
                     <a href="{{ route($data['auth_url']) }}" class="btn btn-orange btn-rounded">{{$data['auth_text']}}</a>
                   </li>
+                  --}}
                 </ul>
             </div>
         </div>

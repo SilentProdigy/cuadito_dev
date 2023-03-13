@@ -15,7 +15,7 @@
                   <h1 class="display-3 text-uppercase fw-bold font-weight-bold mt-5 mt-xl-2">Better Connections,<br>Better Deals</h1>
                   <h5 class="mb-4 fw-normal">Get projects and suppliers with ease.<br>Make sure your business is the most efficient and profitable it can be with Cuadito - the perfect platform for businesses.</h5>
                 </div>
-                <a href="{{ route('client.auth.show-register-form') }}" class="btn landing-page-btn btn-rounded mt-5 fs-5">Get Started <i class="fa fa-angle-right"></i> </a>
+                <a href="https://app.startinfinity.com/form/a888b035-b8bf-481a-979f-16ccd168a144" class="btn landing-page-btn btn-rounded mt-5 fs-5">Get Started <i class="fa fa-angle-right"></i> </a>
               </div>
             </div>
           </div>

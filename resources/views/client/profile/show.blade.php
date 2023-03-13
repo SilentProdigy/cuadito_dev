@@ -135,68 +135,6 @@
                     </div>
                 </div>
             </div>
-            {{-- 
-            @if( auth('client')->user()->id == $client->id )
-            <div class="col-md-4">
-                <div class="card">
-                    <div class="card-body">
-                        @if($client->have_subscription)
-                            <div class="subscriptions text-center">
-                                    <div>
-                                        <span class="counters fw-bold">{{ $client->active_subscription->remaining_proposals }}</span>
-                                    </div>
-                                <span class="text-uppercase text-muted">Remaining Bids</span>
-                                <div class="mt-3">
-                                    <!-- <a href="{{ route('client.products.index') }}" class="btn btn-sm btn-orange">{{ $client->active_subscription->subscription_type->name }}</a>
-                                    -->
-                                    <button type="button" class="btn btn-sm btn-warning shadow-none" data-bs-toggle="modal" data-bs-target="#subscriptionModal">
-                                        View Plan
-                                    </button>
-                                </div>
-                            </div>
-                        @endif
-                    </div>
-                </div>
-                <div class="card mt-4">
-                    <div class="card-header">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <div class="card-subtitle">Payment History</div>
-                            <a href="{{ route('client.payments.index') }}" class="fw-normal text-orange">View All</a>
-                        </div>
-                        
-                    </div>
-                    <div class="card-body">
-                        <div class="table-responsive">
-                            <table id="billing_history_table" class="table table-striped display nowrap" width="100%">
-                                <thead class="table-dark">
-                                    <th>Transaction No.</th>
-                                    <th>Activity</th>
-                                    <th>Satus</th>
-                                    <th>Date</th>
-                                    <th>Amount</th>
-                                </thead>
-                                <tbody>
-                                    {{-- @forelse($payments as $payment)
-                                        <tr>
-                                            <td><a href="{{ route('client.payments.show', $payment) }}">{{ $payment->invoice_id }}</a></td>
-                                            <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
-                                            <td>{{ $payment->status }}</td>
-                                            <td>{{ $payment->created_at->format('Y-m-d') }}</td>
-                                            <td>@money( $payment->total_amount )</td>
-                                        </tr>
-                                    @empty
-                                        <tr>
-                                            <td>No results found!</td>
-                                        </tr>
-                                    @endforelse --}}
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            @endif
-            --}}
         </div>
     </div>
 </div>
