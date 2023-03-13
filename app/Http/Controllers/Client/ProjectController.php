@@ -76,7 +76,8 @@ class ProjectController extends Controller
             $projects = $projects->orderBy('created_at', 'desc');
         }
 
-        $projects = $projects->paginate(5);
+        // $projects = $projects->paginate(5);
+        $projects = $projects->get();
 
         $search_options = [
             'filter_cols' => [
@@ -290,7 +291,8 @@ class ProjectController extends Controller
             $proposals->whereBetween('created_at', [request('min_date'), request('max_date')]);
         }
 
-        $proposals = $proposals->paginate(10);
+        $proposals = $proposals->where('is_paid', true)
+                    ->get();
 
         return view('client.projects.proposals')->with(compact('proposals', 'project'));
     }

@@ -9,16 +9,20 @@ use App\Models\PaymentType;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Support\Facades\Log;
 
 class ProposalPaymentController extends Controller
 {
     public function create(Bidding $bidding)
     {
         // NOTE: DP is not accepting values with decimal point!
-        $payment_type =  PaymentType::findOrFail(PaymentType::PAYMENT_FOR_PROPOSAL_ID);
+        // $payment_type =  PaymentType::findOrFail(PaymentType::PAYMENT_FOR_PROPOSAL_ID);
+        
+        // $total_amount = (float) $payment_type->amount;
+        $project = $bidding->project;
 
-        $total_amount = (float) $payment_type->amount;
+        // TODO: refer to payment range table
+        $total_amount = $project->cost * 0.12;
 
         $target_url = config("dragonpay.base_url") . "/processors/available/".$total_amount;
 
@@ -38,7 +42,80 @@ class ProposalPaymentController extends Controller
             return $total_amount >= $item['minAmount'] && $total_amount < $item['maxAmount'];
         });
 
-        return view('client.billings.create')->with(compact('payment_type', 'total_amount', 'payment_channels'));
+        return view('client.billings.create')->with(compact('total_amount', 'payment_channels', 'bidding'));
+    }
+
+    public function store(Request $request, Bidding $bidding)
+    {
+        try
+        {
+            $request->validate([
+                'payment_channel' => 'required'
+            ]);
+
+            DB::beginTransaction();        
+            
+            $project = $bidding->project;
+
+            // $payment_type =  PaymentType::findOrFail(PaymentType::PAYMENT_FOR_PROPOSAL_ID);
+
+            // TODO: refer to payment range table
+            $total_amount = $project->cost * 0.12;
+
+            // $payment = auth('client')->user()->payments()->create([
+            //     'amount' => 0, // amount here comes from the api of dragon pay
+            //     'total_amount' => 0,
+            //     'details' => $payment_type->description,                
+            //     'status' => Payment::PENDING_STATUS,
+            //     'client_id' => auth( 'client')->user()->id,
+            // ]);
+
+            
+            $payment = $bidding->payment()->create([
+                'amount' => $total_amount, // amount here comes from the api of dragon pay
+                'total_amount' => $total_amount,
+                'details' => "Proposal submission process fee",                
+                'status' => Payment::PENDING_STATUS,
+                'client_id' => auth( 'client')->user()->id,
+            ]);
+
+            // Request for payment
+            $response = Http::retry(3)->withBasicAuth(
+                            config('dragonpay.merchant_id'),
+                            config('dragonpay.password'),
+                        )
+                        ->withHeaders([
+                            'Content-Type' => 'application/json'
+                        ])
+                        ->post(config("dragonpay.base_url") . "/". $payment->id ."/post", [
+                                'Amount' => $total_amount,
+                                'Currency' => config('dragonpay.currency'),
+                                'Description' => "Proposal submission process fee",
+                                'Email' => auth('client')->user()->email,
+                                'Param1' => config('dragonpay.secret'),
+                                'Param2' => "PROPOSAL_" . $bidding->id,
+                                'ProcId' => $request->input('payment_channel')
+                            ],
+                        );
+
+            DB::commit();
+            
+            if($response['Status'] !== "S")
+            {
+                return redirect()->back()->withErrors(['message' => 'Operation Failed: ' . $response['Message']]);
+            }
+            
+            // $this->createPaymentSession($payment, $response);
+
+            // Redirect to Submitted URL
+            return redirect($response['Url']);
+        }
+        catch(\Exception $e)
+        {
+            DB::rollBack();
+            Log::error("ACTION: CREATE_PAYMENT, ERROR:" . $e->getMessage());
+            return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
+        }
     }
 
     public function subscribe(Request $request,PaymentType $payment_type)
