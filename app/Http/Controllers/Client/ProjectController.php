@@ -269,6 +269,12 @@ class ProjectController extends Controller
 
     public function proposals(Project $project)
     {
+
+        if(!$project->is_paid)
+        {
+            return redirect(route('client.payments.projects.create', $project));
+        }
+
         if (!$project->is_owned && !$project->is_winner) {
             return redirect(route('client.proposals.index'))->withErrors(['message' => 'Unauthorized Access!']);
         }

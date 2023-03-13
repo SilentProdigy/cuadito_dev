@@ -254,6 +254,9 @@ Route::name('client.')->group(function () {
         // Route::get('subscriptions/{subscription}/unsubcribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'unsubscribe'])->name('subscriptions.unsubscribe');
         // Route::post('subscriptions/{subscription_type}/subscribe', [\App\Http\Controllers\Client\SubscriptionController::class, 'subscribe'])->name('subscriptions.subscribe');
 
+        Route::get('payments/projects/{project}', [\App\Http\Controllers\Client\ProjectPaymentController::class, 'create'])->name('payments.projects.create');
+        Route::post('payments/projects/{project}', [\App\Http\Controllers\Client\ProjectPaymentController::class, 'store'])->name('payments.projects.store');
+
         Route::get('payments/proposal/{bidding}', [\App\Http\Controllers\Client\ProposalPaymentController::class, 'create'])->name('payments.proposal.create');
         Route::post('payments/proposal/{bidding}', [\App\Http\Controllers\Client\ProposalPaymentController::class, 'store'])->name('payments.proposal.store');
         Route::get('payments/result', [\App\Http\Controllers\Client\PaymentController::class, 'result'])->name('payments.result');

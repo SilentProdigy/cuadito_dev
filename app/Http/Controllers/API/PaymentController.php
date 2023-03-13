@@ -36,18 +36,10 @@ class PaymentController extends Controller
 
             if($request->input('status') == 'S')
             {
-                $paymentable_type = $payment->paymentable_type;
-                $paymentable_id = $payment->paymentable_id;
+                $payment->paymentable->markAsPaid();
 
-                $paymentable = app($paymentable_type)->find($paymentable_id);
-                $paymentable_class_name = $paymentable->getMorphClass();
-
-                if($paymentable_class_name == "App\Models\Bidding")
-                {
-                    $proposal = $payment->paymentable;
-                    $proposal->markAsPaid();
-                }
-
+                // $this->sendEmail($payment->client->email, new PaymentCreated($payment,$subscription));
+             
                 // Log::info("paymentable_class_name{$paymentable_class_name}");
 
                 /*

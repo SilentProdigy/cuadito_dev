@@ -36,6 +36,7 @@ class Project extends Model
         'relevant_authorities',
         'remarks',
         'winner_bidding_id',
+        'is_paid',
         'company_id',
         'created_at'
     ];
@@ -140,5 +141,10 @@ class Project extends Model
     public static function getProjectsOverviewPerMonth($year = '2023')
     {
         
+    }
+
+    public function markAsPaid()
+    {
+        self::update(['is_paid' => true]);
     }
 }

@@ -25,7 +25,7 @@ class CreateProjectsTable extends Migration
             $table->text('relevant_authorities')->nullable();
             $table->foreignId('company_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             $table->text('remarks')->nullable();
-            
+            $table->boolean('is_paid')->default(false);
             $table->timestamps();
             $table->softDeletes();
             $table->index(['title', 'status', 'cost', 'scope_of_work']);

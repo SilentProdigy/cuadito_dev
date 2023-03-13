@@ -49,6 +49,7 @@
                 <th class="col-span-2">STATUS</th>
                 <th>DATE POSTED</th>
                 <th>PROPOSALS</th>
+                <th>PAYMENT STATUS</th>
                 <th>ACTIONS</th>
             </thead>
             <tbody>
@@ -68,6 +69,11 @@
                         </td>
                         <td>
                             <span>{{ $project->proposals_count }}</span>
+                        </td>
+                        <td>
+                            <span class="{{ $project->is_paid ?  "text-success" : 'text-danger'}} fw-bold">
+                                {{ $project->is_paid ? "PAID" : "NOT PAID" }}
+                            </span>
                         </td>
                         <td>
                             <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info">
