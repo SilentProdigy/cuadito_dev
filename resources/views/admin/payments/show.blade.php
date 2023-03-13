@@ -46,7 +46,7 @@
                         class="fw-bold">Creation Date: </span>{{ $payment->created_at->format('M d,Y') }}</li>
                     <li class="text-muted"><i class="fas fa-circle text-orange"></i> <span
                         class="me-1 fw-bold">Status:</span><span class="badge bg-success text-white fw-bold">
-                        Paid</span></li>
+                        {{ $payment->status }}</span></li>
                     </ul>
                 </div>
                 </div>
