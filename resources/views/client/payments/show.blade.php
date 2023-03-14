@@ -53,18 +53,16 @@
                             <th scope="col">Description</th>
                             <th scope="col">Date</th>
                             <th scope="col">Unit Price</th>
-                            <th scope="col">Billed Month</th>
                             <th scope="col">Amount</th>
                         </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <th scope="row">1</th>
-                                <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
+                                <td>{{ $payment->details }}</td>
                                 <td>{{ $payment->created_at->format('M d,Y') }}</td>
-                                <td>&#8369;{{$payment->subscription->subscription_type->amount}}</td>
-                                <td>{{ $payment->period }}</td>
-                                <td>&#8369;{{ $payment->subscription->subscription_type->amount * 12 }}.00</td>
+                                <td>&#8369;{{$payment->amount}}</td>
+                                <td>&#8369;{{ $payment->amount }}</td>
                             </tr>
                         </tbody>
 
@@ -77,11 +75,11 @@
                     </div>
                     <div class="col-xl-3">
                         <ul class="list-unstyled">
-                        <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>&#8369;{{ $payment->subscription->subscription_type->amount * 12 }}.00</li>
+                        <li class="text-muted ms-3"><span class="text-black me-4">SubTotal</span>&#8369;{{ $payment->amount }}.00</li>
                         <li class="text-muted ms-3 mt-2"><span class="text-black me-4">Tax(0%)</span>&#8369;0.00</li>
                         </ul>
                         <p class="text-black float-start"><span class="text-black me-3"> Total Amount</span><span
-                            style="font-size: 25px;">&#8369;{{ $payment->subscription->subscription_type->amount * 12 }}.00</span></p>
+                            style="font-size: 25px;">&#8369;{{ $payment->amount }}.00</span></p>
                     </div>
                     </div>
                     <hr>
@@ -96,85 +94,4 @@
         </div>
     </div>    
 
-    <!-- <div class="container px-5">
-        <section class="mt-4">
-            <div class="row">
-                <div class="col-sm-12">
-                    <div class="card">
-                        <div class="card-header d-flex justify-content-between">
-                            <div>
-                                <h1 class="my-2">Payment History</h1>
-                            </div>
-
-                            <div>
-                                <a href="{{ route('client.payments.print', $payment) }}" class="btn btn-dark">Print PDF</a>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Invoice ID</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->invoice_id }}</p>
-                            </div>
-                            
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Status</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->status }}</p>
-                            </div>
-
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Created At</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->created_at->format('M d,Y') }}</p>
-                            </div>
-
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Payment Date</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->paid_at?->format('M d,Y') }}</p>
-                            </div>
-                                
-                            <div class="my-2 py-3 border-top">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Billed Months</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">{{ $payment->period }}</p>
-                            </div>
-
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Product</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">
-                                    {{ $payment->subscription->subscription_type->name }} Plan
-                                </p>
-                            </div>
-
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Unit Price</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">
-                                    @money($payment->subscription->subscription_type->amount)
-                                </p>
-                            </div>
-                                
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Discount</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">
-                                    @money(0)
-                                </p>
-                            </div>
-
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">VAT</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">
-                                    @money($payment->additional_vat)
-                                </p>
-                            </div>
-
-                            <div class="my-2 py-3">
-                                <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Total Payment</h5>
-                                <p class="fs-6 lh-lg" style="color: #222;">@money( $payment->total_amount )</p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-    </div> -->
 @endsection

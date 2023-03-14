@@ -23,7 +23,7 @@
                         <th>ACTIONS</th>
                     </thead>
                     <tbody>
-                        @forelse ($client->companies as $company)
+                        @foreach ($client->companies as $company)
                             <tr>
                                 <td class="d-flex flex-row">
                                     <div class="d-flex flex-column user-listing-details px-3">
@@ -45,11 +45,7 @@
                                     </a>
                                 </td>
                             </tr>
-                        @empty
-                            <tr>
-                                <td>No Companies Yet!</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -73,10 +69,11 @@
                         <th>DATE POSTED</th>
                         {{-- <th>DUE DATE</th> --}}
                         <th>PROPOSALS</th>
+                        <th>PAYMENT STATUS</th>
                         <th>ACTIONS</th>
                     </thead>
                     <tbody>
-                        @forelse ($client->projects as $project)
+                        @foreach ($client->projects as $project)
                             <tr>
                                 <td>
                                     <span>{{ $loop->iteration }}</span>
@@ -99,17 +96,16 @@
                                 <td>
                                     <span>{{ $project->proposals_count }}</span>
                                 </td>
+                                <span class="{{ $project->is_paid ?  "text-success" : 'text-danger'}} fw-bold">
+                                    {{ $project->is_paid ? "PAID" : "NOT PAID" }}
+                                </span>
                                 <td>
                                     <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-outline-info">
                                         <i class="fa fa-eye"></i>
                                     </a>
                                 </td>
                             </tr>        
-                        @empty
-                            <tr>
-                                <td>No Projects Yet!</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>
                 </table>
             </div>
@@ -133,10 +129,11 @@
                         <th>SUBMITTED RATE</th>
                         <th>DATE OF PROPOSAL</th>
                         <th>PROPOSAL STATUS</th>
+                        <th>PAYMENT STATUS</th>
                         <th>ACTIONS</th>
                     </thead>
                     <tbody>
-                        @forelse ($client->biddings as $proposal)
+                        @foreach ($client->biddings as $proposal)
                             <tr>
                                 <td class="d-flex flex-row">
                                     <div class="d-flex flex-column user-listing-details px-3">
@@ -169,17 +166,19 @@
                                         @endif
                                     </span>
                                 </td>
+                                <td>
+                                    <span class="{{ $proposal->is_paid ?  "text-success" : 'text-danger'}} fw-bold">
+                                        {{ $proposal->is_paid ? "PAID" : "NOT PAID" }}
+                                    </span>
+                                </td>
+
                                 <td class="user-actions">
                                     <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                         <i class="fa fa-eye"></i>         
                                     </a>
                                 </td>
                             </tr>        
-                        @empty
-                            <tr>
-                                <td>No Proposals Yet!</td>
-                            </tr>
-                        @endforelse
+                        @endforeach
                     </tbody>        
                 </table>
             </div>

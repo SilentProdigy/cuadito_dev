@@ -16,8 +16,7 @@ class PaymentController extends Controller
 
     public function index()
     {
-        $payments = Payment::with(['subscription', 'subscription.subscription_type'])
-                    ->where('client_id', auth('client')->user()->id);
+        $payments = Payment::where('client_id', auth('client')->user()->id);
 
         if(request()->input('search'))
         {
