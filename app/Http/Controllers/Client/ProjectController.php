@@ -269,7 +269,13 @@ class ProjectController extends Controller
 
     public function proposals(Project $project)
     {
+        $due_date = \Carbon\Carbon::parse($project->due_date);
 
+        if($due_date->isFuture())
+        {
+            return redirect(route('client.projects.index'))->withErrors(['message' => 'Invalid operation! The project is not yet due']);
+        }
+        
         if(!$project->is_paid)
         {
             return redirect(route('client.payments.projects.create', $project));

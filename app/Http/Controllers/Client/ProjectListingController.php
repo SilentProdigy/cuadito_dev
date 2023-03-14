@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Project;
 use App\Traits\CheckIfClientOwnedAProject;
 use App\Traits\CheckIfCompanyHasProposalToProject;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 
 
@@ -33,7 +34,8 @@ class ProjectListingController extends Controller
         }
 
         $projects = $projects->with('categories')
-                    ->where('status', Project::ACTIVE_STATUS);
+                    ->where('status', Project::ACTIVE_STATUS)
+                    ->where('due_date', '>', Carbon::today());
         
         if(!request()->has('sort_col') && request()->input('sort_col') != "")
         {

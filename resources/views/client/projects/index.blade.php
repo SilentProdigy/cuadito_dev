@@ -48,6 +48,7 @@
                 <th>COMPANY</th>
                 <th class="col-span-2">STATUS</th>
                 <th>DATE POSTED</th>
+                <th>DUE DATE</th>
                 <th>PROPOSALS</th>
                 <th>PAYMENT STATUS</th>
                 <th>ACTIONS</th>
@@ -66,6 +67,9 @@
                         </td>
                         <td>
                             <span>{{ $project->created_at->format('M d,Y') }}</span>
+                        </td>
+                        <td>
+                            <span>{{ \Carbon\Carbon::parse($project->due_date)->format('M d,Y') }}</span>
                         </td>
                         <td>
                             <span>{{ $project->proposals_count }}</span>

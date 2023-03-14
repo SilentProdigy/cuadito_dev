@@ -38,11 +38,12 @@ class Project extends Model
         'winner_bidding_id',
         'is_paid',
         'company_id',
-        'created_at'
+        'created_at',
+        'due_date',
     ];
 
     protected $cast = [
-        // 'due_date' => 'date'
+        'due_date' => 'date'
     ];
 
     protected $with = ['company'];

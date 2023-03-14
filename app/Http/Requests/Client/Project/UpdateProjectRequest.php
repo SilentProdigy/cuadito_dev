@@ -36,7 +36,7 @@ class UpdateProjectRequest extends FormRequest
             'company_id' => 'required|exists:App\Models\Company,id',
             'cost' => 'required|numeric',
             'scope_of_work' => 'nullable|string|min:3',
-            // 'due_date' => 'required|date|after:' . $dt->addDay()->format('Y-m-d'),
+            'due_date' => 'required|date|after:' . $dt->addDay()->format('Y-m-d'),
             'relevant_authorities' => 'nullable|string|min:3',
             'terms_and_conditions' => 'nullable|string|min:3',
         ];

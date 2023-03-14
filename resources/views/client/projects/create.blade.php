@@ -91,7 +91,7 @@
                     @enderror
                 </div>
                 
-                {{-- <div class="col-md-6 mt-3">
+                <div class="col-md-6 mt-3">
                     <label>Due Date</label>
                     <input 
                         type="date" 
@@ -105,7 +105,7 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
-                </div> --}}
+                </div>
 
                 <div class="col-md-12 mt-3">
                     <label>Description</label>
