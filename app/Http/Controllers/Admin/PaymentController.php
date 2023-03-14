@@ -10,18 +10,17 @@ class PaymentController extends Controller
 {
     public function index()
     {
-        $payments = Payment::with(['subscription', 'subscription.subscription_type']);
+        $payments = Payment::latest()->get();
 
-        if(request()->input('search'))
-        {
-            $payments = $payments->where(function($query) {
-                $query->where('id', 'LIKE' , request()->input('search') ."%")
-                ->orWhere('or_number', 'LIKE' , "%". request()->input('search') ."%")
-                ->orWhere('status', 'LIKE' , "%". request()->input('search') ."%");
-            });
-        }   
+        // if(request()->input('search'))
+        // {
+        //     $payments = $payments->where(function($query) {
+        //         $query->where('id', 'LIKE' , request()->input('search') ."%")
+        //         ->orWhere('or_number', 'LIKE' , "%". request()->input('search') ."%")
+        //         ->orWhere('status', 'LIKE' , "%". request()->input('search') ."%");
+        //     });
+        // }   
 
-        $payments = $payments->get();
         return view('admin.payments.index')->with(compact('payments'));
     }
     

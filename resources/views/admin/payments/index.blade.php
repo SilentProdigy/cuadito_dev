@@ -18,11 +18,12 @@
                 <th>INVOICE #</th>
                 <th>REF. NO.</th>
                 <th>OR #</th>
-                <th>PLAN</th>
+                {{-- <th>PLAN</th> --}}
                 <th>STATUS</th>                
                 <th>CREATED AT</th>
                 <th>PAID AT</th>
                 <th>TOTAL AMOUNT</th>
+                <th>DESCRIPTION</th>
                 <th>ACTIONS</th>
             </thead>
             <tbody>            
@@ -32,11 +33,12 @@
                         <td><a href="{{ route('admin.payments.show', $payment) }}">{{ $payment->id }}</a></td>
                         <td>{{ $payment->reference_no ?? "-" }}</td>
                         <td>{{ $payment->or_number ?? "-" }}</td>
-                        <td>{{ $payment->subscription->subscription_type->name }} Plan</td>
+                        {{-- <td>{{ $payment->subscription->subscription_type->name }} Plan</td> --}}
                         <td>{{ $payment->status }}</td>
                         <td>{{ $payment->created_at->format('Y-m-d') }}</td>
                         <td>{{ $payment->paid_at?->format('Y-m-d') }}</td>
                         <td>@money( $payment->total_amount )</td>
+                        <td>{{ $payment->details }}</td>
                         <td>
                             <a href="{{ route('admin.payments.show', $payment) }}" class="btn btn-primary btn-sm">View Details</a>
                         </td>
