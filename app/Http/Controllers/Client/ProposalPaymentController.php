@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
 use App\Models\Bidding;
+use App\Models\BidRule;
 use App\Models\Payment;
 use App\Models\PaymentType;
 use Illuminate\Http\Request;
@@ -21,8 +22,18 @@ class ProposalPaymentController extends Controller
         // $total_amount = (float) $payment_type->amount;
         $project = $bidding->project;
 
-        // TODO: refer to payment range table
-        $total_amount = $project->cost * 0.12;
+        $total_amount = 0;
+        $cost = $project->cost;
+
+        if($project->cost < 50000) 
+            $total_amount = 5000;
+        else {
+            $bidRule = BidRule::bidRules($cost);
+
+            if(!$bidRule) abort(404);
+
+            $total_amount = $cost * $bidRule->percentage;
+        }
 
         $target_url = config("dragonpay.base_url") . "/processors/available/".$total_amount;
 
