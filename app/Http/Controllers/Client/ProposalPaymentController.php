@@ -22,19 +22,8 @@ class ProposalPaymentController extends Controller
         // $total_amount = (float) $payment_type->amount;
         $project = $bidding->project;
 
-        $total_amount = 0;
-        $cost = $project->cost;
-
-        if($project->cost < 50000) 
-            $total_amount = 5000;
-        else {
-            $bidRule = BidRule::bidRules($cost);
-
-            if(!$bidRule) abort(404);
-
-            $total_amount = $cost * $bidRule->percentage;
-        }
-
+        $total_amount = $project->computeTotalAmount();
+       
         $target_url = config("dragonpay.base_url") . "/processors/available/".$total_amount;
 
         $response = Http::retry(3)->withBasicAuth(
@@ -71,7 +60,7 @@ class ProposalPaymentController extends Controller
             // $payment_type =  PaymentType::findOrFail(PaymentType::PAYMENT_FOR_PROPOSAL_ID);
 
             // TODO: refer to payment range table
-            $total_amount = $project->cost * 0.12;
+            $total_amount = $project->computeTotalAmount();
 
             // $payment = auth('client')->user()->payments()->create([
             //     'amount' => 0, // amount here comes from the api of dragon pay

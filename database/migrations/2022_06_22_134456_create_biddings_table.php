@@ -19,7 +19,7 @@ class CreateBiddingsTable extends Migration
             $table->foreignId('project_id')->constrained()->onDelete('cascade')->onUpdate('cascade');
             // $table->string('quotation_url');
             $table->text('cover_letter');
-            $table->decimal('rate', 9, 2);
+            $table->decimal('rate', 12, 2);
             $table->boolean('is_paid')->default(false);
             // $table->string('payment_reference_no')->nullable();
             // $table->string('payment_date')->nullable();

@@ -148,4 +148,22 @@ class Project extends Model
     {
         self::update(['is_paid' => true]);
     }
+
+    public function computeTotalAmount()
+    {
+        $total_amount = 0;
+        $cost = $this->cost;
+
+        if($cost < 50000) 
+            $total_amount = 5000;
+        else {
+            $bidRule = BidRule::bidRules($cost);
+
+            if(!$bidRule) abort(404);
+
+            $total_amount = $cost * $bidRule->percentage;
+        }
+
+        return $total_amount;
+    }
 }

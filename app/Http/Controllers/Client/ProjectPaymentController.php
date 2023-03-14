@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Client;
 
 use App\Http\Controllers\Controller;
+use App\Models\BidRule;
 use App\Models\Payment;
 use App\Models\Project;
 use Illuminate\Http\Request;
@@ -17,9 +18,10 @@ class ProjectPaymentController extends Controller
         // NOTE: DP is not accepting values with decimal point!
         // $payment_type =  PaymentType::findOrFail(PaymentType::PAYMENT_FOR_PROPOSAL_ID);
         
-        // $total_amount = (float) $payment_type->amount;
-        // TODO: refer to payment range table
-        $total_amount = $project->cost * 0.12;
+        $total_amount = 0;
+        $cost = $project->cost;
+
+        $total_amount = $project->computeTotalAmount();
 
         $target_url = config("dragonpay.base_url") . "/processors/available/".$total_amount;
 
@@ -51,9 +53,8 @@ class ProjectPaymentController extends Controller
             ]);
 
             DB::beginTransaction();        
-
-            // TODO: refer to payment range table
-            $total_amount = $project->cost * 0.12;
+            
+            $total_amount = $project->computeTotalAmount();
             
             $payment = $project->payment()->create([
                 'amount' => $total_amount, // amount here comes from the api of dragon pay
