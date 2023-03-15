@@ -69,6 +69,8 @@ class ProposalController extends Controller
 
     public function show(Bidding $bidding)
     {
+        $bidding->load('requirements');
+
         return view('client.proposals.show')->with(compact('bidding'));
     }
 
@@ -83,15 +85,6 @@ class ProposalController extends Controller
 
         try 
         {
-            $paths = collect();
-
-            if ($request->has('attachments')) {
-                $paths = $this->proposalService->uploadProposalAttachments(
-                    $project,
-                    $request->file('attachments')
-                );
-            }
-
             $proposal = $this->proposalService->createProposal(
                 $project,
                 array_merge(
@@ -100,16 +93,22 @@ class ProposalController extends Controller
                 )
             );
 
-            // Attaching files to proposal
-            foreach ($paths as $path)
-                $proposal->attachments()->create(['url' => $path]);
+            foreach($project->requirements as $requirement)
+            {
+                $file = $request->file("requirements_{$requirement->id}");
+                $target_dir = "projects/". $project->id ."/proposals";
+                
+                // Attaching files to proposal
+                $path = $this->uploadFile($target_dir,$file);
+                $proposal->requirements()->create([
+                    'url' => $path,
+                    'project_requirement_id' => $requirement->id
+                ]);
+            }
+                
+            Bidding::createNotificationsForProposal($proposal);
 
-            // Bidding::createNotificationsForProposal($proposal);
-
-            // $this->sendEmail([$project->company->email], new ProposalSubmitted($proposal));
-
-            // $active_subscrption = auth('client')->user()->active_subscription;
-            // $this->increaseProposalCountOnSubscription($active_subscrption);
+            $this->sendEmail([$project->company->email], new ProposalSubmitted($proposal));
 
             DB::commit();
             return redirect(route('client.payments.proposal.create', $proposal))

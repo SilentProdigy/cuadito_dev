@@ -166,4 +166,9 @@ class Project extends Model
 
         return $total_amount;
     }
+
+    public function requirements()
+    {
+        return $this->hasMany(ProjectRequirement::class);
+    }
 }

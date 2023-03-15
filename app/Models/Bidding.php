@@ -90,4 +90,9 @@ class Bidding extends Model
     {
         self::update(['is_paid' => true]);
     }
+
+    public function requirements()
+    {
+        return $this->hasMany(BiddingRequirement::class);
+    }
 }

@@ -64,12 +64,14 @@
                 </div>  
 
                 <div class="card my-4">
-                    <div class="card-header bg-dark text-white text-uppercase fw-bold">Attachments</div>
+                    <div class="card-header bg-dark text-white text-uppercase fw-bold">Requirements</div>
                     <div class="card-body px-5">
-                        <div class="input-group mb-3">
-                            <input type="file" class="form-control @error('attachments[]') is-invalid @enderror" id="inputGroupFile02" multiple name="attachments[]">
-                            <label class="input-group-text" for="inputGroupFile02">Upload</label>
-                        </div>
+                        @foreach ($project->requirements as $requirement)
+                            <label for="" class="fw-bold">{{ $requirement->requirement_name }}</label>
+                            <div class="input-group mb-3">
+                                <input type="file" name="requirements_{{$requirement->id}}" required>
+                            </div>
+                        @endforeach
                     </div>
                 </div>  
             </div>

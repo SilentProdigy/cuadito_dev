@@ -76,7 +76,7 @@
                                     <th>ACTIONS</th>
                                 </thead>
                                 <tbody>
-                                    @foreach ($bidding->attachments as $item)
+                                    @foreach ($bidding->requirements as $item)
                                         <tr>
                                             <td class="d-flex flex-row">
                                                 <div class="d-flex flex-column user-listing-details px-3">
@@ -87,7 +87,7 @@
                                                 <div class="d-flex flex-column user-listing-details px-3">
                                                     <span>
                                                         <a href="{{ route('client.attachments.download', $item) }}" target="_blank">
-                                                            {{ $item->file_name }}
+                                                            {{ $item->requirement_name }}
                                                         </a>
                                                     </span>
                                                 </div>

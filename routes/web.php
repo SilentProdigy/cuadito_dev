@@ -200,7 +200,7 @@ Route::name('client.')->group(function () {
         Route::delete('proposals/{bidding}/cancel', [\App\Http\Controllers\Client\ProposalController::class, 'cancel'])->name('proposals.cancel');
         Route::patch('config/set-company', [\App\Http\Controllers\Client\SessionConfigController::class, 'update'])->name('global.config.update');
 
-        Route::get('attachments/download/{attachment}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');
+        Route::get('attachments/download/{biddingRequirement}', [\App\Http\Controllers\Client\AttachmentController::class, 'download'])->name('attachments.download');
     
         Route::get('conversations/create', [\App\Http\Controllers\Client\ConversationController::class, 'create'])->name('conversations.create');
         Route::get('conversations', [\App\Http\Controllers\Client\ConversationController::class, 'index'])->name('conversations.index');

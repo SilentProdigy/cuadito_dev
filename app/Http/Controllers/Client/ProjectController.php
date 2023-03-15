@@ -105,7 +105,9 @@ class ProjectController extends Controller
     public function create()
     {
         $companies = $this->companyService->getApprovedCompaniesOfClient();
-        return view('client.projects.create')->with(compact('companies'));
+        $requirements = auth('client')->user()->project_requirements;
+        
+        return view('client.projects.create')->with(compact('companies', 'requirements'));
     }
 
     /**
@@ -118,15 +120,24 @@ class ProjectController extends Controller
     {
         DB::beginTransaction();
 
-        try {
+        try 
+        {
             $project_details = $request->except(['company_id', 'categories_ids']);
             $category_ids = $request->input('category_ids');
             $company = Company::find($request->input('company_id'));
             $project = $this->companyService->createProject($company, $project_details, $category_ids);
 
+            collect($request->input('requirement_ids'))->each(function($item) use($project){
+                $project->requirements()->create([
+                    'requirement_id' => $item
+                ]);
+            });
+
             DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');
-        } catch (\Exception $e) {
+        } 
+        catch (\Exception $e) 
+        {
             DB::rollBack();
             Log::error("ACTION: PROJECT_CREATE, ERROR:" . $e->getMessage());
             return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
@@ -190,7 +201,7 @@ class ProjectController extends Controller
         try {
             // TODO: Additional business logic here
             $project_details = $request->except(['company_id', 'category_ids']);
-            $category_ids = $request->input('category_ids');
+            $category_ids = $request->input('category');
             $this->projectService->updateProject($project, $project_details, $category_ids);
 
             DB::commit();

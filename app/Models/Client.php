@@ -208,4 +208,9 @@ class Client extends Authenticatable
     {
         return $this->contacts()->where(['contact_id' => $client->id])->exists();
     }
+
+    public function project_requirements()
+    {
+        return $this->hasMany(ClientProjectRequirement::class);
+    }
 }

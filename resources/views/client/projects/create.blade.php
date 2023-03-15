@@ -75,7 +75,7 @@
                     @enderror
                 </div>  
 
-                <div class="col-md-6 mt-3">
+                <div class="col-md-4 mt-3">
                     <label>Scope of Work</label>
                     <input 
                         type="text" 
@@ -91,7 +91,7 @@
                     @enderror
                 </div>
                 
-                <div class="col-md-6 mt-3">
+                <div class="col-md-4 mt-3">
                     <label>Due Date</label>
                     <input 
                         type="date" 
@@ -105,6 +105,17 @@
                             <strong>{{ $message }}</strong>
                         </span>
                     @enderror
+                </div>
+
+
+                <div class="col-md-4 mt-3">
+                    <label>Requirements</label>
+                    
+                    <select name="requirement_ids[]" id="" class="mt-1 form-control @error('requirement_ids') is-invalid @enderror">
+                        @foreach ($requirements as $item)
+                            <option value="{{ $item->id }}">{{ $item->name }}</option>
+                        @endforeach
+                    </select>
                 </div>
 
                 <div class="col-md-12 mt-3">

@@ -53,6 +53,15 @@
                             <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Relevant Authorities</h5>
                             <p class="fs-6 lh-lg" style="color: #222;">{{ $project->relevant_authorities }}</p>
                         </div>
+
+                        <div class="my-2 py-3 border-top">
+                            <h5 class="text-uppercase text-secondary fw-bold fs-6 py-2">Requirements</h5>
+                            <ul>
+                                @foreach ($project->requirements as $item)
+                                    <li>{{ $item->requirement_name }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
                     </div>
                 </div>
             </div>
