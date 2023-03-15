@@ -69,8 +69,6 @@
                 <div class="card">
                     <div class="card-body">
                         <div class="my-5 text-center">
-                            <h1 class="fw-bold">{{ $project->proposals_count }}</h1>
-                            <p class="fw-bold text-uppercase fs-6 text-secondary">Total Proposals</p>
                             @if($project->is_owned || $project->is_winner)
                                 <a class="btn btn-sm btn-primary" href="{{route('client.projects.proposals', $project)}}">View all proposals</a>
                             @endif

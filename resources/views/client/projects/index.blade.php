@@ -49,7 +49,6 @@
                 <th class="col-span-2">STATUS</th>
                 <th>DATE POSTED</th>
                 <th>DUE DATE</th>
-                <th>PROPOSALS</th>
                 <th>PAYMENT STATUS</th>
                 <th>ACTIONS</th>
             </thead>
@@ -72,10 +71,7 @@
                             <span>{{ \Carbon\Carbon::parse($project->due_date)->format('M d,Y') }}</span>
                         </td>
                         <td>
-                            <span>{{ $project->proposals_count }}</span>
-                        </td>
-                        <td>
-                            <span class="{{ $project->is_paid ?  "text-success" : 'text-danger'}} fw-bold">
+                            <span class="{{ $project->is_paid ?  'text-success' : 'text-danger'}} fw-bold">
                                 {{ $project->is_paid ? "PAID" : "NOT PAID" }}
                             </span>
                         </td>
