@@ -44,12 +44,6 @@
                                 <div class="col">
                                     <h5>{{ $project->title }}</h5>
                                 </div>
-                                <div class="col d-flex justify-content-end proposal-label">
-                                    <span class="text-muted">Proposals:</span>&nbsp;
-                                    <span>
-                                        {{ $project->proposals_count }}
-                                    </span>
-                                </div>
                             </div>
                             @foreach ($project->categories as $category)
                                 <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>

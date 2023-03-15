@@ -64,11 +64,6 @@
                             @include('client.listing.includes.action_buttons')
                         </div>
 
-                        <div class="my-5 text-center">
-                            <h1 class="fw-bold">{{ $project->proposals_count }}</h1>
-                            <p class="fw-bold text-uppercase fs-6 text-secondary">Current Proposals</p>
-                        </div>
-
                         <div class="border-top my-5 px-3 py-3">
                             <h5 class="fs-6 fw-bold text-center mb-3 text-uppercase" style="color: #222;"><i class="fa fa-info-circle"></i> About the Company</h5>
                             <p><span class="fw-bold">Company:</span> <a href="{{ route('client.companies.show', $project->company) }}">{{ $project->company->name }}</a></p>
