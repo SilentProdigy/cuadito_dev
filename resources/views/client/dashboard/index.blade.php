@@ -1,4 +1,5 @@
-@extends('layouts.client-main-layout')
+@extends('layouts.client-layout')
+@section('page_title', 'Dashboard')
 
 @section('style')
 <style>

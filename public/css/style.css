@@ -377,10 +377,13 @@ body {
     background-color: #00A65A !important;
 }
 .bg-orange {
-    background-color: #f39c12 !important;
+    background-color: #F96B23 !important;
 }
 .bg-red {
     background-color: #d9534f !important;
+}
+.bg-yellow{
+    background-color: #FDDB2E !important;
 }
 .text-orange{
     color: #F96B23;
@@ -397,6 +400,13 @@ body {
 .text-green{
     color: #00A65A;
 }
+.text-light{
+    color: #d3d3d3;
+}
+.text-black{
+    color: #0b0014;
+}
+
 
   /* END OF DASHBOARD CARDS */
 .dashboard-proj-img img{
@@ -735,10 +745,14 @@ body {
     background: #ffb901;
 }
 .border-orange{
-    border-color: #f26722 !important;
+    border-color: #F96B23 !important;
 }
 .btn-orange{
     background-color: #f26722 !important;
+    color: white !important;
+}
+.btn-black{
+    background-color: #0b0014 !important;
     color: white !important;
 }
 #pricing_table .btn-gray{
@@ -965,7 +979,6 @@ body {
   /* End of Pricing Table on Admin Panel */
   .modal-backdrop {
     /* background-color: rgba(0,0,0,.0001) !important; */
-    margin-top: 100px;
     z-index: 1;
 }
 
@@ -1348,3 +1361,9 @@ ul li {
 
 /* Inbox Page */
 /* End of Inbox Page */
+
+/* REVAMP (ANTHONY MARK LOPEZ) */
+/* Projects Available */
+.page-breadcrumbs{display: flex;align-items: center;justify-content: space-between;}
+.page-title{font-size: 1.5rem;}
+/* End of Projects Available */

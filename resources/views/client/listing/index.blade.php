@@ -1,39 +1,224 @@
-@extends('layouts.client-main-layout')
+@extends('layouts.client-layout')
+@section('page_title', 'Projects Available')
 
 @section('style')
 <style>
-    .proposal-label{
-        font-size: 15px;
+    .right-elements{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card img{
+        opacity: 0.3;
     }
 </style>
 @endsection
 
 @section('content')
 <div class="container px-5">
-    <div class="my-3">
-        <form action="{{ route('client.listing.index') }}" method="get">
-            <div class="input-group input-group-lg mb-3">
-                <input id="search-focus" type="text" class="form-control" placeholder="Search Project ..." name="search" value="{{ request('search') }}">
-                <button class="btn border-orange btn-orange" type="submit">
-                    <i class="fas fa-search"></i>
-                </button>
+    <div class="page-breadcrumbs">
+        <div class="page-title">Projects Available</div>
+        <div class="right-elements">
+            <div><a href="#" class="text-orange">Projects</a> / Projects Available</div>
+            &ensp;
+            <div>
+                <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal"><i class="bx bx-slider-alt fs-5 text-black"></i></a>
+                @if(request()->has('search') || request()->has('adv_search'))
+                    <a href="{{ route('client.listing.index') }}"><i class="bx bx-x"></i></a>
+                @endif
             </div>
-            <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal" style="margin-right: 2%;">Show Search Options</a>
-
-            @if(request()->has('search') || request()->has('adv_search'))
-                <a href="{{ route('client.listing.index') }}">Clear Search Results</a>
-            @endif
-        </form>
+        </div>
     </div>
 
-    <section class="mt-4">
-
-        <h4>Projects in CUADITO</h4>
-        <p>Find the perfect projects for you.</p>
-        
-        @if(request()->has('search') || request()->has('adv_search'))
-            <h5>Found {{ $projects->count() }} search results ... </h5>
-        @endif
+    <div class="container px-5">
+        <div class="row" id="project-grid">
+            <div class="col-xs-12 col-md-4 gy-3">
+                <div class="card h-100">
+                    <img src="{{ asset('images/banners/project-banner.jpg') }}" class="card-img-top" alt="Project Banner"/>
+                    <div class="card-header card-img-overlay">
+                        <h5 class="card-title text-black">Project 001</h5>
+                        <div class="d-flex">
+                            <span class="badge rounded-pill bg-green">Construction</span>
+                            <span class="badge rounded-pill bg-orange">Medical</span>
+                        </div>
+                        <div class="project-dates">
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 1, 2023</small>
+                            </div>
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content. This content is a little bit longer...
+                          </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm btn-black px-3"><i class="bx bx-show"></i> View</a>
+                        &ensp;
+                        <a href="#" class="btn btn-sm btn-orange px-3"><i class="bx bx-paper-plane"></i> Submit Proposal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 gy-3">
+                <div class="card h-100">
+                    <img src="{{ asset('images/banners/project-banner.jpg') }}" class="card-img-top" alt="Project Banner"/>
+                    <div class="card-header card-img-overlay">
+                        <h5 class="card-title text-black">Project 001</h5>
+                        <div class="d-flex">
+                            <span class="badge rounded-pill bg-green">Construction</span>
+                            <span class="badge rounded-pill bg-orange">Medical</span>
+                        </div>
+                        <div class="project-dates">
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 1, 2023</small>
+                            </div>
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content. This content is a little bit longer...
+                          </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm btn-black px-3"><i class="bx bx-show"></i> View</a>
+                        &ensp;
+                        <a href="#" class="btn btn-sm btn-orange px-3"><i class="bx bx-paper-plane"></i> Submit Proposal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 gy-3">
+                <div class="card h-100">
+                    <img src="{{ asset('images/banners/project-banner.jpg') }}" class="card-img-top" alt="Project Banner"/>
+                    <div class="card-header card-img-overlay">
+                        <h5 class="card-title text-black">Project 001</h5>
+                        <div class="d-flex">
+                            <span class="badge rounded-pill bg-green">Construction</span>
+                            <span class="badge rounded-pill bg-orange">Medical</span>
+                        </div>
+                        <div class="project-dates">
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 1, 2023</small>
+                            </div>
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content. This content is a little bit longer...
+                          </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm btn-black px-3"><i class="bx bx-show"></i> View</a>
+                        &ensp;
+                        <a href="#" class="btn btn-sm btn-orange px-3"><i class="bx bx-paper-plane"></i> Submit Proposal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 gy-3">
+                <div class="card h-100">
+                    <img src="{{ asset('images/banners/project-banner.jpg') }}" class="card-img-top" alt="Project Banner"/>
+                    <div class="card-header card-img-overlay">
+                        <h5 class="card-title text-black">Project 001</h5>
+                        <div class="d-flex">
+                            <span class="badge rounded-pill bg-green">Construction</span>
+                            <span class="badge rounded-pill bg-orange">Medical</span>
+                        </div>
+                        <div class="project-dates">
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 1, 2023</small>
+                            </div>
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content. This content is a little bit longer...
+                          </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm btn-black px-3"><i class="bx bx-show"></i> View</a>
+                        &ensp;
+                        <a href="#" class="btn btn-sm btn-orange px-3"><i class="bx bx-paper-plane"></i> Submit Proposal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 gy-3">
+                <div class="card h-100">
+                    <img src="{{ asset('images/banners/project-banner.jpg') }}" class="card-img-top" alt="Project Banner"/>
+                    <div class="card-header card-img-overlay">
+                        <h5 class="card-title text-black">Project 001</h5>
+                        <div class="d-flex">
+                            <span class="badge rounded-pill bg-green">Construction</span>
+                            <span class="badge rounded-pill bg-orange">Medical</span>
+                        </div>
+                        <div class="project-dates">
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 1, 2023</small>
+                            </div>
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content. This content is a little bit longer...
+                          </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm btn-black px-3"><i class="bx bx-show"></i> View</a>
+                        &ensp;
+                        <a href="#" class="btn btn-sm btn-orange px-3"><i class="bx bx-paper-plane"></i> Submit Proposal</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xs-12 col-md-4 gy-3">
+                <div class="card h-100">
+                    <img src="{{ asset('images/banners/project-banner.jpg') }}" class="card-img-top" alt="Project Banner"/>
+                    <div class="card-header card-img-overlay">
+                        <h5 class="card-title text-black">Project 001</h5>
+                        <div class="d-flex">
+                            <span class="badge rounded-pill bg-green">Construction</span>
+                            <span class="badge rounded-pill bg-orange">Medical</span>
+                        </div>
+                        <div class="project-dates">
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 1, 2023</small>
+                            </div>
+                            <div class="start-date">
+                                <small class="text-black">Start Date: March 15, 2023</small>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            This is a wider card with supporting text below as a natural lead-in to additional
+                            content. This content is a little bit longer...
+                          </p>
+                    </div>
+                    <div class="card-footer d-flex justify-content-center">
+                        <a href="#" class="btn btn-sm btn-black px-3"><i class="bx bx-show"></i> View</a>
+                        &ensp;
+                        <a href="#" class="btn btn-sm btn-orange px-3"><i class="bx bx-paper-plane"></i> Submit Proposal</a>
+                    </div>
+                </div>
+            </div>
+        </div>
 
         <div class="row">
             @foreach ($projects as $project)
@@ -67,28 +252,9 @@
                 </div>
             @endforeach
         </div>
-    </section>
-
-    <section class="mt-3 d-flex justify-content-center">
-        {{-- <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-              <li class="page-item disabled">
-                <a class="page-link">Previous</a>
-              </li>
-              <li class="page-item"><a class="page-link" href="#">1</a></li>
-              <li class="page-item"><a class="page-link" href="#">2</a></li>
-              <li class="page-item"><a class="page-link" href="#">3</a></li>
-              <li class="page-item">
-                <a class="page-link" href="#">Next</a>
-              </li>
-            </ul>
-        </nav> --}}
-         
-        {{ $projects->links() }}
-    </section>
+    </div>
 </div>
 
-<!-- Modal -->
 <div class="modal fade" id="advance-search-modal" tabindex="-1" aria-labelledby="advance-search-modal" aria-hidden="true">
     <div class="modal-dialog modal-lg">
         <div class="modal-content">
@@ -158,9 +324,4 @@
         </div>
     </div>
 </div>
-
-@endsection
-
-@section('script')
-
 @endsection
