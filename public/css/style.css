@@ -138,6 +138,16 @@ body {
   }
 }*/
 
+/* BUTTONS */
+.btn-dark-gray{
+    color: #E6E7E7 !important;
+    background-color: #6B6B6B !important;
+}
+.btn-light-gray{
+    color: #6B6B6B !important;
+    background-color: #E6E7E7 !important;
+}
+
 /* Auth */
 #auth-logo{
     width: 100px;
@@ -1367,3 +1377,7 @@ ul li {
 .page-breadcrumbs{display: flex;align-items: center;justify-content: space-between;}
 .page-title{font-size: 1.5rem;}
 /* End of Projects Available */
+
+/* Profile Page */
+.btn-blue{background-color: #00c0ef !important; color: #fff !important;}
+/* End of Profile Page */

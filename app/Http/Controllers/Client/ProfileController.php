@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Client\Profile\ChangePasswordRequest;
 use App\Http\Requests\Client\Profile\UpdateProfileRequest;
 use App\Models\Client;
+use App\Models\Company;
+use App\Models\Contact;
 use App\Traits\UploadFile;
 use App\Models\Payment;
 use Exception;
@@ -26,13 +28,16 @@ class ProfileController extends Controller
         $payments = Payment::with(['subscription', 'subscription.subscription_type'])
                     ->where('client_id', auth('client')->user()->id);
 
+        $company = Company::where('client_id', $client->id)->first();
+        $contacts = auth('client')->user()->contacts;
+
         $data = [
             'projects_count' => auth('client')->user()->projects()->count(),
             'projects' => auth('client')->user()->projects,
         ];
 
         $payments = $payments->paginate();
-        return view('client.profile.show')->with(compact('client', 'data', 'payments'));
+        return view('client.profile.show')->with(compact('client', 'data', 'payments', 'company', 'contacts'));
     }
 
     public function edit(Client $client)

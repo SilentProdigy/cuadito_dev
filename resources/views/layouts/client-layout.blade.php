@@ -19,11 +19,6 @@
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/dashboard-style.css') }}" rel="stylesheet" />
-
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.3/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.12.1/css/dataTables.bootstrap5.min.css">
 
@@ -34,6 +29,11 @@
     href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
     rel="stylesheet"
     />
+    <!-- Styles -->
+    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/style.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/dashboard-style.css') }}" rel="stylesheet" />
+    
     <!-- MDB -->
     <link
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/4.4.0/mdb.min.css"
@@ -52,6 +52,9 @@
 
     @yield('style')
     <style>
+        body{
+            background-color: #e6e7e7e7;
+        }
         .submenu li{
             margin-bottom: 1rem;
         }
@@ -70,30 +73,40 @@
             justify-content: center;
             align-items: center;
         }
+        #header{padding: 24px 60px;}
+        
+        form.nosubmit {
+            border: none;
+            padding: 0;
+        }
+
+        input.nosubmit {
+            outline-offset: 0;
+            border: 1px solid #555;
+            width: 100%;
+            padding-left: 20%;
+            border-radius: 50px;
+            background: transparent url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' class='bi bi-search' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'%3E%3C/path%3E%3C/svg%3E") no-repeat 13px center;
+        }
+        input.nosubmit:focus{
+            border-color: #ff5f00 !important;
+            box-shadow: inset 0 0 0 1px #ff5f00 !important;
+        }
+        
     </style>
 
 </head>
 
-<body data-subscription="{{ json_encode(auth('client')->user()->active_subscription) }}" id="body-pd" class="bg-light">
+<body data-subscription="{{ json_encode(auth('client')->user()->active_subscription) }}" id="body-pd">
     <header class="header shadow-sm" id="header">
         <div class="header_logo">
             <img src="{{asset('images/logo/logo.png')}}" height="70" alt="Cuadito Logo" loading="lazy" />
         </div>
         <div class="right-nav">
 
-            <div class="input-group main-search">
-                <input
-                    type="text"
-                    class="form-control"
-                    placeholder="Search..."
-                    aria-label="Search"
-                    aria-describedby="basic-addon2"
-                    style="border-radius: 25px 0px 0px 25px;"
-                />
-                <span class="input-group-text bg-orange text-white border-orange" id="basic-addon2" style="border-radius: 0px 25px 25px 0px;">
-                    <i class="bx bx-search"></i>
-                </span>
-            </div>
+            <form class="nosubmit">
+                <input class="nosubmit form-control" type="search" placeholder="Search...">
+            </form>
 
 
             <span class="nav-icons">
@@ -146,7 +159,7 @@
         </div>
     </header>
     <div class="l-navbar" id="nav-bar">
-        <nav class="nav">
+        <nav class="dashboard_nav">
             <div>
                 <div class="nav_list">
                     <a href="{{ route('client.dashboard') }}" class="nav_link active">
@@ -182,7 +195,7 @@
                 </div>
             </div>
             <div class="header_toggle text-white">
-                <i class='bx bx-menu' id="header-toggle"></i>
+                <i class='bx bx-menu nav_icon' id="header-toggle"></i>
             </div>
         </nav>
     </div>
@@ -218,28 +231,31 @@
     <script>
         document.addEventListener("DOMContentLoaded", function(event) {
         
-        const showNavbar = (toggleId, navId, bodyId, menuSub) =>{
-            const toggle = document.getElementById(toggleId),
+        const showNavbar = (toggleId, navId, bodyId, menuSub, headerTogg) =>{
+            const toggle = document.getElementsByClassName(toggleId),
             nav = document.getElementById(navId),
             bodypd = document.getElementById(bodyId),
-            submenu = document.getElementById(menuSub)
+            submenu = document.getElementById(menuSub),
+            headerToggle = document.getElementById(headerTogg)
             
             // Validate that all variables exist
             if(toggle && nav && bodypd && submenu){
-                toggle.addEventListener('click', ()=>{
-                    // show navbar
-                    nav.classList.toggle('show')
-                    // change icon
-                    toggle.classList.toggle('bx-x')
-                    // add padding to body
-                    bodypd.classList.toggle('body-pd')
+                for(var i = 0; i < toggle.length; i++){
+                    toggle[i].addEventListener('click', ()=>{
+                        // show navbar
+                        nav.classList.toggle('dashboard-show')
+                        // change icon
+                        headerToggle.classList.toggle('bx-x')
+                        // add padding to body
+                        bodypd.classList.toggle('body-pd')
 
-                    submenu.classList.remove('show')
-                })
+                        submenu.classList.remove('dashboard-show')
+                    }, false)
+                }
             }
         }
         
-        showNavbar('header-toggle','nav-bar','body-pd', 'submenu')
+        showNavbar('nav_icon','nav-bar','body-pd', 'submenu', 'header-toggle')
         
         /*===== LINK ACTIVE =====*/
         const linkColor = document.querySelectorAll('.nav_link')
@@ -257,7 +273,7 @@
     </script>
     <script>
         document.addEventListener("DOMContentLoaded", function(){
-        document.querySelectorAll('.nav .nav_collapse').forEach(function(element){
+        document.querySelectorAll('.dashboard_nav .nav_collapse').forEach(function(element){
             
             
             element.addEventListener('click', function (e) {
@@ -285,5 +301,7 @@
         }) // forEach
         }); 
     </script>
+    
+    <script src="{{ asset('js/card-pagination.js') }}"></script>
 </body>
 </html>

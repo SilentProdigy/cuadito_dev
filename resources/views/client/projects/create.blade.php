@@ -1,4 +1,26 @@
-@extends('layouts.client-main-layout')
+@extends('layouts.client-layout')
+
+@section('style')
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+<style>
+    .bootstrap-tagsinput{
+        width: 100% !important;
+        margin-top: 1%;
+        padding-top: 4px;
+        padding-bottom: 4px;
+        min-height: auto;
+    }
+    .bootstrap-tagsinput input:focus{
+        border-color: #ff5f00 !important;
+        box-shadow: inset 0 0 0 1px #ff5f00 !important;
+    }
+    .bootstrap-tagsinput .tag{
+        color: #757575 !important;
+    }
+    .bootstrap-tagsinput .label-info{display: inline-block;}
+</style>
+
+@endsection
 
 @section('content')    
 
@@ -110,12 +132,16 @@
 
                 <div class="col-md-4 mt-3">
                     <label>Requirements</label>
-                    
-                    <select name="requirement_ids[]" id="" class="mt-1 form-control @error('requirement_ids') is-invalid @enderror">
-                        @foreach ($requirements as $item)
-                            <option value="{{ $item->id }}">{{ $item->name }}</option>
-                        @endforeach
-                    </select>
+                    <input
+                        type="text"
+                        class="form-control p-4 @error('requirements_ids') is-invalid @enderror"
+                        data-role="tagsinput"
+                        name="requirement_ids[]"
+                        value=""
+                        placeholder="* Enter Requirements"
+                        required
+                        autofocus
+                    />
                 </div>
 
                 <div class="col-md-12 mt-3">
@@ -175,6 +201,10 @@
 @endsection
 
 @section('script')
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.min.js"></script>
+
+
 <script>
 (() => {
   'use strict';
