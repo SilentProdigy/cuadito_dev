@@ -16,15 +16,15 @@
     .project-cards{padding: 20px;}
     .card-text{font-size: 12px;}
     .card .rounded-pill{padding: 3px 20px;}
+    .card-footer{padding-top: 5%; padding-bottom: 5%}
 </style>
 @endsection
 
 @section('content')
-<div class="container-fluid">
+<div class="container">
     <div class="page-breadcrumbs">
         <div class="page-title">Projects Available</div>
         <div class="right-elements">
-            <div><a href="#" class="text-black">Projects</a> / Projects Available</div>
             &ensp;
             <div>
                 <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal"><i class="bx bx-slider-alt fs-5 text-black"></i></a>
@@ -55,7 +55,7 @@
         </div>
     </div>
 
-    <div class="container-fluid" id="project-grid">
+    <div class="container" id="project-grid">
         
         <div class="row">
 

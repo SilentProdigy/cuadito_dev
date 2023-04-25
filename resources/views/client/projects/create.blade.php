@@ -1,4 +1,5 @@
 @extends('layouts.client-layout')
+@section('page_title', 'Post New Project')
 
 @section('style')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-tagsinput/0.8.0/bootstrap-tagsinput.css" integrity="sha512-xmGTNt20S0t62wHLmQec2DauG9T+owP9e6VU8GigI0anN7OXLip9i7IwEhelasml2osdxX71XcYm6BQunTQeQg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -24,14 +25,14 @@
 
 @section('content')    
 
-<div class="container-fluid mb-3">
+<div class="container mb-3">
     <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles"><a href="{{ url()->previous() }}"><i class="fa fa-arrow-left text-muted"></i></a>&nbsp;Post A New Project Form</div>
+        <div class="table-titles"><a href="{{ url()->previous() }}"><i class="fa fa-arrow-left text-muted"></i></a>&ensp;Post A New Project Form</div>
         <div class="col d-flex justify-content-end">
         </div>
     </div>
 </div>
-<div class="card">
+<div class="card container">
     <div class="card-body">
         <form action="{{ route('client.projects.store') }}" class="needs-validation" novalidate method="POST">
             @csrf

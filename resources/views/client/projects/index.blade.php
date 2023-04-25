@@ -8,6 +8,14 @@
         justify-content: space-between;
         align-items: center;
     }
+    .bg-image{
+        background-image: url("{{ asset('images/banners/project-banner.jpg') }}");
+        background-position: 10% 65%;
+        height: 6rem;
+    }
+    .mask{
+        background-color: rgba(255, 255, 255, 0.8);
+    }
     .page-item.active .page-link{background-color: #F96B23;}
     .with-action{margin-right: 24px;}
     .small-counters{background-color: #00C0EF; border-radius: 100px; padding: 5px 6px; color: #fff; font-size: 10px;}
@@ -18,12 +26,10 @@
 
 @section('content')    
 
-<div class="container-fluid">
+<div class="container">
     <div class="page-breadcrumbs">
         <div class="page-title">Projects List</div>
         <div class="right-elements">
-            <div><a href="#" class="text-black">Projects</a> / Projects List</div>
-            &ensp;
             <div>
                 <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal"><i class="bx bx-slider-alt fs-5 text-black"></i></a>
                 @if(request()->has('search') || request()->has('adv_search'))
@@ -70,42 +76,43 @@
             @foreach($projects as $project)
             <div class="my-4 project-cards">
                 <div class="card p-0">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between">
-                            <div>
-                                <h4 class="card-title text-black">{{ $project->title }}</h4>
-                            </div>
-                            <div class="flex">
-                                <div class="estimated-cost">
-                                    <small class="text-black">Estimated Cost: &#8369;{{ number_format($project->cost, 2) }}</small>
-                                </div>
-                                <div class="start-date">
-                                    <small class="text-black">Due Date: {{ \Carbon\Carbon::parse($project->due_date)->format('M d,Y') }}</small>
-                                </div>
-                            </div>
-                            <div class="d-flex text-center with-action">
+                    <div class="bg-image">
+                        <div class="mask card-body">
+                            <div class="d-flex justify-content-between">
                                 <div>
-                                    <div>
-                                        <small class="text-black">Status</small>
+                                    <h4 class="card-title text-black">{{ $project->title }}</h4>
+                                </div>
+                                <div class="flex">
+                                    <div class="estimated-cost">
+                                        <small class="text-black">Estimated Cost: &#8369;{{ number_format($project->cost, 2) }}</small>
                                     </div>
+                                    <div class="start-date">
+                                        <small class="text-black">Due Date: {{ \Carbon\Carbon::parse($project->due_date)->format('M d,Y') }}</small>
+                                    </div>
+                                </div>
+                                <div class="d-flex text-center with-action">
                                     <div>
-                                        {!! $project->status_badge !!}
-                                        <!-- <span class="status-badge">Active</span> -->
-                                        <!-- <a href="#" class="btn btn-sm btn-success status-badge"> Active</a> -->
+                                        <div>
+                                            <small class="text-black">Status</small>
+                                        </div>
+                                        <div>
+                                            {!! $project->status_badge !!}
+                                            <!-- <span class="status-badge">Active</span> -->
+                                            <!-- <a href="#" class="btn btn-sm btn-success status-badge"> Active</a> -->
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
-        
-                        <hr>
-        
+                    </div>
+                    <div class="card-footer">
                         <div class="d-flex justify-content-between">
                             <div class="list-proposal-count">
                                 <small class="text-muted">Proposals: </small>
                                 <span class="small-counters"> +4 </span>
                             </div>
                             <div class="right-items d-flex">
-                                <a href="{{ route('client.projects.show', $project  ) }}" class="btn btn-sm btn-orange">
+                                <a href="{{ route('client.projects.show', $project) }}" class="btn btn-sm btn-orange">
                                     <i class="fa fa-eye"></i>
                                 </a>
                                 &ensp;
