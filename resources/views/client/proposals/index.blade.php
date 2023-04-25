@@ -1,20 +1,35 @@
-@extends('layouts.client-main-layout')
+@extends('layouts.client-layout')
+@section('page_title', 'Proposals')
 
-@section('content')    
-<div class="container-fluid mb-3">
-    <div class="d-flex flex-row d-align-items-center justify-content-center">
-        <div class="table-titles">Your Proposals</div>
-        <div class="col d-flex justify-content-end">
-            {{-- @if(auth('client')->user()->have_valid_companies)
-                <a href="{{ route('client.projects.create') }}" class="btn btn-primary header-btn">
-                    <i class="fa fa-plus"></i>&ensp;Add Project
-                </a>
-            @else
-                <button type="button" class="btn btn-primary header-btn" data-bs-toggle="modal" data-bs-target="#no-valid-company-modal">
-                    <i class="fa fa-plus"></i>&ensp;Add Project
-                </button>
-            @endif --}}
+@section('style')
+<style>
+    .right-elements{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    #proposals-table_previous{display: none;}
+    #proposals-table_next{display: none;}
+</style>
+@endsection
+
+@section('content')
+<div class="container">
+    <div class="page-breadcrumbs">
+        <div class="page-title">Your Proposals</div>
+        <div class="right-elements">
+            <div>
+                <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal"><i class="bx bx-slider-alt fs-5 text-black"></i></a>
+                @if(request()->has('search') || request()->has('adv_search'))
+                    <a href="{{ route('client.listing.index') }}"><i class="bx bx-x"></i></a>
+                @endif
+            </div>
         </div>
+    </div>
+    <hr>
+    <div class="d-flex justify-content-between">
+        <div class="custom-pagination-info"></div>
+        <div class="custom-pagination-paginate"></div>
     </div>
 </div>
 
@@ -39,38 +54,23 @@
     @endif
 </div>
 
-<div class="card">
+<div class="card container">
     <div class="card-body">
-        <table class="table table-borderless table-md user-listing-table" id="proposals-table">
-            <thead>
-                <th>SEQ</th>
-                <th>PROJECT</th>
-                {{-- <th>COMPANY</th> --}}
-                <th class="col-span-2">PROJECT STATUS</th>
-                <th>SUBMITTED RATE</th>
-                <th>DATE OF PROPOSAL</th>
-                <th>PROPOSAL STATUS</th>
-                <th>PAYMENT STATUS</th>
-                <th>ACTIONS</th>
+        <table class="table table-hover table-md user-listing-table" id="proposals-table">
+            <thead class="bg-light">
+                <th>Project Name</th>
+                <th>Project Cost</th>
+                <th>Submission Date</th>
+                <th>Status</th>
+                <th>Actions</th>
             </thead>
             <tbody>
                 @foreach ($proposals as $proposal)
                     <tr>
-                        <td class="d-flex flex-row">
-                            <div class="d-flex flex-column user-listing-details px-3">
-                                <span>{{ $loop->iteration }}</span>
-                            </div>
-                        </td>
                         <td>
                             <a href="{{ route('client.projects.show', $proposal->project) }}" target="_blank">
                                 {{ $proposal->project->title }}
                             </a>
-                        </td>
-                        {{-- <td>
-                            <span>{{ $proposal->project->company->name }}</span>
-                        </td> --}}
-                        <td class="">
-                            <span>{!! $proposal->project->status_badge !!}</span>
                         </td>
                         <td>
                             <span>@money($proposal->rate)</span>
@@ -89,9 +89,9 @@
                                 @endif
                             </span>
                         </td>
-                        <td>
+                        <!-- <td>
                             <span class="{{ $proposal->is_paid ?  "text-success" : 'text-danger'}} fw-bold">{{ $proposal->is_paid ? "PAID" : "NOT PAID" }}</span>
-                        </td>
+                        </td> -->
                         <td class="user-actions">
                             <a href="{{ route('client.proposals.show', $proposal) }}" class="btn btn-sm btn-outline-info">
                                 <i class="fa fa-eye"></i>         
@@ -125,7 +125,15 @@
 @section('script')
     <script>
         $(document).ready(function () {
-            $('#proposals-table').DataTable();
+            // $('#proposals-table').DataTable();
+            $('#proposals-table').DataTable({
+                initComplete: (settings, json)=>{
+                    $('#proposals-table_paginate').appendTo('.custom-pagination-paginate');
+                    $('#proposals-table_info').appendTo('.custom-pagination-info');
+                },
+                "bLengthChange" : false,
+                "bFilter": false
+            });
         });
     </script>
 

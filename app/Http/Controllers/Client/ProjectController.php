@@ -15,6 +15,8 @@ use App\Models\Bidding;
 use App\Models\Company;
 use App\Models\Contact;
 use App\Models\Project;
+use App\Models\Requirement;
+use App\Models\ProjectRequirement;
 use App\Services\CompanyService;
 use App\Services\ProjectService;
 use App\Traits\CheckIfClientOwnedAProject;
@@ -127,11 +129,58 @@ class ProjectController extends Controller
             $company = Company::find($request->input('company_id'));
             $project = $this->companyService->createProject($company, $project_details, $category_ids);
 
-            collect($request->input('requirement_ids'))->each(function($item) use($project){
-                $project->requirements()->create([
-                    'requirement_id' => $item
-                ]);
-            });
+            $requirements = $request->input('requirement_ids');
+
+            // $new_requirements = array_chunk($requirements,2,true);
+
+            $new_requirements = [];
+            $requirementIds = [];
+            foreach(explode(',', $requirements[0]) as $item){
+                $new_requirements[] = $item;
+                $requirement = Requirement::firstOrCreate(
+                    ['name' =>  $item],
+                    ['required' => true]
+                );
+                
+                $requirementIds[] = $requirement->id;
+            }
+
+            $curr_requirement = ProjectRequirement::where('project_id', $project->id)->first();
+
+            // dd($curr_requirement);
+            // HERE'S THE CODE THAT PUSHES TO STORE MULTIPLE IDS ON PROJECT REQUIREMENT TABLE
+            $project_requirements = ProjectRequirement::updateOrCreate(
+                ['project_id' => $project->id],
+                ['requirement_id' => $requirementIds]
+            );
+
+            // dd($requirementIds);
+            // foreach ($new_requirements as $new_requirement) {
+            //     // $curr_requirement = Requirement::where('name', $requirement)->first();
+ 
+            //     // if ($curr_requirement === null) {
+            //     //     $curr_requirement = new Requirement(['name' => $requirement], ['required' => true]);
+            //     // }
+                
+            //     // $curr_requirement->name = $requirement;
+                
+            //     // $curr_requirement->save();
+            //     $requirement = Requirement::firstOrCreate(
+            //         ['name' =>  $new_requirement],
+            //         ['required' => true]
+            //     );
+
+            //     $requirementIds = $requirement->id;
+            //     // $requirementIds[] = ['name' => $requirement, 'value' => $requirement];
+            // }
+
+            // dd($requirementIds);
+
+            // collect($requirementIds)->each(function($item) use($project){
+            //     $project->requirements()->create([
+            //         'requirement_id' => $item
+            //     ]);
+            // });
 
             DB::commit();
             return redirect(route('client.projects.index'))->with('success', 'Project was successfully created & posted.');
@@ -140,6 +189,8 @@ class ProjectController extends Controller
         {
             DB::rollBack();
             Log::error("ACTION: PROJECT_CREATE, ERROR:" . $e->getMessage());
+
+            return $e->getMessage();
             return redirect()->back()->withErrors(['message' => "Something went wrong; We are working on it."]);
         }
     }
