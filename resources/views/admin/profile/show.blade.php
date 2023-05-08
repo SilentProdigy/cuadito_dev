@@ -1,7 +1,19 @@
-@extends('layouts.dashboard-layout')
+@extends('layouts.admin-layout')
+@section('page_title', $user->name)
 
 @section('content')
-<div class="container-fluid user-profile">
+<div class="container">
+    <div class="row">
+        <div class="col-md-8">
+            <div class="card">
+                
+            </div>
+        </div>
+        <div class="col-md-4"></div>
+    </div>
+</div>
+
+<!-- <div class="container-fluid user-profile">
     <div class="card profile-header">
         <div class="card-header image d-flex flex-column px-5">
             <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
@@ -44,5 +56,5 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->
 @endsection

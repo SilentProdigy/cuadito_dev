@@ -1,109 +1,84 @@
-@extends('layouts.dashboard-layout')
+@extends('layouts.admin-layout')
+@section('page_title', 'Users')
+
+@section('style')
+<style>
+    .right-elements{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card img{
+        border-radius: 100%;
+        width: 100px;
+    }
+    .page-item.active .page-link{background-color: #F96B23;}
+    .clients-cards{padding: 20px;}
+    .card-text{font-size: 12px;}
+    .card .rounded-pill{padding: 3px 20px;}
+    .card-footer{padding-top: 5%; padding-bottom: 5%}
+    .client-info{display: flex; align-items: center;}
+</style>
+@endsection
 
 @section('content')
-    <div class="container-fluid mb-3">
-        <div class="my-3">
-            <div class="d-flex flex-row d-align-items-center justify-content-center">
-                <div class="table-titles">Registered Clients</div>
+<div class="container">
+    <div class="page-breadcrumbs">
+        <div class="page-title">Users</div>
+        <div class="right-elements">
+            &ensp;
+            <div>
+                <a href="javascript::void(0)" data-bs-toggle="modal" data-bs-target="#advance-search-modal"><i class="bx bx-slider-alt fs-5 text-black"></i></a>
+                @if(request()->has('search') || request()->has('adv_search'))
+                    <a href="{{ route('admin.clients.index') }}"><i class="bx bx-x"></i></a>
+                @endif
             </div>
         </div>
     </div>
 
-    <div class="card">
-        <div class="card-body">
-            <table class="table table-borderless table-md clients-listing-table" id="clients-table">
-                <thead>
-                    <th>SEQ</th>
-                    <th>NAME</th>
-                    <th>EMAIL</th>
-                    {{-- <th>CONTACT NO.</th> --}}
-                    <th>COMPANIES</th>
-                    <th>PROJECTS</th>
-                    <th>BIDDINGS</th>
-                    {{-- <th>PLAN</th>
-                    <th>PROMO</th> --}}
-                    <th>Actions</th>
-                </thead>
-                <tbody>
-                    @foreach($clients as $client)
-                        <tr>
-                            <td>
-                                <span>{{ $loop->iteration }}</span>
-                            </td>
-                            <td class="">
-                                <span>{{ ucfirst($client->name) }}</span>
-                            </td>
-                            <td>
-                                <span>{{ $client->email }}</span>
-                            </td>
-                            <td>
-                                <span>{{ $client->companies_count }}</span>
-                            </td>
-                            <td>
-                                <span>{{ $client->projects_count }}</span>
-                            </td>
-                            <td>
-                                <span>{{ $client->biddings_count }}</span>
-                            </td>
-                            {{-- <td>
-                                <span>{{ $client->active_subscription?->subscription_type->name }}</span>
-                            </td>
-                            <td>
-                                <span>{{ $client->active_subscription?->is_life_time_subscription ? "LIFETIME PROMO" : "-" }}</span>
-                            </td> --}}
-                            <td class="user-actions">
-                                <a href="{{ route('admin.clients.show', $client) }}" class="btn btn-sm btn-outline-info">
-                                    <i class="fa fa-eye"></i>         
-                                </a>
+    <hr>
 
-                                {{-- 
-                                    @if(!$client->active_subscription?->is_life_time_subscription)
-                                        <button class="btn btn-sm btn-outline-success btn-sub-lifetime" title="Subscribe to Lifetime Plan" data-client='@json($client)'>
-                                            <i class="fa-solid fa-seedling"></i>
-                                        </button>
-                                    @endif
-                                    <a href="#" class="btn btn-sm btn-warning btn-set-approval-status" data-company="{{ json_encode($company) }}">
-                                        Set Approval Status
-                                    </a> 
-                                --}}
-                            </td>
-                        </tr>
-                    @endforeach
-                </tbody>
-            </table>
+    <div class="d-flex justify-content-between">
+        <div>
+            
+        </div>
+        <div>
+            <div class="pagination">
+                <!--<li class="page-item previous-page disable"><a class="page-link" href="#">Prev</a></li>
+                <li class="page-item current-page active"><a class="page-link" href="#">1</a></li>
+                <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+                <li class="page-item current-page"><a class="page-link" href="#">5</a></li>
+                <li class="page-item current-page"><a class="page-link" href="#">6</a></li>
+                <li class="page-item dots"><a class="page-link" href="#">...</a></li>
+                <li class="page-item current-page"><a class="page-link" href="#">10</a></li>
+                <li class="page-item next-page"><a class="page-link" href="#">Next</a></li>-->
+            </div>
+        </div>
+    </div>
+    
+    <div class="container" id="clients-grid">
+        <div class="row">
+            @foreach($clients as $client)
+            <div class="col-xs-12 col-md-4 clients-cards">
+                <div class="card h-100">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="client-img cold-xs-6 col-md-6">
+                            <img src="{{ asset('images/avatar/12.png') }}" alt="Client Image"/>
+                        </div>
+                        <div class="client-info cold-xs-6 col-md-6">
+                            <div class="client-info-container">
+                                <h5 class="client-name text-black">{{ $client->name }}</h5>
+                                <p class="client-company">{{ $client->company->name }}</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
         </div>
     </div>
 
-
-    {{-- <section class="mt-3 d-flex justify-content-center">        
-        {{ $clients->links() }}
-    </section> --}}
-
-    <div class="modal" tabindex="-1" id="confirm-lifetime-subscription-modal">
-        <div class="modal-dialog">
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title">Cofirm Action</h5>
-              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <p class="mb-0 ml-1">
-                    Are you sure you want to <span class="text-warning text-bold">give lifetime promo</span> <strong id="category-name"></strong> to this Client?
-                </p>
-                
-                <form action="{{ route('admin.subscribe.life-time-plan') }}" method="post" id="submit-lifetime-plan-form">
-                    @csrf
-                    <input type="hidden" name="client_id" id="client-id">
-                </form>
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
-              <button type="button" class="btn btn-danger" onclick="document.getElementById('submit-lifetime-plan-form').submit()">Give Lifetime Promo</button>
-            </div>
-          </div>
-        </div>
-    </div>
-
+</div>
 @endsection
 
 @section('script')

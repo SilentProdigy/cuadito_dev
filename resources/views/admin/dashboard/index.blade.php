@@ -1,7 +1,8 @@
-@extends('layouts.dashboard-layout')
+@extends('layouts.admin-layout')
+@section('page_title', 'Dashboard')
 
 @section('content')
-<div class="container px-5" id="data-container" data-chart-info='@json($chart_data)'>
+<div class="container px-5">
   <div class="row">
     <nav aria-label="breadcrumb">
       <ol class="breadcrumb">
@@ -90,12 +91,6 @@
         </ul>
       </div>
     </div>
-    <div class="col-md-8">
-      <div class="rounded-lg overflow-hidden">
-        <div class="py-3 px-5 bg-gray-50 table-titles">Projects Analytics</div>
-        <canvas class="p-10" id="chartBar"></canvas>
-      </div>
-    </div>
   </div>
 </div>
     {{-- <div class="row m-5">
@@ -120,101 +115,4 @@
                     </div>
                 </div>
             </div> --}}
-@endsection
-
-@section('script')
-<!-- Required chart.js -->
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<!-- Chart doughnut -->
-<script>
-  const dataDoughnut = {
-    labels: ["JavaScript", "Python", "Ruby"],
-    datasets: [
-      {
-        label: "My First Dataset",
-        data: [300, 50, 100],
-        backgroundColor: [
-          "#d34807",
-          "#ffdc2c",
-          "#f96b23",
-        ],
-        hoverOffset: 4,
-      },
-    ],
-  };
-
-  const configDoughnut = {
-    type: "doughnut",
-    data: dataDoughnut,
-    options: {},
-  };
-
-  var chartBar = new Chart(
-    document.getElementById("chartDoughnut"),
-    configDoughnut
-  );
-</script>
-<!-- Label bar -->
-<script>
-
-  let chart_data = document.getElementById('data-container');
-  chart_data = chart_data.getAttribute('data-chart-info');   
-  chart_data = JSON.parse(chart_data);
-
-
-  const labelsBarChart = chart_data.map(item => item.month_str);
-
-  const data = chart_data.map(item => item.data);
-
-  const dataBarChart = {
-    labels: labelsBarChart,
-    datasets: [
-      {
-        label: "Projects",
-        backgroundColor: "#f96b23",
-        borderColor: "hsl(252, 82.9%, 67.8%)",
-        data,
-      },
-    ],
-  };
-
-  const configBarChart = {
-    type: "bar",
-    data: dataBarChart,
-    options: {},
-  };
-
-  var chartBar = new Chart(
-    document.getElementById("chartBar"),
-    configBarChart
-  );
-</script>
-
-<!--Line Chart-->
-<script>
-  const labels = ["January", "February", "March", "April", "May", "June"];
-  const data = {
-    labels: labels,
-    datasets: [
-      {
-        label: "My First dataset",
-        backgroundColor: "#f96b23",
-        borderColor: "#f96b23",
-        data: [0, 10, 5, 2, 20, 30, 45],
-      },
-    ],
-  };
-
-  const configLineChart = {
-    type: "line",
-    data,
-    options: {},
-  };
-
-  var chartLine = new Chart(
-    document.getElementById("chartLine"),
-    configLineChart
-  );
-</script>
 @endsection

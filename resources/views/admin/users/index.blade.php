@@ -1,9 +1,69 @@
-@extends('layouts.dashboard-layout')
+@extends('layouts.admin-layout')
+@section('page_title', 'Administrators')
+
+@section('style')
+<style>
+    .right-elements{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+    .card img{
+        border-radius: 100%;
+        width: 130px;
+    }
+    .page-item.active .page-link{background-color: #F96B23;}
+    .clients-cards{padding: 20px;}
+    .card-text{font-size: 12px;}
+    .card .rounded-pill{padding: 3px 20px;}
+    .card-footer{padding-top: 5%; padding-bottom: 5%}
+    .client-info{display: flex; align-items: center;}
+</style>
+@endsection
 
 @section('content')
+<div class="container">
+    <div class="page-breadcrumbs">
+        <div class="page-title">Administrators</div>
+    </div>
+    
+    <div class="container mt-5" id="clients-grid">
+        <div class="row">
+            @foreach($users as $user)
+            <div class="col-xs-12 col-md-6 clients-cards">
+                <div class="card h-100 p-3">
+                    <div class="card-body d-flex justify-content-between">
+                        <div class="client-img cold-xs-6 col-md-6">
+                            <img src="{{ asset('images/avatar/12.png') }}" alt="Client Image"/>
+                        </div>
+                        <div class="client-info cold-xs-6 col-md-6">
+                            <div class="client-info-container">
+                                <h5 class="client-name text-black">{{ $user->name }}</h5>
+                                <p class="client-company">{{ ucfirst(trans($user->role)) }}</p>
+                                <!-- Facebook -->
+                                <a class="btn btn-orange btn-sm" href="#!" role="button"><i class="fa fa-phone-alt"></i></a>
+
+                                <!-- Twitter -->
+                                <a class="btn btn-orange btn-sm" href="#!" role="button"><i class="fa fa-envelope"></i></a>
+
+                                <!-- Google -->
+                                <a class="btn btn-orange btn-sm" href="#!" role="button"><i class="fab fa-facebook-f"></i></a>
+
+                                <!-- Instagram -->
+                                <a class="btn btn-orange btn-sm" href="#!" role="button"><i class="fab fa-linkedin-in"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            @endforeach
+        </div>
+    </div>
+
+</div>
     
 
-    <div class="card mb-3 p-3 container-fluid">
+    <!-- <div class="card mb-3 p-3 container-fluid">
         <div class="d-flex flex-row">
             <div class="image">
                 <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="150" width="150" alt="Avatar" />
@@ -100,7 +160,7 @@
                 </tbody>
             </table>
         </div>
-    </div>
+    </div> -->
 
     <section class="mt-3 d-flex justify-content-center">
         {{ $users->links() }}
