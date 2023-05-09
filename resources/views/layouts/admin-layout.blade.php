@@ -8,7 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<<<<<<< HEAD
+    <title>{{ config('app.name', 'Cuadito') }} | @yield('page_title') </title>
+=======
     <title>{{ config('app.name', 'Cuadito Admin') }} | @yield('page_title') </title>
+>>>>>>> 3845303019ba5205f0afcb997e0b0df5c15e9d0d
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ App::environment('local') ? asset('images/logo/logo.png') : secure_asset('images/logo/favicon.ico') }}">
 
@@ -97,7 +101,7 @@
 
 </head>
 
-<body data-subscription="{{ json_encode(auth('client')->user()->active_subscription) }}" id="body-pd">
+<body id="body-pd">
     <header class="header shadow-sm" id="header">
         <div class="header_logo">
             <img src="{{asset('images/logo/logo.png')}}" height="70" alt="Cuadito Logo" loading="lazy" />
@@ -107,37 +111,14 @@
             <form class="nosubmit">
                 <input class="nosubmit form-control" type="search" placeholder="Search...">
             </form>
-
-
-            <span class="nav-icons">
-                <a href="{{ route('client.inbox.index') }}" class="nav-link">
-                    <i class="fa-solid fa-comment nav_icon text-black"></i>
-                    @if(auth('client')->user()->have_unopened_messages)
-                        <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger">
-                            {{ auth('client')->user()->have_unopened_messages_count }}
-                        </span>
-                    @endif
-                </a>
-            </span>
-            
-            <span class="nav-icons" style="margin-right: 1rem;">
-                <a href="{{ route('client.notifications.index') }}" class="nav-link">
-                    <i class="fa-sharp fa-solid fa-bell nav_icon text-black"></i>
-                    @if(auth('client')->user()->have_unread_notifications)
-                        <span class="position-absolute top-20 start-80 translate-middle badge rounded-pill bg-danger">
-                            {{ auth('client')->user()->unread_notifications_count }}
-                        </span>
-                    @endif
-                </a>
-            </span>
             <span class="dropdown">
                 <a class="nav-link text-muted dropdown-toggle hidden-arrow d-flex align-items-center header_img" href="#" id="accountDropdown" role="button" data-mdb-toggle="dropdown" aria-expanded="false">
-                    <img src="{{ auth('client')->user()->profile_picture_url }}" class="rounded-circle" height="40" alt="Avatar" loading="lazy" />
-                    <!-- &ensp;<span style="font-weight: normal">{{ auth('client')->user()->name }}</span> -->
+                    <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="40" alt="Avatar" loading="lazy" />
+                    
                 </a>
                 <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="accountDropdown">
                     <li>
-                        <a class="dropdown-item nav-link" href="{{ route('client.profile.show', auth('client')->user()->id) }}">My Profile</a>
+                        <a class="dropdown-item nav-link" href="{{ route('admin.profile.show', auth()->user()) }}">My Profile</a>
                     </li>
                     <li>
                         <a class="dropdown-item nav-link disabled" href="#">Terms & Privacy</a>
@@ -146,11 +127,11 @@
                         <a class="dropdown-item nav-link disabled" href="#">Help & Support</a>
                     </li>
                     <li>
-                        <a class="dropdown-item nav-link" href="{{ route('client.auth.logout') }}" onclick="event.preventDefault();
+                        <a class="dropdown-item nav-link" href="{{ route('admin.logout') }}" onclick="event.preventDefault();
                                     document.getElementById('logout-form').submit();">
                             {{ __('Logout') }}
                         </a>
-                        <form id="logout-form" action="{{ route('client.auth.logout') }}" method="POST" class="d-none">
+                        <form id="logout-form" action="{{ route('admin.logout') }}" method="POST" class="d-none">
                             @csrf
                         </form>
                     </li>
@@ -162,36 +143,7 @@
         <nav class="dashboard_nav">
             <div>
                 <div class="nav_list">
-                    <a href="{{ route('client.dashboard') }}" class="nav_link active">
-                        <i class='bx bx-grid-alt nav_icon'></i>
-                        <span class="nav_name">Dashboard</span>
-                        <i class="bx bx-angle-down text-white"></i>
-                    </a>
-                    <!-- <a href="#" class="nav_link">
-                        <i class='bx bx-folder nav_icon'></i>
-                        <span class="nav_name">Projects</span>
-                    </a> -->
-                    <a href="javascript:void(0);" class="nav_collapse nav_link has-submenu" id="has-submenu">
-                        <i class='bx bx-folder nav_icon'></i>
-                        <span class="nav_name">Projects</span>
-                    </a>
-                    <ul class="submenu collapse ml-3" id="submenu">
-                        <li><a href="{{ route('client.listing.index') }}" class="fw-normal">Projects Available</a></li>
-                        <li class="divider"></li>
-                        <li><a href="{{ route('client.projects.index') }}" class="fw-normal">Your Projects </a></li>
-                    </ul>
-                    <a href="{{ route('client.proposals.index') }}" class="nav_link">
-                        <i class='bx bx-file nav_icon'></i>
-                        <span class="nav_name">Proposals</span>
-                    </a>
-                    <a href="#" class="nav_link">
-                        <i class='bx bx-bar-chart-alt-2 nav_icon'></i>
-                        <span class="nav_name">Reports</span>
-                    </a>
-                    <a href="#" class="nav_link">
-                        <i class='bx bx-cog nav_icon'></i>
-                        <span class="nav_name">Settings</span>
-                    </a>
+                    @includeIf('panels.admin_sidebar', [auth()->user()->role => 'admin'])
                 </div>
             </div>
             <div class="header_toggle text-white">
@@ -209,19 +161,6 @@
     <script type="text/javascript" src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
     @yield('script')
-
-    {{-- @if(!request()->routeIs('client.payments.result'))
-        <script>
-            $(document).ready(function(){
-                
-                let subscription = $('body').data('subscription');
-        
-                if(!subscription) {
-                    $("#subscriptionModal").modal('show');
-                }
-            });
-      </script>
-    @endif --}}
     <!-- MDB -->
     <script
     type="text/javascript"
