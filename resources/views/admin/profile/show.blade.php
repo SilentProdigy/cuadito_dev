@@ -12,6 +12,13 @@
     .nav-item .nav-link {
         text-transform: none;
         font-size: 16px;
+        padding: 1em 4em;
+    }
+
+    .nav-tabs .nav-link.active {
+        background-color: white;
+        color: #0B0B0D;
+        border-bottom: 3px solid #0B0B0D;
     }
 
     .--text-secondary {
@@ -81,7 +88,7 @@
             <div class="float-end d-flex gap-4">
                 <div>
                     @foreach([1,2,3] as $key)
-                    <img src="{{ asset('images/avatar/12.png') }}" class="rounded-full" style="margin-left: -10px;" height="30" width="30" alt="Avatar" />
+                    <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" style="margin-left: -12px;" height="30" width="30" alt="Avatar" />
                     @endforeach
                 </div>
                 <span>20 Connections</span>
@@ -163,7 +170,7 @@
                                 <h3 class="text-base">Date: March 25, 2023</h3>
                             </td>
                             <td>
-                                <button class="btn btn-primary">
+                                <button class="btn text-white" style="background-color: #F96B24;">
                                     <i class="fa-solid fa-eye"></i>
                                 </button>
                             </td>
@@ -202,7 +209,7 @@
                     <div class="row">
                         @foreach([1, 2, 3, 4, 5, 6] as $key)
                         <div class="p-4 col-6 d-flex gap-4 justify-content-between">
-                            <div class="d-flex gap-4">
+                            <div class="d-flex gap-4 align-items-start">
                                 <img src="{{ asset('images/avatar/12.png') }}" style="height: 60px; width: 60px;" />
 
                                 <div class="d-flex flex-column">
@@ -211,7 +218,7 @@
                                 </div>
                             </div>
 
-                            <button class="btn btn-primary px-4 py-1" style="padding: 10 0;">Message</button>
+                            <button class="btn btn-primary px-4 py-2 align-self-center" style="padding: 10 0; background-color: #00C0EF;">Message</button>
                         </div>
                         @endforeach
                     </div>
