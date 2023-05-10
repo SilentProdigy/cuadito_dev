@@ -37,7 +37,7 @@
 </ul>
 @endif
 
-<a href="#" class="nav_link">
+<a href="{{ route('admin.analytics.index')}}" class="nav_link">
     <i class='bx bx-file nav_icon'></i>
     <span class="nav_name">Analytics</span>
 </a>
