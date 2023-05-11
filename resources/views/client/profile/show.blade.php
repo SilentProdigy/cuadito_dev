@@ -5,26 +5,6 @@
 @section('style')
 <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
 <style>
-    /* .profile_info .btn{
-        background-color: rgba(211, 211, 211, 0.5);
-        box-shadow: none;
-    }
-    .profile_info .btn:hover{
-        background-color: gray;
-        color: #fff;
-    }
-    .profile_details i{
-        margin-right: 10px;
-    }
-    .add-project-card{
-        border: dashed #dfdfdf 2px;
-        box-shadow: none;
-        color: #dfdfdf;
-    }
-    .add-project-card:hover{
-        border: dashed #bababa 2px;
-        color: #bababa;
-    } */
     .profile-header{width: 80%;}
     .profile-actions{display: inline-flex; align-items: center;}
     .profile-actions .btn-blue{
@@ -50,7 +30,7 @@
 
 @section('content')
 <!-- Start of Revamp Design -->
-<div class="container-fluid my-3">
+<!-- <div class="container-fluid my-3">
     <div class="page-breadcrumbs">
         <div class="page-title">Profile</div>
         <div class="right-elements">
@@ -84,7 +64,6 @@
                         <div class="row mt-4">
                             <div class="col-md-4 col-lg-4">
                                 <h3>{{ $client->name }}</h3>
-                                <!-- <smal>Web Developer</smal> -->
                                 <small>{{ $client->address }}</small>
                             </div>
                             <div class="col-md-8 col-lg-8">
@@ -92,9 +71,6 @@
                                     @if( auth('client')->user()->id == $client->id )
                                     <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-blue">Edit Profile</a>
                                     @endif
-                                    <!-- <div class="mx-3 fs-4">
-                                        <i class="fa fa-cog"></i>
-                                    </div> -->
                                 </div>
                             </div> 
                         </div>
@@ -103,7 +79,6 @@
             </div>
 
             <div class="row justify-content-center" style="margin-top: 20px;">
-                <!-- Tabs navs -->
                 <ul class="nav nav-tabs nav-justified mb-3" id="profile-tabs" role="tablist" style="width: 50%;">
                     <li class="nav-item" role="presentation">
                     <a
@@ -154,9 +129,6 @@
                         >
                     </li>
                 </ul>
-                <!-- Tabs navs -->
-                
-                <!-- Tabs content -->
                 <div class="tab-content" id="profile-tabs-content" style="width: 80%;">
                     <div
                     class="tab-pane fade show active"
@@ -262,11 +234,10 @@
                     Tab 3 content
                     </div>
                 </div>
-                <!-- Tabs content -->
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 <!-- End of Revamp Design -->
 
