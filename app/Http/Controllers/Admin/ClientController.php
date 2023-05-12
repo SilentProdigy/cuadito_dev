@@ -27,9 +27,9 @@ class ClientController extends Controller
 
     public function show(Client $client)
     {
-        if(request()->has("test")){
-            return $client;
-        }
+        // if(request()->has("test")){
+        //     return $client;
+        // }
 
         // return view('admin.clients.show')->with(compact('client'));
         return view('admin.clients.show2')->with(compact('client'));

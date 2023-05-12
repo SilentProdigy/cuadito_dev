@@ -24,7 +24,9 @@
         "vue-template-compiler": "^2.6.12"
     },
     "dependencies": {
+        "@prettier/plugin-php": "^0.19.4",
         "bootstrap-tagsinput": "^0.7.1",
-        "mdb-ui-kit": "^4.1.0"
+        "mdb-ui-kit": "^4.1.0",
+        "prettier": "^2.8.8"
     }
 }
