@@ -3,21 +3,43 @@
 
 @section('style')
 <style>
-    .right-elements{
+    .right-elements {
         display: flex;
         justify-content: space-between;
         align-items: center;
     }
-    .card img{
+
+    .card img {
         border-radius: 100%;
         width: 130px;
     }
-    .page-item.active .page-link{background-color: #F96B23;}
-    .clients-cards{padding: 20px;}
-    .card-text{font-size: 12px;}
-    .card .rounded-pill{padding: 3px 20px;}
-    .card-footer{padding-top: 5%; padding-bottom: 5%}
-    .client-info{display: flex; align-items: center;}
+
+    .page-item.active .page-link {
+        background-color: #F96B23;
+    }
+
+    .clients-cards {
+        padding: 20px;
+    }
+
+    .card-text {
+        font-size: 12px;
+    }
+
+    .card .rounded-pill {
+        padding: 3px 20px;
+    }
+
+    .card-footer {
+        padding-top: 5%;
+        padding-bottom: 5%
+    }
+
+    .client-info {
+        display: flex;
+        align-items: center;
+    }
+
 </style>
 @endsection
 
@@ -26,7 +48,7 @@
     <div class="page-breadcrumbs">
         <div class="page-title">Administrators</div>
     </div>
-    
+
     <div class="container mt-5" id="clients-grid">
         <div class="row">
             @foreach($users as $user)
@@ -34,7 +56,7 @@
                 <div class="card h-100 p-3">
                     <div class="card-body d-flex justify-content-between">
                         <div class="client-img cold-xs-6 col-md-6">
-                            <img src="{{ asset('images/avatar/12.png') }}" alt="Client Image"/>
+                            <img src="{{ asset('images/avatar/12.png') }}" alt="Client Image" />
                         </div>
                         <div class="client-info cold-xs-6 col-md-6">
                             <div class="client-info-container">
@@ -61,9 +83,9 @@
     </div>
 
 </div>
-    
 
-    <!-- <div class="card mb-3 p-3 container-fluid">
+
+<!-- <div class="card mb-3 p-3 container-fluid">
         <div class="d-flex flex-row">
             <div class="image">
                 <img src="{{ asset('images/avatar/12.png') }}" class="rounded-circle" height="150" width="150" alt="Avatar" />
@@ -162,97 +184,106 @@
         </div>
     </div> -->
 
-    <section class="mt-3 d-flex justify-content-center">
-        {{ $users->links() }}
-    </section>
+<section class="mt-3 d-flex justify-content-center">
+    {{ $users->links() }}
+</section>
 
-    @include('admin.users.modals.add_user_modal')
-    @include('admin.users.modals.set_status_modal')
-    @include('admin.users.modals.confirm_delete_modal')
-    @include('admin.users.modals.edit_user_modal')
-    @include('admin.users.modals.change_password_modal')
+@include('admin.users.modals.add_user_modal')
+@include('admin.users.modals.set_status_modal')
+@include('admin.users.modals.confirm_delete_modal')
+@include('admin.users.modals.edit_user_modal')
+@include('admin.users.modals.change_password_modal')
 @endsection
 
 @section('script')
-    <script>
-        $(document).ready(function() {
-            let set_status_buttons = document.querySelectorAll('.btn-set-user-status');
+<script>
+    $(document).ready(function() {
+        let set_status_buttons = document.querySelectorAll('.btn-set-user-status');
 
-            set_status_buttons.forEach(button => {
-                button.addEventListener('click', function(e) {  
-                    e.preventDefault;
-                    let data = button.getAttribute('data-user');   
-                    data = JSON.parse(data);
-    
-                    let myModal = new bootstrap.Modal(document.getElementById('set-user-status-modal'), {keyboard: false})
-                    myModal.show()
+        set_status_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault;
+                let data = button.getAttribute('data-user');
+                data = JSON.parse(data);
 
-                    let form = document.querySelector('#set-user-status-form');
-                    form.setAttribute('action', `/admin/users/set-status/${ data.id }`);
+                let myModal = new bootstrap.Modal(document.getElementById('set-user-status-modal'), {
+                    keyboard: false
+                })
+                myModal.show()
 
-                    // document.querySelector('#area-name').innerHTML = data.name;
-                });
+                let form = document.querySelector('#set-user-status-form');
+                form.setAttribute('action', `/admin/users/set-status/${ data.id }`);
+
+                // document.querySelector('#area-name').innerHTML = data.name;
             });
-
-            let delete_buttons = document.querySelectorAll('.btn-delete');
-
-            delete_buttons.forEach(button => {
-                button.addEventListener('click', function(e) {  
-                    e.preventDefault;
-                    let data = button.getAttribute('data-user');   
-                    data = JSON.parse(data);
-    
-                    let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {keyboard: false})
-                    myModal.show()
-
-                    document.querySelector('#user-fullname').innerHTML = data.name;
-    
-                    let form = document.querySelector('#delete-user-form');
-                    form.setAttribute('action', `/admin/users/${ data.id }`);
-
-                });
-            });
-
-            let edit_buttons = document.querySelectorAll('.btn-edit-user');
-
-            edit_buttons.forEach(button => {
-                button.addEventListener('click', function(e) {  
-                    e.preventDefault;
-                    let data = button.getAttribute('data-user');   
-                    data = JSON.parse(data);
-    
-                    let myModal = new bootstrap.Modal(document.getElementById('edit-user-modal'), {keyboard: false})
-                    myModal.show()
-
-                    // document.querySelector('#user-fullname').innerHTML = data.name;
-    
-                    let form = document.querySelector('#edit-user-form');
-                    form.setAttribute('action', `/admin/users/${ data.id }`);
-
-                    $('#edit-name-text').val(data.name);
-                    $('#edit-email-text').val(data.email);
-                    $('#edit-role-text').val(data.role);
-                });
-            });
-
-            let change_password_buttons = document.querySelectorAll('.btn-change-password');
-
-            change_password_buttons.forEach(button => {
-                button.addEventListener('click', function(e) {  
-                    e.preventDefault;
-                    let data = button.getAttribute('data-user');   
-                    data = JSON.parse(data);
-    
-                    let myModal = new bootstrap.Modal(document.getElementById('change-user-password-modal'), {keyboard: false})
-                    myModal.show()
-
-                    // document.querySelector('#user-fullname').innerHTML = data.name;
-    
-                    let form = document.querySelector('#change-password-form');
-                    form.setAttribute('action', `/admin/users/change-password/${ data.id }`);
-                });
-            });
-
         });
-    </script>
+
+        let delete_buttons = document.querySelectorAll('.btn-delete');
+
+        delete_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault;
+                let data = button.getAttribute('data-user');
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('confirm-delete-modal'), {
+                    keyboard: false
+                })
+                myModal.show()
+
+                document.querySelector('#user-fullname').innerHTML = data.name;
+
+                let form = document.querySelector('#delete-user-form');
+                form.setAttribute('action', `/admin/users/${ data.id }`);
+
+            });
+        });
+
+        let edit_buttons = document.querySelectorAll('.btn-edit-user');
+
+        edit_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault;
+                let data = button.getAttribute('data-user');
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('edit-user-modal'), {
+                    keyboard: false
+                })
+                myModal.show()
+
+                // document.querySelector('#user-fullname').innerHTML = data.name;
+
+                let form = document.querySelector('#edit-user-form');
+                form.setAttribute('action', `/admin/users/${ data.id }`);
+
+                $('#edit-name-text').val(data.name);
+                $('#edit-email-text').val(data.email);
+                $('#edit-role-text').val(data.role);
+            });
+        });
+
+        let change_password_buttons = document.querySelectorAll('.btn-change-password');
+
+        change_password_buttons.forEach(button => {
+            button.addEventListener('click', function(e) {
+                e.preventDefault;
+                let data = button.getAttribute('data-user');
+                data = JSON.parse(data);
+
+                let myModal = new bootstrap.Modal(document.getElementById('change-user-password-modal'), {
+                    keyboard: false
+                })
+                myModal.show()
+
+                // document.querySelector('#user-fullname').innerHTML = data.name;
+
+                let form = document.querySelector('#change-password-form');
+                form.setAttribute('action', `/admin/users/change-password/${ data.id }`);
+            });
+        });
+
+    });
+
+</script>
 @endsection

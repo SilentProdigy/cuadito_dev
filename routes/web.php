@@ -8,6 +8,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProductController;
 use App\Http\Contorllers\Client\MessageController;
+use App\Http\Controllers\AnalyticsController;
 use App\Http\Controllers\LandingPageController;
 use Revolution\Google\Sheets\Facades\Sheets;
 
@@ -79,6 +80,8 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
         Route::get('payments', [\App\Http\Controllers\Admin\PaymentController::class, 'index'])->name('payments.index');
         Route::get('payments/{payment}', [\App\Http\Controllers\Admin\PaymentController::class, 'show'])->name('payments.show');
+
+        Route::get("analytics", [AnalyticsController::class, 'index'])->name("analytics.index");
     });
 });
 
