@@ -100,8 +100,8 @@
                                 </span>
                             </td>
                             <!-- <td>
-                                                                                <span class="{{ $proposal->is_paid ? 'text-success' : 'text-danger' }} fw-bold">{{ $proposal->is_paid ? 'PAID' : 'NOT PAID' }}</span>
-                                                                            </td> -->
+                                                                                    <span class="{{ $proposal->is_paid ? 'text-success' : 'text-danger' }} fw-bold">{{ $proposal->is_paid ? 'PAID' : 'NOT PAID' }}</span>
+                                                                                </td> -->
                             <td class="user-actions">
                                 <a href="{{ route('client.proposals.show', $proposal) }}"
                                     class="btn btn-sm btn-outline-info">
