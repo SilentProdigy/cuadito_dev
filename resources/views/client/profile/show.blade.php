@@ -3,398 +3,408 @@
 @section('page_title', $client->name)
 
 @section('style')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.2/css/dataTables.bootstrap5.min.css">
-<style>
-    /* .profile_info .btn{
-        background-color: rgba(211, 211, 211, 0.5);
-        box-shadow: none;
-    }
-    .profile_info .btn:hover{
-        background-color: gray;
-        color: #fff;
-    }
-    .profile_details i{
-        margin-right: 10px;
-    }
-    .add-project-card{
-        border: dashed #dfdfdf 2px;
-        box-shadow: none;
-        color: #dfdfdf;
-    }
-    .add-project-card:hover{
-        border: dashed #bababa 2px;
-        color: #bababa;
-    } */
-    .profile-header{width: 80%;}
-    .profile-actions{display: inline-flex; align-items: center;}
-    .profile-actions .btn-blue{
-        font-size: 11px;
-        padding: 5px 15px 5px 15px;
-        vertical-align: middle;
-        display: inline-flex;
-        align-items: center;
-        height: 30px;
-    }
-    #profile-tabs .nav-link.active{background-color: #F96B23; color: #fff; font-weight: bold;}
-    #profile-tabs .nav-link:hover{color: #000}
-    #profile-tabs .nav-link{
-        height: 10px;
-        vertical-align: middle;
-        display: inline-flex;
-        align-items: center;
-    }
-    .tab-pane{padding-top: 20px;}
-    .btn-dark-gray{font-size: 11px; padding: 5px 15px;vertical-align: middle; display: inline-flex; align-items: center; height: 30px;align-self: center;}
-</style>
+    <style>
+        :root {
+            --primary-color: #F96B23;
+            --secondary-color: #666;
+        }
+
+        .nav-item .nav-link {
+            text-transform: none;
+            font-size: 16px;
+            padding: 1em 4em;
+        }
+
+        .nav-tabs .nav-link.active {
+            background-color: white;
+            color: #0B0B0D;
+            border-bottom: 3px solid #0B0B0D;
+        }
+
+        .--text-secondary {
+            color: var(--secondary-color);
+        }
+
+        .text-xs {
+            font-size: 10px;
+        }
+
+        .text-sm {
+            font-size: 12px;
+        }
+
+        .text-base {
+            font-size: 16px;
+        }
+
+        .text-lg {
+            font-size: 18px;
+        }
+
+        .text-xl {
+            font-size: 24px;
+        }
+
+        .uppercase {
+            text-transform: uppercase;
+        }
+
+        .user-profile .profile-header .card-header {
+            /* height: 300px; */
+            height: 200px;
+            background-image: url("/images/banners/clients_profile_banner.jpg");
+            background-size: cover;
+        }
+
+        .user-profile .profile-header .card-header img {
+            margin-top: 100px;
+            border: solid 3px #fff;
+        }
+
+        table tr td {
+            border: none;
+        }
+    </style>
+
 @endsection
 
 @section('content')
-<!-- Start of Revamp Design -->
-<div class="container-fluid my-3">
-    <div class="page-breadcrumbs">
-        <div class="page-title">Profile</div>
-        <div class="right-elements">
-            <div>Profile</div>
-        </div>
-    </div>
-</div>
-<div class="container">
-    <div class="card">
-        <div class="card-body py-5">
-            <div class="container profile-header py-5">
-                <div class="row">
-                    <div class="col-md-3 col-lg-3 d-flex">
-                        <img src="{{ $client->profile_picture_url }}" class="rounded-circle" height="120" width="120" alt="Avatar" />
-                    </div>
-                    <div class="col-md-9 col-lg-9">
-                        <div class="row">
-                            <div class="col-md-4 col-lg-4">
-                                <span class="fs-2 fw-bold">{{ $data['projects_count'] }}</span>
-                                <small class="fs-4"> project posts</small>
-                            </div>
-                            <div class="col-md-4 col-lg-4">
-                                <span class="fs-2 fw-bold">{{ $data['projects_count'] }}</span>
-                                <small class="fs-4"> project proposals</small>
-                            </div>
-                            <div class="col-md-4 col-lg-4">
-                                <span class="fs-2 fw-bold">{{ $data['projects_count'] }}</span>
-                                <small class="fs-4"> project wins</small>
-                            </div>
-                        </div>
-                        <div class="row mt-4">
-                            <div class="col-md-4 col-lg-4">
-                                <h3>{{ $client->name }}</h3>
-                                <!-- <smal>Web Developer</smal> -->
-                                <small>{{ $client->address }}</small>
-                            </div>
-                            <div class="col-md-8 col-lg-8">
-                                <div class="profile-actions d-flex">
-                                    @if( auth('client')->user()->id == $client->id )
-                                    <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-blue">Edit Profile</a>
-                                    @endif
-                                    <!-- <div class="mx-3 fs-4">
-                                        <i class="fa fa-cog"></i>
-                                    </div> -->
-                                </div>
-                            </div> 
-                        </div>
-                    </div>
-                </div>
+
+    <div class="container user-profile">
+        <div class="card profile-header">
+            <div class="card-header image d-flex flex-column px-5">
             </div>
+            <div class="card-body position-relative">
+                <div class="d-flex align-content-start flex-row gap-4" style="width: 100%">
+                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                        style="margin-top: -75px; margin-left: 30px;" alt="Avatar" width="150" height="150">
 
-            <div class="row justify-content-center" style="margin-top: 20px;">
-                <!-- Tabs navs -->
-                <ul class="nav nav-tabs nav-justified mb-3" id="profile-tabs" role="tablist" style="width: 50%;">
-                    <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link active"
-                        id="ex2-tab-1"
-                        data-mdb-toggle="tab"
-                        href="#profile-tabs-1"
-                        role="tab"
-                        aria-controls="profile-tabs-1"
-                        aria-selected="true"
-                        >My Company</a
-                    >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link"
-                        id="ex2-tab-2"
-                        data-mdb-toggle="tab"
-                        href="#profile-tabs-2"
-                        role="tab"
-                        aria-controls="profile-tabs-2"
-                        aria-selected="false"
-                        >My Wins</a
-                    >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                    <a
-                        class="nav-link"
-                        id="ex2-tab-3"
-                        data-mdb-toggle="tab"
-                        href="#profile-tabs-3"
-                        role="tab"
-                        aria-controls="profile-tabs-3"
-                        aria-selected="false"
-                        >My Connections</a
-                    >
-                    </li>
-                    <li class="nav-item" role="presentation">
-                        <a
-                            class="nav-link"
-                            id="ex2-tab-4"
-                            data-mdb-toggle="tab"
-                            href="#profile-tabs-4"
-                            role="tab"
-                            aria-controls="profile-tabs-4"
-                            aria-selected="false"
-                            >Reviews</a
-                        >
-                    </li>
-                </ul>
-                <!-- Tabs navs -->
-                
-                <!-- Tabs content -->
-                <div class="tab-content" id="profile-tabs-content" style="width: 80%;">
-                    <div
-                    class="tab-pane fade show active"
-                    id="profile-tabs-1"
-                    role="tabpanel"
-                    aria-labelledby="profile-tabs-1"
-                    >
-                    <div class="d-flex">
-                        <img src="{{ $client->profile_picture_url }}" class="rounded" height="120" width="120" alt="Avatar" />
-                        <div class="mt-auto" style="margin-left: 20px;">
-                            <div class="d-flex">
-                                <h1 class="display-7" style="margin-right: 10px;">{{ $company->name }}</h1>
-                                <a href="{{ route('client.companies.edit', $company) }}" class="btn btn-dark-gray">Update Company</a>
-                            </div>
-                            <small>{{ $client->tag_line }}</small>
+                    <div class="d-flex justify-content-between align-self-start align-content-start flex-grow-1"
+                        style="justify-content: space-between; ">
+                        <div class="d-flex flex-column">
+                            <span class="name text-uppercase">company name</span>
+                            <span class="text-sm --text-secondary">Product Developer Company</span>
+                        </div>
+                        <div class="d-flex align-content-start align-self-start gap-3">
+                            <button class="btn text-white"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #F96B24;">
+                                Edit Company
+                            </button>
+                            <button class="btn text-white"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #6A6A6A;">
+                                <i class="fas fa-cog" aria-hidden="true"></i>
+                                <span>Account settings</span>
+                            </button>
                         </div>
                     </div>
-                    <div class="row mt-5">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-                        <p>
-                            Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem. 
-                        </p>
-                    </div>
 
-                    <div class="row">
-                        <h5 class="fw-bold">Location</h5>
-                        <smal>{{ $company->address }}</smal>
-                    </div>
-                        
-                    </div>
-                    <div
-                    class="tab-pane fade"
-                    id="profile-tabs-2"
-                    role="tabpanel"
-                    aria-labelledby="profile-tabs-2"
-                    >
-                    Tab 2 content
-                    </div>
-                    <div
-                    class="tab-pane fade"
-                    id="profile-tabs-3"
-                    role="tabpanel"
-                    aria-labelledby="profile-tabs-3"
-                    >
-                    @forelse ($contacts as $item)
-                    <div class="col-lg-4 mb-4">
-                        <div class="card">
-                            <div class="card-body">
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="d-flex align-items-center">
-                                        <img
-                                        src="{{ $item->contact_profile_picture }}"
-                                        alt="profile picture"
-                                        style="width: 45px; height: 45px"
-                                        class="rounded-circle"
-                                        />
-                                        <div class="ms-3">
-                                            <p class="fw-bold mb-1">{{ $item->contact_name }}</p>
-                                            <p class="text-muted mb-0">{{ $item->contact_email }}</p>
-                                        </div>
-                                    </div>
-                                    @if($item->is_existing_client)
-                                        <span class="badge rounded-pill badge-success">Active</span>
-                                    @endif
-                                </div>
-                            </div>
-                            <div class="card-footer border-0 bg-light p-2 d-flex justify-content-around">
-                                @if($item->is_existing_client)
-                                    <a
-                                        class="btn btn-link m-0 text-reset"
-                                        href="{{ route('client.conversations.create', ['email' => $item->contact_email]) }}"
-                                        role="button"
-                                        data-ripple-color="primary"
-                                    >Message<i class="fas fa-envelope ms-2"></i
-                                    ></a>
-                                    <a class="btn btn-link m-0 text-reset btn-delete-contact"
-                                        href="#"
-                                        role="button"
-                                        data-ripple-color="primary"
-                                        data-contact='@json($item)'>Delete<i class="fas fa-trash ms-2"></i>
-                                    </a>
-                                @else 
-                                    <a class="btn btn-link m-0 text-reset" 
-                                        href="{{ route('client.contacts.invite', $item) }}" 
-                                        role="button" 
-                                        data-ripple-color="primary">
-                                        Invite<i class="fas fa-paper-plane ms-2"></i>
-                                    </a>
-                                @endif
-                            </div>
-                        </div>
-                    </div>
-                @empty
-                    <p>You don't have any contacts yet!</p>
-                @endforelse
-                    </div>
-                    <div
-                    class="tab-pane fade"
-                    id="profile-tabs-4"
-                    role="tabpanel"
-                    aria-labelledby="profile-tabs-4"
-                    >
-                    Tab 3 content
-                    </div>
                 </div>
-                <!-- Tabs content -->
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- End of Revamp Design -->
-
-<!-- <div class="container-fluid user-profile">
-    <div class="card profile-header">
-        <div class="card-header image d-flex flex-column px-5">
-            <img src="{{ $client->profile_picture_url }}" class="rounded-circle position-absolute" height="150" width="150" alt="Avatar" />
-        </div>
-        <div class="d-flex flex-row">
-            <div class="card-body mt-5 mx-3 row">
-                <div class="d-flex flex-column col-md-6">
-                    <span class="name mt-3">{{ $client->name }}</span>
-                    <span>{{ $client->tag_line }}</span>
-                    @if( auth('client')->user()->id == $client->id )
-                    <span>{{ $client->email }}</span>
-                    @endif
-                </div>
-                <div class="col-md-6">
-                    @if( auth('client')->user()->id == $client->id )
-                    <a href="{{ route('client.profile.change-password.form', $client) }}" class="btn btn-sm btn-warning float-end shadow-none"><i class="fa fa-lock"></i>&ensp;Change Password</a>
-                    @endif
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="mx-auto mt-5 my-5">
-        <div class="row">
-            <div class="col-md-12">
-                <div class="card profile_info">
-                    <div class="card-body">
-                        <div class="d-flex justify-content-between align-items-center">
-                            <h4 class="fw-bold">About</h4>
-                            @if( auth('client')->user()->id == $client->id )
-                            <a href="{{ route('client.profile.edit', auth('client')->user()) }}" class="btn btn-md"><i class="fa fa-pencil"></i>&ensp;Edit Information</a>
-                            @endif
-                        </div>
-                        <div class="profile_details row mt-4">
-                            <div class="company_description">
-                                <p>Cuadito is an online platform designed to help companies streamline their proposal and quotation process. It allows users to submit proposals, send quotations to other companies on the platform, and build stronger connections.
-                                </p>
-                            </div>
-                            @if( auth('client')->user()->id == $client->id )
-                                <h4 class="fw-bold">Personal Information</h4>
-                                @if($client->contact_number || $client->address || $client->birth_date || $client->marital_status)
-                                    
-                                    @if($client->contact_number)
-                                        <div class="col-12 mt-4"><i class="fa fa-phone-alt fs-5"></i>{{ $client->contact_number }}</div>
-                                    @endif
-                                    @if($client->address)
-                                        <div class="col-12 mt-4"><i class="fa fa-location-dot fs-5"></i>{{ $client->address }}</div>
-                                    @endif
-                                    @if($client->birth_date)
-                                        <div class="col-12 mt-4"><i class="fa fa-cake-candles fs-5"></i>{{ $client->birth_date }}</div>
-                                    @endif
-                                    @if($client->marital_status)
-                                        <div class="col-12 mt-4"><i class="fa fa-heart fs-5"></i>{{ $client->marital_status }}</div>
-                                    @endif
-                                @else
-                                    <p class="text-center text-muter">No information available.</p>
-                                @endif
-                            @endif
-                        </div>
-                    </div>
-                </div>
-
-
                 <div class="mt-4">
-                    <div class="d-flex justify-content-between align-items-center">
-                        <h4 class="fw-bold">Projects</h4>
-                        <a href="javascript:void(0);" class="fw-normal text-orange">View All</a>
+                    <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem facilis, amet sunt
+                        veniam itaque nemo!</p>
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, et!</p>
+                </div>
+
+                <div class="float-end d-flex gap-4">
+                    <div>
+                        <img src="http://localhost:8000/images/avatar/12.png" class="rounded-circle"
+                            style="margin-left: -12px;" alt="Avatar" width="30" height="30">
+                        <img src="http://localhost:8000/images/avatar/12.png" class="rounded-circle"
+                            style="margin-left: -12px;" alt="Avatar" width="30" height="30">
+                        <img src="http://localhost:8000/images/avatar/12.png" class="rounded-circle"
+                            style="margin-left: -12px;" alt="Avatar" width="30" height="30">
                     </div>
-                    <div class="row">
-                        @foreach ($data['projects'] as $project)
-                            <div class="col-xs-12 col-md-4 gy-3">
-                                <div class="card h-100 my-3">
-                                    <div class="card-header">
-                                        <div class="row">
-                                            <div class="col">
-                                                <h5>{{ $project->title }}</h5>
-                                            </div>
-                                        </div>
-                                        @foreach ($project->categories as $category)
-                                            <span class="badge rounded-pill bg-dark">{{ $category->name }}</span>
-                                        @endforeach
-                                        <div class="fw-normal fs-6 text-muted">
-                                            <i class="fa-sharp fa-solid fa-pen-to-square"></i> {{ $project->created_at->format('M d,Y') }}
-                                        </div>
-                                    </div>
-                                    <div class="card-body px-3">
-                                        <p class="card-text">
-                                            {!! $project->description_text !!}
-                                        </p>
-                                        <div class="d-flex justify-content-end">
-                                            <a href="{{ route('client.listing.show', $project) }}" class="btn btn-sm btn-orange px-3">View</a>
-                                        </div>
-                                    </div>
+                    <span>20 Connections</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="d-flex justify-content-center mt-5">
+        <ul class="nav nav-tabs d-inline-flex justify-content-center" style="background-color: #efefef;  margin: 0 auto;">
+            <li class="nav-item active">
+                <a class="nav-link" data-toggle="tab" href="#tab1">About</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab2">Wins</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab3">Connections</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="tab" href="#tab4">Reviews</a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div class="tab-content" style="width: 65%">
+            <div id="tab1" class="tab-pane fade active">
+                <div class="card p-5">
+                    <p>Location</p>
+
+                    <p>
+                        19th floor, Marco Polo Ortigas Manila, Sapphire Rd, <br>
+                        San Antonio, Pasig, 1600 Metro Manila
+                    </p>
+
+                    <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Corrupti soluta ea itaque quisquam
+                        temporibus,
+                        ipsa nostrum impedit beatae reprehenderit odit incidunt officia tempore, nulla sequi. Aliquam
+                        veritatis
+                        facilis quasi! Aperiam.</p>
+
+                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus facilis, doloribus obcaecati
+                        rerum corrupti excepturi fugiat nisi minima dicta quas veniam repellat facere? Ipsam, molestiae
+                        sequi
+                        possimus aperiam nesciunt ea error quod commodi autem eveniet quis quidem. Omnis, adipisci. Optio
+                        harum
+                        sapiente cum alias nostrum blanditiis dignissimos molestiae enim consectetur voluptatibus, debitis
+                        quisquam velit nemo ducimus voluptas omnis aperiam dolore similique, impedit quidem. Eaque officiis
+                        enim
+                        voluptatibus nesciunt, dicta cum.</p>
+                </div>
+            </div>
+
+            {{-- wins  --}}
+            <div id="tab2" class="tab-pane fade active ">
+                <div class="card p-5">
+
+                    <div class="d-flex justify-content-between">
+                        <div class="custom-pagination-info"></div>
+                        <div class="custom-pagination-paginate"></div>
+                    </div>
+
+                    <table class="table" style="border: none;">
+                        <tbody style="border: none;">
+                            <tr>
+                                <td scope="col">
+                                    <strong>PROJECT TITLE HERE</strong> <br /> Project Type: Construction
+                                </td>
+                                <td scope="col">Project Cost: P 1, 000, 000 <br /> Date: March 30, 2023</td>
+                                <td scope="col">Proposed Cost: P 1, 000, 000 <br /> Date: March 25, 2023</td>
+                                <td scope="col"><i class="fa fa-eye btn btn-orange"></i></td>
+                            </tr>
+                            <tr>
+                                <td scope="col">
+                                    <strong>PROJECT TITLE HERE</strong> <br /> Project Type: Construction
+                                </td>
+                                <td scope="col">Project Cost: P 1, 000, 000 <br /> Date: March 30, 2023</td>
+                                <td scope="col">Proposed Cost: P 1, 000, 000 <br /> Date: March 25, 2023</td>
+                                <td scope="col"><i class="fa fa-eye btn btn-orange"></i></td>
+                            </tr>
+                            <tr>
+                                <td scope="col">
+                                    <strong>PROJECT TITLE HERE</strong> <br /> Project Type: Construction
+                                </td>
+                                <td scope="col">Project Cost: P 1, 000, 000 <br /> Date: March 30, 2023</td>
+                                <td scope="col">Proposed Cost: P 1, 000, 000 <br /> Date: March 25, 2023</td>
+                                <td scope="col"><i class="fa fa-eye btn btn-orange"></i></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            {{-- Connections  --}}
+            <div id="tab3" class="tab-pane fade active ">
+                <div class="card p-5">
+
+                    <div class="row g-3">
+                        <div class="col-lg-6">
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
                                 </div>
                             </div>
-                        @endforeach
-                        <div class="col-xs-12 col-md-4 gy-3">
-                            <div class="card add-project-card h-100 my-3">
-                                <div class="card-body d-flex justify-content-center align-items-center">
-                                    <i class="fa fa-plus"></i>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
                                 </div>
-                                <a href="{{ route('client.projects.create') }}" class="stretched-link"></a>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
                             </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col-lg-3">
+                                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                                        style="margin-left: 30px;" alt="Avatar" width="100" height="100">
+                                </div>
+                                <div class="col-lg-5 p-4">
+                                    Company Name <br>
+                                    Owner Name
+                                </div>
+                                <div class="col-lg-4 p-4">
+                                    <button class="btn btn-blue">Message</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            {{-- Reviews  --}}
+            <div id="tab4" class="tab-pane fade active ">
+                <div class="card p-5">
+                    <div class="card border p-5 mb-5">
+                        <div class="d-flex justify-content-between">
+                            <h5>XYZ Company</h5>
+                            <p class="ml-auto">March 14, 2023</p>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <i class="fa-solid fa-star text-yellow"></i> <i class="fa-solid fa-star text-yellow"></i><i
+                                class="fa-solid fa-star text-yellow"></i> <i class="fa-regular fa-star text-yellow"></i>
+                            <i class="fa-regular fa-star text-yellow"></i>
+                        </div>
+                        <div class="d-flex justify-content-start mt-2">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In mollitia distinctio eaque nisi, ab
+                            soluta earum aliquid sed, ullam porro libero iste ratione expedita, harum officiis tempora eius
+                            facere illum?
+                        </div>
+                    </div>
+                    <div class="card border p-5 mb-5">
+                        <div class="d-flex justify-content-between">
+                            <h5>XYZ Company</h5>
+                            <p class="ml-auto">March 14, 2023</p>
+                        </div>
+                        <div class="d-flex justify-content-start">
+                            <i class="fa-solid fa-star text-yellow"></i> <i class="fa-solid fa-star text-yellow"></i><i
+                                class="fa-solid fa-star text-yellow"></i> <i class="fa-regular fa-star text-yellow"></i>
+                            <i class="fa-regular fa-star text-yellow"></i>
+                        </div>
+                        <div class="d-flex justify-content-start mt-2">
+                            Lorem ipsum dolor sit amet consectetur adipisicing elit. In mollitia distinctio eaque nisi, ab
+                            soluta earum aliquid sed, ullam porro libero iste ratione expedita, harum officiis tempora eius
+                            facere illum?
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div> -->
+
+
 @endsection
 
 @section('script')
-<!-- MDB -->
-<script
-  type="text/javascript"
-  src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"
-></script>
-<script>
-    $(document).ready(function () {
-        $('#billing_history_table').DataTable({
-           dom: 't'
-        });
-    });
-</script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
-<script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
+    <!-- MDB -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.2.0/mdb.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('.nav-tabs a').click(function() {
+                $(this).tab("show");
+            })
+
+            $(".nav-tabs .nav-item:nth-child(1) a").tab("show");
+        })
+    </script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdn.datatables.net/1.13.2/js/dataTables.bootstrap5.min.js"></script>
 @endsection

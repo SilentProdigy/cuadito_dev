@@ -1,9 +1,9 @@
-<ul>
+{{-- <ul>
     <li class="title">
         Rooms
     </li>
     <li>
-        <a href="{{ route('client.inbox.index') }}"><i class="fa fa-inbox"></i> Inbox 
+        <a href="{{ route('client.inbox.index') }}"><i class="fa fa-inbox"></i> Inbox
             <span class="label label-danger">{{ $unread_data['inbox'] }}</span>
         </a>
     </li>
@@ -18,7 +18,25 @@
     </li>
     <li>
         <a href="{{ route('client.inbox.important') }}">
-            <i class="fa fa-bookmark"></i> Important<span class="label label-info">{{ $unread_data['important'] }}</span>
+            <i class="fa fa-bookmark"></i> Important<span
+                class="label label-info">{{ $unread_data['important'] }}</span>
+        </a>
+    </li>
+</ul> --}}
+
+<ul class="list-group list-group-horizontal-sm">
+    <li class="list-group-item border-0">
+        <a href="{{ route('client.inbox.index') }}"><i class="fa fa-inbox"></i> Inbox
+            <span class="label label-danger">{{ $unread_data['inbox'] }}</span>
+        </a>
+    </li>
+    <li class="list-group-item border-0">
+        <a href="{{ route('client.inbox.sent') }}"><i class="fa fa-rocket"></i> Sent</a>
+    </li>
+    <li class="list-group-item border-0">
+        <a href="{{ route('client.inbox.important') }}">
+            <i class="fa fa-bookmark"></i> Important<span
+                class="label label-info">{{ $unread_data['important'] }}</span>
         </a>
     </li>
 </ul>
