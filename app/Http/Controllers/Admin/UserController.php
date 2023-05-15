@@ -33,6 +33,9 @@ class UserController extends Controller
                 })
                 ->where('id', '!=', auth()->user()->id)
                 ->paginate(User::ITEMS_PER_PAGE);
+
+        // $users = User::all();
+        // return $users;
         
         $roles = User::ROLES;
 

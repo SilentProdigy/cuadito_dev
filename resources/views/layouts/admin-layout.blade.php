@@ -8,7 +8,11 @@
     <!-- CSRF Token -->
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
+<<<<<<< HEAD
     <title>{{ config('app.name', 'Cuadito') }} | @yield('page_title') </title>
+=======
+    <title>{{ config('app.name', 'Cuadito Admin') }} | @yield('page_title') </title>
+>>>>>>> 3845303019ba5205f0afcb997e0b0df5c15e9d0d
 
     <link rel="shortcut icon" type="image/x-icon" href="{{ App::environment('local') ? asset('images/logo/logo.png') : secure_asset('images/logo/favicon.ico') }}">
 
