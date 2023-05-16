@@ -248,34 +248,33 @@
 <script>
     $(document).ready(function() {
         const table = $("#proposals-table").DataTable({
-            "paging": true
-            , "drawCallback": function() {
-                var paginationContainer = $($('#proposals-table').table().container()).find('.dataTables_paginate');
-
-                console.log($('#proposals-table').table())
-
-                var previousButton = $('<button>').text('Previous');
-                var nextButton = $('<button>').text('Next');
-
-                previousButton.on('click', function() {
-                    table.page('previous').draw(false);
-                });
-
-                nextButton.on('click', function() {
-                    table.page('next').draw(false);
-                });
-
-                paginationContainer.empty().append(previousButton, nextButton);
+                "paging": true,
+                // "drawCallback": function() {
+                //   {{-- var paginationContainer = $($('#proposals-table').table().container()).find('.dataTables_paginate');
+                //
+                //   console.log($('#proposals-table').table())
+                //
+                //   var previousButton = $('<button>').text('Previous');
+                //   var nextButton = $('<button>').text('Next');
+                //
+                //   previousButton.on('click', function() {
+                //       table.page('previous').draw(false);
+                //   });
+                //
+                //   nextButton.on('click', function() {
+                //       table.page('next').draw(false);
+                //   });
+                //
+                //   paginationContainer.empty().append(previousButton, nextButton); --}}
             }
         })
 
-        console.log({
-            table
-        })
+    console.log({
+        table
+    })
 
 
-        const paginationButtons = $('.paginate_button');
-        paginationButtons.addClass('custom-pagination');
+    const paginationButtons = $('.paginate_button'); paginationButtons.addClass('custom-pagination');
 
 
     })
