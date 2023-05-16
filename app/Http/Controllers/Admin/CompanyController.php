@@ -46,7 +46,7 @@ class CompanyController extends Controller
         // else if($tab === Company::DISAPPROVED_STATUS)
         //     $companies->where("validation_status",  $tab);
 
-        $companies = company_query()->paginate(Company::ITEMS_PER_PAGE);
+        $companies = company_query()->paginate(1 ?? Company::ITEMS_PER_PAGE);
 
         // return $companies;
 

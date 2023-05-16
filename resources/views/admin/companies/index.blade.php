@@ -169,7 +169,7 @@
                         {{ $companies->links() }}
                     </div>
 
-                    @foreach($companies as $company)
+                    @forelse($companies as $company)
                     <div class="my-4 company-cards">
                         <div class="card">
                             <div class="card-body d-flex justify-content-between">
@@ -185,15 +185,35 @@
                                         <i class="fa fa-eye"></i>
                                     </a>
                                     @if(auth()->user()->role == 'admin')
-                                    <a href="#" class="btn btn-sm btn-orange btn-set-approval-status" data-company="{{ json_encode($company) }}">
-                                        Set Approval Status
-                                    </a>
+                                        @if($company->validation_status === $company_states[1])
+                                            <a href="#" class="btn btn-sm btn-success btn-set-approval-status" data-company="{{ json_encode($company) }}">
+                                                <span>Approved</span>
+                                            </a>
+                                        @elseif($company->validation_status === $company_states[0])
+                                            <a href="#" class="btn btn-sm btn-orange btn-set-approval-status" data-company="{{ json_encode($company) }}">
+                                                <i class="fa-solid fa-clock"></i>
+                                                <span>Pending</span>
+                                            </a>
+                                        @elseif($company->validation_status === $company_states[2])
+                                            <a href="#" class="btn btn-sm btn-black btn-set-approval-status " data-company="{{ json_encode($company) }}">
+                                                <i class="fa-solid fa-x"></i>
+                                                <span>Denied</span>
+                                            </a>
+                                        @else
+                                            <a href="#" class="btn btn-sm btn-orange btn-set-approval-status" data-company="{{ json_encode($company) }}">
+                                                Set Approval Status
+                                            </a>
+                                        @endif
                                     @endif
                                 </div>
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="card p-4 d-flex justify-content-center">
+                        <span>No data available.</span>
+                    </div>
+                    @endforelse
 
                 </div>
 
@@ -217,7 +237,7 @@
                         {{ $approved->links() }}
                     </div>
 
-                    @foreach($approved as $company)
+                    @forelse($approved as $company)
                     <div class="my-4 company-cards">
                         <div class="card">
                             <div class="card-body d-flex justify-content-between">
@@ -240,7 +260,11 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="card p-4 d-flex justify-content-center">
+                        <span>No data available.</span>
+                    </div>
+                    @endforelse
 
                 </div>
                 <div class="tab-pane fade {{ $tab === $company_states[0] ? 'show active' : null }}" id="comptabs-tabs-3" role="tabpanel" aria-labelledby="comptabs-tab-3">
@@ -259,13 +283,10 @@
                                 Showing {{ $firstEntry }} to {{ $lastEntry }} of {{ $totalEntries }} entries
                             </div>                       
                         @endif 
-
-                        
-
                         {{ $pending->links() }}
                     </div>
 
-                    @foreach($pending as $company)
+                    @forelse($pending as $company)
                     <div class="my-4 company-cards">
                         <div class="card">
                             <div class="card-body d-flex justify-content-between">
@@ -289,7 +310,11 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                    <div class="card p-4 d-flex justify-content-center">
+                        <span>No data available.</span>
+                    </div>
+                    @endforelse
 
                 </div>
 
@@ -308,14 +333,10 @@
                                 Showing {{ $firstEntry }} to {{ $lastEntry }} of {{ $totalEntries }} entries
                             </div>                       
                         @endif 
-
-                        
-
-
                         {{ $disapproved->links() }}
                     </div>
 
-                    @foreach($disapproved as $company)
+                    @forelse($disapproved as $company)
                     <div class="my-4 company-cards">
                         <div class="card">
                             <div class="card-body d-flex justify-content-between">
@@ -339,13 +360,18 @@
                             </div>
                         </div>
                     </div>
-                    @endforeach
+                    @empty
+                        <div class="card p-4 d-flex justify-content-center">
+                            <span>No data available.</span>
+                        </div>
+                    @endforelse
 
                 </div>
             </div>
         </div>
     </div>
 </div>
+
 
 {{-- <section class="mt-3 d-flex justify-content-center">
     {{ $companies->links() }}
@@ -355,8 +381,9 @@
 @endsection
 
 @section('script')
-<script>
 
+
+<script>
     $(document).ready(function() {
         let set_status_buttons = document.querySelectorAll('.btn-set-approval-status');
 
@@ -411,7 +438,7 @@
             let tabDisapprovedPagination = $("#tab-disapproved-pagination");
 
             const tabPagination = [tabNewPagination, tabApprovedPagination, tabPendingPagination, tabDisapprovedPagination]
-
+ 
             for(pagination of tabPagination)
                 pagination.removeClass("d-flex").addClass("d-none");
 
