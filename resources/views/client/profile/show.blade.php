@@ -64,6 +64,20 @@
         table tr td {
             border: none;
         }
+
+        .nav-item {
+            width: 250px;
+        }
+
+        .nav-tabs .nav-link.active {
+            border-bottom: none;
+            text-align: center;
+            font-weight: bold;
+        }
+
+        .nav-item {
+            box-shadow: 2px 2px 4px rgb(175, 172, 172);
+        }
     </style>
 
 @endsection
@@ -76,7 +90,7 @@
             </div>
             <div class="card-body position-relative">
                 <div class="d-flex align-content-start flex-row gap-4" style="width: 100%">
-                    <img src="http://localhost:8000/images/avatar/12.png" class="rounded"
+                    <img src="http://localhost:8000/images/avatar/12.png" class=""
                         style="margin-top: -75px; margin-left: 30px;" alt="Avatar" width="150" height="150">
 
                     <div class="d-flex justify-content-between align-self-start align-content-start flex-grow-1"
@@ -86,20 +100,21 @@
                             <span class="text-sm --text-secondary">Product Developer Company</span>
                         </div>
                         <div class="d-flex align-content-start align-self-start gap-3">
-                            <button class="btn text-white"
-                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #F96B24;">
-                                Edit Company
-                            </button>
-                            <button class="btn text-white"
+                            {{-- <button class="btn text-white"
                                 style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #6A6A6A;">
+                                Edit Company
+                            </button> --}}
+                            <a class="btn text-white"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; background-color: #F96B24;"
+                                href="{{ url('settings') }}">
                                 <i class="fas fa-cog" aria-hidden="true"></i>
                                 <span>Account settings</span>
-                            </button>
+                            </a>
                         </div>
                     </div>
 
                 </div>
-                <div class="mt-4">
+                <div class="mt-4" style="margin-left: 30px;">
                     <p class="mb-0">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem facilis, amet sunt
                         veniam itaque nemo!</p>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Enim, et!</p>
@@ -121,8 +136,9 @@
     </div>
 
     <div class="d-flex justify-content-center mt-5">
-        <ul class="nav nav-tabs d-inline-flex justify-content-center" style="background-color: #efefef;  margin: 0 auto;">
-            <li class="nav-item active">
+        <ul class="nav nav-tabs d-inline-flex justify-content-center"
+            style="background-color: #efefef;  margin: 0 auto; border: none;">
+            <li class="nav-item active text-center">
                 <a class="nav-link" data-toggle="tab" href="#tab1">About</a>
             </li>
             <li class="nav-item">

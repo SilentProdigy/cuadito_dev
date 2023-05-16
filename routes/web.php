@@ -1,16 +1,17 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\HomeController;
-use App\Http\Controllers\Auth\RegisterController;
-use App\Http\Controllers\OrderController;
 use App\Http\Controllers\CartController;
-use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\OrderController;
 use App\Http\Controllers\ProductController;
-use App\Http\Contorllers\Client\MessageController;
-use App\Http\Controllers\AnalyticsController;
-use App\Http\Controllers\LandingPageController;
 use Revolution\Google\Sheets\Facades\Sheets;
+use App\Http\Controllers\AnalyticsController;
+use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\LandingPageController;
+use App\Http\Controllers\Auth\RegisterController;
+use App\Http\Contorllers\Client\MessageController;
+use App\Http\Controllers\Client\AccountSettingsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -266,7 +267,9 @@ Route::name('client.')->group(function () {
         Route::get('payments', [\App\Http\Controllers\Client\PaymentController::class, 'index'])->name('payments.index');
         Route::get('payments/{payment}', [\App\Http\Controllers\Client\PaymentController::class, 'show'])->name('payments.show');
         Route::get('payments/{payment}/print', [\App\Http\Controllers\Client\PaymentController::class, 'print'])->name('payments.print');
+
+        // settings 
+        Route::get('settings', [AccountSettingsController::class, 'index']);
     });
 
 });
-
