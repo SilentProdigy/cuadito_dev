@@ -39,7 +39,9 @@ class CompaniesTableSeeder extends Seeder
     {
         $companies = [];
 
-        for ($i = 0; $i < 100; $i++) {
+        $count = 2;
+
+        for ($i = 0; $i < $count; $i++) {
             $companies[] = [
                 "name" => "Company-" . $client->name . "-" . $i,
                 "address" => "Street " . $i . " York",

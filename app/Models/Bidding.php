@@ -12,20 +12,20 @@ class Bidding extends Model
 
     public const DEFAULT_DECREASE_VALUE = 10;
 
-    protected $with = ['company'];
+    protected $with = ["company"];
 
     protected $fillable = [
-        'company_id',
-        'project_id',
+        "company_id",
+        "project_id",
         // 'quotation_url',
-        'cover_letter',
-        'rate',
-        'is_paid'
+        "cover_letter",
+        "rate",
+        "is_paid",
     ];
 
     public function payment()
     {
-        return $this->morphOne(Payment::class, 'paymentable');
+        return $this->morphOne(Payment::class, "paymentable");
     }
 
     public function project()
@@ -40,22 +40,25 @@ class Bidding extends Model
 
     public function attachments()
     {
-        return $this->morphMany(\App\Models\Attachment::class, 'attachmentable');
+        return $this->morphMany(
+            \App\Models\Attachment::class,
+            "attachmentable"
+        );
     }
 
     public function getIsOwnedAttribute()
     {
-        return $this->company->client_id == auth('client')->user()->id;
+        return $this->company->client_id == auth("client")->user()->id;
     }
 
     public function notifications()
     {
-        return $this->morphMany(Notification::class, 'notifiable');
+        return $this->morphMany(Notification::class, "notifiable");
     }
 
     static function getOwner(string $proposal_id)
     {
-        $proposal = self::where(['id' => $proposal_id])->firstOrFail();
+        $proposal = self::where(["id" => $proposal_id])->firstOrFail();
         return $proposal->company->client;
     }
 
@@ -64,22 +67,31 @@ class Bidding extends Model
         $project = $proposal->project;
 
         $proposal->notifications()->create([
-            'client_id' => auth('client')->user()->id,
-            'content' => "You submitted a proposal for Project: " . $project->title . " #" . $project->id,
-            'url' => route('client.proposals.show', $proposal),
+            "client_id" => auth("client")->user()->id,
+            "content" =>
+                "You submitted a proposal for Project: " .
+                $project->title .
+                " #" .
+                $project->id,
+            "url" => route("client.proposals.show", $proposal),
         ]);
-    
+
         $proposal->notifications()->create([
-            'client_id' => $project->owner->id,
-            'content' => $proposal->company->name . " submitted a proposal for your Project: " . $project->title . " #" . $project->id,
-            'url' => route('client.projects.show', $project),                
+            "client_id" => $project->owner->id,
+            "content" =>
+                $proposal->company->name .
+                " submitted a proposal for your Project: " .
+                $project->title .
+                " #" .
+                $project->id,
+            "url" => route("client.projects.show", $project),
         ]);
     }
 
     static function cancelProposal(Bidding $bidding)
     {
         # Delete notifications
-        $bidding->notifications()->each(function($item) {
+        $bidding->notifications()->each(function ($item) {
             $item->delete();
         });
 
@@ -88,7 +100,7 @@ class Bidding extends Model
 
     public function markAsPaid()
     {
-        self::update(['is_paid' => true]);
+        self::update(["is_paid" => true]);
     }
 
     public function requirements()
